@@ -60,7 +60,6 @@ spec:
                   name: orakl-listener-config
                   key: ipfs
 
-
           ports:
             - name: http
               containerPort: 8000
