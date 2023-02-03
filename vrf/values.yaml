@@ -1,0 +1,74 @@
+## Klaytn Orakl Listener Configuration
+## created by Bisonai
+
+global:
+  image:
+    repository: docker.io/jolol/orakl
+    pullPolicy: IfNotPresent
+    tag: "v.0.0.0"
+    imagePullPolicy: IfNotPresent
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+    imagePullSecrets: []
+
+  config:
+    NODE_ENV:
+    CHAIN:
+    HOST_SETTINGS_DB_DIR: 
+    HEALTH_CHECK_PORT: 8888
+    ORAKL_DIR:
+    SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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 
+
+  podAnnotations: {}
+
+  livenessProbe:
+    enabled: true
+    path: /
+    initialDelaySeconds: 20
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+
+  readinessProbe:
+    enabled: true
+    path: /
+    initialDelaySeconds: 20
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5 
+
+listener:
+  enabled: true
+  replicas: 1
+  serviceAccount:
+    # -- Create a service account for the application controller
+    create: true
+    # -- Service account name
+    name: orakl-vrf-listener
+    # -- Annotations applied to created service account
+    annotations: {}
+    # -- Automount API credentials for the Service Account
+    automountServiceAccountToken: true
+
+  podSecurityContext: {}
+
+  containerSecurityContext: {}
+    
+  resources:
+    limits:
+      cpu: 500m
+      memory: 4Gi
+    requests:
+      cpu: 500m
+      memory: 4Gi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+tolerations: []
+dotenv: {}
