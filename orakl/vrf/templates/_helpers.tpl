@@ -31,6 +31,26 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Common labels
+*/}}
+{{- define "orakl-vrf.labels" -}}
+helm.sh/chart: {{ include "orakl-vrf.chart" . }}
+{{ include "orakl-vrf.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Selector labels
+*/}}
+{{- define "orakl-vrf.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
 Common labels for listener
 */}}
 {{- define "orakl-vrf.labels.listener" -}}
@@ -48,54 +68,4 @@ Selector labels for listener
 {{- define "orakl-vrf.selectorLabels.listener" -}}
 app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-listener
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Common labels for worker
-*/}}
-{{- define "orakl-vrf.labels.worekr" -}}
-helm.sh/chart: {{ include "orakl-vrf.chart" . }}
-{{ include "orakl-vrf.selectorLabels.worker" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels for worker
-*/}}
-{{- define "orakl-vrf.selectorLabels.worker" -}}
-app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-worker
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-Common labels for reporter
-*/}}
-{{- define "orakl-vrf.labels.reporter" -}}
-helm.sh/chart: {{ include "orakl-vrf.chart" . }}
-{{ include "orakl-vrf.selectorLabels.reporter" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels for reporter
-*/}}
-{{- define "orakl-vrf.selectorLabels.reporter" -}}
-app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-reporter
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "orakl-vrf.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "orakl-vrf.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
 {{- end }}

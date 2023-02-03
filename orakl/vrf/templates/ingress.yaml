@@ -1,9 +1,9 @@
-{{- if .Values.ingress.ws.enabled -}}
-{{- $fullName := include "orakl-vrf.fullname" . -}}
-{{- $svcPort := .Values.service.wsPort -}}
-{{- if and .Values.ingress.ws.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.ws.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.ws.annotations "kubernetes.io/ingress.class" .Values.ingress.ws.className}}
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "mbxnft-backend.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
+  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
   {{- end }}
 {{- end }}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -15,20 +15,20 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}-ws
+  name: {{ $fullName }}
   labels:
-    {{- include "orakl-vrf.labels" . | nindent 4 }}
-  {{- with .Values.ingress.ws.annotations }}
+    {{- include "mbxnft-backend.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if and .Values.ingress.ws.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-  ingressClassName: {{ .Values.ingress.ws.className }}
+  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
-  {{- if .Values.ingress.ws.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
-    {{- range .Values.ingress.ws.tls }}
+    {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -37,7 +37,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.ws.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
