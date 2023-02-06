@@ -5,18 +5,18 @@ global:
   image:
     repository: docker.io/jolol/orakl
     pullPolicy: IfNotPresent
-    tag: "v.0.0.0"
+    tag: "v.0.0.1"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   config:
-    NODE_ENV:
-    CHAIN:
+    NODE_ENV: production
+    CHAIN: baobab
     HOST_SETTINGS_DB_DIR: 
     HEALTH_CHECK_PORT: 8888
-    ORAKL_DIR:
-    SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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 
+    ORAKL_DIR: /app/db
+    SLACK_WEBHOOK_URL: 
 
   podAnnotations: {}
 
@@ -37,6 +37,16 @@ global:
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5 
+
+  persistentVolume:
+    accessModes:
+      - ReadWriteOnce
+    labels: {}
+    annotations: {}
+    existingClaim: ""
+    mountPath: /
+    size: 8Gi
+    subPath: ""
 
 listener:
   enabled: true

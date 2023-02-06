@@ -25,32 +25,40 @@ spec:
       serviceAccountName: {{ .Values.listener.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.listener.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: orakl-database-storage
+          persistentVolumeClaim:
+            claimName: orakl-database
+
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: /app/db
+              name: orakl-database-storage
           env:
             - name: NODE_ENV
-              value: {{ .Values.global.NODE_ENV | quote}}                          
+              value: {{ .Values.global.config.NODE_ENV | quote}}                          
             - name: CHAIN
-              value: {{ .Values.global.CHAIN | quote}}                          
+              value: {{ .Values.global.config.CHAIN | quote}}                          
             - name: HOST_SETTINGS_DB_DIR
-              value: {{ .Values.global.HOST_SETTINGS_DB_DIR | quote}}              
+              value: {{ .Values.global.config.HOST_SETTINGS_DB_DIR | quote}}              
             - name: HEALTH_CHECK_PORT
-              value: {{ .Values.global.healthCheckPort | quote}}  
+              value: {{ .Values.global.config.HEALTH_CHECK_PORT | quote}}  
             - name: ORAKL_DIR
-              value: {{ .Values.global.ORAKL_DIR | quote}}  
+              value: {{ .Values.global.config.ORAKL_DIR | quote}}  
             - name: SLACK_WEBHOOK_URL
-              value: {{ .Values.global.SLACK_WEBHOOK_URL | quote}}                                                                                 
+              value: {{ .Values.global.config.SLACK_WEBHOOK_URL | quote}}                                                                                 
           command: ["yarn"]
           args: [start:listener:vrf]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.global.livenessProbe.path }}
-              port: {{ .Values.global.healthCheckPort | quote }} 
+              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -61,16 +69,16 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.global.readinessProbe.path }}
-              port: {{ .Values.global.healthCheckPort | quote }} 
+              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
             failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
           {{- end }}          
-
           resources:
             {{- toYaml .Values.listener.resources | nindent 12 }}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
