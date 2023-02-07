@@ -38,16 +38,6 @@ global:
     successThreshold: 1
     failureThreshold: 5 
 
-  persistentVolume:
-    accessModes:
-      - ReadWriteOnce
-    labels: {}
-    annotations: {}
-    existingClaim: ""
-    mountPath: /
-    size: 8Gi
-    subPath: ""
-
 listener:
   enabled: true
   replicas: 1
@@ -66,12 +56,74 @@ listener:
   containerSecurityContext: {}
     
   resources:
-    limits:
-      cpu: 500m
-      memory: 4Gi
-    requests:
-      cpu: 500m
-      memory: 4Gi
+    # limits:
+    #   cpu: 500m
+    #   memory: 4Gi
+    # requests:
+    #   cpu: 500m
+    #   memory: 4Gi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 80
+
+worker:
+  enabled: true
+  replicas: 1
+  serviceAccount:
+    # -- Create a service account for the application controller
+    create: true
+    # -- Service account name
+    name: orakl-vrf-worker
+    # -- Annotations applied to created service account
+    annotations: {}
+    # -- Automount API credentials for the Service Account
+    automountServiceAccountToken: true
+
+  podSecurityContext: {}
+
+  containerSecurityContext: {}
+    
+  resources:
+    # limits:
+    #   cpu: 500m
+    #   memory: 4Gi
+    # requests:
+    #   cpu: 500m
+    #   memory: 4Gi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 80
+
+reporter:
+  enabled: true
+  replicas: 1
+  serviceAccount:
+    # -- Create a service account for the application controller
+    create: true
+    # -- Service account name
+    name: orakl-vrf-reporter
+    # -- Annotations applied to created service account
+    annotations: {}
+    # -- Automount API credentials for the Service Account
+    automountServiceAccountToken: true
+
+  podSecurityContext: {}
+
+  containerSecurityContext: {}
+    
+  resources:
+    # limits:
+    #   cpu: 500m
+    #   memory: 4Gi
+    # requests:
+    #   cpu: 500m
+    #   memory: 4Gi
 
   autoscaling:
     enabled: false

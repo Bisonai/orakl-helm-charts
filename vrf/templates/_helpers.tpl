@@ -69,3 +69,43 @@ Selector labels for listener
 app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-listener
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Common labels for worker
+*/}}
+{{- define "orakl-vrf.labels.worker" -}}
+helm.sh/chart: {{ include "orakl-vrf.chart" . }}
+{{ include "orakl-vrf.selectorLabels.worker" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Selector labels for worker
+*/}}
+{{- define "orakl-vrf.selectorLabels.worker" -}}
+app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-worker
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
+Common labels for reporter
+*/}}
+{{- define "orakl-vrf.labels.reporter" -}}
+helm.sh/chart: {{ include "orakl-vrf.chart" . }}
+{{ include "orakl-vrf.selectorLabels.reporter" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Selector labels for reporter
+*/}}
+{{- define "orakl-vrf.selectorLabels.reporter" -}}
+app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-reporter
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

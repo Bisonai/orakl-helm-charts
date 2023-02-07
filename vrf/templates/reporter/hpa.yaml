@@ -1,0 +1,28 @@
+{{- if .Values.reporter.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "orakl-vrf.fullname" . }}-reporter
+  labels:
+    {{- include "orakl-vrf.labels.reporter" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "orakl-vrf.fullname" . }}
+  minReplicas: {{ .Values.reporter.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.reporter.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.reporter.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.reporter.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.reporter.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.reporter.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

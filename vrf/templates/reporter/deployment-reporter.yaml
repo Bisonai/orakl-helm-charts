@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vrf-listener
+  name: vrf-reporter
   labels:
-    {{- include "orakl-vrf.labels.listener" . | nindent 4 }}
+    {{- include "orakl-vrf.labels.reporter" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.listener.replicas }}
+  replicas: {{ .Values.reporter.replicas }}
   selector:
     matchLabels:
-      {{- include "orakl-vrf.selectorLabels.listener" . | nindent 6 }}
+      {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
@@ -16,15 +16,15 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "orakl-vrf.selectorLabels.listener" . | nindent 8 }}
+        {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 8 }}
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.listener.serviceAccount.name }}
+      serviceAccountName: {{ .Values.reporter.serviceAccount.name }}
       securityContext:
-        {{- toYaml .Values.listener.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.reporter.podSecurityContext | nindent 8 }}
       volumes:
         - name: orakl-database-storage
           persistentVolumeClaim:
@@ -33,7 +33,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
+            {{- toYaml .Values.reporter.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           volumeMounts:
@@ -53,7 +53,7 @@ spec:
             - name: SLACK_WEBHOOK_URL
               value: {{ .Values.global.config.SLACK_WEBHOOK_URL | quote}}                                                                                 
           command: ["yarn"]
-          args: [start:listener:vrf]
+          args: [start:reporter:vrf]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
@@ -77,7 +77,7 @@ spec:
             failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
           {{- end }}          
           resources:
-            {{- toYaml .Values.listener.resources | nindent 12 }}
+            {{- toYaml .Values.reporter.resources | nindent 12 }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
