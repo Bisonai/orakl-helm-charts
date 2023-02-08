@@ -1,0 +1,10 @@
+persistentVolume:
+  accessModes:
+    - ReadWriteOnce
+  labels: {}
+  annotations: {}
+  existingClaim: ""
+  mountPath: /
+  size: 2Gi
+  subPath: ""
+  storageClass: orakl-sc
