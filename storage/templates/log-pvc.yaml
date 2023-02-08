@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  {{- if .Values.persistentVolume.log.annotations }}
+  annotations:
+  {{ toYaml .Values.persistentVolume.log.annotations | indent 4 }}
+  {{- end }}
+  {{- if .Values.persistentVolume.log.labels }}
+  labels:
+  {{- end }}  
+  name: {{ .Values.persistentVolume.log.name }}
+spec:
+  accessModes:
+{{ toYaml .Values.persistentVolume.log.accessModes | indent 4 }}
+{{- if .Values.persistentVolume.log.storageClass }}
+{{- if (eq "-" .Values.persistentVolume.log.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.persistentVolume.log.storageClass }}"
+{{- end }}
+{{- end }}
+{{- if .Values.persistentVolume.log.volumeBindingMode }}
+  volumeBindingMode: "{{ .Values.persistentVolume.log.volumeBindingMode }}"
+{{- end }}
+  resources:
+    requests:
+      storage: "{{ .Values.persistentVolume.log.size }}"
+{{- if .Values.persistentVolume.log.selector }}
+  selector:
+  {{- toYaml .Values.persistentVolume.log.selector | nindent 4 }}
+{{- end -}}
+{{- if .Values.persistentVolume.log.volumeName }}
+  volumeName: "{{ .Values.persistentVolume.log.volumeName }}"
+{{- end -}}
+
