@@ -5,7 +5,7 @@ global:
   image:
     repository: docker.io/jolol/orakl
     pullPolicy: IfNotPresent
-    tag: "v.0.0.1"
+    tag: "v.0.0.2"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -16,7 +16,11 @@ global:
     HOST_SETTINGS_DB_DIR: 
     HEALTH_CHECK_PORT: 8888
     ORAKL_DIR: /app/db
+    REDIS_HOST: redis-master-0.redis-headless.orakl.svc.cluster.local
+    REDIS_PORT: 6379
     SLACK_WEBHOOK_URL: 
+    LOG_LEVEL: info
+    LOG_DIR: /app/log
 
   podAnnotations: {}
 

@@ -40,18 +40,11 @@ spec:
             - mountPath: /app/db
               name: orakl-database-storage
           env:
-            - name: NODE_ENV
-              value: {{ .Values.global.config.NODE_ENV | quote}}                          
-            - name: CHAIN
-              value: {{ .Values.global.config.CHAIN | quote}}                          
-            - name: HOST_SETTINGS_DB_DIR
-              value: {{ .Values.global.config.HOST_SETTINGS_DB_DIR | quote}}              
-            - name: HEALTH_CHECK_PORT
-              value: {{ .Values.global.config.HEALTH_CHECK_PORT | quote}}  
-            - name: ORAKL_DIR
-              value: {{ .Values.global.config.ORAKL_DIR | quote}}  
-            - name: SLACK_WEBHOOK_URL
-              value: {{ .Values.global.config.SLACK_WEBHOOK_URL | quote}}                                                                                 
+            {{- range $key, $value := .Values.global.config }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}  
+            {{- end }}
+
           command: ["yarn"]
           args: [start:listener:vrf]
           {{- if .Values.global.livenessProbe.enabled }}
