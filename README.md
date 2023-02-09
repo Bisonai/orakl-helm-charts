@@ -4,7 +4,6 @@ This doc is for deploying Orakl of Klaytn using applications such as  Argocd, Pr
 Each directory contains a 'README.md' file, and the README has instructions on installing it in AWS Kubernetes.  
 
 ---
-<br/>
 
 ## Index ##
 <br/>
