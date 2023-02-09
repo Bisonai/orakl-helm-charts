@@ -13,7 +13,6 @@ global:
   config:
     NODE_ENV: production
     CHAIN: baobab
-    HOST_SETTINGS_DB_DIR: 
     HEALTH_CHECK_PORT: 8888
     ORAKL_DIR: /app/db
     REDIS_HOST: redis-master-0.redis-headless.orakl.svc.cluster.local

@@ -13,7 +13,6 @@ global:
   config:
     NODE_ENV: production    #[dev, production]
     CHAIN: baobab           #[baobab, cypress]
-    HOST_SETTINGS_DB_DIR:   #Default is empty
     HEALTH_CHECK_PORT: 8888 #Specify Helath Check Port
     ORAKL_DIR: /app/db      #The path should match with PVC of Orakl database
     REDIS_HOST: localhost   #Redis Host Url
