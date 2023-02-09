@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  {{- if .Values.persistentVolume.log.annotations }}
+  {{- with .Values.persistentVolume.log.annotations }}
   annotations:
-  {{ toYaml .Values.persistentVolume.log.annotations | indent 4 }}
+  {{- toYaml . | nindent 8 }}
   {{- end }}
-  {{- if .Values.persistentVolume.log.labels }}
+  {{- with .Values.persistentVolume.log.labels }}
   labels:
+  {{- toYaml . | nindent 8 }}
   {{- end }}  
-  name: {{ .Values.persistentVolume.log.name }}
+  name: "{{ .Values.persistentVolume.log.name | default "orakl-log" }}"
 spec:
   accessModes:
 {{ toYaml .Values.persistentVolume.log.accessModes | indent 4 }}

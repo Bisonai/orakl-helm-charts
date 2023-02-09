@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vrf-reporter
+  name: request-response-reporter
   labels:
-    {{- include "orakl-vrf.labels.reporter" . | nindent 4 }}
+    {{- include "orakl-request-response.labels.reporter" . | nindent 4 }}
 spec:
   replicas: {{ .Values.reporter.replicas }}
   selector:
     matchLabels:
-      {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 6 }}
+      {{- include "orakl-request-response.selectorLabels.reporter" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
@@ -16,7 +16,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 8 }}
+        {{- include "orakl-request-response.selectorLabels.reporter" . | nindent 8 }}
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
@@ -43,7 +43,7 @@ spec:
             {{- end }}
 
           command: ["yarn"]
-          args: [start:reporter:vrf]
+          args: [start:reporter:request_response]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:

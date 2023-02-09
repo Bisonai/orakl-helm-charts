@@ -26,9 +26,7 @@ spec:
       securityContext:
         {{- toYaml .Values.worker.podSecurityContext | nindent 8 }}
       volumes:
-        - name: orakl-database-storage
-          persistentVolumeClaim:
-            claimName: orakl-database
+        {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
 
       containers:
         - name: {{ .Chart.Name }}
@@ -37,13 +35,13 @@ spec:
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           volumeMounts:
-            - mountPath: /app/db
-              name: orakl-database-storage
+            {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}
           env:
             {{- range $key, $value := .Values.global.config }}
             - name: {{ $key }}
               value: {{ $value | quote }}  
-            {{- end }}                                                                               
+            {{- end }}
+
           command: ["yarn"]
           args: [start:worker:vrf]
           {{- if .Values.global.livenessProbe.enabled }}

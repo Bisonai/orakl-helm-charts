@@ -33,4 +33,3 @@ spec:
 {{- if .Values.persistentVolume.database.volumeName }}
   volumeName: "{{ .Values.persistentVolume.database.volumeName }}"
 {{- end -}}
-

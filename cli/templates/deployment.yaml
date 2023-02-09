@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vrf-reporter
+  name: orakle-cli
   labels:
-    {{- include "orakl-vrf.labels.reporter" . | nindent 4 }}
+    {{- include "orakl-cli.labels.cli" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.reporter.replicas }}
+  replicas: {{ .Values.cli.replicas }}
   selector:
     matchLabels:
-      {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 6 }}
+      {{- include "orakl-cli.selectorLabels.cli" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
@@ -16,22 +16,22 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 8 }}
+        {{- include "orakl-cli.selectorLabels.cli" . | nindent 8 }}
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.reporter.serviceAccount.name }}
+      serviceAccountName: {{ .Values.cli.serviceAccount.name }}
       securityContext:
-        {{- toYaml .Values.reporter.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.cli.podSecurityContext | nindent 8 }}
       volumes:
         {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
 
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.reporter.containerSecurityContext | nindent 12 }}
+            {{- toYaml .Values.cli.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           volumeMounts:
@@ -42,13 +42,16 @@ spec:
               value: {{ $value | quote }}  
             {{- end }}
 
-          command: ["yarn"]
-          args: [start:reporter:vrf]
+          command: []
+          args:
+          - /bin/sh
+          - -c
+          - touch /tmp/healthy; sleep 1d;
           {{- if .Values.global.livenessProbe.enabled }}
-          livenessProbe:
-            httpGet:
-              path: {{ .Values.global.livenessProbe.path }}
-              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+          livenessProbe: 
+            exec:
+              command:
+              - ls
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -56,10 +59,10 @@ spec:
             failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
           {{- end }}
           {{- if .Values.global.readinessProbe.enabled }}
-          readinessProbe:
-            httpGet:
-              path: {{ .Values.global.readinessProbe.path }}
-              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+          readinessProbe: 
+            exec:
+              command:
+              - ls
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
@@ -67,7 +70,7 @@ spec:
             failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
           {{- end }}          
           resources:
-            {{- toYaml .Values.reporter.resources | nindent 12 }}
+            {{- toYaml .Values.cli.resources | nindent 12 }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:

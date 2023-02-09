@@ -5,7 +5,7 @@ global:
   image:
     repository: docker.io/jolol/orakl
     pullPolicy: IfNotPresent
-    tag: "v.0.04"
+    tag: "v.0.0.3"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -64,7 +64,7 @@ listener:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-vrf-listener
+    name: orakl-request-response-listener
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
@@ -89,7 +89,7 @@ worker:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-vrf-worker
+    name: orakl-request-response-worker
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
@@ -114,7 +114,7 @@ reporter:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-vrf-reporter
+    name: orakl-request-response-reporter
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account

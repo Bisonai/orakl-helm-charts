@@ -1,5 +1,5 @@
 persistentVolume:
-  datbase:
+  database:
     name: orakl-database
     accessModes:
       - ReadWriteOnce
@@ -7,9 +7,9 @@ persistentVolume:
     annotations: {}
     existingClaim: ""
     mountPath: /
-    size: 20M
+    size: 1Gi
     subPath: ""
-    storageClass: orakl-default-sc
+    storageClass: 
   log:
     name: orakl-log
     accessModes:
@@ -20,4 +20,4 @@ persistentVolume:
     mountPath: /
     size: 2Gi
     subPath: ""
-    storageClass: orakl-default-sc
+    storageClass: 
