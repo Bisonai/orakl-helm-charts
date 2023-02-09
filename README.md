@@ -1,39 +1,22 @@
-# orakl-helm-charts
-helm charts of Orakl 
+# Orakl Klaytn
+
+This doc is for deploying Orakl of Klaytn using applications such as  Argocd, Prometheus, etc.
+Each directory contains a 'README.md' file, and the README has instructions on installing it in AWS Kubernetes.  
 
 ---
-## Git + Argocd
----
-
->Install Argocd (CICD)
-
 <br/>
 
-#### + Create namespace
-  
-```bash
-kubectl create namespace argocd
-```
-
-#### + Install argocd with namespace
-  
-```bash
-helm install argocd -n argocd argocd/.
-```
-
-#### + Port forwarding
-```bash
-kubectl port-forward service/argocd-server -n argocd 8080:443
-```
-
-#### + Get admin temporary password
-```bash
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-```
-##### * Remove '%' in the end of the password if it exists.
-
+## Index ##
 <br/>
 
-#### + Access Argocd UI admin(http://localhost:8080) and changed admin password.  (_User Info -> Update Password_)
+Optional
+> + [Argocd](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/argocd) (Optional, CICD Tools with Kubernetes)
+> + [Prometheus](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/prometheus) (Optional, Monitoring Tool)
 
-<br/>
+Required
+> 1) [Redis](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/redis)
+> 2) [Storage](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/storage) (Volum Storage)
+> 3) [Cli](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/cli) (Initial configuration)
+> 4) [VRF](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/vrf) (Required)
+> 5) [Request-Response](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/request-response) (Required)
+> 
