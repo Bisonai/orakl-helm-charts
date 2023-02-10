@@ -15,7 +15,7 @@ global:
     CHAIN: baobab
     HEALTH_CHECK_PORT: 8888
     ORAKL_DIR: /app/db
-    REDIS_HOST: redis-master-0.redis-headless.orakl.svc.cluster.local
+    REDIS_HOST: 
     REDIS_PORT: 6379
     SLACK_WEBHOOK_URL: 
     LOG_LEVEL: debug
