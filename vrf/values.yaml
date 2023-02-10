@@ -15,7 +15,7 @@ global:
     CHAIN: baobab           #[baobab, cypress]
     HEALTH_CHECK_PORT: 8888 #Specify Helath Check Port
     ORAKL_DIR: /app/db      #The path should match with PVC of Orakl database
-    REDIS_HOST: localhost   #Redis Host Url
+    REDIS_HOST:             #Redis Host Url
     REDIS_PORT: 6379        #Redis Port
     SLACK_WEBHOOK_URL:      #Error message is delivered to slack 
     LOG_LEVEL: debug        #[info, debug]
