@@ -5,7 +5,7 @@ global:
   image:
     repository: docker.io/jolol/orakl #repository url
     pullPolicy: IfNotPresent
-    tag: "v.0.0.6"                    #image tag
+    tag: "v.0.0.7"                    #image tag
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
