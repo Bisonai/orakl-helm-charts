@@ -10,6 +10,7 @@ metadata:
   {{- toYaml . | nindent 8 }}
   {{- end }}  
   name: "{{ .Values.persistentVolume.database.name | default "orakl-database" }}"
+allowVolumeExpansion: true
 spec:
   accessModes:
 {{ toYaml .Values.persistentVolume.database.accessModes | indent 4 }}

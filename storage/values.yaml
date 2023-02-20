@@ -18,6 +18,6 @@ persistentVolume:
     annotations: {}
     existingClaim: ""
     mountPath: /
-    size: 2Gi
+    size: 30Gi
     subPath: ""
     storageClass: 

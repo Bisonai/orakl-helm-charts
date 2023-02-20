@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator-listener
+  labels:
+    {{- include "orakl-aggregator.labels.listener" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.listener.replicas }}
+  selector:
+    matchLabels:
+      {{- include "orakl-aggregator.selectorLabels.listener" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "orakl-aggregator.selectorLabels.listener" . | nindent 8 }}
+    spec:
+      {{- with .Values.global.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.listener.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.listener.podSecurityContext | nindent 8 }}
+      volumes:
+        {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
+      {{- if .Values.global.affinity.enabled }}        
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: {{ .Values.global.affinity.key }}
+                operator: In
+                values:
+                - {{ .Values.global.affinity.value }}
+      {{- end }}   
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          volumeMounts:
+            {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}
+          env:
+            {{- range $key, $value := .Values.global.config }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}  
+            {{- end }}
+
+          command: ["yarn"]
+          args: [start:listener:request_response]
+          {{- if .Values.global.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.global.livenessProbe.path }}
+              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+            initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.global.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.global.readinessProbe.path }}
+              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+            initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
+          {{- end }}          
+          resources:
+            {{- toYaml .Values.listener.resources | nindent 12 }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
