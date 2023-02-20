@@ -22,7 +22,7 @@ global:
     LOG_DIR: /app/log       #The path should match with PVC of Orakl Log
 
   affinity:
-    enabled: true
+    enabled: false
     key: kubernetes.io/hostname
     value: ip-10-0-182-23.ap-southeast-1.compute.internal
 
