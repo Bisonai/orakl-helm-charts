@@ -27,7 +27,18 @@ spec:
         {{- toYaml .Values.reporter.podSecurityContext | nindent 8 }}
       volumes:
         {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
-
+      {{- if .Values.global.affinity.enabled }}        
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: {{ .Values.global.affinity.key }}
+                operator: In
+                values:
+                - {{ .Values.global.affinity.value }}
+      {{- end }}  
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

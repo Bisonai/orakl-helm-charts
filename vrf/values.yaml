@@ -21,6 +21,11 @@ global:
     LOG_LEVEL: debug        #[info, debug]
     LOG_DIR: /app/log       #The path should match with PVC of Orakl Log
 
+  affinity:
+    enabled: true
+    key: kubernetes.io/hostname
+    value: ip-10-0-182-23.ap-southeast-1.compute.internal
+
   volumes:
     - name: orakl-database-storage
       persistentVolumeClaim:
