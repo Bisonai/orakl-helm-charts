@@ -1,23 +1,11 @@
 persistentVolume:
+  efsFileSystemId: fs-02bd34cc6aa5f601d
+  region: ap-southeast-1
   database:
     name: orakl-database
-    accessModes:
-      - ReadWriteOnce
-    labels: {}
-    annotations: {}
-    existingClaim: ""
-    mountPath: /
     size: 1Gi
-    subPath: ""
-    storageClass: 
+    storageClass: orakl-sc
   log:
     name: orakl-log
-    accessModes:
-      - ReadWriteOnce
-    labels: {}
-    annotations: {}
-    existingClaim: ""
-    mountPath: /
-    size: 30Gi
-    subPath: ""
-    storageClass: 
+    size: 10Gi
+    storageClass: orakl-sc

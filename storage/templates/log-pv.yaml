@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "{{ .Values.persistentVolume.log.name | default "orakl-log" }}-pv"
+spec:
+  capacity:
+    storage: "{{ .Values.persistentVolume.log.size }}"
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  nfs:
+    server: "{{ .Values.persistentVolume.efsFileSystemId }}.efs.{{ .Values.persistentVolume.region }}.amazonaws.com"
+    path: /
+  storageClassName: orakl-sc    
