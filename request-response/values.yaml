@@ -18,7 +18,7 @@ global:
     REDIS_HOST: 
     REDIS_PORT: 6379
     SLACK_WEBHOOK_URL: 
-    LOG_LEVEL: debug
+    LOG_LEVEL: info
     LOG_DIR: /app/log
 
   affinity:
