@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.deployment.name }}-config
 data:
-  REDIS_HOST: {{ .Values.deployment.env.REDIS_HOST }}
-  REDIS_PORT: {{ .Values.deployment.env.REDIS_PORT }}
+  REDIS_HOST: "{{ .Values.deployment.env.REDIS_HOST }}"
+  REDIS_PORT: "{{ .Values.deployment.env.REDIS_PORT }}"

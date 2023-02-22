@@ -4,13 +4,13 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  name: bull-monitor
+  name: orakl-bull-monitor
   type: ClusterIP
   port: 3000
 
 deployment:
   replicaCount: 1
-  name: bull-monitor
+  name: orakl-bull-monitor
   imagePullSecrets: []
   env:
     REDIS_HOST: 10.0.187.93
