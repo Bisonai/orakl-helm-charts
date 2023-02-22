@@ -54,7 +54,7 @@ spec:
             {{- end }}
 
           command: ["yarn"]
-          args: [start:reporter:request_response]
+          args: [start:reporter:aggregator]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
