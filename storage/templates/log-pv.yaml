@@ -10,5 +10,5 @@ spec:
   volumeMode: Filesystem
   nfs:
     server: "{{ .Values.persistentVolume.efsFileSystemId }}.efs.{{ .Values.persistentVolume.region }}.amazonaws.com"
-    path: /
+    path: /log/
   storageClassName: orakl-sc    
