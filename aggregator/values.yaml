@@ -14,7 +14,7 @@ global:
     NODE_ENV: production
     CHAIN: baobab
     HEALTH_CHECK_PORT: 8888
-    ORAKL_DIR: /app/db
+    ORAKL_DIR: /app/db/aggregator
     REDIS_HOST: 
     REDIS_PORT: 6379
     SLACK_WEBHOOK_URL: 
@@ -22,16 +22,16 @@ global:
     LOG_DIR: /app/log
 
   volumes:
-    - name: orakl-database-storage
+    - name: orakl-database-storage-aggregator
       persistentVolumeClaim:
-        claimName: orakl-database
+        claimName: orakl-database-aggregator
     - name: orakl-log-storage
       persistentVolumeClaim:
         claimName: orakl-log
 
   volumeMounts:
-    - name: orakl-database-storage
-      mountPath: /app/db      
+    - name: orakl-database-storage-aggregator
+      mountPath: /app/db/aggregator
       subPath: db
     - name: orakl-log-storage
       mountPath: /app/log
