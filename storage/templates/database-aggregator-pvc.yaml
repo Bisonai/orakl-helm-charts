@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ .Values.persistentVolume.database.name | default "orakl-database" }}-aggregator"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: "{{ .Values.persistentVolume.database.size }}"
+  volumeName:  "{{ .Values.persistentVolume.database.name | default "orakl-database" }}-aggregator-pv"
+  storageClassName: orakl-sc  
