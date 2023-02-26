@@ -22,15 +22,15 @@ global:
     LOG_DIR: /app/log
 
   volumes:
-    - name: orakl-database-storage-aggregator
+    - name: orakl-database-storage
       persistentVolumeClaim:
-        claimName: orakl-database-aggregator
+        claimName: orakl-database
     - name: orakl-log-storage
       persistentVolumeClaim:
         claimName: orakl-log
 
   volumeMounts:
-    - name: orakl-database-storage-aggregator
+    - name: orakl-database-storage
       mountPath: /app/db/aggregator
       subPath: db
     - name: orakl-log-storage
