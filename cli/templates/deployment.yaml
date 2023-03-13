@@ -18,10 +18,6 @@ spec:
       labels:
         {{- include "orakl-cli.selectorLabels.cli" . | nindent 8 }}
     spec:
-      {{- with .Values.global.image.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       serviceAccountName: {{ .Values.cli.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.cli.podSecurityContext | nindent 8 }}
@@ -41,12 +37,7 @@ spec:
             - name: {{ $key }}
               value: {{ $value | quote }}  
             {{- end }}
-
-          command: []
-          args:
-          - /bin/sh
-          - -c
-          - touch /tmp/healthy; sleep 1d;
+          command: ["sh", "-c", "npm install @bisonai/orakl-cli && orakl-cli start"]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe: 
             exec:
@@ -71,7 +62,6 @@ spec:
           {{- end }}          
           resources:
             {{- toYaml .Values.cli.resources | nindent 12 }}
-
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
