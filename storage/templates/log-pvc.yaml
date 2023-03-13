@@ -1,36 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  {{- with .Values.persistentVolume.log.annotations }}
-  annotations:
-  {{- toYaml . | nindent 8 }}
-  {{- end }}
-  {{- with .Values.persistentVolume.log.labels }}
-  labels:
-  {{- toYaml . | nindent 8 }}
-  {{- end }}  
   name: "{{ .Values.persistentVolume.log.name | default "orakl-log" }}"
 spec:
   accessModes:
-{{ toYaml .Values.persistentVolume.log.accessModes | indent 4 }}
-{{- if .Values.persistentVolume.log.storageClass }}
-{{- if (eq "-" .Values.persistentVolume.log.storageClass) }}
-  storageClassName: ""
-{{- else }}
-  storageClassName: "{{ .Values.persistentVolume.log.storageClass }}"
-{{- end }}
-{{- end }}
-{{- if .Values.persistentVolume.log.volumeBindingMode }}
-  volumeBindingMode: "{{ .Values.persistentVolume.log.volumeBindingMode }}"
-{{- end }}
+    - ReadWriteMany
   resources:
     requests:
       storage: "{{ .Values.persistentVolume.log.size }}"
-{{- if .Values.persistentVolume.log.selector }}
-  selector:
-  {{- toYaml .Values.persistentVolume.log.selector | nindent 4 }}
-{{- end -}}
-{{- if .Values.persistentVolume.log.volumeName }}
-  volumeName: "{{ .Values.persistentVolume.log.volumeName }}"
-{{- end -}}
-
+  volumeName:  "{{ .Values.persistentVolume.log.name | default "orakl-log" }}-pv"
+  storageClassName: orakl-sc    

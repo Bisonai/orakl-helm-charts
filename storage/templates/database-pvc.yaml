@@ -1,35 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  {{- with .Values.persistentVolume.database.annotations }}
-  annotations:
-  {{- toYaml . | nindent 8 }}
-  {{- end }}
-  {{- with .Values.persistentVolume.database.labels }}
-  labels:
-  {{- toYaml . | nindent 8 }}
-  {{- end }}  
   name: "{{ .Values.persistentVolume.database.name | default "orakl-database" }}"
 spec:
   accessModes:
-{{ toYaml .Values.persistentVolume.database.accessModes | indent 4 }}
-{{- if .Values.persistentVolume.database.storageClass }}
-{{- if (eq "-" .Values.persistentVolume.database.storageClass) }}
-  storageClassName: ""
-{{- else }}
-  storageClassName: "{{ .Values.persistentVolume.database.storageClass }}"
-{{- end }}
-{{- end }}
-{{- if .Values.persistentVolume.database.volumeBindingMode }}
-  volumeBindingMode: "{{ .Values.persistentVolume.database.volumeBindingMode }}"
-{{- end }}
+    - ReadWriteMany
   resources:
     requests:
       storage: "{{ .Values.persistentVolume.database.size }}"
-{{- if .Values.persistentVolume.database.selector }}
-  selector:
-  {{- toYaml .Values.persistentVolume.database.selector | nindent 4 }}
-{{- end -}}
-{{- if .Values.persistentVolume.database.volumeName }}
-  volumeName: "{{ .Values.persistentVolume.database.volumeName }}"
-{{- end -}}
+  volumeName:  "{{ .Values.persistentVolume.database.name | default "orakl-database" }}-pv"
+  storageClassName: orakl-sc  

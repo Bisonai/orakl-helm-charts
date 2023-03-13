@@ -5,7 +5,7 @@ global:
   image:
     repository: docker.io/jolol/orakl
     pullPolicy: IfNotPresent
-    tag: "v.0.3.0hash"
+    tag: "v.0.3.0"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -14,17 +14,12 @@ global:
     NODE_ENV: production
     CHAIN: baobab
     HEALTH_CHECK_PORT: 8888
-    ORAKL_DIR: /app/db
+    ORAKL_DIR: /app/db/aggregator
     REDIS_HOST: 
     REDIS_PORT: 6379
     SLACK_WEBHOOK_URL: 
-    LOG_LEVEL: info
+    LOG_LEVEL: debug
     LOG_DIR: /app/log
-
-  affinity:
-    enabled: false
-    key: kubernetes.io/hostname
-    value: ip-10-0-90-13.ap-southeast-1.compute.internal
 
   volumes:
     - name: orakl-database-storage
@@ -36,10 +31,15 @@ global:
 
   volumeMounts:
     - name: orakl-database-storage
-      mountPath: /app/db      
+      mountPath: /app/db/aggregator
       subPath: db
     - name: orakl-log-storage
       mountPath: /app/log
+
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value: ip-10-0-90-13.ap-southeast-1.compute.internal
 
   podAnnotations: {}
 
@@ -68,7 +68,7 @@ listener:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-request-response-listener
+    name: orakl-aggregator-listener
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
@@ -78,13 +78,13 @@ listener:
 
   containerSecurityContext: {}
     
-  resources:
-    # limits:
-    #   cpu: 500m
-    #   memory: 4Gi
-    # requests:
-    #   cpu: 500m
-    #   memory: 4Gi
+  # resources:
+  #   limits:
+  #     cpu: 400m
+  #     memory: 2Gi
+  #   requests:
+  #     cpu: 400m
+  #     memory: 2Gi
 
 worker:
   enabled: true
@@ -93,7 +93,7 @@ worker:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-request-response-worker
+    name: orakl-aggregator-worker
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
@@ -103,13 +103,13 @@ worker:
 
   containerSecurityContext: {}
     
-  resources:
-    # limits:
-    #   cpu: 500m
-    #   memory: 4Gi
-    # requests:
-    #   cpu: 500m
-    #   memory: 4Gi
+  # resources:
+  #   limits:
+  #     cpu: 1000m
+  #     memory: 4Gi
+  #   requests:
+  #     cpu: 1000m
+  #     memory: 4Gi
 
 reporter:
   enabled: true
@@ -118,7 +118,7 @@ reporter:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-request-response-reporter
+    name: orakl-aggregator-reporter
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
@@ -128,13 +128,13 @@ reporter:
 
   containerSecurityContext: {}
     
-  resources:
-    # limits:
-    #   cpu: 500m
-    #   memory: 4Gi
-    # requests:
-    #   cpu: 500m
-    #   memory: 4Gi
+  # resources:
+  #   limits:
+  #     cpu: 400m
+  #     memory: 2Gi
+  #   requests:
+  #     cpu: 400m
+  #     memory: 2Gi
 
 nodeSelector: {}
 tolerations: []

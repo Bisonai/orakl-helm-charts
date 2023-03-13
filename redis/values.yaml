@@ -163,7 +163,7 @@ master:
   ##
   disableCommands:
     - FLUSHDB
-    - FLUSHALL
+    
   ## @param master.command Override default container command (useful when using custom images)
   ##
   command: []

@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: request-response-listener
+  name: aggregator-reporter
   labels:
-    {{- include "orakl-request-response.labels.listener" . | nindent 4 }}
+    {{- include "orakl-aggregator.labels.reporter" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.listener.replicas }}
+  replicas: {{ .Values.reporter.replicas }}
   selector:
     matchLabels:
-      {{- include "orakl-request-response.selectorLabels.listener" . | nindent 6 }}
+      {{- include "orakl-aggregator.selectorLabels.reporter" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
@@ -16,18 +16,18 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "orakl-request-response.selectorLabels.listener" . | nindent 8 }}
+        {{- include "orakl-aggregator.selectorLabels.reporter" . | nindent 8 }}
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.listener.serviceAccount.name }}
+      serviceAccountName: {{ .Values.reporter.serviceAccount.name }}
       securityContext:
-        {{- toYaml .Values.listener.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.reporter.podSecurityContext | nindent 8 }}
       volumes:
         {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
-      {{- if .Values.global.affinity.enabled }}        
+      {{- if .Values.global.affinity.enabled }}    
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -38,11 +38,11 @@ spec:
                 operator: In
                 values:
                 - {{ .Values.global.affinity.value }}
-      {{- end }}  
+      {{- end }}   
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
+            {{- toYaml .Values.reporter.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           volumeMounts:
@@ -54,7 +54,7 @@ spec:
             {{- end }}
 
           command: ["yarn"]
-          args: [start:listener:request_response]
+          args: [start:reporter:aggregator]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
@@ -78,7 +78,7 @@ spec:
             failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
           {{- end }}          
           resources:
-            {{- toYaml .Values.listener.resources | nindent 12 }}
+            {{- toYaml .Values.reporter.resources | nindent 12 }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:

@@ -1,0 +1,17 @@
+image:
+  repository: ejhayes/nodejs-bull-monitor
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  name: orakl-bull-monitor
+  type: ClusterIP
+  port: 3000
+
+deployment:
+  replicaCount: 1
+  name: orakl-bull-monitor
+  imagePullSecrets: []
+  env:
+    REDIS_HOST: 10.0.143.98
+    REDIS_PORT: "6379"
