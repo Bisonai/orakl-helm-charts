@@ -4,9 +4,15 @@ metadata:
   name: "{{ .Values.persistentVolume.log.name | default "orakl-log" }}"
 spec:
   accessModes:
+    {{- if .Values.persistentVolume.efsFileSystemId }}  
     - ReadWriteMany
+    {{ else }}
+    - ReadWriteOnce
+    {{ end }}
   resources:
     requests:
       storage: "{{ .Values.persistentVolume.log.size }}"
   volumeName:  "{{ .Values.persistentVolume.log.name | default "orakl-log" }}-pv"
+  {{- if .Values.persistentVolume.efsFileSystemId }}    
   storageClassName: orakl-sc    
+  {{- end }}
