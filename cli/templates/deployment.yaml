@@ -44,12 +44,8 @@ spec:
             - name: {{ $key }}
               value: {{ $value | quote }}  
             {{- end }}
-
-          command: []
-          args:
-          - /bin/sh
-          - -c
-          - touch /tmp/healthy; sleep 1d;
+          command: ["/bin/sh"]
+          args: ["-c", "touch /tmp/healthy; tail -f /dev/null"]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe: 
             exec:
