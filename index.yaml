@@ -43,5 +43,5 @@ entries:
     type: application
     urls:
     - charts/orakl-vrf-0.1.0.tgz
-    version: 0.1.0
+    version: 0.1.1
 generated: "2023-02-10T17:03:04.112438+09:00"
