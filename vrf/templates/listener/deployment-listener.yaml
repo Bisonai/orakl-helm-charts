@@ -26,8 +26,11 @@ spec:
       securityContext:
         {{- toYaml .Values.listener.podSecurityContext | nindent 8 }}
       volumes:
+      {{ if .Values.global.hostPath.enable }}
+        {{- toYaml .Values.global.hostPath.volumes | default "" | nindent 8 }}
+      {{ else }}
         {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
-
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

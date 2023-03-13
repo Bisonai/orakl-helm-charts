@@ -26,8 +26,12 @@ spec:
       securityContext:
         {{- toYaml .Values.reporter.podSecurityContext | nindent 8 }}
       volumes:
+      {{ if .Values.global.hostPath.enable }}
+        {{- toYaml .Values.global.hostPath.volumes | default "" | nindent 8 }}
+      {{ else }}
         {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
-      {{- if .Values.global.affinity.enabled }}        
+      {{ end }}
+      {{- if .Values.global.affinity.enabled }}         
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
