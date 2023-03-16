@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: orakl-cli-config
-data:
-  ORAKL_NETWORK_API_URL:
-  ORAKL_NETWORK_FETCHER_URL:

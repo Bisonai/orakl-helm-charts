@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orakle-cli
+  name: {{ include "orakl-cli.fullname" . }}
   labels:
     {{- include "orakl-cli.labels.cli" . | nindent 4 }}
 spec:
@@ -32,10 +32,25 @@ spec:
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           env:
-         - name: ORAKL_NETWORK_API_URL
-            value: {{ .Values.oraklNetworkApiUrl | default (valueOrDefault "orakl-cli-config" "ORAKL_NETWORK_API_URL") }}
-          - name: ORAKL_NETWORK_FETCHER_URL
-            value: {{ .Values.oraklNetworkFetcherUrl | default (valueOrDefault "orakl-cli-config" "ORAKL_NETWORK_FETCHER_URL") }}
+          - name: ORAKL_NETWORK_API_URL          
+          {{- if .Values.global.config.ORAKL_NETWORK_API_URL }}
+            value: {{ .Values.global.config.ORAKL_NETWORK_API_URL }}
+          {{ else }}
+            valueFrom:
+              secretKeyRef:
+                name: orakl-cli-secrets
+                key: ORAKL_NETWORK_API_URL
+          {{ end }}     
+          - name: ORAKL_NETWORK_FETCHER_URL          
+          {{- if .Values.global.config.ORAKL_NETWORK_FETCHER_URL }}
+            value: {{ .Values.global.config.ORAKL_NETWORK_FETCHER_URL }}
+          {{ else }}
+            valueFrom:
+              secretKeyRef:
+                name: orakl-cli-secrets
+                key: ORAKL_NETWORK_FETCHER_URL
+          {{ end }}     
+
           command: ["/bin/sh"]
           args: ["-c", "touch /tmp/healthy; tail -f /dev/null"]
           {{- if .Values.global.livenessProbe.enabled }}
