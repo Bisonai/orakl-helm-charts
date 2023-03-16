@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: orakl-api
 spec:
-  selector:
-    app: api
   type: ClusterIP
   ports:
   - port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
     targetPort: http
     protocol: TCP
+  selector:
+    {{- include "orakl-api.selectorLabels.api" . | nindent 6 }}   
