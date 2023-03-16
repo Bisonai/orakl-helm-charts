@@ -5,6 +5,6 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+  - port: {{ .Values.global.config.APP_PORT | default 4040 | int  }}
     targetPort: http
     protocol: TCP
