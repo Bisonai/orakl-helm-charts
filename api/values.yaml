@@ -3,16 +3,16 @@
 
 global:
   image:
-    repository: docker.io/bisonai/orakl-cli
+    repository: docker.io/bisonai/orakl-api #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.0-dev-beta"
+    tag: "v0.0.0-dev"  
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   config:
-    ORAKL_NETWORK_API_URL:
-    ORAKL_NETWORK_FETCHER_URL:
+    DATABASE_URL:
+    APP_PORT: 
 
   affinity:
     enabled: false
@@ -22,29 +22,31 @@ global:
   podAnnotations: {}
 
   livenessProbe:
-    enabled: false
-    initialDelaySeconds: 20
+    enabled: true
+    path: /health
+    initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
 
   readinessProbe:
-    enabled: false
-    initialDelaySeconds: 20
+    enabled: true
+    path: /health
+    initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5 
 
-cli:
+api:
   enabled: true
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-cli
+    name: orakl-api
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
@@ -53,14 +55,14 @@ cli:
   podSecurityContext: {}
 
   containerSecurityContext: {}
-    
+  
   resources:
     # limits:
-    #   cpu: 500m
-    #   memory: 4Gi
+    #   cpu: 1500m
+    #   memory: 6Gi
     # requests:
-    #   cpu: 500m
-    #   memory: 4Gi
+    #   cpu: 1500m
+    #   memory: 6Gi
 
 nodeSelector: {}
 tolerations: []

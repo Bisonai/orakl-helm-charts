@@ -1,0 +1,15 @@
+fetcherVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "orakl-fetcher.fullname" . }}-test-connection"
+  labels:
+    {{- include "orakl-fetcher.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "orakl-fetcher.fullname" . }}']
+  restartPolicy: Never

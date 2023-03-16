@@ -1,0 +1,12 @@
+{{- if .Values.fetcher.serviceAccount.create -}}
+fetcherVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.fetcher.serviceAccount.name }}
+  labels:
+    {{- include "orakl-fetcher.labels.fetcher" . | nindent 4 }}
+  {{- with .Values.fetcher.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}

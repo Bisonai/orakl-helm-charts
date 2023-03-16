@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vrf-listener
+  name: {{ include "orakl-api.fullname" . }}
   labels:
-    {{- include "orakl-vrf.labels.listener" . | nindent 4 }}
+    {{- include "orakl-api.labels.api" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.listener.replicas }}
+  replicas: {{ .Values.api.replicas }}
   selector:
     matchLabels:
-      {{- include "orakl-vrf.selectorLabels.listener" . | nindent 6 }}
+      {{- include "orakl-api.selectorLabels.api" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
@@ -16,44 +16,64 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "orakl-vrf.selectorLabels.listener" . | nindent 8 }}
+        {{- include "orakl-api.selectorLabels.api" . | nindent 8 }}
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.listener.serviceAccount.name }}
+      serviceAccountName: {{ .Values.api.serviceAccount.name }}
       securityContext:
-        {{- toYaml .Values.listener.podSecurityContext | nindent 8 }}
-      volumes:
-      {{ if .Values.global.hostPath.enable }}
-        {{- toYaml .Values.global.hostPath.volumes | default "" | nindent 8 }}
-      {{ else }}
-        {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
-      {{ end }}
+        {{- toYaml .Values.api.podSecurityContext | nindent 8 }}
+      {{- if .Values.global.affinity.enabled }}        
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: {{ .Values.global.affinity.key }}
+                operator: In
+                values:
+                - {{ .Values.global.affinity.value }}
+      {{- end }}  
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
+            {{- toYaml .Values.api.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-          volumeMounts:
-            {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}
           env:
-            {{- range $key, $value := .Values.global.config }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}  
-            {{- end }}
-
+            - name: DATABASE_URL          
+            {{- if .Values.global.config.DATABASE_URL }}
+              value: {{ .Values.global.config.DATABASE_URL }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-api-secrets
+                  key: DATABASE_URL
+            {{ end }}
+            - name: APP_PORT
+            {{- if .Values.global.config.APP_PORT }}
+              value: "{{ .Values.global.config.APP_PORT }}"
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-api-secrets
+                  key: APP_PORT
+            {{ end }}
           command: ["yarn"]
-          args: [start:listener:vrf]
+          args: ["start:prod"]
+          ports:
+          - name: http
+            containerPort: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.global.livenessProbe.path }}
-              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+              port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.global.livenessPƒrobe.periodSeconds }}
+            periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.livenessProbe.successThreshold }}
             failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
@@ -62,7 +82,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.global.readinessProbe.path }}
-              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+              port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
@@ -70,7 +90,7 @@ spec:
             failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
           {{- end }}          
           resources:
-            {{- toYaml .Values.listener.resources | nindent 12 }}
+            {{- toYaml .Values.api.resources | nindent 12 }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
