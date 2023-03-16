@@ -23,7 +23,7 @@ global:
 
   livenessProbe:
     enabled: true
-    path: /health
+    path: /api/v1/
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 5
@@ -32,7 +32,7 @@ global:
 
   readinessProbe:
     enabled: true
-    path: /health
+    path: /api/v1/
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 1
