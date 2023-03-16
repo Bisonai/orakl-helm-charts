@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "orakl-cli.fullname" . }}
+  name: cli
   labels:
     {{- include "orakl-cli.labels.cli" . | nindent 4 }}
 spec:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "orakl-fetcher.fullname" . }}
+  name: fetcher
   labels:
     {{- include "orakl-fetcher.labels.fetcher" . | nindent 4 }}
 spec:
