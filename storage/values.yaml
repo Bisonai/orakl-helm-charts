@@ -1,5 +1,6 @@
 persistentVolume:
-  efsFileSystemId: fs-02bd34cc6aa5f601d
+  # efsFileSystemId: fs-02bd34cc6aa5f601d
+  efsFileSystemId: ""
   region: ap-southeast-1
   database:
     name: orakl-database

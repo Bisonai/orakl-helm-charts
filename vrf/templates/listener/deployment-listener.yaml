@@ -26,8 +26,11 @@ spec:
       securityContext:
         {{- toYaml .Values.listener.podSecurityContext | nindent 8 }}
       volumes:
+      {{ if .Values.global.hostPath.enable }}
+        {{- toYaml .Values.global.hostPath.volumes | default "" | nindent 8 }}
+      {{ else }}
         {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
-
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -50,7 +53,7 @@ spec:
               path: {{ .Values.global.livenessProbe.path }}
               port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
+            periodSeconds: {{ .Values.global.livenessPƒrobe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.livenessProbe.successThreshold }}
             failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}

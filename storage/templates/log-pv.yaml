@@ -1,3 +1,4 @@
+{{- if .Values.persistentVolume.efsFileSystemId }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -5,6 +6,7 @@ metadata:
 spec:
   capacity:
     storage: "{{ .Values.persistentVolume.log.size }}"
+    
   accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
@@ -12,3 +14,4 @@ spec:
     server: "{{ .Values.persistentVolume.efsFileSystemId }}.efs.{{ .Values.persistentVolume.region }}.amazonaws.com"
     path: /log/
   storageClassName: orakl-sc    
+  {{- end }}
