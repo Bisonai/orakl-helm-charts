@@ -5,24 +5,21 @@ global:
   image:
     repository: docker.io/bisonai/orakl #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.0-dev-alpha"  
+    tag: "v0.0.0"  
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   config:
-    PROVIDER_URL: https://api.baobab.klaytn.net:8651
-    NODE_ENV: production    #[dev, production]
-    CHAIN: baobab        #[baobab, cypress]
-    HEALTH_CHECK_PORT: 8888 #Specify Helath Check Port
-    ORAKL_DIR: /app/db      #The path should match with PVC of Orakl database
-    REDIS_HOST: 10.0.179.143   #Redis Host Url
-    REDIS_PORT: 6379        #Redis Port
-    SLACK_WEBHOOK_URL:      #Error message is delivered to slack 
-    LOG_LEVEL: info         #[info, debug]
-    LOG_DIR: /app/log       #The path should match with PVC of Orakl Log
-    PUBLIC_KEY: 0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec
-    PRIVATE_KEY: 0x47c99abed3324a2707c28affff1267e45918ec8c3f20b8aa892e8b065d2942dd
+    NODE_ENV: 
+    ORAKL_NETWORK_API_URL:
+    CHAIN:
+    HEALTH_CHECK_PORT:
+    REDIS_HOST:
+    REDIS_PORT:
+    SLACK_WEBHOOK_URL:
+    LOG_LEVEL:
+    LOG_DIR: 
 
   affinity:
     enabled: false
@@ -30,29 +27,14 @@ global:
     value: ip-10-0-90-13.ap-southeast-1.compute.internal
 
   hostPath: 
-    enable: false
+    enable: true
     volumes:
-      - name: orakl-database-storage
-        hostPath:
-          path: /db/
-          type: DirectoryOrCreate
       - name: orakl-log-storage
         hostPath:
           path: /log/
           type: DirectoryOrCreate
 
-  volumes:
-    - name: orakl-database-storage
-      persistentVolumeClaim:
-        claimName: orakl-database
-    - name: orakl-log-storage
-      persistentVolumeClaim:
-        claimName: orakl-log
-
   volumeMounts:
-    - name: orakl-database-storage
-      mountPath: /app/db      
-      subPath: db
     - name: orakl-log-storage
       mountPath: /app/log
 
