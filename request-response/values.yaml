@@ -11,12 +11,12 @@ global:
     imagePullSecrets: []
 
   config:
-    PROVIDER_URL: http://host.docker.internal:host-gateway:8545
+    PROVIDER_URL: https://api.baobab.klaytn.net:8651
     NODE_ENV: production    #[dev, production]
-    CHAIN: localhost        #[baobab, cypress]
+    CHAIN: baobab        #[baobab, cypress]
     HEALTH_CHECK_PORT: 8888 #Specify Helath Check Port
     ORAKL_DIR: /app/db      #The path should match with PVC of Orakl database
-    REDIS_HOST: 10.1.0.78   #Redis Host Url
+    REDIS_HOST: 10.0.179.143   #Redis Host Url
     REDIS_PORT: 6379        #Redis Port
     SLACK_WEBHOOK_URL:      #Error message is delivered to slack 
     LOG_LEVEL: info         #[info, debug]
@@ -30,7 +30,7 @@ global:
     value: ip-10-0-90-13.ap-southeast-1.compute.internal
 
   hostPath: 
-    enable: true
+    enable: false
     volumes:
       - name: orakl-database-storage
         hostPath:
