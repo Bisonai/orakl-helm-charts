@@ -133,7 +133,15 @@ spec:
                   name: orakl-core-secrets
                   key: REDIS_PORT
             {{ end }}   
-
+            - name: PROVIDER_URL          
+            {{- if .Values.global.config.PROVIDER_URL }}
+              value: {{ .Values.global.config.PROVIDER_URL }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: PROVIDER_URL
+            {{ end }}    
           command: ["yarn"]
           args: [start:worker:vrf]
           {{- if .Values.global.livenessProbe.enabled }}
