@@ -52,18 +52,95 @@ spec:
           volumeMounts:
             {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}
           env:
-            {{- range $key, $value := .Values.global.config }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}  
-            {{- end }}
+            - name: NODE_ENV          
+            {{- if .Values.global.config.NODE_ENV }}
+              value: {{ .Values.global.config.NODE_ENV }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: NODE_ENV
+            {{ end }}
+            - name: ORAKL_NETWORK_API_URL          
+            {{- if .Values.global.config.ORAKL_NETWORK_API_URL }}
+              value: {{ .Values.global.config.ORAKL_NETWORK_API_URL }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: ORAKL_NETWORK_API_URL
+            {{ end }}
+            - name: CHAIN          
+            {{- if .Values.global.config.CHAIN }}
+              value: {{ .Values.global.config.CHAIN }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: CHAIN
+            {{ end }}            
+            - name: HEALTH_CHECK_PORT          
+            {{- if .Values.global.config.HEALTH_CHECK_PORT }}
+              value: {{ .Values.global.config.HEALTH_CHECK_PORT }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: HEALTH_CHECK_PORT
+            {{ end }}    
+            - name: SLACK_WEBHOOK_URL          
+            {{- if .Values.global.config.SLACK_WEBHOOK_URL }}
+              value: {{ .Values.global.config.SLACK_WEBHOOK_URL }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: SLACK_WEBHOOK_URL
+            {{ end }}           
+            - name: LOG_LEVEL          
+            {{- if .Values.global.config.LOG_LEVEL }}
+              value: {{ .Values.global.config.LOG_LEVEL }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: LOG_LEVEL
+            {{ end }}              
+            - name: LOG_DIR          
+            {{- if .Values.global.config.LOG_DIR }}
+              value: {{ .Values.global.config.LOG_DIR }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: LOG_DIR
+            {{ end }}        
+            - name: REDIS_HOST          
+            {{- if .Values.global.config.REDIS_HOST }}
+              value: {{ .Values.global.config.REDIS_HOST }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: REDIS_HOST
+            {{ end }}                     
+            - name: REDIS_PORT          
+            {{- if .Values.global.config.REDIS_PORT }}
+              value: {{ .Values.global.config.REDIS_PORT }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: REDIS_PORT
+            {{ end }}   
 
           command: ["yarn"]
           args: [start:worker:vrf]
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
-            httpGet:
-              path: {{ .Values.global.livenessProbe.path }}
-              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+            exec:
+              command:
+              - ls
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -72,9 +149,9 @@ spec:
           {{- end }}
           {{- if .Values.global.readinessProbe.enabled }}
           readinessProbe:
-            httpGet:
-              path: {{ .Values.global.readinessProbe.path }}
-              port: {{ .Values.global.config.HEALTH_CHECK_PORT }} 
+            exec:
+              command:
+              - ls
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
