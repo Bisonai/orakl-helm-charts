@@ -140,7 +140,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: orakl-core-secrets
-                  key: PUBLIC_KEY
+                  key: REQUEST_RESPONSE_PUBLIC_KEY
             {{ end }}                     
             - name: PRIVATE_KEY          
             {{- if .Values.global.config.PRIVATE_KEY }}
@@ -149,7 +149,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: orakl-core-secrets
-                  key: PRIVATE_KEY
+                  key: REQUEST_RESPONSE_PRIVATE_KEY
             {{ end }}            
             - name: PROVIDER_URL          
             {{- if .Values.global.config.PROVIDER_URL }}
