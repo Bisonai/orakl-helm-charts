@@ -13,5 +13,5 @@ deployment:
   name: orakl-bull-monitor
   imagePullSecrets: []
   env:
-    REDIS_HOST: 10.0.143.98
+    REDIS_HOST: 10.0.179.143
     REDIS_PORT: "6379"
