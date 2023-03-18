@@ -133,6 +133,24 @@ spec:
                   name: orakl-core-secrets
                   key: REDIS_PORT
             {{ end }}   
+            - name: PUBLIC_KEY          
+            {{- if .Values.global.config.PUBLIC_KEY }}
+              value: {{ .Values.global.config.PUBLIC_KEY }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: PUBLIC_KEY
+            {{ end }}                     
+            - name: PRIVATE_KEY          
+            {{- if .Values.global.config.PRIVATE_KEY }}
+              value: {{ .Values.global.config.PRIVATE_KEY }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-core-secrets
+                  key: PRIVATE_KEY
+            {{ end }}           
             - name: PROVIDER_URL          
             {{- if .Values.global.config.PROVIDER_URL }}
               value: {{ .Values.global.config.PROVIDER_URL }}
@@ -141,7 +159,7 @@ spec:
                 secretKeyRef:
                   name: orakl-core-secrets
                   key: PROVIDER_URL
-            {{ end }}    
+            {{ end }}   
           command: ["yarn"]
           args: [start:worker:aggregator]
           {{- if .Values.global.livenessProbe.enabled }}
