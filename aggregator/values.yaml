@@ -18,8 +18,10 @@ global:
     REDIS_HOST:
     REDIS_PORT:
     SLACK_WEBHOOK_URL:
-    LOG_LEVEL:
+    LOG_LEVEL: debug
     LOG_DIR: 
+    PUBLIC_KEY:
+    PRIVATE_KEY:
 
   affinity:
     enabled: false
