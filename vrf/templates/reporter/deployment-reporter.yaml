@@ -149,7 +149,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
-                  key: PRIVATE_KEY
+                  key: VRF_PRIVATE_KEY
             {{ end }}           
             - name: PROVIDER_URL          
             {{- if .Values.global.config.PROVIDER_URL }}
@@ -158,7 +158,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
-                  key: VRF_PROVIDER_URL
+                  key: PROVIDER_URL
             {{ end }}                    
           command: ["yarn"]
           args: [start:reporter:vrf]
