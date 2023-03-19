@@ -148,7 +148,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-request-response-secrets
                   key: REQUEST_RESPONSE_PRIVATE_KEY
             {{ end }}            
             - name: PROVIDER_URL          
@@ -157,7 +157,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-request-response-secrets
                   key: PROVIDER_URL
             {{ end }}                   
           command: ["yarn"]
