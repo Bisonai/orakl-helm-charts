@@ -58,7 +58,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: NODE_ENV
             {{ end }}
             - name: ORAKL_NETWORK_API_URL          
@@ -67,7 +67,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: ORAKL_NETWORK_API_URL
             {{ end }}
             - name: CHAIN          
@@ -76,7 +76,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: CHAIN
             {{ end }}            
             - name: HEALTH_CHECK_PORT          
@@ -85,7 +85,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: HEALTH_CHECK_PORT
             {{ end }}    
             - name: SLACK_WEBHOOK_URL          
@@ -94,7 +94,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: SLACK_WEBHOOK_URL
             {{ end }}           
             - name: LOG_LEVEL          
@@ -103,7 +103,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: LOG_LEVEL
             {{ end }}              
             - name: LOG_DIR          
@@ -112,7 +112,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: LOG_DIR
             {{ end }}        
             - name: REDIS_HOST          
@@ -121,7 +121,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: REDIS_HOST
             {{ end }}                     
             - name: REDIS_PORT          
@@ -130,7 +130,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: REDIS_PORT
             {{ end }}   
             - name: PUBLIC_KEY          
@@ -139,7 +139,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: AGGREGATOR_PUBLIC_KEY
             {{ end }}                     
             - name: PRIVATE_KEY          
@@ -148,7 +148,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: AGGREGATOR_PRIVATE_KEY
             {{ end }}           
             - name: PROVIDER_URL          
@@ -157,7 +157,7 @@ spec:
             {{ else }}
               valueFrom:
                 secretKeyRef:
-                  name: orakl-core-secrets
+                  name: orakl-aggregator-secrets
                   key: PROVIDER_URL
             {{ end }}                    
           command: ["yarn"]
