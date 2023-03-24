@@ -72,6 +72,8 @@ listener:
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
+  APP_PORT: 4000
+
   podSecurityContext: {}
 
   containerSecurityContext: {}
@@ -121,7 +123,8 @@ reporter:
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
-
+  
+  APP_PORT: 6000
   podSecurityContext: {}
 
   containerSecurityContext: {}
