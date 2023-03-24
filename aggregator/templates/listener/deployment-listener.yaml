@@ -132,6 +132,9 @@ spec:
             {{ end }}                                
           command: ["yarn"]
           args: [start:listener:aggregator]
+          ports:
+          - name: http
+            containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}           
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             exec:
