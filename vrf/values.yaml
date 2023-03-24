@@ -5,7 +5,7 @@ global:
   image:
     repository: docker.io/bisonai/orakl #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.3"                    #image tag
+    tag: "v0.0.2"                    #image tag
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -15,7 +15,7 @@ global:
     ORAKL_NETWORK_API_URL:
     CHAIN:
     HEALTH_CHECK_PORT:
-    REDIS_HOST: '10.0.179.143'
+    REDIS_HOST:
     REDIS_PORT:
     SLACK_WEBHOOK_URL:
     LOG_LEVEL: debug
