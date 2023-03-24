@@ -5,9 +5,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.listener.APP_PORT | default 4000 | int  }}
+  - port: {{ .Values.listener.APP_PORT | default 6000 | int  }}
     targetPort: http
     protocol: TCP
   selector:
-  {{- include "orakl-vrf.selectorLabels.listener" . | nindent 6 }}
+  {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 6 }}
 
