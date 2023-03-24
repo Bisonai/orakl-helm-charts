@@ -162,6 +162,9 @@ spec:
             {{ end }}                   
           command: ["yarn"]
           args: [start:reporter:request_response]
+          ports:
+          - name: http
+            containerPort: {{ .Values.reporter.APP_PORT | default 6000 | int  }}            
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             exec:

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orakl-core-rr-reporter
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.reporter.APP_PORT | default 6000 | int  }}
+    targetPort: http
+    protocol: TCP
+  selector:
+  {{- include "orakl-request-response.selectorLabels.reporter" . | nindent 6 }}
+
