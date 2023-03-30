@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loki-stack
+  labels:
+    loki-stack
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+spec:
+  ingressClassName: ""
+  tls: []
+  - hosts:
+    loki.orakl.bisonai.net
+  rules:
+    - host: loki.orakl.bisonai.net
+      http:
+        paths:
