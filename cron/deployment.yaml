@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: orakl-cron
-          image: public.ecr.aws/u6t6w0e4/orakl-general:v0.0.0
+          image: public.ecr.aws/u6t6w0e4/orakl-general:cron.20230404.2342.fa23b83
           volumeMounts:
             - name: logrotate-config
               mountPath: /etc/logrotate.conf
