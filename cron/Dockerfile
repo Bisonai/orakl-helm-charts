@@ -15,3 +15,5 @@ RUN echo "* * * * * root /usr/sbin/logrotate /etc/logrotate.conf > /dev/null 2>&
 RUN service cron start
 
 CMD ["tail", "-f", "/dev/null"]
+
+#
