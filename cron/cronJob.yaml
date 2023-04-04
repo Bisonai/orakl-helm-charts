@@ -22,7 +22,7 @@ spec:
           volumes:
             - name: logrotate-config
               configMap:
-                name: logrotate-config
+                name: logrotate-conf
             - name: orakl-log-storage
               hostPath:
                 path: /log/
