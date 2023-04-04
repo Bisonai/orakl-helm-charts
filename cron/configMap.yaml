@@ -5,9 +5,11 @@ metadata:
 data:
   logrotate.conf: |
     /app/log/*.log {
-      size 524M
+      frequency 1
+      size 0      
       dateext
-      rotate 3
+      missingok
+      rotate 15
       compress
       create 0644 root root
     }

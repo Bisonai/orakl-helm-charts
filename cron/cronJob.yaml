@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: logrotate
 spec:
-  schedule: "0 * * * *" # Runs every hour
+  schedule: "* * * * *" # Runs every hour
   jobTemplate:
     spec:
       template:
@@ -16,7 +16,6 @@ spec:
                 - name: logrotate-config
                   mountPath: /etc/logrotate.conf
                   subPath: logrotate.conf
-              volumeMounts:
                 - name: orakl-log-storage
                   mountPath: /app/log
           restartPolicy: OnFailure
@@ -24,7 +23,6 @@ spec:
             - name: logrotate-config
               configMap:
                 name: logrotate-config
-          volumes:
             - name: orakl-log-storage
               hostPath:
                 path: /log/
