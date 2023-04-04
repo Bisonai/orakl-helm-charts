@@ -5,8 +5,7 @@ metadata:
 data:
   logrotate.conf: |
     /app/log/*.log {
-      frequency 1
-      size 0      
+      size 10K
       dateext
       missingok
       rotate 15
