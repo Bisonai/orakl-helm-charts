@@ -10,8 +10,8 @@ spec:
         spec:
           containers:
             - name: cron
-              image: alpine
-              command: ["sh", "-c", "apk update && apk add logrotate && /usr/sbin/logrotate /etc/logrotate.conf"]
+              image: ubuntu:20.04
+              command: ["sh", "-c", "apt-get update && apt-get install -y logrotate && logrotate -v /etc/logrotate.conf"]
               volumeMounts:
                 - name: logrotate-config
                   mountPath: /etc/logrotate.conf
