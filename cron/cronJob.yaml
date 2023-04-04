@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: logrotate
 spec:
-  schedule: "* * * * *" # Runs every hour
+  schedule: "0 * * * *" # Runs every hour
   jobTemplate:
     spec:
       template:

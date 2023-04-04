@@ -5,7 +5,7 @@ metadata:
 data:
   logrotate.conf: |
     /app/log/*.log {
-      size 9M
+      size 524M
       dateext
       rotate 3
       compress
