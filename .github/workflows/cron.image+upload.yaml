@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
+      pre_fix: cron
       tag_date: ${{ steps.tag.outputs.date }}
       tag_git_hash: ${{ steps.tag.outputs.git_hash }}
 
@@ -60,5 +61,5 @@ jobs:
 
       - name: Publish Image to ECR(orakl)
         run: |
-          docker tag orakl-general ${{ env.ecr_url }}:${{ needs.prepare.outputs.tag_date }}.${{ needs.prepare.outputs.tag_git_hash }}
-          docker push ${{ env.ecr_url }}:${{ needs.prepare.outputs.tag_date }}.${{ needs.prepare.outputs.tag_git_hash }}
+          docker tag orakl-general ${{ env.ecr_url }}:${{ needs.prepare.outputs.pre_fix }}.${{ needs.prepare.outputs.tag_date }}.${{ needs.prepare.outputs.tag_git_hash }}
+          docker push ${{ env.ecr_url }}:${{ needs.prepare.outputs.pre_fix }}.${{ needs.prepare.outputs.tag_date }}.${{ needs.prepare.outputs.tag_git_hash }}

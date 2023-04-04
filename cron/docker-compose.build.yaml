@@ -5,4 +5,4 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: orakl-general:cron-V0.0.0
+    image: orakl-general
