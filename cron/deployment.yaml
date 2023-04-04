@@ -1,29 +1,32 @@
-apiVersion: batch/v1beta1
-kind: CronJob
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: logrotate
+  name: orakl-cron
 spec:
-  schedule: "* * * * *" # Runs every hour
-  jobTemplate:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orakl-cron
+  template:
+    metadata:
+      labels:
+        app: orakl-cron
     spec:
-      template:
-        spec:
-          containers:
-            - name: cron
-              image: ubuntu:20.04
-              command: ["sh", "-c", "apt-get update && apt-get install -y logrotate && logrotate -v /etc/logrotate.conf"]
-              volumeMounts:
-                - name: logrotate-config
-                  mountPath: /etc/logrotate.conf
-                  subPath: logrotate.conf
-                - name: orakl-log-storage
-                  mountPath: /app/log
-          restartPolicy: OnFailure
-          volumes:
+      containers:
+        - name: orakl-cron
+          image: public.ecr.aws/u6t6w0e4/orakl-general:v0.0.0
+          volumeMounts:
             - name: logrotate-config
-              configMap:
-                name: logrotate-conf
+              mountPath: /etc/logrotate.conf
+              subPath: logrotate.conf
+          volumeMounts:
             - name: orakl-log-storage
-              hostPath:
-                path: /log/
-                type: DirectoryOrCreate
+              mountPath: /app/log
+      volumes:
+        - name: logrotate-config
+          configMap:
+            name: logrotate-config
+        - name: orakl-log-storage
+          hostPath:
+            path: /log/
+            type: DirectoryOrCreate
