@@ -11,10 +11,7 @@ spec:
           containers:
             - name: cron
               image: alpine
-              command:
-                - /bin/sh
-                - -c
-                - logrotate /etc/logrotate.d/orakl
+              command: ["sh", "-c", "apk update && apk add logrotate && /usr/sbin/logrotate /etc/logrotate.conf"]
               volumeMounts:
                 - name: logrotate-config
                   mountPath: /etc/logrotate.conf
