@@ -9,17 +9,6 @@ This chart will deploy two separate PVCs for the external storage of Orakl.
 
 ```
 persistentVolume:
-  database:
-    name: orakl-database
-    accessModes:
-      - ReadWriteOnce
-    labels: {}
-    annotations: {}
-    existingClaim: ""
-    mountPath: /
-    size: 1Gi  
-    subPath: ""
-    storageClass: 
   log:
     name: orakl-log
     accessModes:

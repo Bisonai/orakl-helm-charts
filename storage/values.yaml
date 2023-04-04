@@ -2,10 +2,6 @@ persistentVolume:
   # efsFileSystemId: fs-02bd34cc6aa5f601d
   efsFileSystemId: ""
   region: ap-southeast-1
-  database:
-    name: orakl-database
-    size: 1Gi
-    storageClass: orakl-sc
   log:
     name: orakl-log
     size: 10Gi
