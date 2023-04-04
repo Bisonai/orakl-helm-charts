@@ -5,7 +5,7 @@ on:
     branches:
       - baobab
     paths:
-      - "cron/**"
+      - "cron/Dockerfile"
 
 env:
   ecr_url: public.ecr.aws/u6t6w0e4/orakl-general
