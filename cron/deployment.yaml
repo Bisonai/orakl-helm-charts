@@ -20,6 +20,5 @@ spec:
               mountPath: /app/log
       volumes:
         - name: orakl-log-storage
-          hostPath:
-            path: /log/
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: orakl-log
