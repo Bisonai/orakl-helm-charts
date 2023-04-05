@@ -5,6 +5,7 @@ metadata:
 data:
   logrotate.conf: |
     /app/log/*.log {
+      size 10K
       daily
       rotate 30
       compress
@@ -12,7 +13,4 @@ data:
       missingok
       notifempty
       create 644 root root
-      postrotate
-        /usr/bin/killall -HUP rsyslogd
-      endscript
     }
