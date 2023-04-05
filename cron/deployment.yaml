@@ -16,9 +16,16 @@ spec:
         - name: orakl-cron
           image: public.ecr.aws/u6t6w0e4/orakl-general:cron.20230404.2342.fa23b83
           volumeMounts:
+            - name: logrotate-config
+              mountPath: /etc/logrotate.conf
+              subPath: logrotate.conf          
+          volumeMounts:
             - name: orakl-log-storage
               mountPath: /app/log
       volumes:
+        - name: logrotate-config
+          configMap:
+            name: logrotate-config      
         - name: orakl-log-storage
           persistentVolumeClaim:
             claimName: orakl-log
