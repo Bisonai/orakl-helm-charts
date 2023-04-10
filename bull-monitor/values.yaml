@@ -6,7 +6,7 @@ image:
 service:
   name: orakl-bull-monitor
   type: ClusterIP
-  port: 3737
+  port: 3000
 
 deployment:
   replicaCount: 1
