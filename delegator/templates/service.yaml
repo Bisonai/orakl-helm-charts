@@ -1,0 +1,12 @@
+delegatorVersion: v1
+kind: Service
+metadata:
+  name: orakl-delegator
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+    targetPort: http
+    protocol: TCP
+  selector:
+    {{- include "orakl-delegator.selectorLabels.delegator" . | nindent 6 }}   
