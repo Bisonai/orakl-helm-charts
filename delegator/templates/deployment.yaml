@@ -85,12 +85,12 @@ spec:
           args: ["start:prod"]
           ports:
           - name: http
-            containerPort: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+            containerPort: {{ .Values.global.config.APP_PORT | default 5050 | int  }}
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.global.livenessProbe.path }}
-              port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+              port: {{ .Values.global.config.APP_PORT | default 5050 | int  }}
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
