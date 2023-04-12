@@ -1,4 +1,4 @@
-delegatorVersion: v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: "{{ include "orakl-delegator.fullname" . }}-test-connection"
