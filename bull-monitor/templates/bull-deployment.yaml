@@ -40,4 +40,4 @@ spec:
             memory: 1Gi          
         ports:
         - name: http
-          containerPort: "{{ .Values.deployment.env.PORT }}"
+          containerPort: {{ .Values.deployment.env.PORT }}
