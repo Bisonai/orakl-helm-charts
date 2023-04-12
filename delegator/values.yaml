@@ -13,6 +13,8 @@ global:
   config:
     DATABASE_URL:
     APP_PORT: 
+    PROVIDER_URL:
+    DELEGATOR_FEEPAYER_PK:
 
   affinity:
     enabled: false

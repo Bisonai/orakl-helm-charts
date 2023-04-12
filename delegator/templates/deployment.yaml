@@ -62,6 +62,23 @@ spec:
                   name: orakl-delegator-secrets
                   key: APP_PORT
             {{ end }}
+            {{- if .Values.global.config.PROVIDER_URL }}
+              value: "{{ .Values.global.config.PROVIDER_URL }}"
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-delegator-secrets
+                  key: PROVIDER_URL
+            {{ end }}
+            {{- if .Values.global.config.DELEGATOR_FEEPAYER_PK }}
+              value: "{{ .Values.global.config.DELEGATOR_FEEPAYER_PK }}"
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-delegator-secrets
+                  key: DELEGATOR_FEEPAYER_PK
+            {{ end }}            
+
           command: ["yarn"]
           args: ["start:prod"]
           ports:
