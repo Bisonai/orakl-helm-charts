@@ -31,7 +31,13 @@ spec:
             value: "{{ .Values.deployment.env.BULL_WATCH_QUEUE_PREFIXES }}"
           - name: UI
             value: "{{ .Values.deployment.env.bull-master }}"
-          
+        resources:
+          limits:
+            cpu: 400m
+            memory: 1Gi
+          requests:
+            cpu: 400m
+            memory: 1Gi          
         ports:
         - name: http
           containerPort: "{{ .Values.deployment.env.PORT }}"
