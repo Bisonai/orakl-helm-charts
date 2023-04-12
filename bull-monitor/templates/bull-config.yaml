@@ -5,3 +5,7 @@ metadata:
 data:
   REDIS_HOST: "{{ .Values.deployment.env.REDIS_HOST }}"
   REDIS_PORT: "{{ .Values.deployment.env.REDIS_PORT }}"
+  NODE_ENV: "{{ .Values.deployment.env.NODE_ENV }}"
+  PORT: "{{ .Values.deployment.env.PORT }}"
+  BULL_WATCH_QUEUE_PREFIXES: "{{ .Values.deployment.env.BULL_WATCH_QUEUE_PREFIXES }}"
+  UI: "{{ .Values.deployment.env.bull-master }}"

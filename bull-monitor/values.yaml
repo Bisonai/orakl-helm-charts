@@ -6,7 +6,7 @@ image:
 service:
   name: orakl-bull-monitor
   type: ClusterIP
-  port: 3000
+  port: 3100
 
 deployment:
   replicaCount: 1
@@ -14,4 +14,8 @@ deployment:
   imagePullSecrets: []
   env:
     REDIS_HOST: 10.0.179.143
-    REDIS_PORT: "6379"
+    REDIS_PORT: 6379
+    NODE_ENV: production
+    PORT: 3100
+    BULL_WATCH_QUEUE_PREFIXES: bull
+    UI: bull-master    

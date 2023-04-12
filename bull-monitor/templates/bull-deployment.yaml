@@ -23,6 +23,15 @@ spec:
             value: "{{ .Values.deployment.env.REDIS_HOST }}"
           - name: REDIS_PORT
             value: "{{ .Values.deployment.env.REDIS_PORT }}"
+          - name: NODE_ENV
+            value: "{{ .Values.deployment.env.NODE_ENV }}"
+          - name: PORT
+            value: "{{ .Values.deployment.env.PORT }}"
+          - name: BULL_WATCH_QUEUE_PREFIXES
+            value: "{{ .Values.deployment.env.BULL_WATCH_QUEUE_PREFIXES }}"
+          - name: UI
+            value: "{{ .Values.deployment.env.bull-master }}"
+          
         ports:
         - name: http
-          containerPort: 3000
+          containerPort: "{{ .Values.deployment.env.PORT }}"
