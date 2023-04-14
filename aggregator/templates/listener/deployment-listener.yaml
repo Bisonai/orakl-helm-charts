@@ -139,10 +139,11 @@ spec:
             {{- if .Values.global.config.HEALTH_CHECK_PORT }}
             containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT }}
             {{ else }}
-            containerPortFrom:
-              secretKeyRef:
-                name: orakl-aggregator-secrets
-                key: HEALTH_CHECK_PORT      
+            containerPort:
+            - valueFrom:
+                secretKeyRef:
+                  name: orakl-aggregator-secrets
+                  key: HEALTH_CHECK_PORT      
             {{ end }}  
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
