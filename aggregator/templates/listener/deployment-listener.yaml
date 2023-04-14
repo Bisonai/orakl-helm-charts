@@ -140,8 +140,8 @@ spec:
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /
-              port: healthcheck
+              path: /health
+              port: watchman
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -151,8 +151,8 @@ spec:
           {{- if .Values.global.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /
-              port: healthcheck
+              path: /health
+              port: watchman
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
