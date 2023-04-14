@@ -33,10 +33,10 @@ spec:
             value: "{{ .Values.deployment.env.UI }}"
         resources:
           limits:
-            cpu: 400m
+            cpu: 1
             memory: 1Gi
           requests:
-            cpu: 400m
+            cpu: 1
             memory: 1Gi          
         ports:
         - name: http
