@@ -167,7 +167,8 @@ spec:
             containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}               
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
-            path: /
+            httpGet:          
+              path: /
               port: healthcheck
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
@@ -177,7 +178,8 @@ spec:
           {{- end }}
           {{- if .Values.global.readinessProbe.enabled }}
           readinessProbe:
-            path: /
+            httpGet:          
+              path: /
               port: healthcheck
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}

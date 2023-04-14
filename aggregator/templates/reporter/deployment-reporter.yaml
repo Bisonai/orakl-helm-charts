@@ -163,7 +163,7 @@ spec:
           command: ["yarn"]
           args: [start:reporter:aggregator]
           ports:
-          - name: http
+          - name: watchman
             containerPort: {{ .Values.reporter.APP_PORT | default 6000 | int  }}           
           - name: healthcheck
             containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}               
