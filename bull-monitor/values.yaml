@@ -4,16 +4,16 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  name: vrf-monitor
+  name: request-response-monitor
   type: ClusterIP
   port: 3100
 
 deployment:
   replicaCount: 1
-  name: vrf-monitor
+  name: request-response-monitor
   imagePullSecrets: []
   env:
-    REDIS_HOST: "10.0.135.50"
+    REDIS_HOST: "10.0.163.247"
     REDIS_PORT: 6379
     NODE_ENV: production
     PORT: 3100
