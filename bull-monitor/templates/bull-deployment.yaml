@@ -34,10 +34,10 @@ spec:
         resources:
           limits:
             cpu: 1
-            memory: 1Gi
+            memory: 2Gi
           requests:
             cpu: 1
-            memory: 1Gi          
+            memory: 2Gi          
         ports:
         - name: http
           containerPort: {{ .Values.deployment.env.PORT }}
