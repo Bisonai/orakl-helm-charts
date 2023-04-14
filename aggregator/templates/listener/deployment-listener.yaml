@@ -143,6 +143,7 @@ spec:
               secretKeyRef:
                 name: orakl-aggregator-secrets
                 key: HEALTH_CHECK_PORT      
+            {{ end }}  
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
