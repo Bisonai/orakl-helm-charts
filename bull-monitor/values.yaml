@@ -4,16 +4,16 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  name: request-response-monitor
+  name: aggregator-monitor
   type: ClusterIP
   port: 3100
 
 deployment:
   replicaCount: 1
-  name: request-response-monitor
+  name: aggregator-monitor
   imagePullSecrets: []
   env:
-    REDIS_HOST: "10.0.163.247"
+    REDIS_HOST: "10.0.64.219"
     REDIS_PORT: 6379
     NODE_ENV: production
     PORT: 3100
