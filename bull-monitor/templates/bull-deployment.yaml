@@ -31,13 +31,13 @@ spec:
             value: "{{ .Values.deployment.env.BULL_WATCH_QUEUE_PREFIXES }}"
           - name: UI
             value: "{{ .Values.deployment.env.UI }}"
-        resources:
-          limits:
-            cpu: 1
-            memory: 2Gi
-          requests:
-            cpu: 1
-            memory: 2Gi          
+        # resources:
+        #   limits:
+        #     cpu: 1
+        #     memory: 2Gi
+        #   requests:
+        #     cpu: 1
+        #     memory: 2Gi          
         ports:
         - name: http
           containerPort: {{ .Values.deployment.env.PORT }}
