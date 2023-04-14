@@ -133,13 +133,13 @@ spec:
           command: ["yarn"]
           args: [start:listener:request_response]
           ports:
-          - name: http
+          - name: watchman
             containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}          
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
-            exec:
-              command:
-              - ls
+            httpGet:
+              path: /health
+              port: watchman
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -148,9 +148,9 @@ spec:
           {{- end }}
           {{- if .Values.global.readinessProbe.enabled }}
           readinessProbe:
-            exec:
-              command:
-              - ls
+            httpGet:
+              path: /health
+              port: watchman
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}

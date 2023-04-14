@@ -144,11 +144,14 @@ spec:
             {{ end }}    
           command: ["yarn"]
           args: [start:worker:request_response]
+          ports:
+          - name: healthcheck
+            containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}          
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
-            exec:
-              command:
-              - ls
+            httpGet:
+              path: /
+              port: healthcheck
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -157,9 +160,9 @@ spec:
           {{- end }}
           {{- if .Values.global.readinessProbe.enabled }}
           readinessProbe:
-            exec:
-              command:
-              - ls
+            httpGet:
+              path: /
+              port: healthcheck
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
