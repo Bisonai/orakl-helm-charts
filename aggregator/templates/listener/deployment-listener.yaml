@@ -139,9 +139,7 @@ spec:
             {{- if .Values.global.config.HEALTH_CHECK_PORT }}
             containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT }}
             {{- else }}
-            containerPort: {{- with secretKey .Values.global.secrets.orakl-aggregator-secrets .Values.global.secrets.HEALTH_CHECK_PORT }}
-              {{ .data.value | b64dec }}
-            {{- end }}
+            containerPort: {{ .Values.global.secrets.HEALTH_CHECK_PORT }}
             {{- end }}
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
