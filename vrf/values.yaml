@@ -20,6 +20,7 @@ global:
     SLACK_WEBHOOK_URL:
     LOG_LEVEL: debug
     LOG_DIR: 
+    PROVIDER_URL: https://baobab01.fautor.app
 
 
   affinity:
