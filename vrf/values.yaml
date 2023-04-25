@@ -20,7 +20,7 @@ global:
     SLACK_WEBHOOK_URL:
     LOG_LEVEL: debug
     LOG_DIR: 
-    PROVIDER_URL: "10.0.64.10:8282"
+    PROVIDER_URL: "http://10.0.64.10:8282"
 
 
   affinity:
