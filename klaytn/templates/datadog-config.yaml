@@ -1,0 +1,16 @@
+{{- $fullName := include "klaytn.fullname" . -}}
+{{- $network := include "klaytn.network" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}-{{ $network }}-datadog-config
+  labels:
+    {{- include "klaytn.labels" . | nindent 4 }}
+data:
+  DD_ENV: "prod"
+  DD_SERVICE: "{{ $fullName }}-{{ $network }}"
+  DD_TRACE_HEADER_TAGS: "remote_addr,x-forwarded-for,origin"
+  DD_TRACE_RATE_LIMIT: "2000"
+  DD_TRACE_SAMPLING_RATE: "1.0"
+  DD_TRACE_ENABLED: "true"
+  DD_KLAYTN_RPC_RESPONSE: "true"

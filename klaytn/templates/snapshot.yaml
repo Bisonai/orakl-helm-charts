@@ -1,0 +1,18 @@
+{{- $fullName := include "klaytn.fullname" . -}}
+{{- if eq .Values.cloud "gcp" }}
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: {{ $fullName }}-snapshot-class
+driver: pd.csi.storage.gke.io
+deletionPolicy: Delete
+---
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: {{ $fullName }}-snapshot
+spec:
+  volumeSnapshotClassName: {{ $fullName }}-snapshot-class
+  source:
+    persistentVolumeClaimName: {{ printf "data-%s" $fullName }}-0
+{{- end }}

@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "klaytn.fullname" . }}-node-config
+  labels:
+    {{- include "klaytn.labels" . | nindent 4 }}
+data:
+  {{- with.Values.node }}
+  kend.conf: |-
+    NETWORK={{ $.Values.node.network | quote }}
+    {{- range $key, $value := . }}
+    {{- if and (ne $key "initData") (ne $key "type") }}
+    {{- if or (kindIs "bool" $value) (kindIs "float64" $value) }}
+    {{ $key | snakecase | upper }}={{ $value | int }}
+    {{- if eq $key "port" }}
+    SUBPORT=$((PORT + 1))
+    {{- end }}
+    {{- end}}
+
+    {{- if kindIs "string" $value }}
+    {{ $key | snakecase | upper }}={{ $value | quote }}
+    {{- if eq $key "dataDir" }}
+    LOG_DIR="${DATA_DIR}/log"
+    {{- end }}
+    {{- end }}
+
+    {{- if kindIs "slice" $value }}
+    {{ $key | snakecase | upper }}={{ join " " $value | quote }}
+    {{- end }}
+
+    {{- if kindIs "map" $value }}
+    {{- range $mkey, $mvalue := $value }}
+    {{- if or (kindIs "slice" $mvalue) (kindIs "string" $mvalue) }}
+    {{ $key | snakecase | upper }}_{{ $mkey | snakecase | upper }}={{ join "," $mvalue | quote }}
+    {{- else }}
+    {{ $key | snakecase | upper }}_{{ $mkey | snakecase | upper }}={{ $mvalue | int }}
+    {{- end }}
+    {{- end }}
+    {{- end }}
+    {{- end }}
+    {{- end }}
+  {{- end }}
