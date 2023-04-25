@@ -5,7 +5,7 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
-    tag: "v.20230413.0102.ae89852"  
+    tag: "v0.3.1.20230421.0638.3a48741"  
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -15,12 +15,12 @@ global:
     ORAKL_NETWORK_API_URL:
     CHAIN:
     HEALTH_CHECK_PORT:
-    REDIS_HOST: "10.0.108.117"
+    REDIS_HOST: "redis-aggregator-master.redis.svc.cluster.local"
     REDIS_PORT:
     SLACK_WEBHOOK_URL:
     LOG_LEVEL: debug
     LOG_DIR: 
-    PROVIDER_URL: https://baobab01.fautor.app
+    PROVIDER_URL: "http://10.0.64.10:8282"
     PUBLIC_KEY:
     PRIVATE_KEY:
 
