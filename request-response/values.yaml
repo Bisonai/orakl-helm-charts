@@ -5,7 +5,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-core #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.3.1.20230414.2038.9425b8e"                    #image tag
+    tag: "v0.3.1.20230421.0638.3a48741"                    #image tag
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -15,13 +15,12 @@ global:
     ORAKL_NETWORK_API_URL:
     CHAIN:
     HEALTH_CHECK_PORT:
-    REDIS_HOST: "10.0.163.247"
+    REDIS_HOST: "redis-request-response-master.redis.svc.cluster.local"
     REDIS_PORT:
     SLACK_WEBHOOK_URL:
     LOG_LEVEL: debug
     LOG_DIR: 
-    PUBLIC_KEY:
-    PRIVATE_KEY:
+    PROVIDER_URL: "http://10.0.64.10:8282"
 
   affinity:
     enabled: false
