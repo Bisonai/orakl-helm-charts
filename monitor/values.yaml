@@ -1,6 +1,6 @@
 image:
   repository: public.ecr.aws/bisonai/orakl-general
-  tag: monitor.v0.0.1.20230428.0127.ab08f03
+  tag: monitor.v0.0.1.20230428.0459.b92d604
 
 config:
   PROVIDER: "http://10.0.64.10:8282"
