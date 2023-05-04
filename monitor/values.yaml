@@ -1,6 +1,6 @@
 image:
   repository: public.ecr.aws/bisonai/orakl-general
-  tag: monitor.v0.0.1.20230504.0619.c4875b2
+  tag: monitor.v0.0.1.20230504.0648.91c6702
 
 config:
   PROVIDER: "http://10.0.64.10:8282"
@@ -29,10 +29,10 @@ deployment:
   resources:
     requests:
       cpu: 500m
-      memory: 512Mi
+      memory: 1024Mi
     limits:
       cpu: 500m
-      memory: 512Mi
+      memory: 1024Mi
 
 probes:
   liveness:
