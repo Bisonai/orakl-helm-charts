@@ -1,6 +1,5 @@
 ## Klaytn Orakl Listener Configuration
 ## created by Bisonai
-
 global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api  #repository url
@@ -13,6 +12,11 @@ global:
   config:
     DATABASE_URL:
     APP_PORT: 
+
+  secretManager:
+    enabled: false
+    secretId: orakl/baobab/api
+    versionId: cc91fdab-559c-4ebc-a0ae-a90f356c42e8
 
   affinity:
     enabled: false

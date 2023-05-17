@@ -3,137 +3,23 @@ entries:
   orakl-api:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-03-16T23:00:46.452618+09:00"
+    created: "2023-05-17T10:18:17.436418+09:00"
     description: A Helm chart for Kubernetes
-    digest: 2dc6311e7f738676f069fe1bdea61112acce9f7d5b2e40882cbdc0e6d799349a
+    digest: 6b76db0eb77c6dcbf4acf295ddfbbd42b0c6a008f086c1faf8762c7711687a65
     name: orakl-api
     type: application
     urls:
-    - charts/orakl-api-0.1.1.tgz
-    version: 0.1.1
+    - charts/orakl-api-0.1.0.tgz
+    version: 0.1.0
   orakl-cli:
   - apiVersion: v2
-    appVersion: 0.0.8
-    created: "2023-03-16T23:00:46.456049+09:00"
+    appVersion: 0.6.0
+    created: "2023-05-17T10:18:17.436913+09:00"
     description: A Helm chart for Kubernetes
-    digest: c5019a984fb44a5d2ae65f162ce9a3c2bc26747d596e752d374c4a875818a562
+    digest: e5d94b9bcfe827ce756c31a450d4091b847147e08e6a1e2ff0ee3c536b437d46
     name: orakl-cli
     type: application
     urls:
-    - charts/orakl-cli-0.0.4.tgz
-    version: 0.0.4
-  - apiVersion: v2
-    appVersion: 0.0.8
-    created: "2023-03-16T23:00:46.455456+09:00"
-    description: A Helm chart for Kubernetes
-    digest: b90eb6c329b8e14ddf2801a25d000d0c8006eef4525d7496afe46f0aafb3a44b
-    name: orakl-cli
-    type: application
-    urls:
-    - charts/orakl-cli-0.0.3.tgz
-    version: 0.0.3
-  - apiVersion: v2
-    appVersion: 0.0.7
-    created: "2023-03-16T23:00:46.454683+09:00"
-    description: A Helm chart for Kubernetes
-    digest: c8e18d105b0a20e17cee2dd1d3ba3849fefb38c7507aa63793dbe10de95cad0d
-    name: orakl-cli
-    type: application
-    urls:
-    - charts/orakl-cli-0.0.2.tgz
-    version: 0.0.2
-  - apiVersion: v2
-    appVersion: 0.0.7
-    created: "2023-03-16T23:00:46.454075+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 57b3213d7215756fe282ec6d1fb02ca8c38db83264288bfa4fd0da7672c41eb0
-    name: orakl-cli
-    type: application
-    urls:
-    - charts/orakl-cli-0.0.1.tgz
-    version: 0.0.1
-  orakl-request-response:
-  - apiVersion: v2
-    appVersion: 0.0.1
-    created: "2023-03-16T23:00:46.458726+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 606afe46b7862ba252ffaaa8a4a26c941cf0295e27ab237f27cc9e6143bddd79
-    name: orakl-request-response
-    type: application
-    urls:
-    - charts/orakl-request-response-0.1.3.tgz
-    version: 0.1.3
-  - apiVersion: v2
-    appVersion: 0.0.1
-    created: "2023-03-16T23:00:46.458008+09:00"
-    description: A Helm chart for Kubernetes
-    digest: f3369b29d162cd83b5338766a5a2a14f5945d208a448c4756c0331bcdb07b742
-    name: orakl-request-response
-    type: application
-    urls:
-    - charts/orakl-request-response-0.1.2.tgz
-    version: 0.1.2
-  - apiVersion: v2
-    appVersion: 0.0.1
-    created: "2023-03-16T23:00:46.457247+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 7ab9c319a26ec6371ddfe69b567a87829c2524dd03d1b114d5e30d83bf1a171b
-    name: orakl-request-response
-    type: application
-    urls:
-    - charts/orakl-request-response-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v2
-    appVersion: 0.0.0
-    created: "2023-03-13T12:16:10.110301+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 4b318ae749718b832e03224f4c0c6062ab4c18ae4525bd5c2ee0954804271721
-    name: orakl-request-response
-    type: application
-    urls:
-    - charts/orakl-request-response-0.1.0.tgz
-    version: 0.1.0
-  orakl-storage:
-  - apiVersion: v2
-    appVersion: 0.0.1
-    created: "2023-03-16T23:00:46.459318+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 419e7538866e0b4579232cd55ae203c0b530393c610fc1959132034ce4519709
-    name: orakl-storage
-    type: application
-    urls:
-    - charts/orakl-storage-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v2
-    appVersion: 0.0.0
-    created: "2023-03-16T23:00:46.459034+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 01e8cbbf37d2060094e10dafc87843c78e2351c1aee75600ac8b6d4c427f1e30
-    name: orakl-storage
-    type: application
-    urls:
-    - charts/orakl-storage-0.1.0.tgz
-    version: 0.1.0
-  orakl-vrf:
-  - apiVersion: v2
-    appVersion: 0.0.0
-    created: "2023-03-13T12:16:10.113769+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 45589896d6832864e82cfbbf8805efcc6af4493f0e3ec0cad6ebe31c751732d3
-    name: orakl-vrf
-    type: application
-    urls:
-    - charts/orakl-vrf-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v2
-    appVersion: 0.0.0
-    created: "2023-03-13T13:33:10.756588+09:00"
-    created: "2023-03-16T23:00:46.459791+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 134b12898055f2a635973a0e0389623dab3d095a1421977685707c3b2fe9313b
-    name: orakl-vrf
-    type: application
-    urls:
-    - charts/orakl-vrf-0.1.0.tgz
-    version: 0.1.0
-generated: "2023-03-13T12:16:10.108677+09:00"
+    - charts/orakl-cli-0.6.0.tgz
+    version: 0.6.0
+generated: "2023-05-17T10:18:17.435773+09:00"

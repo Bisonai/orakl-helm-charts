@@ -5,15 +5,15 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-cli
     pullPolicy: IfNotPresent
-    tag: "v.20230412.0223.ee7b2a5"
+    tag: "v0.6.0.20230421.0710.57e0295"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   config:
-    ORAKL_NETWORK_API_URL:
-    ORAKL_NETWORK_FETCHER_URL:
-    ORAKL_NETWORK_DELEGATOR_URL:
+    ORAKL_NETWORK_API_URL: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
+    ORAKL_NETWORK_FETCHER_URL: http://orakl-fetcher.orakl.svc.cluster.local:4040/api/v1
+    ORAKL_NETWORK_DELEGATOR_URL: http://orakl-delegator.orakl.svc.cluster.local:5050/api/v1
 
   hostPath: 
     enable: true
@@ -35,7 +35,7 @@ global:
   podAnnotations: {}
 
   livenessProbe:
-    enabled: false
+    enabled: true
     initialDelaySeconds: 20
     periodSeconds: 5
     timeoutSeconds: 5
@@ -43,7 +43,7 @@ global:
     failureThreshold: 5
 
   readinessProbe:
-    enabled: false
+    enabled: true
     initialDelaySeconds: 20
     periodSeconds: 5
     timeoutSeconds: 1
