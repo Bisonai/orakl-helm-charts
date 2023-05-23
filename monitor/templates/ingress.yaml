@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: monitor-api-ingress
+  name: orakl-monitor-api
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/target-type: ip
@@ -16,6 +16,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: monitor-api
+                name: orakl-monitor-api
                 port:
                   number: 8888
