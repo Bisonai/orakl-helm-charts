@@ -65,7 +65,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels for api
 */}}
-{{- define "orakl-monitor-api.selectorLabels.api" -}}
+{{- define "orakl-monitor-api.selectorLabels.monitor-api" -}}
 app.kubernetes.io/name: {{ include "orakl-monitor-api.name" . }}-monitor-api
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

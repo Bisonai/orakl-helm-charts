@@ -9,4 +9,4 @@ spec:
     targetPort: http
     protocol: TCP
   selector:
-    {{- include "orakl-api.selectorLabels.monitor-api" . | nindent 6 }}   
+    {{- include "orakl-monitor-api.selectorLabels.monitor-api" . | nindent 6 }}   

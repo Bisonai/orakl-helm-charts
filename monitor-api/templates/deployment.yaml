@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "orakl-monitor-api.labels.monitor-api" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.monitor-api.replicas }}
+  replicas: {{ .Values.monitorApi.replicas }}
   selector:
     matchLabels:
       {{- include "orakl-monitor-api.selectorLabels.monitor-api" . | nindent 6 }}
@@ -22,9 +22,9 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.monitor-api.serviceAccount.name }}
+      serviceAccountName: {{ .Values.monitorApi.serviceAccount.name }}
       securityContext:
-        {{- toYaml .Values.monitor-api.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.monitorApi.podSecurityContext | nindent 8 }}
       {{- if .Values.global.affinity.enabled }}        
       affinity:
         nodeAffinity:
@@ -40,14 +40,13 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.monitor-api.containerSecurityContext | nindent 12 }}
+            {{- toYaml .Values.monitorApi.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-          {{- if .Values.global.secretManager.enabled }}
           env:
             - name: PROVIDER
-            {{- if .Values.config.PROVIDER }}
-              value: {{ .Values.config.PROVIDER }}
+            {{- if .Values.global.config.PROVIDER }}
+              value: {{ .Values.global.config.PROVIDER }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -56,8 +55,8 @@ spec:
             {{ end }}
 
             - name: MONITOR_POSTGRES_USER
-            {{- if .Values.config.MONITOR_POSTGRES_USER }}
-              value: {{ .Values.config.MONITOR_POSTGRES_USER }}
+            {{- if .Values.global.config.MONITOR_POSTGRES_USER }}
+              value: {{ .Values.global.config.MONITOR_POSTGRES_USER }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -66,8 +65,8 @@ spec:
             {{ end }}
 
             - name: MONITOR_POSTGRES_PASSWORD
-            {{- if .Values.config.MONITOR_POSTGRES_PASSWORD }}
-              value: {{ .Values.config.MONITOR_POSTGRES_PASSWORD }}
+            {{- if .Values.global.config.MONITOR_POSTGRES_PASSWORD }}
+              value: {{ .Values.global.config.MONITOR_POSTGRES_PASSWORD }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -76,8 +75,8 @@ spec:
             {{ end }}
 
             - name: MONITOR_POSTGRES_HOST
-            {{- if .Values.config.MONITOR_POSTGRES_HOST }}
-              value: {{ .Values.config.MONITOR_POSTGRES_HOST }}
+            {{- if .Values.global.config.MONITOR_POSTGRES_HOST }}
+              value: {{ .Values.global.config.MONITOR_POSTGRES_HOST }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -86,8 +85,8 @@ spec:
             {{ end }}
 
             - name: MONITOR_POSTGRES_PORT
-            {{- if .Values.config.MONITOR_POSTGRES_PORT }}
-              value: {{ .Values.config.MONITOR_POSTGRES_PORT }}
+            {{- if .Values.global.config.MONITOR_POSTGRES_PORT }}
+              value: {{ .Values.global.config.MONITOR_POSTGRES_PORT }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -96,8 +95,8 @@ spec:
             {{ end }}
 
             - name: MONITOR_POSTGRES_DATABASE
-            {{- if .Values.config.MONITOR_POSTGRES_DATABASE }}
-              value: {{ .Values.config.MONITOR_POSTGRES_DATABASE }}
+            {{- if .Values.global.config.MONITOR_POSTGRES_DATABASE }}
+              value: {{ .Values.global.config.MONITOR_POSTGRES_DATABASE }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -106,8 +105,8 @@ spec:
             {{ end }}
 
             - name: ORAKL_POSTGRES_USER
-            {{- if .Values.config.ORAKL_POSTGRES_USER }}
-              value: {{ .Values.config.ORAKL_POSTGRES_USER }}
+            {{- if .Values.global.config.ORAKL_POSTGRES_USER }}
+              value: {{ .Values.global.config.ORAKL_POSTGRES_USER }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -116,8 +115,8 @@ spec:
             {{ end }}
 
             - name: ORAKL_POSTGRES_PASSWORD
-            {{- if .Values.config.ORAKL_POSTGRES_PASSWORD }}
-              value: {{ .Values.config.ORAKL_POSTGRES_PASSWORD }}
+            {{- if .Values.global.config.ORAKL_POSTGRES_PASSWORD }}
+              value: {{ .Values.global.config.ORAKL_POSTGRES_PASSWORD }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -126,8 +125,8 @@ spec:
             {{ end }}
 
             - name: ORAKL_POSTGRES_HOST
-            {{- if .Values.config.ORAKL_POSTGRES_HOST }}
-              value: {{ .Values.config.ORAKL_POSTGRES_HOST }}
+            {{- if .Values.global.config.ORAKL_POSTGRES_HOST }}
+              value: {{ .Values.global.config.ORAKL_POSTGRES_HOST }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -136,8 +135,8 @@ spec:
             {{ end }}
 
             - name: ORAKL_POSTGRES_PORT
-            {{- if .Values.config.ORAKL_POSTGRES_PORT }}
-              value: {{ .Values.config.ORAKL_POSTGRES_PORT }}
+            {{- if .Values.global.config.ORAKL_POSTGRES_PORT }}
+              value: {{ .Values.global.config.ORAKL_POSTGRES_PORT }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -146,8 +145,8 @@ spec:
             {{ end }}
 
             - name: ORAKL_POSTGRES_DATABASE
-            {{- if .Values.config.ORAKL_POSTGRES_DATABASE }}
-              value: {{ .Values.config.ORAKL_POSTGRES_DATABASE }}
+            {{- if .Values.global.config.ORAKL_POSTGRES_DATABASE }}
+              value: {{ .Values.global.config.ORAKL_POSTGRES_DATABASE }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -156,8 +155,8 @@ spec:
             {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_USER
-            {{- if .Values.config.GRAPH_NODE_POSTGRES_USER }}
-              value: {{ .Values.config.GRAPH_NODE_POSTGRES_USER }}
+            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_USER }}
+              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_USER }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -166,8 +165,8 @@ spec:
             {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_PASSWORD
-            {{- if .Values.config.GRAPH_NODE_POSTGRES_PASSWORD }}
-              value: {{ .Values.config.GRAPH_NODE_POSTGRES_PASSWORD }}
+            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_PASSWORD }}
+              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_PASSWORD }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -176,8 +175,8 @@ spec:
             {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_HOST
-            {{- if .Values.config.GRAPH_NODE_POSTGRES_HOST }}
-              value: {{ .Values.config.GRAPH_NODE_POSTGRES_HOST }}
+            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_HOST }}
+              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_HOST }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -186,8 +185,8 @@ spec:
             {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_PORT
-            {{- if .Values.config.GRAPH_NODE_POSTGRES_PORT }}
-              value: {{ .Values.config.GRAPH_NODE_POSTGRES_PORT }}
+            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_PORT }}
+              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_PORT }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
@@ -196,25 +195,24 @@ spec:
             {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_DATABASE
-            {{- if .Values.config.GRAPH_NODE_POSTGRES_DATABASE }}
-              value: {{ .Values.config.GRAPH_NODE_POSTGRES_DATABASE }}
+            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_DATABASE }}
+              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_DATABASE }}
             {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-monitor-secrets
                   key: GRAPH_NODE_POSTGRES_DATABASE
-            {{ end }}
-
+            {{ end }}          
           command: ["yarn"]
           args: ["start:prod"]
           ports:
           - name: http
-            containerPort: 8888
+            containerPort: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.global.livenessProbe.path }}
-              port: 8888
+              port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -225,7 +223,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.global.readinessProbe.path }}
-              port: 8888
+              port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
@@ -233,7 +231,7 @@ spec:
             failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
           {{- end }}          
           resources:
-            {{- toYaml .Values.monitor-api.resources | nindent 12 }}
+            {{- toYaml .Values.monitorApi.resources | nindent 12 }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
