@@ -1,0 +1,245 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-api
+  labels:
+    {{- include "orakl-monitor-api.labels.monitor-api" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.monitor-api.replicas }}
+  selector:
+    matchLabels:
+      {{- include "orakl-monitor-api.selectorLabels.monitor-api" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "orakl-monitor-api.selectorLabels.monitor-api" . | nindent 8 }}
+    spec:
+      {{- with .Values.global.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.monitor-api.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.monitor-api.podSecurityContext | nindent 8 }}
+      {{- if .Values.global.affinity.enabled }}        
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: {{ .Values.global.affinity.key }}
+                operator: In
+                values:
+                - {{ .Values.global.affinity.value }}
+      {{- end }}  
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.monitor-api.containerSecurityContext | nindent 12 }}
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          {{- if .Values.global.secretManager.enabled }}
+          env:
+            - name: PROVIDER
+            {{- if .Values.config.PROVIDER }}
+              value: {{ .Values.config.PROVIDER }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: BAOBAB_EN_NODE
+            {{ end }}
+
+            - name: MONITOR_POSTGRES_USER
+            {{- if .Values.config.MONITOR_POSTGRES_USER }}
+              value: {{ .Values.config.MONITOR_POSTGRES_USER }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: MONITOR_POSTGRES_USER
+            {{ end }}
+
+            - name: MONITOR_POSTGRES_PASSWORD
+            {{- if .Values.config.MONITOR_POSTGRES_PASSWORD }}
+              value: {{ .Values.config.MONITOR_POSTGRES_PASSWORD }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: MONITOR_POSTGRES_PASSWORD
+            {{ end }}
+
+            - name: MONITOR_POSTGRES_HOST
+            {{- if .Values.config.MONITOR_POSTGRES_HOST }}
+              value: {{ .Values.config.MONITOR_POSTGRES_HOST }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: MONITOR_POSTGRES_HOST
+            {{ end }}
+
+            - name: MONITOR_POSTGRES_PORT
+            {{- if .Values.config.MONITOR_POSTGRES_PORT }}
+              value: {{ .Values.config.MONITOR_POSTGRES_PORT }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: MONITOR_POSTGRES_PORT
+            {{ end }}
+
+            - name: MONITOR_POSTGRES_DATABASE
+            {{- if .Values.config.MONITOR_POSTGRES_DATABASE }}
+              value: {{ .Values.config.MONITOR_POSTGRES_DATABASE }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: MONITOR_POSTGRES_DATABASE
+            {{ end }}
+
+            - name: ORAKL_POSTGRES_USER
+            {{- if .Values.config.ORAKL_POSTGRES_USER }}
+              value: {{ .Values.config.ORAKL_POSTGRES_USER }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: ORAKL_POSTGRES_USER
+            {{ end }}
+
+            - name: ORAKL_POSTGRES_PASSWORD
+            {{- if .Values.config.ORAKL_POSTGRES_PASSWORD }}
+              value: {{ .Values.config.ORAKL_POSTGRES_PASSWORD }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: ORAKL_POSTGRES_PASSWORD
+            {{ end }}
+
+            - name: ORAKL_POSTGRES_HOST
+            {{- if .Values.config.ORAKL_POSTGRES_HOST }}
+              value: {{ .Values.config.ORAKL_POSTGRES_HOST }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: ORAKL_POSTGRES_HOST
+            {{ end }}
+
+            - name: ORAKL_POSTGRES_PORT
+            {{- if .Values.config.ORAKL_POSTGRES_PORT }}
+              value: {{ .Values.config.ORAKL_POSTGRES_PORT }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: ORAKL_POSTGRES_PORT
+            {{ end }}
+
+            - name: ORAKL_POSTGRES_DATABASE
+            {{- if .Values.config.ORAKL_POSTGRES_DATABASE }}
+              value: {{ .Values.config.ORAKL_POSTGRES_DATABASE }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: ORAKL_POSTGRES_DATABASE
+            {{ end }}
+
+            - name: GRAPH_NODE_POSTGRES_USER
+            {{- if .Values.config.GRAPH_NODE_POSTGRES_USER }}
+              value: {{ .Values.config.GRAPH_NODE_POSTGRES_USER }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: GRAPH_NODE_POSTGRES_USER
+            {{ end }}
+
+            - name: GRAPH_NODE_POSTGRES_PASSWORD
+            {{- if .Values.config.GRAPH_NODE_POSTGRES_PASSWORD }}
+              value: {{ .Values.config.GRAPH_NODE_POSTGRES_PASSWORD }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: GRAPH_NODE_POSTGRES_PASSWORD
+            {{ end }}
+
+            - name: GRAPH_NODE_POSTGRES_HOST
+            {{- if .Values.config.GRAPH_NODE_POSTGRES_HOST }}
+              value: {{ .Values.config.GRAPH_NODE_POSTGRES_HOST }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: GRAPH_NODE_POSTGRES_HOST
+            {{ end }}
+
+            - name: GRAPH_NODE_POSTGRES_PORT
+            {{- if .Values.config.GRAPH_NODE_POSTGRES_PORT }}
+              value: {{ .Values.config.GRAPH_NODE_POSTGRES_PORT }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: GRAPH_NODE_POSTGRES_PORT
+            {{ end }}
+
+            - name: GRAPH_NODE_POSTGRES_DATABASE
+            {{- if .Values.config.GRAPH_NODE_POSTGRES_DATABASE }}
+              value: {{ .Values.config.GRAPH_NODE_POSTGRES_DATABASE }}
+            {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-monitor-secrets
+                  key: GRAPH_NODE_POSTGRES_DATABASE
+            {{ end }}
+
+          command: ["yarn"]
+          args: ["start:prod"]
+          ports:
+          - name: http
+            containerPort: 8888
+          {{- if .Values.global.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.global.livenessProbe.path }}
+              port: 8888
+            initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.global.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.global.readinessProbe.path }}
+              port: 8888
+            initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
+          {{- end }}          
+          resources:
+            {{- toYaml .Values.monitor-api.resources | nindent 12 }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

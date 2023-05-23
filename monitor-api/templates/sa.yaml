@@ -1,0 +1,12 @@
+{{- if .Values.monitor-api.serviceAccount.create -}}
+monitor-apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.monitor-api.serviceAccount.name }}
+  labels:
+    {{- include "orakl-monitor-api.labels.monitor-api" . | nindent 4 }}
+  {{- with .Values.monitor-api.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
