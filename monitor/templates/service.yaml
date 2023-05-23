@@ -9,5 +9,4 @@ spec:
     targetPort: http
     protocol: TCP
   selector:
-    app.kubernetes.io/instance: orakl-monitor-api
-    app.kubernetes.io/name: orakl-monitor-api
+    {{- include "orakl-monitor-api.selectorLabels.monitor-api" . | nindent 6 }}  
