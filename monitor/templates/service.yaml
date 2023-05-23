@@ -9,4 +9,5 @@ spec:
     targetPort: http
     protocol: TCP
   selector:
-    app: orakl-monitor-api
+    app.kubernetes.io/instance: orakl-monitor-api
+    app.kubernetes.io/name: orakl-monitor-api
