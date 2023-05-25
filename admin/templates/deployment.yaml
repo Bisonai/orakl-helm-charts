@@ -18,7 +18,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: NEXT_PUBLIC_API_BASE_URL
-              value: {{ .Values.config.GRAPH_NODE_POSTGRES_DATABASE }}
+              value: {{ .Values.config.NEXT_PUBLIC_API_BASE_URL }}
 
           command:
             - yarn
