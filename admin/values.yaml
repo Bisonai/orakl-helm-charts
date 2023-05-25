@@ -1,0 +1,27 @@
+image:
+  repository: public.ecr.aws/bisonai/orakl-general
+  tag: admin.v0.1.0.20230525.0756.47bfe1e
+
+config:
+  NEXT_PUBLIC_API_BASE_URL: "http://orakl-monitor-api.orakl.svc.cluster.local:8888"
+
+deployment:
+  name: orakl-admin
+  replicas: 1
+  resources:
+
+probes:
+  liveness:
+    path: /
+    port: 3000
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readiness:
+    path: /
+    port: 3000
+    initialDelaySeconds: 15
+    periodSeconds: 5
+    timeoutSeconds: 3
+    successThreshold: 1
