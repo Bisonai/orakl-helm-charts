@@ -17,6 +17,7 @@ global:
     ORAKL_NETWORK_API_URL:
     ORAKL_NETWORK_DELEGATOR_URL:
 
+    HEALTH_CHECK_PORT:
     # Logging
     LOG_LEVEL:
     LOG_DIR:
