@@ -16,7 +16,7 @@ global:
 
   secretManager:
     enabled: false
-    secretId: orakl/baobab/api
+    secretId: 
     versionId: 
 
   affinity:
@@ -62,12 +62,12 @@ api:
   containerSecurityContext: {}
   
   resources:
-    # limits:
-    #   cpu: 1500m
-    #   memory: 6Gi
-    # requests:
-    #   cpu: 1500m
-    #   memory: 6Gi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
 
 nodeSelector: {}
 tolerations: []
