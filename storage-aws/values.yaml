@@ -3,5 +3,5 @@ persistentVolume:
   region: ap-southeast-1
   log:
     name: orakl-log
-    size: 60Gi
+    size: 100Gi
     storageClass: orakl-sc
