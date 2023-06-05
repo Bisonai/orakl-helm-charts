@@ -3,7 +3,7 @@ entries:
   orakl-api:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-05T12:43:42.197714+09:00"
+    created: "2023-06-05T13:28:16.343456+09:00"
     description: A Helm chart for Kubernetes
     digest: 934217cfdd839561e8702db1da980407439cb07ace91ce56178ab68ce2edd474
     name: orakl-api
@@ -14,7 +14,7 @@ entries:
   orakl-cli:
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2023-06-05T12:43:42.198364+09:00"
+    created: "2023-06-05T13:28:16.344183+09:00"
     description: A Helm chart for Kubernetes
     digest: e5d94b9bcfe827ce756c31a450d4091b847147e08e6a1e2ff0ee3c536b437d46
     name: orakl-cli
@@ -22,10 +22,31 @@ entries:
     urls:
     - charts/orakl-cli-0.6.0.tgz
     version: 0.6.0
+  orakl-delegator:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-06-05T13:28:16.346475+09:00"
+    description: A Helm chart for Kubernetes
+    digest: c65c0779374fade2f463f7a0f6f75d863a388de333a3c231c03bd0ade04aa2d4
+    name: orakl-delegator
+    type: application
+    urls:
+    - charts/orakl-delegator-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-06-05T13:28:16.344757+09:00"
+    description: A Helm chart for Kubernetes
+    digest: e7ef559ac2c842815271812e283a0cde78a9270b0db8ea52827988220c97c879
+    name: orakl-delegator
+    type: application
+    urls:
+    - charts/orakl-delegator-0.0.2.tgz
+    version: 0.0.2
   orakl-fetcher:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-05T12:43:42.199599+09:00"
+    created: "2023-06-05T13:28:16.347075+09:00"
     description: A Helm chart for Kubernetes
     digest: 59314bf529bf96f8099d97abd774cbe6814d253d255e5472a0a93c5730f1bbdf
     name: orakl-fetcher
@@ -36,7 +57,7 @@ entries:
   orakl-log-storage:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-05T12:43:42.200035+09:00"
+    created: "2023-06-05T13:28:16.347488+09:00"
     description: A Helm chart for Kubernetes
     digest: 2026a0a38d5b0335b05b1a951d0a92471a9c4175630dd64a2c2b4c6993d95715
     name: orakl-log-storage
@@ -50,7 +71,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.8
-    created: "2023-06-05T12:43:42.203706+09:00"
+    created: "2023-06-05T13:28:16.351494+09:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -76,4 +97,4 @@ entries:
     urls:
     - charts/redis-17.7.0.tgz
     version: 17.7.0
-generated: "2023-06-05T12:43:42.196686+09:00"
+generated: "2023-06-05T13:28:16.342152+09:00"
