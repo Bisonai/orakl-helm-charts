@@ -103,7 +103,7 @@ spec:
           {{ end }}
 
           command: ["yarn"]
-          args: [start:listener:aggregator]
+          args: [start:listener:data_feed]
           ports:
           - name: watchman
             containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}           

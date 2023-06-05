@@ -114,7 +114,7 @@ spec:
                 name: orakl-aggregator-configmap
           {{ end }}             
           command: ["yarn"]
-          args: [start:reporter:aggregator]
+          args: [start:reporter:data_feed]
           ports:
           - name: watchman
             containerPort: {{ .Values.reporter.APP_PORT | default 6000 | int  }}           
