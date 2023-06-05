@@ -51,115 +51,68 @@ spec:
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           volumeMounts:
             {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}
+         {{- if .Values.global.secretManager.enabled }}  
           env:
             - name: NODE_ENV          
-            {{- if .Values.global.config.NODE_ENV }}
-              value: {{ .Values.global.config.NODE_ENV }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: NODE_ENV
-            {{ end }}
             - name: ORAKL_NETWORK_API_URL          
-            {{- if .Values.global.config.ORAKL_NETWORK_API_URL }}
-              value: {{ .Values.global.config.ORAKL_NETWORK_API_URL }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: ORAKL_NETWORK_API_URL
-            {{ end }}
+            - name: ORAKL_NETWORK_DELEGATOR_URL          
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-aggregator-secrets
+                  key: ORAKL_NETWORK_DELEGATOR_URL                  
             - name: CHAIN          
-            {{- if .Values.global.config.CHAIN }}
-              value: {{ .Values.global.config.CHAIN }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: CHAIN
-            {{ end }}            
             - name: HEALTH_CHECK_PORT          
-            {{- if .Values.global.config.HEALTH_CHECK_PORT }}
-              value: {{ .Values.global.config.HEALTH_CHECK_PORT }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: HEALTH_CHECK_PORT
-            {{ end }}    
             - name: SLACK_WEBHOOK_URL          
-            {{- if .Values.global.config.SLACK_WEBHOOK_URL }}
-              value: {{ .Values.global.config.SLACK_WEBHOOK_URL }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: SLACK_WEBHOOK_URL
-            {{ end }}           
             - name: LOG_LEVEL          
-            {{- if .Values.global.config.LOG_LEVEL }}
-              value: {{ .Values.global.config.LOG_LEVEL }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: LOG_LEVEL
-            {{ end }}              
             - name: LOG_DIR          
-            {{- if .Values.global.config.LOG_DIR }}
-              value: {{ .Values.global.config.LOG_DIR }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: LOG_DIR
-            {{ end }}        
             - name: REDIS_HOST          
-            {{- if .Values.global.config.REDIS_HOST }}
-              value: {{ .Values.global.config.REDIS_HOST }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: REDIS_HOST
-            {{ end }}                     
             - name: REDIS_PORT          
-            {{- if .Values.global.config.REDIS_PORT }}
-              value: {{ .Values.global.config.REDIS_PORT }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: REDIS_PORT
-            {{ end }}   
-            - name: PUBLIC_KEY          
-            {{- if .Values.global.config.PUBLIC_KEY }}
-              value: {{ .Values.global.config.PUBLIC_KEY }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-aggregator-secrets
-                  key: AGGREGATOR_PUBLIC_KEY
-            {{ end }}                     
-            - name: PRIVATE_KEY          
-            {{- if .Values.global.config.PRIVATE_KEY }}
-              value: {{ .Values.global.config.PRIVATE_KEY }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-aggregator-secrets
-                  key: AGGREGATOR_PRIVATE_KEY
-            {{ end }}           
             - name: PROVIDER_URL          
-            {{- if .Values.global.config.PROVIDER_URL }}
-              value: {{ .Values.global.config.PROVIDER_URL }}
-            {{ else }}
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: PROVIDER_URL
-            {{ end }}   
+          {{ else }}
+          envFrom:
+            - configMapRef:
+                name: orakl-aggregator-configmap
+          {{ end }}
           command: ["yarn"]
           args: [start:worker:aggregator]
           ports:
