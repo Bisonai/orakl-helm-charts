@@ -21,16 +21,16 @@ global:
     versionId: 
 
   hostPath: 
-    enable: true
+    enable: false
     volumes:
-      - name: orakl-log-storage
-        hostPath:
-          path: /log/
-          type: DirectoryOrCreate
+      # - name: orakl-log-storage
+      #   hostPath:
+      #     path: /log/
+      #     type: DirectoryOrCreate
 
   volumeMounts:
-    - name: orakl-log-storage
-      mountPath: /app/log
+    # - name: orakl-log-storage
+    #   mountPath: /app/log
 
   affinity:
     enabled: false
