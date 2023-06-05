@@ -1,9 +1,8 @@
-# configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: orakl-api-configmap
 data:
   DATABASE_URL: {{ .Values.config.databaseUrl }}
-  APP_PORT: {{ .Values.config.appPort }}
-  APP_PORT: {{ .Values.config.ENCRYPT_PASSWORD }}
+  APP_PORT: {{ .Values.config.appPort | default 3030 }}
+  ENCRYPT_PASSWORD: {{ .Values.config.ENCRYPT_PASSWORD }}

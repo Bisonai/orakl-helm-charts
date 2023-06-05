@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yarn cli listener insert --chain baobab --service Aggregator --eventName NewRound --address 0x640Ed61e261C545D7439bDBb27e1674a6F589e96
+yarn cli listener insert --chain baobab --service Aggregator --eventName NewRound --address 0x4D92F10A23E28AB11d2d39325B9db0Fd0504520d
 yarn cli listener insert --chain baobab --service Aggregator --eventName NewRound --address 0x9C2248d7EafB3D9e9D615E52965bD387a12c856b
 yarn cli listener insert --chain baobab --service Aggregator --eventName NewRound --address 0x80139B55D6539E08890b93448B1A93cd014Ed87C
 yarn cli listener insert --chain baobab --service Aggregator --eventName NewRound --address 0x99E9E1a78498575E78F46675b54847767C5787Fb
