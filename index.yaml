@@ -1,11 +1,11 @@
 apiVersion: v1
 entries:
   orakl-api:
-  - apiVersion: v2
+  - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-05-17T10:18:17.436418+09:00"
+    created: "2023-06-05T10:34:27.650229+09:00"
     description: A Helm chart for Kubernetes
-    digest: 6b76db0eb77c6dcbf4acf295ddfbbd42b0c6a008f086c1faf8762c7711687a65
+    digest: e9d84f8d4aab06403f3455cb3e762c0433e6626877bd5d55a038d3acaed3d4b4
     name: orakl-api
     type: application
     urls:
@@ -14,7 +14,7 @@ entries:
   orakl-cli:
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2023-05-17T10:18:17.436913+09:00"
+    created: "2023-06-05T10:34:27.650758+09:00"
     description: A Helm chart for Kubernetes
     digest: e5d94b9bcfe827ce756c31a450d4091b847147e08e6a1e2ff0ee3c536b437d46
     name: orakl-cli
@@ -22,4 +22,15 @@ entries:
     urls:
     - charts/orakl-cli-0.6.0.tgz
     version: 0.6.0
-generated: "2023-05-17T10:18:17.435773+09:00"
+  orakl-log-storage:
+  - apiVersion: v1
+    appVersion: 0.1.0
+    created: "2023-06-05T10:34:27.651853+09:00"
+    description: A Helm chart for Kubernetes
+    digest: 2026a0a38d5b0335b05b1a951d0a92471a9c4175630dd64a2c2b4c6993d95715
+    name: orakl-log-storage
+    type: application
+    urls:
+    - charts/orakl-log-storage-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-06-05T10:34:27.649461+09:00"

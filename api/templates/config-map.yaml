@@ -6,3 +6,4 @@ metadata:
 data:
   DATABASE_URL: {{ .Values.config.databaseUrl }}
   APP_PORT: {{ .Values.config.appPort }}
+  APP_PORT: {{ .Values.config.ENCRYPT_PASSWORD }}

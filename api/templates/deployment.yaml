@@ -55,6 +55,11 @@ spec:
                 secretKeyRef:
                   name: orakl-api-secrets
                   key: APP_PORT
+            - name: ENCRYPT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-api-secrets
+                  key: APP_PORT
           {{ else }}
           envFrom:
             - configMapRef:
