@@ -5,15 +5,20 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-cli
     pullPolicy: IfNotPresent
-    tag: "v0.6.0.20230421.0710.57e0295"
+    tag: "v0.6.0.20230530.0240.8d4657c"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   config:
-    ORAKL_NETWORK_API_URL: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
-    ORAKL_NETWORK_FETCHER_URL: http://orakl-fetcher.orakl.svc.cluster.local:4040/api/v1
-    ORAKL_NETWORK_DELEGATOR_URL: http://orakl-delegator.orakl.svc.cluster.local:5050/api/v1
+    ORAKL_NETWORK_API_URL:
+    ORAKL_NETWORK_FETCHER_URL:
+    ORAKL_NETWORK_DELEGATOR_URL:
+
+  secretManager:
+    enabled: false
+    secretId: 
+    versionId: 
 
   hostPath: 
     enable: true
