@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "{{ .Values.persistentVolume.log.name | default "orakl-log" }}-pv"
+  name: "{{ .Values.name | default "orakl-log" }}-pv"
 spec:
   capacity:
-    storage: "{{ .Values.persistentVolume.log.size }}"
+    storage: "{{ .Values.config.size }}"
   accessModes:
     - ReadWriteMany
   gcePersistentDisk:
-    pdName: orakl-log-baobab
+    pdName: "{{ .Values.config.pdName }}"
     fsType: ext4
   storageClassName: orakl-sc    

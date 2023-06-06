@@ -1,7 +1,6 @@
-persistentVolume:
-  region: "asia-northeast1"
-  zone: "asia-southeast1-a"
-  log:
-    name: orakl-log
-    size: 100Gi
-    storageClass: orakl-sc
+name: orakl-log
+storageClass: orakl-sc
+
+config:
+  size:
+  pdName: 

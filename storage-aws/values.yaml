@@ -1,7 +1,8 @@
-persistentVolume:
-  efsFileSystemId: fs-02bd34cc6aa5f601d
-  region: ap-southeast-1
-  log:
-    name: orakl-log
-    size: 100Gi
-    storageClass: orakl-sc
+name: orakl-log
+
+config:
+  efsFileSystemId: 
+  region: 
+  size:
+  
+storageClass: orakl-sc
