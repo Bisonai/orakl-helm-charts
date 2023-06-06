@@ -3,7 +3,7 @@ entries:
   orakl-aggregator:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-07T08:17:38.855739+09:00"
+    created: "2023-06-07T08:23:35.176863+09:00"
     description: A Helm chart for Kubernetes
     digest: 4acabea900ecf6a6dea11cc440f0fce247b57f049d563638514899e11cd5e529
     name: orakl-aggregator
@@ -13,7 +13,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-07T08:17:38.854978+09:00"
+    created: "2023-06-07T08:23:35.175829+09:00"
     description: A Helm chart for Kubernetes
     digest: 298374e4aab409707fe0656ba204621d02b15e172dcefbe7aed6e7d3eb959296
     name: orakl-aggregator
@@ -24,7 +24,7 @@ entries:
   orakl-api:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T08:17:38.856132+09:00"
+    created: "2023-06-07T08:23:35.177261+09:00"
     description: A Helm chart for Kubernetes
     digest: 934217cfdd839561e8702db1da980407439cb07ace91ce56178ab68ce2edd474
     name: orakl-api
@@ -35,7 +35,7 @@ entries:
   orakl-cli:
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2023-06-07T08:17:38.856466+09:00"
+    created: "2023-06-07T08:23:35.177611+09:00"
     description: A Helm chart for Kubernetes
     digest: 8761fee280ea993976216ed232f5746a253d1c87dc501ceda48566bdd5c14e5a
     name: orakl-cli
@@ -46,7 +46,7 @@ entries:
   orakl-delegator:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-06-07T08:17:38.856807+09:00"
+    created: "2023-06-07T08:23:35.177941+09:00"
     description: A Helm chart for Kubernetes
     digest: c65c0779374fade2f463f7a0f6f75d863a388de333a3c231c03bd0ade04aa2d4
     name: orakl-delegator
@@ -57,7 +57,7 @@ entries:
   orakl-fetcher:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T08:17:38.857139+09:00"
+    created: "2023-06-07T08:23:35.178302+09:00"
     description: A Helm chart for Kubernetes
     digest: 59314bf529bf96f8099d97abd774cbe6814d253d255e5472a0a93c5730f1bbdf
     name: orakl-fetcher
@@ -68,7 +68,7 @@ entries:
   orakl-log-aws-storage:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T08:17:38.857293+09:00"
+    created: "2023-06-07T08:23:35.178475+09:00"
     description: A Helm chart for Kubernetes
     digest: 4841e8930d55238bfa78f3a98102ff8a06c53f7ee3d5a769a2de17b542e97a27
     name: orakl-log-aws-storage
@@ -79,7 +79,7 @@ entries:
   orakl-log-gcp-storage:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T08:17:38.857436+09:00"
+    created: "2023-06-07T08:23:35.178608+09:00"
     description: A Helm chart for Kubernetes
     digest: 71940f86c320a3f2f50ae9d86a3793aa8ea4730659a14ae7e7a1033d44dfd4b6
     name: orakl-log-gcp-storage
@@ -90,7 +90,7 @@ entries:
   orakl-log-storage:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T08:17:38.857587+09:00"
+    created: "2023-06-07T08:23:35.178739+09:00"
     description: A Helm chart for Kubernetes
     digest: 2026a0a38d5b0335b05b1a951d0a92471a9c4175630dd64a2c2b4c6993d95715
     name: orakl-log-storage
@@ -104,7 +104,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.8
-    created: "2023-06-07T08:17:38.862036+09:00"
+    created: "2023-06-07T08:23:35.182901+09:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -130,4 +130,4 @@ entries:
     urls:
     - charts/redis-17.7.0.tgz
     version: 17.7.0
-generated: "2023-06-07T08:17:38.853814+09:00"
+generated: "2023-06-07T08:23:35.175247+09:00"
