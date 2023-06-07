@@ -64,12 +64,12 @@ delegator:
   containerSecurityContext: {}
   
   resources:
-    # limits:
-    #   cpu: 1500m
-    #   memory: 6Gi
-    # requests:
-    #   cpu: 1500m
-    #   memory: 6Gi
+    limits:
+      cpu: 500m
+      memory: 2Gi
+    requests:
+      cpu: 500m
+      memory: 2Gi
 
 nodeSelector: {}
 tolerations: []
