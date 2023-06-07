@@ -45,164 +45,53 @@ spec:
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           env:
             - name: PROVIDER
-            {{- if .Values.global.config.PROVIDER }}
               value: {{ .Values.global.config.PROVIDER }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: BAOBAB_EN_NODE
-            {{ end }}
 
             - name: MONITOR_POSTGRES_USER
-            {{- if .Values.global.config.MONITOR_POSTGRES_USER }}
               value: {{ .Values.global.config.MONITOR_POSTGRES_USER }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: MONITOR_POSTGRES_USER
-            {{ end }}
 
             - name: MONITOR_POSTGRES_PASSWORD
-            {{- if .Values.global.config.MONITOR_POSTGRES_PASSWORD }}
               value: {{ .Values.global.config.MONITOR_POSTGRES_PASSWORD }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: MONITOR_POSTGRES_PASSWORD
-            {{ end }}
 
             - name: MONITOR_POSTGRES_HOST
-            {{- if .Values.global.config.MONITOR_POSTGRES_HOST }}
               value: {{ .Values.global.config.MONITOR_POSTGRES_HOST }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: MONITOR_POSTGRES_HOST
-            {{ end }}
 
             - name: MONITOR_POSTGRES_PORT
-            {{- if .Values.global.config.MONITOR_POSTGRES_PORT }}
               value: {{ .Values.global.config.MONITOR_POSTGRES_PORT }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: MONITOR_POSTGRES_PORT
-            {{ end }}
 
             - name: MONITOR_POSTGRES_DATABASE
-            {{- if .Values.global.config.MONITOR_POSTGRES_DATABASE }}
               value: {{ .Values.global.config.MONITOR_POSTGRES_DATABASE }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: MONITOR_POSTGRES_DATABASE
-            {{ end }}
 
             - name: ORAKL_POSTGRES_USER
-            {{- if .Values.global.config.ORAKL_POSTGRES_USER }}
               value: {{ .Values.global.config.ORAKL_POSTGRES_USER }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: ORAKL_POSTGRES_USER
-            {{ end }}
 
             - name: ORAKL_POSTGRES_PASSWORD
-            {{- if .Values.global.config.ORAKL_POSTGRES_PASSWORD }}
               value: {{ .Values.global.config.ORAKL_POSTGRES_PASSWORD }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: ORAKL_POSTGRES_PASSWORD
-            {{ end }}
 
             - name: ORAKL_POSTGRES_HOST
-            {{- if .Values.global.config.ORAKL_POSTGRES_HOST }}
               value: {{ .Values.global.config.ORAKL_POSTGRES_HOST }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: ORAKL_POSTGRES_HOST
-            {{ end }}
 
             - name: ORAKL_POSTGRES_PORT
-            {{- if .Values.global.config.ORAKL_POSTGRES_PORT }}
               value: {{ .Values.global.config.ORAKL_POSTGRES_PORT }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: ORAKL_POSTGRES_PORT
-            {{ end }}
 
             - name: ORAKL_POSTGRES_DATABASE
-            {{- if .Values.global.config.ORAKL_POSTGRES_DATABASE }}
               value: {{ .Values.global.config.ORAKL_POSTGRES_DATABASE }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: ORAKL_POSTGRES_DATABASE
-            {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_USER
-            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_USER }}
               value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_USER }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: GRAPH_NODE_POSTGRES_USER
-            {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_PASSWORD
-            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_PASSWORD }}
               value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_PASSWORD }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: GRAPH_NODE_POSTGRES_PASSWORD
-            {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_HOST
-            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_HOST }}
               value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_HOST }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: GRAPH_NODE_POSTGRES_HOST
-            {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_PORT
-            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_PORT }}
               value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_PORT }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: GRAPH_NODE_POSTGRES_PORT
-            {{ end }}
 
             - name: GRAPH_NODE_POSTGRES_DATABASE
-            {{- if .Values.global.config.GRAPH_NODE_POSTGRES_DATABASE }}
               value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_DATABASE }}
-            {{ else }}
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-monitor-secrets
-                  key: GRAPH_NODE_POSTGRES_DATABASE
-            {{ end }}          
+
           command: ["yarn"]
           args: ["start:prod"]
           ports:
