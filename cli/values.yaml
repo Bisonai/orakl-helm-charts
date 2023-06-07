@@ -74,10 +74,10 @@ cli:
     
   resources:
     limits:
-      cpu: 100m
+      cpu: 300m
       memory: 500M
     requests:
-      cpu: 100m
+      cpu: 300m
       memory: 500M
 
 nodeSelector: {}
