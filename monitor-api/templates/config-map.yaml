@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orakl-monitor-api-configmap
+data:         
+  PROVIDER: "{{ .Values.global.config.PROVIDER }}"
+  MONITOR_POSTGRES_USER: "{{ .Values.global.config.MONITOR_POSTGRES_USER }}"
+  MONITOR_POSTGRES_PASSWORD: "{{ .Values.global.config.MONITOR_POSTGRES_PASSWORD }}"
+  MONITOR_POSTGRES_HOST: "{{ .Values.global.config.MONITOR_POSTGRES_HOST }}"
+  MONITOR_POSTGRES_PORT: "{{ .Values.global.config.MONITOR_POSTGRES_PORT }}"
+  MONITOR_POSTGRES_DATABASE: "{{ .Values.global.config.MONITOR_POSTGRES_DATABASE }}"
+  ORAKL_POSTGRES_USER: "{{ .Values.global.config.ORAKL_POSTGRES_USER }}"
+  ORAKL_POSTGRES_PASSWORD: "{{ .Values.global.config.ORAKL_POSTGRES_PASSWORD }}"
+  ORAKL_POSTGRES_HOST: "{{ .Values.global.config.ORAKL_POSTGRES_HOST }}"
+  ORAKL_POSTGRES_PORT: "{{ .Values.global.config.ORAKL_POSTGRES_PORT }}"
+  ORAKL_POSTGRES_DATABASE: "{{ .Values.global.config.ORAKL_POSTGRES_DATABASE }}"
+  GRAPH_NODE_POSTGRES_USER: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_USER }}"
+  GRAPH_NODE_POSTGRES_PASSWORD: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_PASSWORD }}"
+  GRAPH_NODE_POSTGRES_HOST: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_HOST }}"
+  GRAPH_NODE_POSTGRES_PORT: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_PORT }}"
+  GRAPH_NODE_POSTGRES_DATABASE: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_DATABASE }}"

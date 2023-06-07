@@ -43,55 +43,9 @@ spec:
             {{- toYaml .Values.monitorApi.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-          env:
-            - name: PROVIDER
-              value: {{ .Values.global.config.PROVIDER }}
-
-            - name: MONITOR_POSTGRES_USER
-              value: {{ .Values.global.config.MONITOR_POSTGRES_USER }}
-
-            - name: MONITOR_POSTGRES_PASSWORD
-              value: {{ .Values.global.config.MONITOR_POSTGRES_PASSWORD }}
-
-            - name: MONITOR_POSTGRES_HOST
-              value: {{ .Values.global.config.MONITOR_POSTGRES_HOST }}
-
-            - name: MONITOR_POSTGRES_PORT
-              value: {{ .Values.global.config.MONITOR_POSTGRES_PORT }}
-
-            - name: MONITOR_POSTGRES_DATABASE
-              value: {{ .Values.global.config.MONITOR_POSTGRES_DATABASE }}
-
-            - name: ORAKL_POSTGRES_USER
-              value: {{ .Values.global.config.ORAKL_POSTGRES_USER }}
-
-            - name: ORAKL_POSTGRES_PASSWORD
-              value: {{ .Values.global.config.ORAKL_POSTGRES_PASSWORD }}
-
-            - name: ORAKL_POSTGRES_HOST
-              value: {{ .Values.global.config.ORAKL_POSTGRES_HOST }}
-
-            - name: ORAKL_POSTGRES_PORT
-              value: {{ .Values.global.config.ORAKL_POSTGRES_PORT }}
-
-            - name: ORAKL_POSTGRES_DATABASE
-              value: {{ .Values.global.config.ORAKL_POSTGRES_DATABASE }}
-
-            - name: GRAPH_NODE_POSTGRES_USER
-              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_USER }}
-
-            - name: GRAPH_NODE_POSTGRES_PASSWORD
-              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_PASSWORD }}
-
-            - name: GRAPH_NODE_POSTGRES_HOST
-              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_HOST }}
-
-            - name: GRAPH_NODE_POSTGRES_PORT
-              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_PORT }}
-
-            - name: GRAPH_NODE_POSTGRES_DATABASE
-              value: {{ .Values.global.config.GRAPH_NODE_POSTGRES_DATABASE }}
-
+          envFrom:
+            - configMapRef:
+               name: orakl-monitor-api-configmap
           command: ["yarn"]
           args: ["start:prod"]
           ports:

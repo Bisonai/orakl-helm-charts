@@ -10,7 +10,7 @@ global:
     imagePullSecrets: []
 
   config:
-    PROVIDER: "http://10.0.64.10:8282"
+    PROVIDER:
     MONITOR_POSTGRES_USER: 
     MONITOR_POSTGRES_PASSWORD: 
     MONITOR_POSTGRES_HOST: 
