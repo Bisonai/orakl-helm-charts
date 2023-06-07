@@ -3,9 +3,9 @@ entries:
   orakl-aggregator:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-07T14:28:27.394067+09:00"
+    created: "2023-06-07T19:33:58.762649+09:00"
     description: A Helm chart for Kubernetes
-    digest: fc36bb30b7bf0bb69ddcf3e737ef3b5bd133309c4952c01adf7c05e684db2598
+    digest: 7abe1541de9673be9cd32ecf88d0ef9359d706d1dec9f00a7bf3a5c78977575d
     name: orakl-aggregator
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-07T14:28:27.392631+09:00"
+    created: "2023-06-07T19:33:58.76126+09:00"
     description: A Helm chart for Kubernetes
     digest: 298374e4aab409707fe0656ba204621d02b15e172dcefbe7aed6e7d3eb959296
     name: orakl-aggregator
@@ -24,9 +24,9 @@ entries:
   orakl-api:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T14:28:27.394558+09:00"
+    created: "2023-06-07T19:33:58.762979+09:00"
     description: A Helm chart for Kubernetes
-    digest: 9306b30162a17ea3879d5b40334e55650f87638a98f94c192c0341005d7a470e
+    digest: bb9e22d6705f33a7744ccc2862d0ef09f3d75e5693028db0a8e5ec5023a72ee4
     name: orakl-api
     type: application
     urls:
@@ -35,9 +35,9 @@ entries:
   orakl-cli:
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2023-06-07T14:28:27.39485+09:00"
+    created: "2023-06-07T19:33:58.7633+09:00"
     description: A Helm chart for Kubernetes
-    digest: c4eea535626d341de0a197420231bd3461272748602023c2b0de7b1f3714869d
+    digest: 511b6e9d5d0b92c652d1a7f5803afea748a2e01d0d89b2b9032b5e662b102656
     name: orakl-cli
     type: application
     urls:
@@ -46,9 +46,9 @@ entries:
   orakl-delegator:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-06-07T14:28:27.39545+09:00"
+    created: "2023-06-07T19:33:58.763627+09:00"
     description: A Helm chart for Kubernetes
-    digest: 2f2d3a5018c93d6c37502211acdf54c859f9ed88eb414c3531dfd412c5f07815
+    digest: 74f7e420070c3ee309bdaa9a438a4110ad28d159de6c8165c833605159f55386
     name: orakl-delegator
     type: application
     urls:
@@ -57,9 +57,9 @@ entries:
   orakl-fetcher:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T14:28:27.395939+09:00"
+    created: "2023-06-07T19:33:58.763932+09:00"
     description: A Helm chart for Kubernetes
-    digest: d14daed7d5e8ce50acd67d4852015becc7c8783b2433bb4ec7f7955e371e39c6
+    digest: 3ef8c5a8ff5de90896bd3afcfb61cf284d54aeb227a2c6ed641356b1f033d4b7
     name: orakl-fetcher
     type: application
     urls:
@@ -68,7 +68,7 @@ entries:
   orakl-log-aws-storage:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T14:28:27.396243+09:00"
+    created: "2023-06-07T19:33:58.764405+09:00"
     description: A Helm chart for Kubernetes
     digest: 4841e8930d55238bfa78f3a98102ff8a06c53f7ee3d5a769a2de17b542e97a27
     name: orakl-log-aws-storage
@@ -79,7 +79,7 @@ entries:
   orakl-log-gcp-storage:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2023-06-07T14:28:27.39652+09:00"
+    created: "2023-06-07T19:33:58.764708+09:00"
     description: A Helm chart for Kubernetes
     digest: 71940f86c320a3f2f50ae9d86a3793aa8ea4730659a14ae7e7a1033d44dfd4b6
     name: orakl-log-gcp-storage
@@ -87,13 +87,35 @@ entries:
     urls:
     - charts/orakl-log-gcp-storage-0.1.0.tgz
     version: 0.1.0
+  orakl-request-response:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-06-07T19:33:58.765215+09:00"
+    description: A Helm chart for Kubernetes
+    digest: ebbdd7b164eb0eeec00bdba78f7bbc4f32758aa20f61c147e9ecfc0fa79208eb
+    name: orakl-request-response
+    type: application
+    urls:
+    - charts/orakl-request-response-0.1.3.tgz
+    version: 0.1.3
+  orakl-vrf:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-06-07T19:33:58.765713+09:00"
+    description: A Helm chart for Kubernetes
+    digest: 073808d0ca0d88a61b4e4383c10024c9a4eec27c95d7a949b32ed56baf75b09c
+    name: orakl-vrf
+    type: application
+    urls:
+    - charts/orakl-vrf-0.1.5.tgz
+    version: 0.1.5
   redis:
   - annotations:
       category: Database
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.8
-    created: "2023-06-07T14:28:27.401078+09:00"
+    created: "2023-06-07T19:33:58.770399+09:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -119,4 +141,4 @@ entries:
     urls:
     - charts/redis-17.7.0.tgz
     version: 17.7.0
-generated: "2023-06-07T14:28:27.391763+09:00"
+generated: "2023-06-07T19:33:58.760169+09:00"
