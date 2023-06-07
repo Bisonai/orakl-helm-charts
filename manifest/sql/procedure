@@ -1,4 +1,21 @@
 -- create view table
+CREATE OR REPLACE FUNCTION public.create_all_data_ag_view()
+ RETURNS void
+ LANGUAGE plpgsql
+AS $function$
+DECLARE
+    view_query TEXT := '';
+BEGIN
+    -- Build a UNION ALL query for all tables in the public schema that match the pattern 'data_%'
+    SELECT INTO view_query string_agg(format('SELECT * FROM %I', table_name), ' UNION ALL ')
+    FROM information_schema.tables
+    WHERE table_schema = 'public' AND table_name LIKE 'data_ag_%';
+    
+    -- Create the 'all_data' view using the UNION ALL query
+    EXECUTE format('CREATE OR REPLACE VIEW all_data_ag AS %s', view_query);
+END;
+$function$
+
 
 CREATE OR REPLACE FUNCTION public.create_all_data_view()
  RETURNS void
@@ -45,3 +62,50 @@ $function$
 
 -- cron scheduling
 SELECT cron.schedule('0 0 * * *', 'SELECT move_data_to_new_table()');
+
+---- new ---
+
+CREATE OR REPLACE FUNCTION public.move_aggregates_to_new_table()
+ RETURNS void
+ LANGUAGE plpgsql
+AS $function$
+DECLARE
+  oldest_day timestamp;
+  new_table_name text;
+BEGIN
+  SELECT min(timestamp::date) INTO oldest_day FROM aggregates WHERE timestamp::date < current_date;
+  IF oldest_day IS NULL THEN
+    RETURN;
+  END IF;
+  new_table_name := 'data_ag_' || to_char(oldest_day, 'YYYY_MM_DD');
+  IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = new_table_name) THEN
+    RETURN;
+  END IF;
+  EXECUTE 'CREATE TABLE ' || new_table_name || ' (LIKE aggregates INCLUDING ALL)';
+  EXECUTE 'INSERT INTO ' || new_table_name || ' SELECT * FROM aggregates WHERE timestamp::date = $1' USING oldest_day;
+  EXECUTE 'DELETE FROM aggregates WHERE timestamp::date = $1' USING oldest_day;
+  PERFORM create_all_data_ag_view();
+END;
+$function$
+
+CREATE OR REPLACE FUNCTION public.move_data_to_new_table()
+ RETURNS void
+ LANGUAGE plpgsql
+AS $function$
+DECLARE
+  oldest_day timestamp;
+  new_table_name text;
+BEGIN
+  SELECT min(timestamp::date) INTO oldest_day FROM data WHERE timestamp::date < current_date;
+  IF oldest_day IS NULL THEN
+    RETURN;
+  END IF;
+  new_table_name := 'data_' || to_char(oldest_day, 'YYYY_MM_DD');
+  IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = new_table_name) THEN
+    RETURN;
+  END IF;
+  EXECUTE 'CREATE TABLE ' || new_table_name || ' (LIKE data INCLUDING ALL)';
+  EXECUTE 'INSERT INTO ' || new_table_name || ' SELECT * FROM data WHERE timestamp::date = $1' USING oldest_day;
+  EXECUTE 'DELETE FROM data WHERE timestamp::date = $1' USING oldest_day;
+END;
+$function$
