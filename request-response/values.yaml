@@ -22,6 +22,11 @@ global:
     LOG_DIR: 
     PROVIDER_URL: 
 
+  secretManager:
+    enabled: false
+    secretId: 
+    versionId: 
+    
   affinity:
     enabled: false
     key: kubernetes.io/hostname
