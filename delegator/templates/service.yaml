@@ -3,10 +3,12 @@ kind: Service
 metadata:
   name: orakl-delegator
 spec:
-  type: ClusterIP
+  # type: ClusterIP
   ports:
   - port: {{ .Values.global.config.APP_PORT | default 5050 | int  }}
     targetPort: http
     protocol: TCP
+  type: LoadBalancer
+  loadBalancerIP: "{{ .Values.delegator.loadBalancerIP }}" 
   selector:
-    {{- include "orakl-delegator.selectorLabels.delegator" . | nindent 6 }}   
+    {{- include "orakl-delegator.selectorLabels.delegator" . | nindent 4 }} 

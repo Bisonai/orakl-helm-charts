@@ -1,0 +1,13 @@
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: orakl-delegator-ingress
+#   annotations:
+#   kubernetes.io/ingress.global-static-ip-name: delegator-ip
+
+# spec:
+#   defaultBackend:
+#     service:
+#       name: orakl-delegator
+#       port:
+#         number: 5050

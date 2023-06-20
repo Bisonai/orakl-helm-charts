@@ -72,6 +72,7 @@ spec:
           ports:
           - name: http
             containerPort: {{ .Values.global.config.APP_PORT | default 5050 | int  }}
+            protocol: TCP
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
