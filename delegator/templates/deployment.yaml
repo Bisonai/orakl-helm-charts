@@ -61,12 +61,6 @@ spec:
                 secretKeyRef:
                   name: orakl-delegator-secrets
                   key: PROVIDER_URL
-            - name: DELEGATOR_FEEPAYER_PK
-              value: "{{ .Values.global.config.DELEGATOR_FEEPAYER_PK }}"
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-delegator-secrets
-                  key: DELEGATOR_FEEPAYER_PK
           {{ else }}
           envFrom:
             - configMapRef:

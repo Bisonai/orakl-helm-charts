@@ -14,7 +14,6 @@ global:
     DATABASE_URL:
     APP_PORT: 
     PROVIDER_URL:
-    DELEGATOR_FEEPAYER_PK:
 
   secretManager:
     enabled: false
@@ -63,13 +62,15 @@ delegator:
 
   containerSecurityContext: {}
   
+  loadBalancerIP: 
+
   resources:
-    limits:
-      cpu: 500m
-      memory: 2Gi
-    requests:
-      cpu: 500m
-      memory: 2Gi
+    # limits:
+    #   cpu: 500m
+    #   memory: 2Gi
+    # requests:
+    #   cpu: 500m
+    #   memory: 2Gi
 
 nodeSelector: {}
 tolerations: []
