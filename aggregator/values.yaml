@@ -5,7 +5,7 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.3.1.20230608.1432.c5c2353"  
+    tag: "v0.3.1.20230613.0620.caac864"  
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -96,12 +96,12 @@ listener:
   containerSecurityContext: {}
     
   resources:
-    limits:
-      cpu: 1500m
-      memory: 4Gi
-    requests:
-      cpu: 1500m
-      memory: 4Gi
+    # limits:
+    #   cpu: 1500m
+    #   memory: 4Gi
+    # requests:
+    #   cpu: 1500m
+    #   memory: 4Gi
 
 worker:
   enabled: true
@@ -121,12 +121,12 @@ worker:
   containerSecurityContext: {}
     
   resources:
-    limits:
-      cpu: 1500m
-      memory: 4Gi
-    requests:
-      cpu: 1500m
-      memory: 4Gi
+    # limits:
+    #   cpu: 1500m
+    #   memory: 4Gi
+    # requests:
+    #   cpu: 1500m
+    #   memory: 4Gi
 
 reporter:
   enabled: true
@@ -148,12 +148,12 @@ reporter:
   containerSecurityContext: {}
     
   resources:
-    limits:
-      cpu: 1500m
-      memory: 4Gi
-    requests:
-      cpu: 1500m
-      memory: 4Gi
+    # limits:
+    #   cpu: 1500m
+    #   memory: 4Gi
+    # requests:
+    #   cpu: 1500m
+    #   memory: 4Gi
 
 nodeSelector: {}
 tolerations: []

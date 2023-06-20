@@ -73,12 +73,12 @@ cli:
   containerSecurityContext: {}
     
   resources:
-    limits:
-      cpu: 300m
-      memory: 500M
-    requests:
-      cpu: 300m
-      memory: 500M
+    # limits:
+    #   cpu: 300m
+    #   memory: 500M
+    # requests:
+    #   cpu: 300m
+    #   memory: 500M
 
 nodeSelector: {}
 tolerations: []
