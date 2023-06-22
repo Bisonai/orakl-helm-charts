@@ -29,7 +29,15 @@ spec:
       {{ if .Values.global.hostPath.enable }}
         {{- toYaml .Values.global.hostPath.volumes | default "" | nindent 8 }}
       {{ else }}
-        {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
+        {{- if .Values.global.gcpAutopilot.enabled }}
+        - name: orakl-log-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.global.appName }}-pvc
+        {{ else }}
+        - name: orakl-log-storage
+          persistentVolumeClaim:
+            claimName: orakl-log
+        {{ end }}
       {{ end }}
       {{- if .Values.global.affinity.enabled }}        
       affinity:

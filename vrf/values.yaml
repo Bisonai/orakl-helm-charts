@@ -2,6 +2,7 @@
 ## created by Bisonai
 
 global:
+  appName: orakl-vrf
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core         #repository url
     pullPolicy: IfNotPresent
@@ -26,7 +27,10 @@ global:
     enabled: false
     secretId: 
     versionId: 
-    
+
+  gcpAutopilot:
+    enabled: false
+
   affinity:
     enabled: false
     key: kubernetes.io/hostname
@@ -89,12 +93,12 @@ listener:
   containerSecurityContext: {}
     
   resources:
-    # limits:
-    #   cpu: 1500m
-    #   memory: 4Gi
-    # requests:
-    #   cpu: 1500m
-    #   memory: 4Gi
+    limits:
+      cpu:
+      memory:
+    requests:
+      cpu:
+      memory:
 
 worker:
   enabled: true
@@ -114,12 +118,12 @@ worker:
   containerSecurityContext: {}
     
   resources:
-    # limits:
-    #   cpu: 1500m
-    #   memory: 4Gi
-    # requests:
-    #   cpu: 1500m
-    #   memory: 4Gi
+    limits:
+      cpu:
+      memory:
+    requests:
+      cpu:
+      memory:
 
 reporter:
   enabled: true
@@ -141,12 +145,12 @@ reporter:
   containerSecurityContext: {}
     
   resources:
-    # limits:
-    #   cpu: 1500m
-    #   memory: 4Gi
-    # requests:
-    #   cpu: 1500m
-    #   memory: 4Gi
+    limits:
+      cpu:
+      memory:
+    requests:
+      cpu:
+      memory:
 
 nodeSelector: {}
 tolerations: []
