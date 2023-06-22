@@ -65,12 +65,12 @@ delegator:
   loadBalancerIP: 
 
   resources:
-    # limits:
-    #   cpu: 500m
-    #   memory: 2Gi
-    # requests:
-    #   cpu: 500m
-    #   memory: 2Gi
+    limits:
+      cpu:
+      memory:
+    requests:
+      cpu:
+      memory:
 
 nodeSelector: {}
 tolerations: []
