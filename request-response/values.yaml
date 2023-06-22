@@ -2,6 +2,7 @@
 ## created by Bisonai
 
 global:
+  appName: orakl-request-response
   image:
     repository: public.ecr.aws/bisonai/orakl-core #repository url
     pullPolicy: IfNotPresent
@@ -26,7 +27,10 @@ global:
     enabled: false
     secretId: 
     versionId: 
-    
+
+  gcpAutopilot:
+    enabled: false
+
   affinity:
     enabled: false
     key: kubernetes.io/hostname
