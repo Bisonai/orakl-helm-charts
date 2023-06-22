@@ -32,7 +32,7 @@ spec:
           {{- if .Values.global.gcpAutopilot.enabled }}
         - name: orakl-log-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.global.appName }}-pvc
+            claimName: {{ .Values.global.appName }}-reporter-pvc
         {{ else }}
         - name: orakl-log-storage
           persistentVolumeClaim:
