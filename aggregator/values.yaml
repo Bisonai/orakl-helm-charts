@@ -2,6 +2,7 @@
 ## created by Bisonai
 
 global:
+  appName: orakl-aggregator
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
@@ -33,6 +34,9 @@ global:
     enabled: false
     secretId: 
     versionId: 
+
+  gcpAutopilot:
+    enabled: false
 
   affinity:
     enabled: false
