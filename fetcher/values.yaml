@@ -26,6 +26,9 @@ global:
     key: kubernetes.io/hostname
     value: 
 
+  externalIp:
+    enabled: false
+
   podAnnotations: {}
 
   livenessProbe:

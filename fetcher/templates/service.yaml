@@ -3,7 +3,11 @@ kind: Service
 metadata:
   name: orakl-fetcher
 spec:
+  {{ if .Values.global.externalIp.enabled }}
+  type: LoadBalancer
+  {{ else }}
   type: ClusterIP
+  {{ end }}
   ports:
   - port: {{ .Values.global.config.APP_PORT | default 4040 | int  }}
     targetPort: http
