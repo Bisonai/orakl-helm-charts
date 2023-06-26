@@ -120,6 +120,8 @@ worker:
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
+  APP_PORT : 5000
+
   podSecurityContext: {}
 
   containerSecurityContext: {}
