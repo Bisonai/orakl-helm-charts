@@ -9,5 +9,5 @@ spec:
     targetPort: http
     protocol: TCP
   selector:
-  {{- include "orakl-aggregator.selectorLabels.listener" . | nindent 6 }}
+    {{- include "orakl-aggregator.selectorLabels.listener" . | nindent 6 }}
 
