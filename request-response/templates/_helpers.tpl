@@ -1,6 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
+
 {{- define "orakl-request-response.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}

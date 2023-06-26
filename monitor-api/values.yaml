@@ -4,7 +4,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-general  #repository url
     pullPolicy: IfNotPresent
-    tag: "monitor.v.20230525.0657.c5db0e1"  
+    tag: "monitor.v.20230626.1444.f9ffdaf"  
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -28,6 +28,19 @@ global:
     GRAPH_NODE_POSTGRES_HOST: 
     GRAPH_NODE_POSTGRES_PORT: 
     GRAPH_NODE_POSTGRES_DATABASE: 
+
+
+    VRF_REDIS_HOST:
+    VRF_REDIS_PORT:
+
+    REQUEST_RESPONSE_REDIS_HOST:
+    REQUEST_RESPONSE_REDIS_PORT:
+
+    AGGREGATOR_REDIS_HOST:
+    AGGREGATOR_REDIS_PORT:
+
+    JWT_SECRET:
+    PASSWORD:
 
   affinity:
     enabled: false

@@ -12,16 +12,16 @@ global:
     imagePullSecrets: []
 
   config:
-    NODE_ENV: 
-    ORAKL_NETWORK_API_URL:
-    CHAIN:
-    HEALTH_CHECK_PORT:
-    REDIS_HOST:
-    REDIS_PORT:
+    NODE_ENV: production
+    ORAKL_NETWORK_API_URL: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
+    CHAIN: cypress
+    HEALTH_CHECK_PORT: 8080
+    REDIS_HOST: redis-request-response-master.redis.svc.cluster.local
+    REDIS_PORT: 6379
     SLACK_WEBHOOK_URL:
-    LOG_LEVEL:
-    LOG_DIR: 
-    PROVIDER_URL: 
+    LOG_LEVEL: debug
+    LOG_DIR: /app/log
+    PROVIDER_URL: http://10.148.4.194:8551
 
   secretManager:
     enabled: false
@@ -29,7 +29,7 @@ global:
     versionId: 
 
   gcpAutopilot:
-    enabled: false
+    enabled: true
 
   affinity:
     enabled: false
