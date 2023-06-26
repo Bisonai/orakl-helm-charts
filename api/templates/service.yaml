@@ -10,3 +10,4 @@ spec:
     protocol: TCP
   selector:
     {{- include "orakl-api.selectorLabels.api" . | nindent 6 }}   
+ 
