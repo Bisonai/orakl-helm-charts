@@ -116,6 +116,8 @@ spec:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: PROVIDER_URL
+            - name: REPORTER_PORT          
+              value: {{ .Values.reporter.APP_PORT | default 6000 | int  }} 
           {{ else }}
           envFrom:
             - configMapRef:

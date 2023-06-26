@@ -116,6 +116,8 @@ spec:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: PROVIDER_URL
+            - name: WORKER_PORT          
+              value: {{ .Values.worker.APP_PORT | default 5000 | int  }} 
           {{ else }}
           envFrom:
             - configMapRef:
