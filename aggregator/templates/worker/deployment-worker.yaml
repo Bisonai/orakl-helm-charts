@@ -124,6 +124,8 @@ spec:
           command: ["yarn"]
           args: [start:worker:data_feed]
           ports:
+          - name: watchman
+            containerPort: {{ .Values.reporter.APP_PORT | default 5000 | int  }}             
           - name: healthcheck
             containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}               
           {{- if .Values.global.livenessProbe.enabled }}
