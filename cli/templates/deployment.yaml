@@ -54,6 +54,36 @@ spec:
                 secretKeyRef:
                   name: orakl-cli-secrets
                   key: ORAKL_NETWORK_DELEGATOR_URL
+            - name: LISTENER_SERVICE_HOST          
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: LISTENER_SERVICE_HOST
+            - name: LISTENER_SERVICE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: LISTENER_SERVICE_PORT
+            - name: WORKER_SERVICE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: WORKER_SERVICE_HOST
+            - name: WORKER_SERVICE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: WORKER_SERVICE_PORT
+            - name: REPORTER_SERVICE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: REPORTER_SERVICE_HOST
+            - name: REPORTER_SERVICE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: REPORTER_SERVICE_PORT
           {{ else }}
           envFrom:
             - configMapRef:

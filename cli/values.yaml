@@ -5,7 +5,7 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-cli
     pullPolicy: IfNotPresent
-    tag: "v0.6.0.20230530.0240.8d4657c"
+    tag: "v0.6.0.20230613.0106.de75a96"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -14,6 +14,12 @@ global:
     ORAKL_NETWORK_API_URL:
     ORAKL_NETWORK_FETCHER_URL:
     ORAKL_NETWORK_DELEGATOR_URL:
+    LISTENER_SERVICE_HOST:
+    LISTENER_SERVICE_PORT:
+    WORKER_SERVICE_HOST:
+    WORKER_SERVICE_PORT:
+    REPORTER_SERVICE_HOST:
+    REPORTER_SERVICE_PORT:
 
   secretManager:
     enabled: false

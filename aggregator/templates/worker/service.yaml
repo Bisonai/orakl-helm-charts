@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orakl-core-aggregator-worker
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.worker.APP_PORT | default 5000 | int  }}
+    targetPort: http
+    protocol: TCP
+  selector:
+  {{- include "orakl-aggregator.selectorLabels.worker" . | nindent 6 }}
+
