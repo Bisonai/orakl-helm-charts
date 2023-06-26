@@ -19,16 +19,11 @@ data:
   GRAPH_NODE_POSTGRES_HOST: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_HOST }}"
   GRAPH_NODE_POSTGRES_PORT: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_PORT }}"
   GRAPH_NODE_POSTGRES_DATABASE: "{{ .Values.global.config.GRAPH_NODE_POSTGRES_DATABASE }}"
-
-
   VRF_REDIS_HOST: "{{ .Values.global.config.VRF_REDIS_HOST }}"
   VRF_REDIS_PORT: "{{ .Values.global.config.VRF_REDIS_PORT }}"
-
   REQUEST_RESPONSE_REDIS_HOST: "{{ .Values.global.config.REQUEST_RESPONSE_REDIS_HOST }}"
   REQUEST_RESPONSE_REDIS_PORT: "{{ .Values.global.config.REQUEST_RESPONSE_REDIS_PORT }}"
-
   AGGREGATOR_REDIS_HOST: "{{ .Values.global.config.AGGREGATOR_REDIS_HOST }}"
   AGGREGATOR_REDIS_PORT: "{{ .Values.global.config.AGGREGATOR_REDIS_PORT }}"
-
   JWT_SECRET: "{{ .Values.global.config.JWT_SECRET }}"
   PASSWORD: "{{ .Values.global.config.PASSWORD }}"
