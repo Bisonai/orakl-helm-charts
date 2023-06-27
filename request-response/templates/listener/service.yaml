@@ -8,7 +8,7 @@ spec:
   type: ClusterIP
   ports:
   - port: {{ .Values.listener.APP_PORT | default 4000 | int  }}
-    targetPort: http
+    targetPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}
     protocol: TCP
   selector:
   {{- include "orakl-request-response.selectorLabels.listener" . | nindent 6 }}

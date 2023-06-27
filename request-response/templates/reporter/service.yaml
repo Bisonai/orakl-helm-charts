@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "orakl-request-response.fullname" . }}-reporter
+  labels: 
+    {{- include "orakl-request-response.labels.reporter" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.reporter.APP_PORT | default 6000 | int  }}
+    targetPort: {{ .Values.reporter.APP_PORT | default 6000 | int  }}
+    protocol: TCP
+  selector:
+  {{- include "orakl-request-response.selectorLabels.reporter" . | nindent 6 }}
+

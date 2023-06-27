@@ -4,43 +4,44 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-general  #repository url
     pullPolicy: IfNotPresent
-    tag: "monitor.v.20230626.1444.f9ffdaf"  
+    tag: "monitor.v.20230627.0256.7a9206d"  
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   config:
-    PROVIDER:
-    MONITOR_POSTGRES_USER: 
-    MONITOR_POSTGRES_PASSWORD: 
-    MONITOR_POSTGRES_HOST: 
-    MONITOR_POSTGRES_PORT: 
-    MONITOR_POSTGRES_DATABASE: 
+    PROVIDER: "http://10.0.64.10:8282"
+    MONITOR_POSTGRES_USER: "bisonai"
+    MONITOR_POSTGRES_PASSWORD: "qlthskdl"
+    MONITOR_POSTGRES_HOST: "18.143.176.2"
+    MONITOR_POSTGRES_PORT: "5432"
+    MONITOR_POSTGRES_DATABASE: "monitor"
 
-    ORAKL_POSTGRES_USER: 
-    ORAKL_POSTGRES_PASSWORD: 
-    ORAKL_POSTGRES_HOST: 
-    ORAKL_POSTGRES_PORT: 
-    ORAKL_POSTGRES_DATABASE: 
+    ORAKL_POSTGRES_USER: "bisonai"
+    ORAKL_POSTGRES_PASSWORD: "qlthskdl"
+    ORAKL_POSTGRES_HOST: "orakl-bisonai-baobab.c4fxu3k4a1gu.ap-southeast-1.rds.amazonaws.com"
+    ORAKL_POSTGRES_PORT: "5432"
+    ORAKL_POSTGRES_DATABASE: "orakl"
 
-    GRAPH_NODE_POSTGRES_USER: 
-    GRAPH_NODE_POSTGRES_PASSWORD: 
-    GRAPH_NODE_POSTGRES_HOST: 
-    GRAPH_NODE_POSTGRES_PORT: 
-    GRAPH_NODE_POSTGRES_DATABASE: 
+    GRAPH_NODE_POSTGRES_USER: "bisonai"
+    GRAPH_NODE_POSTGRES_PASSWORD: "qlthskdl"
+    GRAPH_NODE_POSTGRES_HOST: "18.143.176.2"
+    GRAPH_NODE_POSTGRES_PORT: "5432"
+    GRAPH_NODE_POSTGRES_DATABASE: "graph_node"
 
 
-    VRF_REDIS_HOST:
-    VRF_REDIS_PORT:
+    VRF_REDIS_HOST: "redis-vrf-master.redis.svc.cluster.local"
+    VRF_REDIS_PORT: "6379"
 
-    REQUEST_RESPONSE_REDIS_HOST:
-    REQUEST_RESPONSE_REDIS_PORT:
+    REQUEST_RESPONSE_REDIS_HOST: "redis-request-response-master.redis.svc.cluster.local"
+    REQUEST_RESPONSE_REDIS_PORT: "6379"
 
-    AGGREGATOR_REDIS_HOST:
-    AGGREGATOR_REDIS_PORT:
+    AGGREGATOR_REDIS_HOST: "redis-aggregator-master.redis.svc.cluster.local"
+    AGGREGATOR_REDIS_PORT: "6379"
 
-    JWT_SECRET:
-    PASSWORD:
+    JWT_SECRET: "bisonai web3 top block chain comapny unicon"
+    PASSWORD: "bisonaicomingsoon"
+
 
   affinity:
     enabled: false
