@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: orakl-core-vrf-reporter
+  name: {{ include "orakl-vrf.fullname" . }}-reporter
+  labels: 
+    {{- include "orakl-vrf.labels.reporter" . | nindent 4 }}  
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.reporter.APP_PORT | default 6000 | int  }}
-    targetPort: http
+  - port: {{ .Values.reporter.APP_PORT | default 5000 | int  }}
+    targetPort: {{ .Values.reporter.APP_PORT | default 5000 | int  }}
     protocol: TCP
   selector:
-  {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 6 }}
-
+    {{- include "orakl-vrf.selectorLabels.reporter" . | nindent 6 }}

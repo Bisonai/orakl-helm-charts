@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: orakl-aggregator-worker
+  name: {{ include "orakl-aggregator.fullname" . }}-worker
+  labels: 
+    {{- include "orakl-aggregator.labels.worker" . | nindent 4 }}  
 spec:
   type: ClusterIP
   ports:
   - port: {{ .Values.worker.APP_PORT | default 5000 | int  }}
-    targetPort: http
+    targetPort: {{ .Values.worker.APP_PORT | default 5000 | int  }}
     protocol: TCP
   selector:
-  {{- include "orakl-aggregator.selectorLabels.worker" . | nindent 6 }}
-
+    {{- include "orakl-aggregator.selectorLabels.worker" . | nindent 6 }}
