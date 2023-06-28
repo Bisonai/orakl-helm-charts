@@ -29,7 +29,7 @@ global:
     versionId: 
 
   gcpAutopilot:
-    enabled: true
+    enabled: false
 
   affinity:
     enabled: false
