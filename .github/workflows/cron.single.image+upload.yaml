@@ -1,11 +1,11 @@
-name: Deploy to Amazon ECR
+name: Deploy to Amazon ECR Single Cron
 
 on:
   push:
     branches:
       - baobab
     paths:
-      - "cron/Dockerfile"
+      - "cron/single/*"
 
 env:
   ecr_url: public.ecr.aws/u6t6w0e4/orakl-general
@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Docker build orakl-cron
-        run:  docker-compose -f cron/docker-compose.build.yaml build
+        run:  docker-compose -f cron/single/docker-compose.build.yaml build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
