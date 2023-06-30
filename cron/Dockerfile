@@ -12,7 +12,6 @@ RUN chmod 644 /etc/logrotate.d/orakl
 # # Add cron job to run logrotate
 # RUN echo "* * * * * root /usr/sbin/logrotate /etc/logrotate.conf > /dev/null 2>&1" >> /etc/crontab
 
-
 RUN service cron start
 
 CMD ["tail", "-f", "/dev/null"]
