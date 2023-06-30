@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "orakl-request-response.fullname" . }}-listener
+  name: request-response-listener
   labels:
     {{- include "orakl-request-response.labels.listener" . | nindent 4 }}
 spec:
