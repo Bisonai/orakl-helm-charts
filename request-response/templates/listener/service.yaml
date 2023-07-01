@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "orakl-request-response.fullname" . }}-listener
+  name: request-response-listener
   labels: 
     {{- include "orakl-request-response.labels.listener" . | nindent 4 }}
 spec:
@@ -12,4 +12,5 @@ spec:
     protocol: TCP
   selector:
   {{- include "orakl-request-response.selectorLabels.listener" . | nindent 6 }}
+
 
