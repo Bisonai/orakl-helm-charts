@@ -99,21 +99,11 @@ spec:
                 secretKeyRef:
                   name: orakl-vrf-secrets
                   key: PROVIDER_URL
-            - name: REPORTER_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-vrf-secrets
-                  key: REPORTER_PORT
             - name: LISTENER_PORT
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
                   key: LISTENER_PORT
-            - name: WORKER_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-vrf-secrets
-                  key: WORKER_PORT                                                      
           {{ else }}
           envFrom:
             - configMapRef:
@@ -125,7 +115,7 @@ spec:
           - name: watchman
             containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}      
           - name: healthcheck
-              containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}                    
+            containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}                    
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:

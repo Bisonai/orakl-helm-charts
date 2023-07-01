@@ -111,6 +111,11 @@ spec:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: PROVIDER_URL
+            - name: WORKER_PORT 
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: WORKER_PORT                        
           {{ else }}
           envFrom:
             - configMapRef:
