@@ -7,9 +7,15 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.worker.APP_PORT | default 5000 | int  }}
-    targetPort: {{ .Values.worker.APP_PORT | default 5000 | int  }}
+  - name: watchman
+    port: {{ .Values.listener.APP_PORT | default 5000 | int  }}
+    targetPort: {{ .Values.listener.APP_PORT | default 5000 | int  }}
     protocol: TCP
+
+  - name: healthcheck
+    port: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }} 
+    targetPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}
+    protocol: TCP   
   selector:
   {{- include "orakl-request-response.selectorLabels.worker" . | nindent 6 }}
 

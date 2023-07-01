@@ -119,7 +119,7 @@ spec:
           command: ["yarn"]
           args: [start:worker:request_response]
           ports:
-          - name: healthCheck
+          - name: healthcheck
             containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}          
           - name: watchman
             containerPort: {{ .Values.listener.APP_PORT | default 5000 | int  }}               
@@ -127,7 +127,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: healthCheck
+              port: healthcheck
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
