@@ -99,6 +99,21 @@ spec:
                 secretKeyRef:
                   name: orakl-vrf-secrets
                   key: PROVIDER_URL
+            - name: REPORTER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-vrf-secrets
+                  key: REPORTER_PORT
+            - name: LISTENER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-vrf-secrets
+                  key: LISTENER_PORT
+            - name: WORKER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-vrf-secrets
+                  key: WORKER_PORT                                                      
           {{ else }}
           envFrom:
             - configMapRef:
@@ -108,12 +123,14 @@ spec:
           args: [start:listener:vrf]
           ports:
           - name: watchman
-            containerPort: {{ .Values.listener.APP_PORT | default 3000 | int  }}          
+            containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}      
+          - name: healthcheck
+              containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}                    
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /health
-              port: watchman
+              path: /
+              port: healthcheck
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -123,8 +140,8 @@ spec:
           {{- if .Values.global.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /health
-              port: watchman
+              path: /
+              port: healthcheck
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}

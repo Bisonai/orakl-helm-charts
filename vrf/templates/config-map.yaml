@@ -13,3 +13,6 @@ data:
   LOG_LEVEL: "{{ .Values.global.config.LOG_LEVEL }}"
   LOG_DIR:  "{{ .Values.global.config.LOG_DIR }}"
   PROVIDER_URL: "{{ .Values.global.config.PROVIDER_URL }}"
+  LISTENER_PORT: "{{ .Values.listener.APP_PORT }}"
+  WORKER_PORT: "{{ .Values.worker.APP_PORT }}"
+  REPORTER_PORT: "{{ .Values.reporter.APP_PORT }}"
