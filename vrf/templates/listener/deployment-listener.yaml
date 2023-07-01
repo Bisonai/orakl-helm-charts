@@ -108,7 +108,7 @@ spec:
           args: [start:listener:vrf]
           ports:
           - name: watchman
-            containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}          
+            containerPort: {{ .Values.listener.APP_PORT | default 3000 | int  }}          
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
