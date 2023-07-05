@@ -57,12 +57,12 @@ api:
   containerSecurityContext: {}
   
   resources:
-    limits:
-      cpu:
-      memory:
+    limits: 
+      cpu: 2000m
+      memory: 4Gi
     requests:
-      cpu:
-      memory:
+      cpu: 2000m
+      memory: 4Gi
 
 nodeSelector: {}
 tolerations: []
