@@ -62,11 +62,11 @@ fetcher:
   
   resources:
     limits:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
     requests:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
 
 nodeSelector: {}
 tolerations: []
