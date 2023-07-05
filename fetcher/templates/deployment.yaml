@@ -66,21 +66,36 @@ spec:
                   name: orakl-fetcher-secrets
                   key: APP_PORT
           {{ else }}
-          envFrom:
-            - configMapRef:
-                name: orakl-fetcher-configmap
+          env:
+            - name: ORAKL_NETWORK_API_URL          
+              valueFrom:
+                secretKeyRef:
+                  name: fetcher-secrets
+                  key: ORAKL_NETWORK_API_URL
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: fetcher-secrets
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: fetcher-secrets
+                  key: REDIS_PORT                  
+            - name: APP_PORT
+              value: "4040"
           {{ end }}
 
           command: ["yarn"]
           args: ["start:prod"]
           ports:
           - name: http
-            containerPort: {{ .Values.global.config.APP_PORT | default 4040 | int  }}
+            containerPort: 4040
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.global.livenessProbe.path }}
-              port: {{ .Values.global.config.APP_PORT | default 4040 | int  }}
+              port: 4040
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -91,7 +106,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.global.readinessProbe.path }}
-              port: {{ .Values.global.config.APP_PORT | default 4040 | int  }}
+              port: 4040
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}

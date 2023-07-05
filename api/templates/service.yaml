@@ -5,9 +5,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+  - port: 3030
     targetPort: http
     protocol: TCP
   selector:
-    {{- include "orakl-api.selectorLabels.api" . | nindent 6 }}   
- 
+    {{- include "orakl-api.selectorLabels.api" . | nindent 6 }}

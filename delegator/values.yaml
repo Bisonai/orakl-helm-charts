@@ -26,14 +26,6 @@ global:
     value: 
 
   podAnnotations: 
-    # vault.hashicorp.com/agent-inject: 'true'
-    # vault.hashicorp.com/role: 'internal-app'
-    # vault.hashicorp.com/agent-inject-secret-baobab-prod-delegator: 'secret/baobab/prod/delegator'
-    # vault.hashicorp.com/agent-inject-template-config: |
-    #   {{`- with secret "secret/baobab/prod/delegator" -}}
-    #     export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
-    #   {{- end `}}    
-    # vault.hashicorp.com/agent-limits-ephemeral: "1Gi"
 
   livenessProbe:
     enabled: true

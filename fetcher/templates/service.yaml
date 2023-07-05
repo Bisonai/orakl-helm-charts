@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
   {{ end }}
   ports:
-  - port: {{ .Values.global.config.APP_PORT | default 4040 | int  }}
+  - port: 4040
     targetPort: http
     protocol: TCP
   selector:

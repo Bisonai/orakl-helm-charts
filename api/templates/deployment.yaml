@@ -50,31 +50,41 @@ spec:
                 secretKeyRef:
                   name: orakl-api-secrets
                   key: DATABASE_URL
-            - name: APP_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-api-secrets
-                  key: APP_PORT
             - name: ENCRYPT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: orakl-api-secrets
                   key: ENCRYPT_PASSWORD
+            - name: APP_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-api-secrets
+                  key: APP_PORT             
           {{ else }}
-          envFrom:
-            - configMapRef:
-                name: orakl-api-configmap
+          env:
+            - name: DATABASE_URL          
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: DATABASE_URL
+            - name: ENCRYPT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: ENCRYPT_PASSWORD
+            - name: APP_PORT
+              value: "3030"
           {{ end }}
           command: ["yarn"]
           args: ["start:prod"]
           ports:
           - name: http
-            containerPort: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+            containerPort: 3030
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.global.livenessProbe.path }}
-              port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+              port: 3030
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -85,7 +95,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.global.readinessProbe.path }}
-              port: {{ .Values.global.config.APP_PORT | default 3030 | int  }}
+              port: 3030
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}

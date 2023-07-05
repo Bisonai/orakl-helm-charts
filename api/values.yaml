@@ -1,18 +1,13 @@
-## Klaytn Orakl Listener Configuration
+## Klaytn Orakl Api Configuration
 ## created by Bisonai
 global:
   image:
-    repository: public.ecr.aws/bisonai/orakl-api  #repository url
+    repository: public.ecr.aws/bisonai/orakl-api 
     pullPolicy: IfNotPresent
     tag: "v0.1.0.20230623.0833.38d5dad"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-
-  config:
-    DATABASE_URL:
-    APP_PORT: 
-    ENCRYPT_PASSWORD:
 
   secretManager:
     enabled: false
@@ -40,7 +35,7 @@ global:
     path: /api/v1/
     initialDelaySeconds: 10
     periodSeconds: 5
-    timeoutSeconds: 1
+    timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5 
 

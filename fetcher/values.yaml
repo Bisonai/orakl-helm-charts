@@ -10,12 +10,6 @@ global:
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
-  config:
-    REDIS_HOST: 
-    REDIS_PORT:
-    ORAKL_NETWORK_API_URL:
-    APP_PORT:
-
   secretManager:
     enabled: false
     secretId: 
