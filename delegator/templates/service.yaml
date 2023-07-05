@@ -5,10 +5,12 @@ metadata:
 spec:
   # type: ClusterIP
   ports:
-  - port: {{ .Values.global.config.APP_PORT | default 5050 | int  }}
+  # - port: {{ .Values.global.config.APP_PORT | default 5050 | int  }}
+  - port: 5050
     targetPort: http
     protocol: TCP
-  type: LoadBalancer
-  loadBalancerIP: "{{ .Values.delegator.loadBalancerIP }}" 
+  type: ClusterIP
+  # type: LoadBalancer
+  # loadBalancerIP: "{{ .Values.delegator.loadBalancerIP }}" 
   selector:
     {{- include "orakl-delegator.selectorLabels.delegator" . | nindent 4 }} 
