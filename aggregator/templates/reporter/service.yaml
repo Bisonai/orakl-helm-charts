@@ -7,8 +7,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.reporter.APP_PORT | default 6000 | int  }}
-    targetPort: {{ .Values.reporter.APP_PORT | default 6000 | int  }}
+  - port: 6000
+    targetPort: 6000
     protocol: TCP
   selector:
     {{- include "orakl-aggregator.selectorLabels.reporter" . | nindent 6 }}
