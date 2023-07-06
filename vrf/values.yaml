@@ -6,22 +6,10 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core         #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.3.1.20230701.0153.be36831"                    #image tag
+    tag: "v0.3.1.20230703.0933.ef3b19c"                    #image tag
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-
-  config:
-    NODE_ENV: 
-    ORAKL_NETWORK_API_URL:
-    CHAIN:
-    HEALTH_CHECK_PORT:
-    REDIS_HOST:
-    REDIS_PORT:
-    SLACK_WEBHOOK_URL:
-    LOG_LEVEL:
-    LOG_DIR: 
-    PROVIDER_URL:
 
   secretManager:
     enabled: false
@@ -29,7 +17,7 @@ global:
     versionId: 
 
   gcpAutopilot:
-    enabled: false
+    enabled: true
 
   affinity:
     enabled: false
@@ -94,11 +82,11 @@ listener:
     
   resources:
     limits:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
     requests:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
 
 worker:
   enabled: true
@@ -121,11 +109,11 @@ worker:
     
   resources:
     limits:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
     requests:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
 
 reporter:
   enabled: true
@@ -148,11 +136,11 @@ reporter:
     
   resources:
     limits:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
     requests:
-      cpu:
-      memory:
+      cpu: 1000m
+      memory: 2Gi
 
 nodeSelector: {}
 tolerations: []
