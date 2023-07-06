@@ -9,6 +9,6 @@ spec:
     targetPort: http
     protocol: TCP
   type: LoadBalancer
-  loadBalancerIP: 34.87.152.175
+  loadBalancerIP: 34.126.65.247
   selector:
     {{- include "orakl-delegator.selectorLabels.delegator" . | nindent 4 }} 
