@@ -105,15 +105,57 @@ spec:
                   name: orakl-request-response-secrets
                   key: LISTENER_PORT                  
           {{ else }}
-          envFrom:
-            - configMapRef:
-                name: orakl-request-response-configmap
+          env:
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: NODE_ENV
+            - name: ORAKL_NETWORK_API_URL          
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: ORAKL_NETWORK_API_URL
+            - name: CHAIN          
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: CHAIN
+            - name: HEALTH_CHECK_PORT
+              value: "8080"
+            - name: LOG_LEVEL          
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: LOG_LEVEL
+            - name: LOG_DIR 
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: LOG_DIR
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: REDIS_PORT
+            - name: PROVIDER_URL 
+              valueFrom:
+                secretKeyRef:
+                  name: request-response-secrets
+                  key: PROVIDER_URL
+            - name: LISTENER_PORT 
+              value: "4000"
           {{ end }}                                    
           command: ["yarn"]
           args: [start:listener:request_response]
           ports:
           - name: healthcheck
-            containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}                   
+            containerPort: 8080
           - name: watchman
             containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}          
           {{- if .Values.global.livenessProbe.enabled }}

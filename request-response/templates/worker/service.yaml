@@ -13,8 +13,8 @@ spec:
     protocol: TCP
 
   - name: healthcheck
-    port: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }} 
-    targetPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}
+    port: 8080 
+    targetPort: 8080
     protocol: TCP   
   selector:
   {{- include "orakl-request-response.selectorLabels.worker" . | nindent 6 }}
