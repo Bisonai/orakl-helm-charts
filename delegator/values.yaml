@@ -45,9 +45,9 @@ delegator:
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
-    create: false
+    create: true
     # -- Service account name
-    name: internal-app
+    name: orakl-delegator
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
