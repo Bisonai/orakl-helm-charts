@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api
+  namespace: argocd
+spec:
+  destination:
+    namespace: orakl
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: api/
+    repoURL: https://github.com/Bisonai/orakl-helm-charts.git
+    targetRevision: gcp-cypress-prod
+  syncPolicy: auto
