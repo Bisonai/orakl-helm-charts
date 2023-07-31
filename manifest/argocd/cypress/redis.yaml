@@ -47,3 +47,20 @@ spec:
     repoURL: https://github.com/Bisonai/orakl-helm-charts.git
     targetRevision: gcp-cypress-prod
   syncPolicy: {}
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redis-fetcher
+  namespace: argocd
+spec:
+  destination:
+    namespace: redis
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: redis/
+    repoURL: https://github.com/Bisonai/orakl-helm-charts.git
+    targetRevision: gcp-cypress-prod
+  syncPolicy: {}

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: api
+  name: vrf
   namespace: argocd
 spec:
   destination:
@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: api/
+    path: vrf/
     repoURL: https://github.com/Bisonai/orakl-helm-charts.git
     targetRevision: gcp-cypress-prod
   syncPolicy: {}
