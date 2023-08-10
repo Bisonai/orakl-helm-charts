@@ -1,0 +1,80 @@
+#
+# This file should execute apply command with `-n orakl`
+#
+
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: orakl-aggregator-restart
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list"]
+  - apiGroups: ["apps"]
+    resources: ["deployments/scale"]
+    verbs: ["patch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "exec"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: orakl-aggregator-restart
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: orakl
+roleRef:
+  kind: ClusterRole
+  name: orakl-aggregator-restart
+  apiGroup: rbac.authorization.k8s.io
+
+---
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: aggregator-restart-cronjob
+spec:
+  schedule: "0 */2 * * *"  # 2시간마다 실행
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: default
+          restartPolicy: Never
+          containers:
+          - name: scale-down-aggregator-worker
+            image: bitnami/kubectl:latest
+            command: 
+            - /bin/sh
+            - -c
+            - kubectl scale deployment aggregator-worker -n orakl --replicas=0
+          - name: scale-down-aggregator-listener
+            image: bitnami/kubectl:latest
+            command: 
+            - /bin/sh
+            - -c
+            - kubectl scale deployment aggregator-listener -n orakl --replicas=0
+          - name: redis-flush-all
+            image: bitnami/kubectl:latest
+            command: 
+            - /bin/sh
+            - -c
+            - kubectl exec redis-data-feed-master-0 -n redis -- redis-cli flushall
+          - name: scale-up-aggregator-worker
+            image: bitnami/kubectl:latest
+            command: 
+            - /bin/sh
+            - -c
+            - kubectl scale deployment aggregator-worker -n orakl --replicas=1
+          - name: scale-up-aggregator-listener
+            image: bitnami/kubectl:latest
+            command: 
+            - /bin/sh
+            - -c
+            - kubectl scale deployment aggregator-listener -n orakl --replicas=1
