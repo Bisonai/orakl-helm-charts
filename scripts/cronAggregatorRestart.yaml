@@ -44,6 +44,7 @@ spec:
   jobTemplate:
     spec:
       backoffLimit: 0
+      ttlSecondsAfterFinished: 30
       template:
         spec:
           serviceAccountName: default
