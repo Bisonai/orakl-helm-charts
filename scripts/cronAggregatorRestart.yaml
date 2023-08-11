@@ -39,11 +39,11 @@ kind: CronJob
 apiVersion: batch/v1
 metadata:
   name: aggregator-restart-cronjob
-backoffLimit: 0
 spec:
   schedule: "0 */2 * * *"  # 2시간마다 실행
   jobTemplate:
     spec:
+      backoffLimit: 0
       template:
         spec:
           serviceAccountName: default
