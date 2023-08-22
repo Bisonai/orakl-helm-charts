@@ -25,20 +25,6 @@ spec:
       serviceAccountName: {{ .Values.reporter.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.reporter.podSecurityContext | nindent 8 }}
-      volumes:
-      {{ if .Values.global.hostPath.enable }}
-        {{- toYaml .Values.global.hostPath.volumes | default "" | nindent 8 }}
-      {{ else }}
-        {{- if .Values.global.gcpAutopilot.enabled }}
-        - name: orakl-log-storage
-          persistentVolumeClaim:
-            claimName: {{ .Values.global.appName }}-reporter-pvc
-        {{ else }}
-        - name: orakl-log-storage
-          persistentVolumeClaim:
-            claimName: orakl-log
-        {{ end }}
-      {{ end }}
       {{- if .Values.global.affinity.enabled }}         
       affinity:
         nodeAffinity:
@@ -57,8 +43,6 @@ spec:
             {{- toYaml .Values.reporter.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-          volumeMounts:
-            {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}
           {{- if .Values.global.secretManager.enabled }}   
           env:
             - name: NODE_ENV

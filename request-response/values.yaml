@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-core #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.3.1.20230712.0827.c373159" #image tag
+    tag: "v0.3.1.20230822.0106.32f5041" #image tag
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -16,30 +16,10 @@ global:
     secretId:
     versionId:
 
-  gcpAutopilot:
-    enabled: true
-
   affinity:
     enabled: false
     key: kubernetes.io/hostname
     value: ip-10-0-90-13.ap-southeast-1.compute.internal
-
-  hostPath:
-    enable: false
-    volumes:
-      - name: orakl-log-storage
-        hostPath:
-          path: /log/
-          type: DirectoryOrCreate
-
-  volumes:
-    - name: orakl-log-storage
-      persistentVolumeClaim:
-        claimName: orakl-log
-
-  volumeMounts:
-    - name: orakl-log-storage
-      mountPath: /app/log
 
   podAnnotations: {}
 
