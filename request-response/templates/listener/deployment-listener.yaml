@@ -62,11 +62,6 @@ spec:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: LOG_LEVEL
-            - name: LOG_DIR 
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-request-response-secrets
-                  key: LOG_DIR
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
@@ -111,11 +106,6 @@ spec:
                 secretKeyRef:
                   name: request-response-secrets
                   key: LOG_LEVEL
-            - name: LOG_DIR 
-              valueFrom:
-                secretKeyRef:
-                  name: request-response-secrets
-                  key: LOG_DIR
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
