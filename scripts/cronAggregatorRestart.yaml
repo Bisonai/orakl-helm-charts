@@ -40,7 +40,7 @@ apiVersion: batch/v1
 metadata:
   name: aggregator-restart-cronjob
 spec:
-  schedule: "0 */2 * * *"  # 2시간마다 실행
+  schedule: "0 */2 * * *"  # every run at even time(2pm, 4pm)
   jobTemplate:
     spec:
       backoffLimit: 0
@@ -50,33 +50,29 @@ spec:
           serviceAccountName: default
           restartPolicy: Never
           containers:
-          - name: scale-down-aggregator-worker
+          - name: scale-down-restart-pods
             image: bitnami/kubectl:latest
             command: 
             - /bin/sh
             - -c
-            - kubectl scale deployment aggregator-worker -n orakl --replicas=0
-          - name: scale-down-aggregator-listener
+            - |
+              kubectl scale deployment aggregator-reporter -n orakl --replicas=0
+              kubectl scale deployment aggregator-listener -n orakl --replicas=0
+              kubectl scale deployment aggregator-worker -n orakl --replicas=0
+          - name: redis-flushall
             image: bitnami/kubectl:latest
             command: 
             - /bin/sh
             - -c
-            - kubectl scale deployment aggregator-listener -n orakl --replicas=0
-          - name: redis-flush-all
+            - |
+              kubectl exec redis-data-feed-master-0 -n redis -- redis-cli flushall
+          - name: scale-up-restart-pods
             image: bitnami/kubectl:latest
             command: 
             - /bin/sh
             - -c
-            - kubectl exec redis-data-feed-master-0 -n redis -- redis-cli flushall
-          - name: scale-up-aggregator-worker
-            image: bitnami/kubectl:latest
-            command: 
-            - /bin/sh
-            - -c
-            - kubectl scale deployment aggregator-worker -n orakl --replicas=1
-          - name: scale-up-aggregator-listener
-            image: bitnami/kubectl:latest
-            command: 
-            - /bin/sh
-            - -c
-            - kubectl scale deployment aggregator-listener -n orakl --replicas=1
+            - |
+              kubectl scale deployment aggregator-reporter -n orakl --replicas=1
+              kubectl scale deployment aggregator-listener -n orakl --replicas=1
+              kubectl scale deployment aggregator-worker -n orakl --replicas=1
+            
