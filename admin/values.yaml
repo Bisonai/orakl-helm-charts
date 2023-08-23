@@ -1,9 +1,6 @@
 image:
   repository: public.ecr.aws/bisonai/orakl-general
-  tag: admin.v0.1.0.20230602.0152.74df68c
-
-config:
-  NEXT_PUBLIC_API_BASE_URL: "http://orakl-monitor-api.orakl.svc.cluster.local:8888"
+  tag: admin.v0.1.0.20230802.0109.13ce71f
 
 deployment:
   name: orakl-admin

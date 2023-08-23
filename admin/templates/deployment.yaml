@@ -16,9 +16,6 @@ spec:
         - name: orakl-admin
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
-          env:
-            - name: NEXT_PUBLIC_API_BASE_URL
-              value: {{ .Values.config.NEXT_PUBLIC_API_BASE_URL }}
 
           command:
             - yarn
