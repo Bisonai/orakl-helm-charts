@@ -45,6 +45,11 @@ spec:
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           {{- if .Values.global.secretManager.enabled }}
           env:
+            - name: CHAIN
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-fetcher-secrets
+                  key: CHAIN
             - name: REDIS_HOST          
               valueFrom:
                 secretKeyRef:
