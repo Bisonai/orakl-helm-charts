@@ -14,10 +14,9 @@ Optional
 
 Required
 > 1) [Redis](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/redis)
-> 2) [Storage](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/storage) (Volum Storage)
-> 3) [Cli](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/cli) (Initial configuration)
-> 4) [VRF](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/vrf) (Required)
-> 5) [Request-Response](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/request-response) (Required)
+> 2) [Cli](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/cli) (Initial configuration)
+> 3) [VRF](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/vrf) (Required)
+> 4) [Request-Response](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/request-response) (Required)
 
 *Required applications need to be installed by sequence*
 
