@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bisontry-health-check
+  namespace: argocd
+spec:
+  destination:
+    namespace: orakl
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: bisontry-health-check/
+    repoURL: https://github.com/Bisonai/orakl-helm-charts.git
+    targetRevision: gcp-cypress-prod
+  syncPolicy: {}
