@@ -40,7 +40,7 @@ apiVersion: batch/v1
 metadata:
   name: aggregator-restart-cronjob
 spec:
-  schedule: "0 */2 * * *"  # every run at even time(2pm, 4pm)
+  schedule: "30 */2 * * *"  # every run at even hours 30 mins(14:30, 16:30, 18:30, ...)
   jobTemplate:
     spec:
       backoffLimit: 0
