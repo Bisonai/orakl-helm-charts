@@ -12,7 +12,7 @@ imagePullSecrets:
 serviceAccounts:
   server:
     create: true
-    name:
+    name: prometheus
     annotations: {}
 
 ## Monitors ConfigMap changes and POSTs to a URL
@@ -32,7 +32,7 @@ configmapReload:
     ##
     image:
       repository: jimmidyson/configmap-reload
-      tag: v0.8.0
+      tag: v0.9.0
       # When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
       digest: ""
       pullPolicy: IfNotPresent
@@ -1024,7 +1024,6 @@ serverFiles:
 # adds additional scrape configs to prometheus.yml
 # must be a string so you have to add a | after extraScrapeConfigs:
 # example adds prometheus-blackbox-exporter scrape config
-extraScrapeConfigs:
   # - job_name: 'prometheus-blackbox-exporter'
   #   metrics_path: /probe
   #   params:
