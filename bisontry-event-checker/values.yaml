@@ -1,0 +1,8 @@
+image:
+  repository: 831311642255.dkr.ecr.ap-southeast-1.amazonaws.com/bisontry-event-checker
+  tag: v0.0.1.20230831.0828.a7e82bc
+
+deployment:
+  name: bisontry-event-checker
+  replicas: 1
+  resources:

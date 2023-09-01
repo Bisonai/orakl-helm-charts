@@ -1,8 +1,8 @@
 image:
-  repository: 831311642255.dkr.ecr.us-east-1.amazonaws.com/bisontry-health-check
-  tag: v0.1.0.20230822.0128.1bc6ce9
+  repository: 831311642255.dkr.ecr.ap-southeast-1.amazonaws.com/bisontry-health-checker
+  tag: v0.1.0.20230831.0804.f399284
 
 deployment:
-  name: bisontry-health-check
+  name: bisontry-health-checker
   replicas: 1
   resources:

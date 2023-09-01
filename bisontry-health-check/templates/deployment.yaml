@@ -20,4 +20,4 @@ spec:
           imagePullPolicy: Always
           envFrom:
             - secretRef:
-                name: bisontry-health-check-secrets
+                name: {{ .Values.deployment.name }}-secrets
