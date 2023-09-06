@@ -32,14 +32,9 @@ global:
           path: 
           type: DirectoryOrCreate
 
-  volumes:
-    - name: 
-      persistentVolumeClaim:
-        claimName: 
+  volumes: {}
 
-  volumeMounts:
-    - name: 
-      mountPath: 
+  volumeMounts: {}
 
   podAnnotations: {}
 
