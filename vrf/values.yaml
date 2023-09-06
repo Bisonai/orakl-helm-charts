@@ -32,9 +32,9 @@ global:
           path: 
           type: DirectoryOrCreate
 
-  volumes: {}
+  volumes: []
 
-  volumeMounts: {}
+  volumeMounts: []
 
   podAnnotations: {}
 
