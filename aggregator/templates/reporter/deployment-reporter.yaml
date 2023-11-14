@@ -102,6 +102,8 @@ spec:
                   key: PROVIDER_URL
             - name: REPORTER_PORT
               value: {{ .Values.reporter.APP_PORT | default 6000 | int  }}
+            - name: DATA_FEED_REPORTER_CONCURRENCY
+              value: "20"
           {{ else }}
           env:
             - name: NODE_ENV
@@ -145,6 +147,8 @@ spec:
               value: "6000"
             - name: HEALTH_CHECK_PORT
               value: "8080"
+            - name: DATA_FEED_REPORTER_CONCURRENCY
+              value: "20"
           {{ end }}
           command: ["yarn"]
           args: [start:reporter:data_feed]
