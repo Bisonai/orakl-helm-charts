@@ -6,15 +6,15 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.4.0.20231109.1001.ae1e7ef"
+    tag: "v0.4.0.20231114.0559.38c3f23"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   secretManager:
     enabled: false
-    secretId: 
-    versionId: 
+    secretId:
+    versionId:
 
   gcpAutopilot:
     enabled: false
@@ -22,9 +22,9 @@ global:
   affinity:
     enabled: false
     key: kubernetes.io/hostname
-    value: 
+    value:
 
-  hostPath: 
+  hostPath:
     enable: false
     volumes:
       - name: orakl-log-storage
@@ -59,7 +59,7 @@ global:
     periodSeconds: 5
     timeoutSeconds: 1
     successThreshold: 1
-    failureThreshold: 5 
+    failureThreshold: 5
 
 listener:
   enabled: true
@@ -79,7 +79,7 @@ listener:
   podSecurityContext: {}
 
   containerSecurityContext: {}
-    
+
   resources:
     limits:
       cpu: 1000m
@@ -106,7 +106,7 @@ worker:
   podSecurityContext: {}
 
   containerSecurityContext: {}
-    
+
   resources:
     limits:
       cpu: 1000m
@@ -133,7 +133,7 @@ reporter:
   podSecurityContext: {}
 
   containerSecurityContext: {}
-    
+
   resources:
     limits:
       cpu: 1000m
