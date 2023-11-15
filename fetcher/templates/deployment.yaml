@@ -25,7 +25,7 @@ spec:
       serviceAccountName: {{ .Values.fetcher.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.fetcher.podSecurityContext | nindent 8 }}
-      {{- if .Values.global.affinity.enabled }}        
+      {{- if .Values.global.affinity.enabled }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -36,7 +36,7 @@ spec:
                 operator: In
                 values:
                 - {{ .Values.global.affinity.value }}
-      {{- end }}  
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -50,17 +50,17 @@ spec:
                 secretKeyRef:
                   name: orakl-fetcher-secrets
                   key: CHAIN
-            - name: REDIS_HOST          
+            - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
                   name: orakl-fetcher-secrets
                   key: REDIS_HOST
-            - name: REDIS_PORT          
+            - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
                   name: orakl-fetcher-secrets
                   key: REDIS_PORT
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-fetcher-secrets
@@ -70,6 +70,8 @@ spec:
                 secretKeyRef:
                   name: orakl-fetcher-secrets
                   key: APP_PORT
+            - name: CONCURRENCY
+              value: "20"
           {{ else }}
           env:
             - name: CHAIN
@@ -77,7 +79,7 @@ spec:
                 secretKeyRef:
                   name: fetcher-secrets
                   key: CHAIN
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: fetcher-secrets
@@ -91,9 +93,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: fetcher-secrets
-                  key: REDIS_PORT                  
+                  key: REDIS_PORT
             - name: APP_PORT
               value: "4040"
+            - name: CONCURRENCY
+              value: "20"
           {{ end }}
 
           command: ["yarn"]
@@ -121,8 +125,8 @@ spec:
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
-            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
-          {{- end }}          
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.fetcher.resources | nindent 12 }}
 
