@@ -71,7 +71,7 @@ spec:
                   name: orakl-fetcher-secrets
                   key: APP_PORT
             - name: CONCURRENCY
-              value: "20"
+              value: "30"
           {{ else }}
           env:
             - name: CHAIN
@@ -97,7 +97,7 @@ spec:
             - name: APP_PORT
               value: "4040"
             - name: CONCURRENCY
-              value: "20"
+              value: "30"
           {{ end }}
 
           command: ["yarn"]
