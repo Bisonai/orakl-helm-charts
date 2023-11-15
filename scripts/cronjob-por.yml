@@ -68,4 +68,4 @@ spec:
                     name: aggregator-secrets
                     key: PROVIDER_URL
               - name: POR_AGGREGATOR_HASH
-                value: "0xdfc65be0daca54cfd5c081bb325d855e71b1a9cd6d2c5e44fcc1d7d0756f7811"
+                value: "0x952f883b8d2fd47a790307cb569118a215ea45eb861cefd4ed3b83ae7550f8e8"
