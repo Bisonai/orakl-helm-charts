@@ -136,8 +136,6 @@ spec:
                   key: PROVIDER_URL
             - name: REPORTER_PORT
               value: "6000"
-            - name: DATA_FEED_REPORTER_CONCURRENCY
-              value: 15
           {{ end }}
           command: ["yarn"]
           args: [start:reporter:vrf]
