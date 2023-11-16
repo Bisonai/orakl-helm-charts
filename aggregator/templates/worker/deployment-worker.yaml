@@ -25,7 +25,7 @@ spec:
       serviceAccountName: {{ .Values.worker.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.worker.podSecurityContext | nindent 8 }}
-      {{- if .Values.global.affinity.enabled }}        
+      {{- if .Values.global.affinity.enabled }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -36,113 +36,113 @@ spec:
                 operator: In
                 values:
                 - {{ .Values.global.affinity.value }}
-      {{- end }}  
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.worker.containerSecurityContext | nindent 12 }}
-          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.worker-tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-         {{- if .Values.global.secretManager.enabled }}  
+         {{- if .Values.global.secretManager.enabled }}
           env:
-            - name: NODE_ENV          
+            - name: NODE_ENV
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: ORAKL_NETWORK_API_URL
-            - name: ORAKL_NETWORK_DELEGATOR_URL          
+            - name: ORAKL_NETWORK_DELEGATOR_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
-                  key: ORAKL_NETWORK_DELEGATOR_URL                  
-            - name: CHAIN          
+                  key: ORAKL_NETWORK_DELEGATOR_URL
+            - name: CHAIN
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: CHAIN
-            - name: HEALTH_CHECK_PORT          
+            - name: HEALTH_CHECK_PORT
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: HEALTH_CHECK_PORT
-            - name: SLACK_WEBHOOK_URL          
+            - name: SLACK_WEBHOOK_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: SLACK_WEBHOOK_URL
-            - name: LOG_LEVEL          
+            - name: LOG_LEVEL
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: LOG_LEVEL
-            - name: REDIS_HOST          
+            - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: REDIS_HOST
-            - name: REDIS_PORT          
+            - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: REDIS_PORT
-            - name: PROVIDER_URL          
+            - name: PROVIDER_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-aggregator-secrets
                   key: PROVIDER_URL
-            - name: WORKER_PORT          
-              value: {{ .Values.worker.APP_PORT | default 5000 | int  }} 
+            - name: WORKER_PORT
+              value: {{ .Values.worker.APP_PORT | default 5000 | int  }}
           {{ else }}
-          env:          
-            - name: NODE_ENV          
+          env:
+            - name: NODE_ENV
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
                   key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
                   key: ORAKL_NETWORK_API_URL
-            - name: ORAKL_NETWORK_DELEGATOR_URL          
+            - name: ORAKL_NETWORK_DELEGATOR_URL
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
-                  key: ORAKL_NETWORK_DELEGATOR_URL                  
-            - name: CHAIN          
+                  key: ORAKL_NETWORK_DELEGATOR_URL
+            - name: CHAIN
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
                   key: CHAIN
-            - name: LOG_LEVEL          
+            - name: LOG_LEVEL
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
                   key: LOG_LEVEL
-            - name: REDIS_HOST          
+            - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
                   key: REDIS_HOST
-            - name: REDIS_PORT          
+            - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
                   key: REDIS_PORT
-            - name: PROVIDER_URL          
+            - name: PROVIDER_URL
               valueFrom:
                 secretKeyRef:
                   name: aggregator-secrets
                   key: PROVIDER_URL
-            - name: WORKER_PORT          
+            - name: WORKER_PORT
               value: "5000"
-            - name: HEALTH_CHECK_PORT          
-              value: "8080"              
+            - name: HEALTH_CHECK_PORT
+              value: "8080"
           {{ end }}
           command: ["yarn"]
           args: [start:worker:data_feed]
@@ -153,7 +153,7 @@ spec:
             containerPort: 8080
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
-            httpGet:          
+            httpGet:
               path: /
               port: healthcheck
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
@@ -164,15 +164,15 @@ spec:
           {{- end }}
           {{- if .Values.global.readinessProbe.enabled }}
           readinessProbe:
-            httpGet:          
+            httpGet:
               path: /
               port: healthcheck
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
-            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
-          {{- end }}          
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.worker.resources | nindent 12 }}
 
