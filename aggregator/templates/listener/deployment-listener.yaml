@@ -84,7 +84,7 @@ spec:
                   name: orakl-aggregator-secrets
                   key: REDIS_PORT
             - name: PROVIDER_URL
-              value: "https://public-en-cypress.klaytn.net"
+              value: "https://klaytn-mainnet-rpc.allthatnode.com:8551"
             - name: LISTENER_PORT
               value: {{ .Values.listener.APP_PORT | default 4000 | int  }}
           {{ else }}
@@ -122,7 +122,7 @@ spec:
                   name: aggregator-secrets
                   key: REDIS_PORT
             - name: PROVIDER_URL
-              value: "https://public-en-cypress.klaytn.net"
+              value: "https://klaytn-mainnet-rpc.allthatnode.com:8551"
             - name: LISTENER_PORT
               value: "4000"
             - name: HEALTH_CHECK_PORT
