@@ -132,7 +132,7 @@ spec:
           - name: healthcheck
             containerPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}
           - name: watchman
-            containerPort: {{ .Values.listener.APP_PORT | default 5000 | int  }}
+            containerPort: {{ .Values.worker.APP_PORT | default 5000 | int  }}
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
