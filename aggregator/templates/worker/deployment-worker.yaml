@@ -96,7 +96,10 @@ spec:
                   name: orakl-aggregator-secrets
                   key: REDIS_PORT
             - name: PROVIDER_URL
-              value: "https://klaytn-mainnet-rpc.allthatnode.com:8551"
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-aggregator-secrets
+                  key: PROVIDER_URL
             - name: WORKER_PORT
               value: {{ .Values.worker.APP_PORT | default 5000 | int  }}
           {{ else }}
@@ -134,7 +137,10 @@ spec:
                   name: aggregator-secrets
                   key: REDIS_PORT
             - name: PROVIDER_URL
-              value: "https://klaytn-mainnet-rpc.allthatnode.com:8551"
+              valueFrom:
+                secretKeyRef:
+                  name: aggregator-secrets
+                  key: PROVIDER_URL
             - name: WORKER_PORT
               value: "5000"
             - name: HEALTH_CHECK_PORT
