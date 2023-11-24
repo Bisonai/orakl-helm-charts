@@ -10,6 +10,8 @@ apiVersion: batch/v1
 metadata:
   name: proof-of-reserve
   namespace: orakl
+  labels:
+    app.kubernetes.io/instance: "proof-of-reserve"
 spec:
   schedule: "* * * * *"
   jobTemplate:
