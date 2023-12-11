@@ -3,24 +3,24 @@
 
 global:
   image:
-    repository: public.ecr.aws/bisonai/orakl-delegator  #repository url
+    repository: public.ecr.aws/bisonai/orakl-delegator #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20230707.0137.513e9f9"  
+    tag: "v0.0.1.20231211.0735.867d885"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   secretManager:
     enabled: false
-    secretId: 
-    versionId: 
+    secretId:
+    versionId:
 
   affinity:
     enabled: false
     key: kubernetes.io/hostname
-    value: 
+    value:
 
-  podAnnotations: 
+  podAnnotations:
 
   livenessProbe:
     enabled: true
@@ -38,7 +38,7 @@ global:
     periodSeconds: 5
     timeoutSeconds: 1
     successThreshold: 1
-    failureThreshold: 5 
+    failureThreshold: 5
 
 delegator:
   enabled: true
@@ -56,7 +56,7 @@ delegator:
   podSecurityContext: {}
 
   containerSecurityContext: {}
-  
+
   resources:
     limits:
       cpu: 500m
