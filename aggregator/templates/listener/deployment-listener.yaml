@@ -29,7 +29,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
-          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.listener-tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.listenerTag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           {{- if .Values.global.secretManager.enabled }}
           env:
