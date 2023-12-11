@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
-    listenerTag: "v0.5.1.20231211.0351.127c944"
+    listenerTag: "v0.5.1.20231211.0636.c10f3fc"
     reporterTag: "v0.5.0.20231115.0418.edbde75"
     workerTag: "v0.5.0.20231115.0418.edbde75"
     imagePullPolicy: IfNotPresent
