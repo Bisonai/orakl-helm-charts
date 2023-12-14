@@ -60,11 +60,6 @@ spec:
                 secretKeyRef:
                   name: orakl-api-secrets
                   key: APP_PORT
-            - name: APP_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-api-secrets
-                  key: APP_PORT
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
