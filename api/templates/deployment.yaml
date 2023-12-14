@@ -87,12 +87,12 @@ spec:
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
-                  name: orakl-api-secrets
+                  name: api-secrets
                   key: REDIS_HOST
             - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
-                  name: orakl-api-secrets
+                  name: api-secrets
                   key: REDIS_PORT
           {{ end }}
           command: ["yarn"]
