@@ -26,56 +26,56 @@ spec:
           serviceAccountName: orakl-por
           restartPolicy: Never
           containers:
-          - name: proof-of-reserve
-            image: public.ecr.aws/u6t6w0e4/orakl-core:v0.5.1.20231123.0110.b3c548d
-            imagePullPolicy: IfNotPresent
-            command: ["yarn"]
-            args: [start:por]
-            env:
-              - name: NODE_ENV
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: NODE_ENV
-              - name: ORAKL_NETWORK_API_URL
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: ORAKL_NETWORK_API_URL
-              - name: ORAKL_NETWORK_DELEGATOR_URL
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: ORAKL_NETWORK_DELEGATOR_URL
-              - name: CHAIN
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: CHAIN
-              - name: LOG_LEVEL
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: LOG_LEVEL
-              - name: REDIS_HOST
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: REDIS_HOST
-              - name: REDIS_PORT
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: REDIS_PORT
-              - name: PROVIDER_URL
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: PROVIDER_URL
-              - name: POR_AGGREGATOR_HASH
-                value: "0x952f883b8d2fd47a790307cb569118a215ea45eb861cefd4ed3b83ae7550f8e8"
-              - name: SLACK_WEBHOOK_URL
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: SLACK_WEBHOOK_URL
+            - name: proof-of-reserve
+              image: public.ecr.aws/u6t6w0e4/orakl-core:v0.5.1.20231215.0641.bf3889b
+              imagePullPolicy: IfNotPresent
+              command: ["yarn"]
+              args: [start:por]
+              env:
+                - name: NODE_ENV
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: NODE_ENV
+                - name: ORAKL_NETWORK_API_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: ORAKL_NETWORK_API_URL
+                - name: ORAKL_NETWORK_DELEGATOR_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: ORAKL_NETWORK_DELEGATOR_URL
+                - name: CHAIN
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: CHAIN
+                - name: LOG_LEVEL
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: LOG_LEVEL
+                - name: REDIS_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: REDIS_HOST
+                - name: REDIS_PORT
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: REDIS_PORT
+                - name: PROVIDER_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: PROVIDER_URL
+                - name: POR_AGGREGATOR_HASH
+                  value: "0x952f883b8d2fd47a790307cb569118a215ea45eb861cefd4ed3b83ae7550f8e8"
+                - name: SLACK_WEBHOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: aggregator-secrets
+                      key: SLACK_WEBHOOK_URL
