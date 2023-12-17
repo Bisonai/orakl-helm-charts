@@ -68,10 +68,7 @@ spec:
                     name: aggregator-secrets
                     key: REDIS_PORT
               - name: PROVIDER_URL
-                valueFrom:
-                  secretKeyRef:
-                    name: aggregator-secrets
-                    key: PROVIDER_URL
+                value: "https://public-en-cypress.klaytn.net"
               - name: POR_AGGREGATOR_HASH
                 value: "0x4a4f59a3cc46b134755831fc93da7e3ce133b98d358afe87e5d16e72c823b4a9"
               - name: SLACK_WEBHOOK_URL
