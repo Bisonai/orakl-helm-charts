@@ -2,7 +2,7 @@ image:
   # ToDo `repository` and `tag` value needed changing to real value.
   # Below value is example value.
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-backend-fe
-  tag: v0.1.0.20230831.0149.4809042
+  tag: v.20231220.0308.69f29c6
 
 deployment:
   name: orakl-backend-fe
