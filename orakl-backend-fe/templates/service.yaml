@@ -8,5 +8,8 @@ spec:
   ports:
     - port: 80
       targetPort: 3001
+      protocol: TCP
   selector:
     app: {{ .Values.deployment.name }}
+  loadBalancerSourceRanges:
+    - 0.0.0.0/0
