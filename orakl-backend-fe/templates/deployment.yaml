@@ -13,8 +13,6 @@ spec:
       labels:
         app: {{ .Values.deployment.name }}
     spec:
-      imagePullSecrets:
-        - name: bisontry-ecr-secret
       containers:
         - name: {{ .Values.deployment.name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
