@@ -2,4 +2,4 @@ apiVersion: v2
 name: orakl-backend-fe
 description: The backend service for Orakl frontend page.
 version: 0.1.0
-appVersion: v.20231222.0521.e39abc5
+appVersion: v.20231222.0819.0d78575
