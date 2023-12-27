@@ -1,6 +1,6 @@
 image:
-  repository: 831311642255.dkr.ecr.ap-southeast-1.amazonaws.com/bisontry-balance-checker
-  tag: v0.1.0.20230831.0149.4809042
+  repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-balance-checker
+  tag: v0.1.0.20231211.1601.c259821
 
 deployment:
   name: bisontry-balance-checker

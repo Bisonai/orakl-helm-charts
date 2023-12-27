@@ -1,8 +1,8 @@
 image:
-  repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-balance-checker
-  tag: v0.1.0.20231211.1601.c259821
+  repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-daily-report
+  tag: v0.1.0.20231219.0733.2bb7b86
 
 deployment:
-  name: bisontry-balance-checker
+  name: bisontry-daily-report
   replicas: 1
   resources:

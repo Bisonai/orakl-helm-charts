@@ -1,6 +1,6 @@
 image:
-  repository: 831311642255.dkr.ecr.ap-southeast-1.amazonaws.com/bisontry-event-checker
-  tag: v0.0.1.20230831.0828.a7e82bc
+  repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-event-checker
+  tag: v0.0.1.20231219.0733.2bb7b86
 
 deployment:
   name: bisontry-event-checker
