@@ -13,7 +13,7 @@ spec:
         app: {{ .Values.deployment.name }}
     spec:
       imagePullSecrets:
-        - name: bisontry-ecr-secret
+        - name: bisontry-gar-json-key
       containers:
         - name: {{ .Values.deployment.name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
