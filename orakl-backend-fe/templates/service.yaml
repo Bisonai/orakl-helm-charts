@@ -16,5 +16,3 @@ spec:
       protocol: TCP
   selector:
     app: {{ .Values.deployment.name }}
-  loadBalancerSourceRanges:
-    - 0.0.0.0/0
