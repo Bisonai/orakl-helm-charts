@@ -10,7 +10,8 @@ spec:
   - host: api.orakl.network
     http:
       paths:
-      - pathType: ImplementationSpecific
+      - path: /data-feed/latest
+        pathType: ImplementationSpecific
         backend:
           service:
             name: {{ .Values.deployment.name }}
