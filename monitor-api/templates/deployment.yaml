@@ -25,7 +25,7 @@ spec:
       serviceAccountName: {{ .Values.monitorApi.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.monitorApi.podSecurityContext | nindent 8 }}
-      {{- if .Values.global.affinity.enabled }}        
+      {{- if .Values.global.affinity.enabled }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -36,7 +36,7 @@ spec:
                 operator: In
                 values:
                 - {{ .Values.global.affinity.value }}
-      {{- end }}  
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -46,6 +46,9 @@ spec:
           envFrom:
             - secretRef:
                 name: monitor-secrets
+          env:
+            - name: NETWORK
+              value: "baobab"
           command: ["yarn"]
           args: ["start:prod"]
           ports:
@@ -71,8 +74,8 @@ spec:
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
-            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
-          {{- end }}          
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.monitorApi.resources | nindent 12 }}
 
