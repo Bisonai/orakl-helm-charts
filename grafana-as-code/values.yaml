@@ -9,9 +9,3 @@ image:
 deployment:
   name: orakl-grafana-as-code
   replicas: 1
-
-env:
-  - name: NETWORK
-    value: "baobab"
-  - name: GF_AUTH_ANONYMOUS_ENABLED
-    value: "true"
