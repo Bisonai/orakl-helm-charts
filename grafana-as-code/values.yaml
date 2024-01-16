@@ -13,3 +13,5 @@ deployment:
 env:
   - name: NETWORK
     value: "baobab"
+  - name: GF_AUTH_ANONYMOUS_ENABLED
+    value: "true"
