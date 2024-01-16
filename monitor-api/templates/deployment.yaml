@@ -46,9 +46,6 @@ spec:
           envFrom:
             - secretRef:
                 name: monitor-secrets
-          env:
-            - name: NETWORK
-              value: "baobab"
           command: ["yarn"]
           args: ["start:prod"]
           ports:
