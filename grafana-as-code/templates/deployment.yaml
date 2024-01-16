@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          env:
+            - name: CYPRESS_DELEGATOR_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: CYPRESS_DELEGATOR_DB_PW
+            - name: CYPRESS_GRAPHNODE_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: CYPRESS_GRAPHNODE_DB_PW
+            - name: CYPRESS_MAIN_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: CYPRESS_MAIN_DB_PW
+            - name: CYPRESS_MONITOR_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: CYPRESS_MONITOR_DB_PW
+            - name: NETWORK
+              value: "cypress"
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "true"
