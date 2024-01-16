@@ -16,4 +16,57 @@ spec:
         - name: {{ .Values.deployment.name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
-          env: {{- toYaml .Values.env | nindent 12 }}
+          {{- if .Values.global.secretManager.enabled }}
+          env:
+            - name: BAOBAB_DELEGATOR_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-grafana-as-code-secrets
+                  key: BAOBAB_DELEGATOR_DB_PW
+            - name: BAOBAB_GRAPHNODE_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-grafana-as-code-secrets
+                  key: BAOBAB_GRAPHNODE_DB_PW
+            - name: BAOBAB_MAIN_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-grafana-as-code-secrets
+                  key: BAOBAB_MAIN_DB_PW
+            - name: BAOBAB_MONITOR_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-grafana-as-code-secrets
+                  key: BAOBAB_MONITOR_DB_PW
+            - name: NETWORK
+              value: "baobab"
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "true"
+          {{ else }}
+          env:
+            - name: BAOBAB_DELEGATOR_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: BAOBAB_DELEGATOR_DB_PW
+            - name: BAOBAB_GRAPHNODE_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: BAOBAB_GRAPHNODE_DB_PW
+            - name: BAOBAB_MAIN_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: BAOBAB_MAIN_DB_PW
+            - name: BAOBAB_MONITOR_DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-as-code-secrets
+                  key: BAOBAB_MONITOR_DB_PW
+            - name: NETWORK
+              value: "baobab"
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "true"
+
+
