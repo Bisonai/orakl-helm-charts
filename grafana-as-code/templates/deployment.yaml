@@ -16,6 +16,9 @@ spec:
         - name: {{ .Values.deployment.name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
+          ports:
+          - name: grafana
+            containerPort: 3000
           env:
             - name: BAOBAB_DELEGATOR_DB_PW
               valueFrom:
