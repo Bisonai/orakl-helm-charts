@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.deployment.name }}
 spec:
   selector:
-    app: {{ .Values.deployment.name }}}
+    app: {{ .Values.deployment.name }}
   ports:
     - name: grafana
       protocol: TCP
