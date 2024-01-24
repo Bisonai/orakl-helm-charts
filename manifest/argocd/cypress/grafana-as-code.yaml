@@ -12,4 +12,6 @@ spec:
     path: grafana-as-code/
     repoURL: https://github.com/Bisonai/orakl-helm-charts.git
     targetRevision: gcp-cypress-prod
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
