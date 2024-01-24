@@ -12,4 +12,6 @@ spec:
     path: grafana-as-code/
     repoURL: https://github.com/Bisonai/orakl-helm-charts.git
     targetRevision: i-123/feat/cleanup-grafana
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
