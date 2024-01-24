@@ -5,17 +5,17 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-cli
     pullPolicy: IfNotPresent
-    tag: "v0.6.0.20230920.0750.99c4cdd"
+    tag: "v0.6.0.20231229.0312.9433d53"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   secretManager:
     enabled: false
-    secretId: 
-    versionId: 
+    secretId:
+    versionId:
 
-  hostPath: 
+  hostPath:
     enable: false
     volumes:
 
@@ -24,7 +24,7 @@ global:
   affinity:
     enabled: false
     key: kubernetes.io/hostname
-    value: 
+    value:
 
   podAnnotations: {}
 
@@ -42,7 +42,7 @@ global:
     periodSeconds: 5
     timeoutSeconds: 1
     successThreshold: 1
-    failureThreshold: 5 
+    failureThreshold: 5
 
 cli:
   enabled: true
@@ -60,7 +60,7 @@ cli:
   podSecurityContext: {}
 
   containerSecurityContext: {}
-    
+
   resources:
     limits:
       cpu: 400m
