@@ -45,24 +45,24 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: api-secrets
+                  name: goapi-secrets
                   key: DATABASE_URL
             - name: ENCRYPT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: api-secrets
+                  name: goapi-secrets
                   key: ENCRYPT_PASSWORD
             - name: APP_PORT
               value: "3030"
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
-                  name: api-secrets
+                  name: goapi-secrets
                   key: REDIS_HOST
             - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
-                  name: api-secrets
+                  name: goapi-secrets
                   key: REDIS_PORT
           command: ["yarn"]
           args: ["start:prod"]
