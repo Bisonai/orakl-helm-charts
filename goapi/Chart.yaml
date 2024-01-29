@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 name: orakl-goapi
 description: A Helm chart for Kubernetes
 
