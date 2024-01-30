@@ -8,3 +8,5 @@ spec:
     - port: 3030
       targetPort: http
       protocol: TCP
+  selector:
+    app: {{ .Values.deployment.name }}

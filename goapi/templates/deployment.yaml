@@ -2,12 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: goapi
-
 spec:
   replicas: {{ .Values.api.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.deployment.name }}
+      app.kubernetes.io/name: {{ .Values.deployment.name }}
+      app.kubernetes.io/instance: {{ .Values.deployment.name }}
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
