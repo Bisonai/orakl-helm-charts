@@ -10,9 +10,9 @@ spec:
   replicas: {{ .Values.api.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.deployment.name }}
-      app.kubernetes.io/name: {{ .Values.deployment.name }}
-      app.kubernetes.io/instance: {{ .Values.deployment.name }}
+      app: {{ .Values.deployment.name }}-goapi
+      app.kubernetes.io/name: {{ .Values.deployment.name }}-goapi
+      app.kubernetes.io/instance: {{ .Values.deployment.name }}-goapi
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
