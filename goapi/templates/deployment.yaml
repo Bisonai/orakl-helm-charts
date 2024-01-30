@@ -2,6 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: goapi
+  labels:
+    app: {{ .Values.deployment.name }}
+    app.kubernetes.io/name: {{ .Values.deployment.name }}
+    app.kubernetes.io/instance: {{ .Values.deployment.name }}
 spec:
   replicas: {{ .Values.api.replicas }}
   selector:
@@ -17,6 +21,8 @@ spec:
       {{- end }}
       labels:
         app: {{ .Values.deployment.name }}
+        app.kubernetes.io/name: {{ .Values.deployment.name }}
+        app.kubernetes.io/instance: {{ .Values.deployment.name }}
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
