@@ -64,8 +64,6 @@ spec:
                 secretKeyRef:
                   name: goapi-secrets
                   key: REDIS_PORT
-          command: ["yarn"]
-          args: ["start:prod"]
           ports:
           - name: http
             containerPort: 3030
