@@ -20,9 +20,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: {{ .Values.deployment.name }}
-        app.kubernetes.io/name: {{ .Values.deployment.name }}
-        app.kubernetes.io/instance: {{ .Values.deployment.name }}
+        app: {{ .Values.deployment.name }}-goapi
+        app.kubernetes.io/name: {{ .Values.deployment.name }}-goapi
+        app.kubernetes.io/instance: {{ .Values.deployment.name }}-goapi
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
