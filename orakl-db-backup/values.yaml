@@ -1,7 +1,7 @@
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-db-backup #repository url
   pullPolicy: IfNotPresent
-  tag: "v0.0.1.20240201.0735.ac6f8db"
+  tag: "v0.0.1.20240201.1724.21d9889"
   imagePullPolicy: IfNotPresent
   # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
   imagePullSecrets:
