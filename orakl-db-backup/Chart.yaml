@@ -3,4 +3,4 @@ name: orakl-db-backup
 description: The backup service for orakl-db
 type: application
 version: 0.1.0
-appVersion: "v0.0.1.20240131.1530.ae64bc2"
+appVersion: "v0.0.1.20240201.0735.ac6f8db"
