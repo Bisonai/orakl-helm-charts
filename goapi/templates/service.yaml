@@ -9,4 +9,4 @@ spec:
       targetPort: http
       protocol: TCP
   selector:
-    app: { { .Values.deployment.name } }
+    app: {{ .Values.deployment.name }}
