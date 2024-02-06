@@ -2,4 +2,4 @@ apiVersion: v2
 name: bisontry-health-checker
 description: Bisontry Health Checker service.
 version: 0.1.0
-appVersion: v0.1.0.20240131.0523.c3d8172
+appVersion: v0.1.0.20240131.0543.c3d8172
