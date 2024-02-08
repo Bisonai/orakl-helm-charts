@@ -1,0 +1,42 @@
+name: CI Helm Lint
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - i-56/feat/ci-helm-lint
+    paths:
+      - '**/*.yaml'
+      - '**/templates/*.tpl'
+      - '**/templates/*.yaml'
+      - '**/**/templates/*.yaml'
+  # pull_request:
+  #   types:
+  #     - closed
+  #   branches:
+  #     - main
+  #   paths:
+  #     - '**/*.yaml'
+  #     - '**/templates/*.tpl'
+  #     - '**/templates/*.yaml'
+  #     - '**/**/templates/*.yaml'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+
+      - name: Install Helm dependencies
+        run: helm dependency update
+
+      - name: Run Helm lint
+        run: |
+          for chart in $(find . -name "Chart.yaml" -exec dirname {} \;); do
+            helm lint $chart
+          done
