@@ -40,8 +40,9 @@ jobs:
       - name: List changed helm charts
         id: list-changed
         run: |
+          set -e
           changed=$(ct list-changed --target-branch i-56/feat/ci-helm-lint)
-          echo $changed
+          echo "ct output: $changed"
           if [[ -n "$changed" ]]; then
             echo "true"
           fi
