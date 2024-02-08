@@ -41,6 +41,7 @@ jobs:
         id: list-changed
         run: |
           changed=$(ct list-changed --target-branch i-56/feat/ci-helm-lint)
+          echo $changed
           if [[ -n "$changed" ]]; then
             echo "true"
           fi
