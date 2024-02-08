@@ -5,11 +5,6 @@ on:
   push:
     branches:
       - i-56/feat/ci-helm-lint
-    paths:
-      - '**/*.yaml'
-      - '**/templates/*.tpl'
-      - '**/templates/*.yaml'
-      - '**/**/templates/*.yaml'
   # pull_request:
   #   types:
   #     - closed
@@ -30,13 +25,26 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.12.1
 
-      - name: Install Helm dependencies
-        run: helm dependency update
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          check-latest: true
 
-      - name: Run Helm lint
+      - name: Setup chart-testing
+        uses: helm/chart-testing-action@v2.6.0
+
+      - name: List changed helm charts
         run: |
-          for chart in $(find . -name "Chart.yaml" -exec dirname {} \;); do
-            helm lint $chart
-          done
+          changed=$(ct list-changed --target-branch i-56/feat/ci-helm-lint)
+          # changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }})
+          if [[ -n "$changed" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Helm lint to changed charts
+        if: steps.list-changed.outputs.changed == 'true'
+        run: ct lint --target-branch i-56/feat/ci-helm-lint
