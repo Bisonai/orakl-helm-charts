@@ -42,7 +42,7 @@ jobs:
         run: |
           changed=$(ct list-changed --target-branch i-56/feat/ci-helm-lint)
           if [[ -n "$changed" ]]; then
-            echo "::set-output name=changed::true"
+            echo $changed
           fi
 
       - name: Run Helm lint to changed charts
