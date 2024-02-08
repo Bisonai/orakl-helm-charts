@@ -12,12 +12,13 @@ spec:
       labels:
         app: {{ .Values.deployment.name }}
     spec:
-      imagePullSecrets:
-        - name: bisontry-gar-json-key
-      containers:
-        - name: {{ .Values.deployment.name }}
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: Always
-          envFrom:
-            - secretRef:
-                name: {{ .Values.deployment.name }}-secrets
+      # ToDo - Please uncomment it after testing
+      # imagePullSecrets:
+      #   - name: bisontry-gar-json-key
+      # containers:
+      #   - name: {{ .Values.deployment.name }}
+      #     image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+      #     imagePullPolicy: Always
+      #     envFrom:
+      #       - secretRef:
+      #           name: {{ .Values.deployment.name }}-secrets
