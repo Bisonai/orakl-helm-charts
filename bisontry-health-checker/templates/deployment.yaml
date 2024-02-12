@@ -7,18 +7,17 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.deployment.name }}
-
+  template:
     metadata:
       labels:
         app: {{ .Values.deployment.name }}
     spec:
-      # ToDo - Please uncomment it after testing
-      # imagePullSecrets:
-      #   - name: bisontry-gar-json-key
-      # containers:
-      #   - name: {{ .Values.deployment.name }}
-      #     image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-      #     imagePullPolicy: Always
-      #     envFrom:
-      #       - secretRef:
-      #           name: {{ .Values.deployment.name }}-secrets
+      imagePullSecrets:
+        - name: bisontry-gar-json-key
+      containers:
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: {{ .Values.deployment.name }}-secrets

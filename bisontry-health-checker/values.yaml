@@ -6,6 +6,3 @@ deployment:
   name: bisontry-health-checker
   replicas: 1
   resources:
-
-# ToDo - Please remove it after testing
-test: test change
