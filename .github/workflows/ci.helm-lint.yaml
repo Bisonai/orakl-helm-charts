@@ -30,12 +30,12 @@ jobs:
         uses: WyriHaximus/github-action-helm3@v3
         with:
           exec: |
+
             failed_services=""
             for file in $(git diff --name-only HEAD~1..HEAD); do
               dir=$(dirname $file)
               if [ -f "$dir/Chart.yaml" ]; then
                 if ! helm lint $dir; then
-                  echo "'$(basename $dir)' failed"
                   failed_services+="'$(basename $dir)', "
                 fi
               fi
@@ -45,4 +45,5 @@ jobs:
               # Remove the trailing comma and space
               failed_services=${failed_services%??}
               echo "Lint failed services: $failed_services"
+              exit 1
             fi
