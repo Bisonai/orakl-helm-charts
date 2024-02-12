@@ -45,9 +45,10 @@ jobs:
               # Remove the trailing comma and space
               failed_services=${failed_services%??}
               echo "failed_services=$failed_services" >> $GITHUB_OUTPUT
-              exit 1
             fi
 
       - name: Failed services
+        if: steps.lint.outputs.failed_services
         run: |
           echo "Failed services: ${{ steps.lint.outputs.failed_services }}"
+          exit 1
