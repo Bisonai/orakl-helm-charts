@@ -30,7 +30,6 @@ jobs:
         uses: WyriHaximus/github-action-helm3@v3
         with:
           exec: |
-
             failed_services=""
             for file in $(git diff --name-only HEAD~1..HEAD); do
               dir=$(dirname $file)
@@ -44,6 +43,6 @@ jobs:
             if [ -n "$failed_services" ]; then
               # Remove the trailing comma and space
               failed_services=${failed_services%??}
-              echo "Lint failed services: $failed_services"
+              echo "Lint failed services: $failed_services" >> $GITHUB_OUTPUT
               exit 1
             fi
