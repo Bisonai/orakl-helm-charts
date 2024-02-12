@@ -28,6 +28,7 @@ jobs:
 
       - name: Run Helm lint
         uses: WyriHaximus/github-action-helm3@v3
+        id: lint
         with:
           exec: |
             failed_services=""
@@ -35,7 +36,18 @@ jobs:
               dir=$(dirname $file)
               if [ -f "$dir/Chart.yaml" ]; then
                 if ! helm lint $dir; then
-                  exit 1
+                  failed_services+="'$(basename $dir)', "
                 fi
               fi
             done
+
+            if [ -n "$failed_services" ]; then
+              # Remove the trailing comma and space
+              failed_services=${failed_services%??}
+              echo "failed_services=$failed_services" >> $GITHUB_OUTPUT
+              exit 1
+            fi
+
+      - name: Failed services
+        run: |
+          echo "Failed services: ${{ steps.lint.outputs.failed_services }}"
