@@ -27,4 +27,4 @@ jobs:
       - name: Run Helm lint
         uses: WyriHaximus/github-action-helm3@v3
         with:
-          exec: find . -name 'Chart.yaml' -exec dirname {} \; | xargs -I {} helm lint {} | tee /dev/fd/2 | grep "failed" && exit 1 || exit 0
+          exec: find . -name 'Chart.yaml' -exec dirname {} \; | xargs -I {} helm lint {} | grep "failed" && exit 1 || exit 0
