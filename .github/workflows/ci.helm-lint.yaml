@@ -2,19 +2,13 @@ name: CI Helm Lint
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
+    types:
+      - opened
     branches:
-      - i-56/feat/ci-helm-lint
-  # pull_request:
-  #   types:
-  #     - closed
-  #   branches:
-  #     - main
-  #   paths:
-  #     - '**/*.yaml'
-  #     - '**/templates/*.tpl'
-  #     - '**/templates/*.yaml'
-  #     - '**/**/templates/*.yaml'
+      - main
+      - gcp-cypress-prod
+      - gcp-baobab-prod
 
 jobs:
   lint:
