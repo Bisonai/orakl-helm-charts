@@ -1,0 +1,46 @@
+name: CI Helm Lint
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - gcp-cypress-prod
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run Helm lint
+        uses: WyriHaximus/github-action-helm3@v3
+        id: lint
+        with:
+          exec: |
+            failed_services=""
+            for file in $(git diff --name-only HEAD~1..HEAD); do
+              dir=$(dirname $file)
+              if [ -f "$dir/Chart.yaml" ]; then
+                if ! helm lint $dir; then
+                  failed_services+="'$(basename $dir)', "
+                fi
+              fi
+            done
+
+            if [ -n "$failed_services" ]; then
+              # Remove the trailing comma and space
+              failed_services=${failed_services%??}
+              echo "failed_services=$failed_services" >> $GITHUB_OUTPUT
+            fi
+
+      - name: Failed services
+        if: steps.lint.outputs.failed_services
+        run: |
+          echo "Failed services: ${{ steps.lint.outputs.failed_services }}"
+          exit 1
