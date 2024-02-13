@@ -6,9 +6,7 @@ on:
     types:
       - opened
     branches:
-      - main
       - gcp-cypress-prod
-      - gcp-baobab-prod
 
 jobs:
   lint:
