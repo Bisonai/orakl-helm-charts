@@ -2,7 +2,7 @@
 ## created by Bisonai
 global:
   image:
-    repository: public.ecr.aws/bisonai/orakl-goapi
+    repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
     tag: "v0.0.1.20240207.1046.fc31d76"
     imagePullPolicy: IfNotPresent
@@ -54,5 +54,5 @@ tolerations: []
 dotenv: {}
 
 deployment:
-  name: orakl-goapi
+  name: orakl-api
   replicas: 1

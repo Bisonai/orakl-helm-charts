@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: goapi
+  name: api
   labels:
     app: {{ .Values.deployment.name }}
     app.kubernetes.io/name: {{ .Values.deployment.name }}
@@ -52,24 +52,24 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: goapi-secrets
+                  name: api-secrets
                   key: DATABASE_URL
             - name: ENCRYPT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: goapi-secrets
+                  name: api-secrets
                   key: ENCRYPT_PASSWORD
             - name: APP_PORT
               value: "3030"
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
-                  name: goapi-secrets
+                  name: api-secrets
                   key: REDIS_HOST
             - name: REDIS_PORT
               valueFrom:
                 secretKeyRef:
-                  name: goapi-secrets
+                  name: api-secrets
                   key: REDIS_PORT
           ports:
           - name: http
