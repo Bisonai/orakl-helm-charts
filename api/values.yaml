@@ -4,15 +4,10 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.1.0.20231214.0553.3dd6e26"
+    tag: "v0.0.1.20240215.1237.1c4d022"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-
-  secretManager:
-    enabled: false
-    secretId:
-    versionId:
 
   affinity:
     enabled: false
@@ -42,16 +37,6 @@ global:
 api:
   enabled: true
   replicas: 1
-  serviceAccount:
-    # -- Create a service account for the application controller
-    create: true
-    # -- Service account name
-    name: orakl-api
-    # -- Annotations applied to created service account
-    annotations: {}
-    # -- Automount API credentials for the Service Account
-    automountServiceAccountToken: true
-
   podSecurityContext: {}
 
   containerSecurityContext: {}
@@ -67,3 +52,7 @@ api:
 nodeSelector: {}
 tolerations: []
 dotenv: {}
+
+deployment:
+  name: orakl-api
+  replicas: 1
