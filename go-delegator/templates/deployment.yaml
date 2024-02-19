@@ -1,14 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: godelegator
+  name: {{ .Values.deployment.name }}
   labels:
-    {{- include "orakl-godelegator.labels.godelegator" . | nindent 4 }}
+    app: {{ .Values.deployment.name }}
+    app.kubernetes.io/name: {{ .Values.deployment.name }}
+    app.kubernetes.io/instance: {{ .Values.deployment.name }}
 spec:
   replicas: {{ .Values.godelegator.replicas }}
   selector:
     matchLabels:
-      {{- include "orakl-godelegator.selectorLabels.godelegator" . | nindent 6 }}
+      app: {{ .Values.deployment.name }}
+      app.kubernetes.io/name: {{ .Values.deployment.name }}
+      app.kubernetes.io/instance: {{ .Values.deployment.name }}
   template:
     metadata:
       {{- with .Values.global.podAnnotations }}
@@ -16,13 +20,15 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "orakl-godelegator.selectorLabels.godelegator" . | nindent 8 }}
+        app: {{ .Values.deployment.name }}
+        app.kubernetes.io/name: {{ .Values.deployment.name }}
+        app.kubernetes.io/instance: {{ .Values.deployment.name }}
     spec:
       {{- with .Values.global.image.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.godelegator.serviceAccount.name }}
+      # serviceAccountName: {{ .Values.godelegator.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.godelegator.podSecurityContext | nindent 8 }}
       {{- if .Values.global.affinity.enabled }}
@@ -66,10 +72,6 @@ spec:
                   key: GOOGLE_SECRET_PATH
             - name: APP_PORT
               value: "5050"
-
-
-          command: ["yarn"]
-          args: ["start:prod"]
           ports:
           - name: http
             containerPort: 5050

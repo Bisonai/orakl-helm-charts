@@ -40,7 +40,7 @@ global:
     successThreshold: 1
     failureThreshold: 5
 
-delegator:
+godelegator:
   enabled: true
   replicas: 1
   serviceAccount:
@@ -68,3 +68,6 @@ delegator:
 nodeSelector: {}
 tolerations: []
 dotenv: {}
+deployment:
+  name: orakl-godelegator
+  replicas: 1
