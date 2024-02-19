@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orakl-godelegator
+spec:
+  # type: ClusterIP
+  ports:
+  - port: 5050
+    targetPort: http
+    protocol: TCP
+  type: LoadBalancer
+  loadBalancerIP: 34.87.152.175
+  selector:
+    {{- include "orakl-godelegator.selectorLabels.godelegator" . | nindent 4 }} 
