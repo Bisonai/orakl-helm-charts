@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: go-delegator
+  name: godelegator
   namespace: argocd
 spec:
   destination:
@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: go-delegator/
+    path: godelegator/
     repoURL: https://github.com/Bisonai/orakl-helm-charts.git
     targetRevision: gcp-baobab-prod
   syncPolicy: {}
