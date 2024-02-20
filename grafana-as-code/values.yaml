@@ -1,7 +1,7 @@
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
   pullPolicy: IfNotPresent
-  tag: "monitor.v1.0.0.20240130.0252.f052f5f"
+  tag: "monitor.v1.0.0.20240219.0829.923bdfd"
   imagePullPolicy: IfNotPresent
   # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
   imagePullSecrets:
