@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-core #repository url
     pullPolicy: IfNotPresent
-    listenerTag: "v0.5.1.20240111.1440.dacb2ef"
+    listenerTag: "v0.5.1.20240223.0352.eec1c2d"
     reporterTag: "v0.5.1.20240111.1440.dacb2ef"
     workerTag: "v0.5.1.20240122.0240.1672788"
     imagePullPolicy: IfNotPresent
