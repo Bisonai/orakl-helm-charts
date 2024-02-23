@@ -108,10 +108,7 @@ spec:
                   name: aggregator-secrets
                   key: CHAIN
             - name: LOG_LEVEL
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: LOG_LEVEL
+              value: "info"
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
