@@ -7,8 +7,8 @@ global:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
     listenerTag: "v0.5.1.20240223.0352.eec1c2d"
-    reporterTag: "v0.5.1.20240111.1440.dacb2ef"
-    workerTag: "v0.5.1.20240111.1440.dacb2ef"
+    reporterTag: "v0.5.1.20240223.0352.eec1c2d"
+    workerTag: "v0.5.1.20240223.0352.eec1c2d"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
