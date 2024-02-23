@@ -11,6 +11,9 @@ global:
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
+  env:
+    LOG_LEVEL: info
+
   secretManager:
     enabled: false
     secretId:

@@ -31,19 +31,19 @@ spec:
             {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-          {{- if .Values.global.secretManager.enabled }}   
+          {{- if .Values.global.secretManager.enabled }}
           env:
             - name: NODE_ENV
               valueFrom:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: ORAKL_NETWORK_API_URL
-            - name: CHAIN          
+            - name: CHAIN
               valueFrom:
                 secretKeyRef:
                   name: orakl-request-response-secrets
@@ -58,12 +58,12 @@ spec:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: SLACK_WEBHOOK_URL
-            - name: LOG_LEVEL          
+            - name: LOG_LEVEL
               valueFrom:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: LOG_LEVEL
-            - name: LOG_DIR 
+            - name: LOG_DIR
               valueFrom:
                 secretKeyRef:
                   name: orakl-request-response-secrets
@@ -78,16 +78,16 @@ spec:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: REDIS_PORT
-            - name: PROVIDER_URL 
+            - name: PROVIDER_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: PROVIDER_URL
-            - name: LISTENER_PORT 
+            - name: LISTENER_PORT
               valueFrom:
                 secretKeyRef:
                   name: orakl-request-response-secrets
-                  key: LISTENER_PORT                  
+                  key: LISTENER_PORT
           {{ else }}
           env:
             - name: NODE_ENV
@@ -95,20 +95,20 @@ spec:
                 secretKeyRef:
                   name: request-response-secrets
                   key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: request-response-secrets
                   key: ORAKL_NETWORK_API_URL
-            - name: CHAIN          
+            - name: CHAIN
               valueFrom:
                 secretKeyRef:
                   name: request-response-secrets
                   key: CHAIN
             - name: HEALTH_CHECK_PORT
               value: "8080"
-            - name: LOG_LEVEL          
-              value: "info"
+            - name: LOG_LEVEL
+              value: {{ .Values.global.env.LOG_LEVEL }}
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
@@ -119,21 +119,21 @@ spec:
                 secretKeyRef:
                   name: request-response-secrets
                   key: REDIS_PORT
-            - name: PROVIDER_URL 
+            - name: PROVIDER_URL
               valueFrom:
                 secretKeyRef:
                   name: request-response-secrets
                   key: PROVIDER_URL
-            - name: LISTENER_PORT 
+            - name: LISTENER_PORT
               value: "4000"
-          {{ end }}                                    
+          {{ end }}
           command: ["yarn"]
           args: [start:listener:request_response]
           ports:
           - name: healthcheck
             containerPort: 8080
           - name: watchman
-            containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}          
+            containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
@@ -154,8 +154,8 @@ spec:
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
-            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
-          {{- end }}          
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.listener.resources | nindent 12 }}
 
