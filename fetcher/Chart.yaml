@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 name: orakl-fetcher
 description: A Helm chart for Kubernetes
 
