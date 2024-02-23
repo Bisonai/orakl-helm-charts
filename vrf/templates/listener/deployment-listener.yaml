@@ -31,19 +31,19 @@ spec:
             {{- toYaml .Values.listener.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-          {{- if .Values.global.secretManager.enabled }}   
+          {{- if .Values.global.secretManager.enabled }}
           env:
             - name: NODE_ENV
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
                   key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
                   key: ORAKL_NETWORK_API_URL
-            - name: CHAIN          
+            - name: CHAIN
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
@@ -58,7 +58,7 @@ spec:
                 secretKeyRef:
                   name: orakl-vrf-secrets
                   key: SLACK_WEBHOOK_URL
-            - name: LOG_LEVEL          
+            - name: LOG_LEVEL
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
@@ -73,7 +73,7 @@ spec:
                 secretKeyRef:
                   name: orakl-vrf-secrets
                   key: REDIS_PORT
-            - name: PROVIDER_URL 
+            - name: PROVIDER_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-vrf-secrets
@@ -90,12 +90,12 @@ spec:
                 secretKeyRef:
                   name: vrf-secrets
                   key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: vrf-secrets
                   key: ORAKL_NETWORK_API_URL
-            - name: CHAIN          
+            - name: CHAIN
               valueFrom:
                 secretKeyRef:
                   name: vrf-secrets
@@ -103,7 +103,7 @@ spec:
             - name: HEALTH_CHECK_PORT
               value: "8080"
             - name: LOG_LEVEL
-              value: "info"
+              value: {{ .Values.env.LOG_LEVEL }}
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
@@ -114,21 +114,21 @@ spec:
                 secretKeyRef:
                   name: vrf-secrets
                   key: REDIS_PORT
-            - name: PROVIDER_URL 
+            - name: PROVIDER_URL
               valueFrom:
                 secretKeyRef:
                   name: vrf-secrets
                   key: PROVIDER_URL
             - name: LISTENER_PORT
               value: "4000"
-          {{ end }}                                  
+          {{ end }}
           command: ["yarn"]
           args: [start:listener:vrf]
           ports:
           - name: watchman
-            containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}      
+            containerPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}
           - name: healthcheck
-            containerPort: 8080                   
+            containerPort: 8080
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
@@ -149,8 +149,8 @@ spec:
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
-            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
-          {{- end }}          
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.listener.resources | nindent 12 }}
 
