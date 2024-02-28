@@ -3,4 +3,4 @@ name: orakl-grafana-as-code
 description: A Grafana dashboard made by code
 type: application
 version: 0.1.0
-appVersion: "monitor.v1.0.0.20240226.0230.481b977"
+appVersion: "monitor.v1.0.0.20240228.0641.481b977"
