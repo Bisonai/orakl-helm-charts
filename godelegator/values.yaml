@@ -43,7 +43,12 @@ global:
 godelegator:
   enabled: true
   replicas: 1
-  
+  serviceAccount:
+    create: true
+    name: sa
+    annotations: {}
+    automountServiceAccountToken: true
+
   podSecurityContext: {}
   containerSecurityContext: {}
 
