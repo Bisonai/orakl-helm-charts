@@ -43,18 +43,8 @@ global:
 godelegator:
   enabled: true
   replicas: 1
-  serviceAccount:
-    # -- Create a service account for the application controller
-    create: false
-    # -- Service account name
-    name: internal-app
-    # -- Annotations applied to created service account
-    annotations: {}
-    # -- Automount API credentials for the Service Account
-    automountServiceAccountToken: true
-
+  
   podSecurityContext: {}
-
   containerSecurityContext: {}
 
   resources:
