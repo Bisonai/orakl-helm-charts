@@ -34,7 +34,7 @@ global:
   readinessProbe:
     enabled: true
     path: /api/v1/
-    initialDelaySeconds: 10ß
+    initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 1
     successThreshold: 1
