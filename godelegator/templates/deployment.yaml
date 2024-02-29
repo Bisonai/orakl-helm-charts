@@ -28,7 +28,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.godelegator.serviceAccount.name }}
+      serviceAccountName: {{ .Values.deployment.name }}-{{ .Values.godelegator.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.godelegator.podSecurityContext | nindent 8 }}
       {{- if .Values.global.affinity.enabled }}
