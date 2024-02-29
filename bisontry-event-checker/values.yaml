@@ -1,6 +1,6 @@
 image:
   repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-event-checker
-  tag: v0.0.1.20231219.0733.2bb7b86
+  tag: v0.0.1.20240229.0628.c5f12c9
 
 deployment:
   name: bisontry-event-checker
