@@ -5,7 +5,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-godelegator #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240219.0806.65e29cc"
+    tag: "v0.0.1.20240229.0707.88629b5"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
