@@ -1,5 +1,5 @@
 global:
-  name: orakl-admin
+  name: admin
   namespace: orakl
 
 image:
