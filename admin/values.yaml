@@ -1,3 +1,7 @@
+global:
+  name: orakl-admin
+  namespace: orakl
+
 image:
   repository: public.ecr.aws/bisonai/orakl-general
   tag: admin.v0.1.0.20230802.0109.13ce71f

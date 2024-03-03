@@ -1,5 +1,6 @@
-name: grafana-as-code
-namespace: orakl
+global:
+  name: grafana-as-code
+  namespace: orakl
 
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
