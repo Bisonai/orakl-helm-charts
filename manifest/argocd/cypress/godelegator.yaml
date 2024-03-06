@@ -11,5 +11,5 @@ spec:
   source:
     path: godelegator/
     repoURL: https://github.com/Bisonai/orakl-helm-charts.git
-    targetRevision: gcp-baobab-prod
+    targetRevision: gcp-cypress-prod
   syncPolicy: {}
