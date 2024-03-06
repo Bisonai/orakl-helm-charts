@@ -1,0 +1,66 @@
+global:
+  image:
+    repository: public.ecr.aws/bisonai/orakl-godelegator #repository url
+    pullPolicy: IfNotPresent
+    tag: "v0.0.1.20240229.0732.a084a43"
+    imagePullPolicy: IfNotPresent
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+    imagePullSecrets: []
+
+  secretManager:
+    enabled: true
+    secretId:
+    versionId:
+
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+
+  podAnnotations:
+
+  livenessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+
+  readinessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+
+godelegator:
+  enabled: true
+  replicas: 1
+  serviceAccount:
+    create: true
+    name: sa
+    annotations: {}
+    automountServiceAccountToken: true
+
+  podSecurityContext: {}
+  containerSecurityContext: {}
+
+# update limits later
+# resources:
+#   limits:
+#     cpu: 500m
+#     memory: 1Gi
+#   requests:
+#     cpu: 500m
+#     memory: 1Gi
+
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-godelegator
+  replicas: 1
