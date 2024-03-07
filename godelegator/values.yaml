@@ -71,4 +71,5 @@ deployment:
 service:
   port: 5050
   # Optional: For fix external IP address
-  loadBalancerIP: 34.126.65.247
+  loadBalancerIP:
+
