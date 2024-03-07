@@ -58,7 +58,7 @@ spec:
             - name: USE_GOOGLE_SECRET_MANAGER
               value: "true"
             - name: GOOGLE_SECRET_PATH
-              value: "projects/1003113141257/secrets/orakl-cypress-fee-payer"
+              value: "projects/1003113141257/secrets/orakl-cypress-fee-payer/versions/latest"
             - name: APP_PORT
               value: "{{ .Values.service.port }}"
           ports:
