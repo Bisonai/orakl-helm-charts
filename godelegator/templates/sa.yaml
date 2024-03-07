@@ -1,0 +1,7 @@
+{{- if .Values.global.secretManager -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.deployment.name }}-{{ .Values.godelegator.serviceAccount.name }}
+  labels: {{ .Values.deployment.name }}
+{{- end }}
