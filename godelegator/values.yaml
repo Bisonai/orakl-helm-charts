@@ -1,4 +1,7 @@
 global:
+  name: godelegator
+  namespace: orakl
+
   image:
     repository: public.ecr.aws/bisonai/orakl-godelegator #repository url
     pullPolicy: IfNotPresent
@@ -64,3 +67,8 @@ dotenv: {}
 deployment:
   name: orakl-godelegator
   replicas: 1
+
+service:
+  port: 5050
+  # Optional: For fix external IP address
+  loadBalancerIP: 34.126.65.247
