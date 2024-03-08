@@ -52,14 +52,13 @@ godelegator:
   podSecurityContext: {}
   containerSecurityContext: {}
 
-# update limits later
-# resources:
-#   limits:
-#     cpu: 500m
-#     memory: 1Gi
-#   requests:
-#     cpu: 500m
-#     memory: 1Gi
+resources:
+  limits:
+    cpu: 500m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
 
 nodeSelector: {}
 tolerations: []
@@ -72,4 +71,3 @@ service:
   port: 5050
   # Optional: For fix external IP address
   loadBalancerIP:
-
