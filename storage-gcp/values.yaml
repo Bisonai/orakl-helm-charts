@@ -1,6 +1,0 @@
-name: orakl-log
-storageClass: orakl-sc
-
-config:
-  size:
-  pdName: 

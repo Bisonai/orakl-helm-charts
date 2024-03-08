@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: orakl-cluster
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/Bisonai/orakl-helm-charts.git
+      revision: gcp-baobab-prod
+      files:
+      - path: "**/values.yaml"
+  template:
+    metadata:
+      name: "{{global.name}}"
+      namespace: argocd
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: ".;.."
+    spec:
+      project: default 
+      source:
+        repoURL: https://github.com/Bisonai/orakl-helm-charts.git
+        targetRevision: gcp-baobab-prod 
+        path: "{{global.name}}"
+      destination:
+        namespace: "{{global.namespace}}"
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        #automated:
+          #prune: true
+          #selfHeal: true
+        retry:
+          limit: 2

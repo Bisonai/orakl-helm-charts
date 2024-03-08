@@ -2,6 +2,9 @@
 ## created by Bisonai
 
 global:
+  name: vrf
+  namespace: orakl
+
   appName: orakl-vrf
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url

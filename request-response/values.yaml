@@ -2,6 +2,9 @@
 ## created by Bisonai
 
 global:
+  name: request-response
+  namespace: orakl
+
   appName: orakl-request-response
   image:
     repository: public.ecr.aws/bisonai/orakl-core #repository url

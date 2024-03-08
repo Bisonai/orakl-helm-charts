@@ -1,8 +1,0 @@
-name: orakl-log
-
-config:
-  efsFileSystemId: 
-  region: 
-  size:
-  
-storageClass: orakl-sc

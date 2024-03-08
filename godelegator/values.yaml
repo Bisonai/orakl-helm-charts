@@ -2,6 +2,9 @@
 ## created by Bisonai
 
 global:
+  name: godelegator
+  namespace: orakl
+
   image:
     repository: public.ecr.aws/bisonai/orakl-godelegator #repository url
     pullPolicy: IfNotPresent
