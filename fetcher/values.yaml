@@ -4,30 +4,24 @@
 global:
   name: fetcher
   namespace: orakl
-
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-fetcher #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240224.0402.541c45d"
+    tag: "v0.0.1.20240314.0433.ce446c4"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-
   secretManager:
     enabled: false
     secretId:
     versionId:
-
   affinity:
     enabled: false
     key: kubernetes.io/hostname
     value:
-
   externalIp:
     enabled: false
-
   podAnnotations: {}
-
   livenessProbe:
     enabled: true
     path: /api/v1
@@ -36,7 +30,6 @@ global:
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
-
   readinessProbe:
     enabled: true
     path: /api/v1
@@ -45,7 +38,6 @@ global:
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
-
 fetcher:
   enabled: true
   replicas: 1
@@ -58,11 +50,8 @@ fetcher:
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
-
   resources:
     limits:
       cpu: 1000m
@@ -70,7 +59,6 @@ fetcher:
     requests:
       cpu: 1000m
       memory: 2Gi
-
 nodeSelector: {}
 tolerations: []
 dotenv: {}
