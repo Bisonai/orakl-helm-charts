@@ -4,33 +4,26 @@
 global:
   name: cli
   namespace: orakl
-
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-cli
     pullPolicy: IfNotPresent
-    tag: "v0.6.1.20240208.0505.ce676ce"
+    tag: "v0.6.1.20240315.0618.c907cbb"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-
   secretManager:
     enabled: false
     secretId:
     versionId:
-
   hostPath:
     enable: false
     volumes:
-
   volumeMounts:
-
   affinity:
     enabled: false
     key: kubernetes.io/hostname
     value:
-
   podAnnotations: {}
-
   livenessProbe:
     enabled: true
     initialDelaySeconds: 20
@@ -38,7 +31,6 @@ global:
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
-
   readinessProbe:
     enabled: true
     initialDelaySeconds: 20
@@ -46,7 +38,6 @@ global:
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
-
 cli:
   enabled: true
   replicas: 1
@@ -59,11 +50,8 @@ cli:
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
-
   resources:
     limits:
       cpu: 400m
@@ -71,7 +59,6 @@ cli:
     requests:
       cpu: 400m
       memory: 1Gi
-
 nodeSelector: {}
 tolerations: []
 dotenv: {}
