@@ -4,18 +4,15 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240215.1237.1c4d022"
+    tag: "v0.0.1.20240315.0616.e6a56d8"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-
   affinity:
     enabled: false
     key: kubernetes.io/hostname
     value:
-
   podAnnotations: {}
-
   livenessProbe:
     enabled: true
     path: /api/v1/
@@ -24,7 +21,6 @@ global:
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
-
   readinessProbe:
     enabled: true
     path: /api/v1/
@@ -33,14 +29,11 @@ global:
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
-
 api:
   enabled: true
   replicas: 1
   podSecurityContext: {}
-
   containerSecurityContext: {}
-
   resources:
     limits:
       cpu: 2000m
@@ -48,11 +41,9 @@ api:
     requests:
       cpu: 2000m
       memory: 4Gi
-
 nodeSelector: {}
 tolerations: []
 dotenv: {}
-
 deployment:
   name: orakl-api
   replicas: 1
