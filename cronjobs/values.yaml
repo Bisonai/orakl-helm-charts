@@ -11,23 +11,31 @@ jobs:
     failedJobHistoryLimit: 3
     successfulJobHistoryLimit: 10
     concurrencyPolicy: Allow
-    restartPolicy: OnFailure
+    restartPolicy: Never 
+    ttlSecondsAfterFinished: 30
     serviceAccount:
       annotations:
         iam.gke.io/gcp-serviceaccount: "orakl-db-backup@orakl-cypress-prod.iam.gserviceaccount.com"
     command: ["/bin/bash"]
     args:
       - "-c"
-      # Step 1: Install postgresql-client
-      - "sudo apt -y update && sudo apt -y install postgresql-client"
-      # Step 2: Export old data to csv file.
       - |
+        echo "Step 1: Install dependencies"
+        apt -y update && apt -y install curl apt-transport-https ca-certificates gnupg postgresql-client
+        echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg |  gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-sdk -y
+        mkdir -p /data/csv
+        chmod -R 777 /data/csv
+
+        echo "Step 2: Export old data to csv files"
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} sh -c '\
-        psql $DATABASE_URL -c "\copy {} to './{}.csv' WITH DELIMITER ',' CSV HEADER;" \
-        && psql $DATABASE_URL -c "DROP TABLE {};"'
-      # Step 3: Upload all csv files to GCS bucket.
-      - "ls | grep 'csv' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress"
+        | xargs -I {} psql $DATABASE_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
+
+        echo "Step 3: Upload all csv files to GCS bucket."
+        gcloud storage cp /data/csv/*.csv gs://orakl-db-backup-cypress
+
+        echo "Step 4: Delete old data tables"
+        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
+        | xargs -I {} psql $DATABASE_URL -c "DROP TABLE ${};"
     env:
       - name: DATABASE_URL
         valueFrom:
