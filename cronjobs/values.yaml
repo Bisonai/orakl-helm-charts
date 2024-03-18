@@ -22,14 +22,15 @@ jobs:
       - |
         echo "Step 1: Install dependencies"
         apt -y update && apt -y install postgresql-client
+        mkdir -p /data/csv
+        chmod -R 777 /data/csv
 
         echo "Step 2: Export old data to csv files"
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} psql $DATABASE_URL -c "\copy {} to './{}.csv' WITH DELIMITER ',' CSV HEADER;"
+        | xargs -I {} psql $DATABASE_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
 
         echo "Step 3: Upload all csv files to GCS bucket."
-        pwd
-        ls | grep 'csv' | xargs -I {} gcloud storage cp ./{} gs://orakl-db-backup-cypress
+        gcloud storage cp /data/csv/*.csv gs://orakl-db-backup-cypress
 
         echo "Step 4: Delete old data tables"
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';"
