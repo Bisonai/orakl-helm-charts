@@ -11,7 +11,8 @@ jobs:
     failedJobHistoryLimit: 3
     successfulJobHistoryLimit: 10
     concurrencyPolicy: Allow
-    restartPolicy: OnFailure
+    restartPolicy: Never 
+    ttlSecondsAfterFinished: 30
     serviceAccount:
       annotations:
         iam.gke.io/gcp-serviceaccount: "orakl-db-backup@orakl-cypress-prod.iam.gserviceaccount.com"
@@ -22,6 +23,7 @@ jobs:
       - "apt -y update && apt -y install postgresql-client"
       # Step 2: Export old data to csv file.
       - |
+        echo "start step 2"
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
         | xargs -I {} sh -c '\
         psql $DATABASE_URL -c "\copy {} to './{}.csv' WITH DELIMITER ',' CSV HEADER;" \
