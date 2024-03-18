@@ -13,19 +13,20 @@ jobs:
     concurrencyPolicy: Allow
     restartPolicy: OnFailure
     serviceAccount:
-      annotation:
+      annotations:
         iam.gke.io/gcp-serviceaccount: "orakl-db-backup@orakl-cypress-prod.iam.gserviceaccount.com"
     command: ["/bin/bash"]
     args:
       - "-c"
-      # Step 1: Export old data to csv file.
+      # Step 1: Install postgresql-client
+      - "sudo apt -y update && sudo apt -y install postgresql-client"
+      # Step 2: Export old data to csv file.
       - |
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
         | xargs -I {} sh -c '\
         psql $DATABASE_URL -c "\copy {} to './{}.csv' WITH DELIMITER ',' CSV HEADER;" \
         && psql $DATABASE_URL -c "DROP TABLE {};"'
-      # Step 2:  e
-      # Step 2: Upload all csv files to GCS bucket.
+      # Step 3: Upload all csv files to GCS bucket.
       - "ls | grep 'csv' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress"
     env:
       - name: DATABASE_URL
