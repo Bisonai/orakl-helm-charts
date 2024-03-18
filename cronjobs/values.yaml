@@ -1,0 +1,35 @@
+jobs:
+  ###
+  # Backup Orakl DB
+  ###
+  orakl-db-backup:
+    image:
+      repository: debian
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    schedule: "0 */6 * * *"
+    failedJobHistoryLimit: 3
+    successfulJobHistoryLimit: 10
+    concurrencyPolicy: Allow
+    restartPolicy: OnFailure
+    serviceAccount:
+      annotation:
+        iam.gke.io/gcp-serviceaccount: "orakl-db-backup@orakl-cypress-prod.iam.gserviceaccount.com"
+    command: ["/bin/bash"]
+    args:
+      - "-c"
+      # Step 1: Export old data to csv file.
+      - |
+        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
+        | xargs -I {} sh -c '\
+        psql $DATABASE_URL -c "\copy {} to './{}.csv' WITH DELIMITER ',' CSV HEADER;" \
+        && psql $DATABASE_URL -c "DROP TABLE {};"'
+      # Step 2:  e
+      # Step 2: Upload all csv files to GCS bucket.
+      - "ls | grep 'csv' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress"
+    env:
+      - name: DATABASE_URL
+        valueFrom:
+          secretKeyRef:
+            name: api-secrets
+            key: DATABASE_URL
