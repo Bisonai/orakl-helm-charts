@@ -29,12 +29,10 @@ jobs:
 
         echo "Step 3: Upload all csv files to GCS bucket."
         ls | grep 'csv'
-        ls
-        ls | grep 'csv' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress
+        ls | grep 'csv' | awk '{print $1}' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress
 
         echo "Step 4: Delete old data tables"
-        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} psql $DATABASE_URL -c "DROP TABLE {};"
+        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';"
     env:
       - name: DATABASE_URL
         valueFrom:
