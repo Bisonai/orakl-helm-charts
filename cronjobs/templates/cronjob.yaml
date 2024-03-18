@@ -12,7 +12,7 @@ spec:
   failedJobsHistoryLimit: {{ $job.failedJobsHistoryLimit }}
   jobTemplate:
     spec:
-    ttlSecondsAfterFinished: {{ $job.ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ $job.ttlSecondsAfterFinished }}
       template:
         metadata:
           labels:
