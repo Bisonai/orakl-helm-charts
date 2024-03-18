@@ -19,17 +19,18 @@ jobs:
     command: ["/bin/bash"]
     args:
       - "-c"
-      # Step 1: Install postgresql-client
-      - "apt -y update && apt -y install postgresql-client"
-      # Step 2: Export old data to csv file.
       - |
-        echo "start step 2"
+        echo "Step 1: Install dependencies"
+        apt -y update && apt -y install postgresql-client
+
+        echo "Step 2: Export old data to csv files"
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
         | xargs -I {} sh -c '\
         psql $DATABASE_URL -c "\copy {} to './{}.csv' WITH DELIMITER ',' CSV HEADER;" \
         && psql $DATABASE_URL -c "DROP TABLE {};"'
-      # Step 3: Upload all csv files to GCS bucket.
-      - "ls | grep 'csv' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress"
+
+        echo "Step 3: Upload all csv files to GCS bucket."
+        ls | grep 'csv' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress
     env:
       - name: DATABASE_URL
         valueFrom:
