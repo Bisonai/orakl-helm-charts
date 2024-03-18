@@ -25,9 +25,8 @@ jobs:
 
         echo "Step 2: Export old data to csv files"
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} sh -c '\
-        psql $DATABASE_URL -c "\copy {} to \'./{}.csv\' WITH DELIMITER \',\' CSV HEADER;" \
-        && psql $DATABASE_URL -c "DROP TABLE {};"'
+        | xargs -I {} psql $DATABASE_URL -c "\copy {} to './{}.csv' WITH DELIMITER ',' CSV HEADER;" \
+        && psql $DATABASE_URL -c "DROP TABLE {};"
 
         echo "Step 3: Upload all csv files to GCS bucket."
         ls | grep 'csv' | xargs -I {} gcloud storage cp {} gs://orakl-db-backup-cypress
