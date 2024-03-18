@@ -34,7 +34,8 @@ jobs:
         gcloud storage cp /data/csv/*.csv gs://orakl-db-backup-cypress
 
         echo "Step 4: Delete old data tables"
-        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';"
+        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
+        | xargs -I {} psql $DATABASE_URL -c "DROP TABLE ${};"
     env:
       - name: DATABASE_URL
         valueFrom:
