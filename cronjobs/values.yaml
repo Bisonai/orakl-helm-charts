@@ -19,7 +19,7 @@ jobs:
     args:
       - "-c"
       # Step 1: Install postgresql-client
-      - "sudo apt -y update && sudo apt -y install postgresql-client"
+      - "apt -y update && apt -y install postgresql-client"
       # Step 2: Export old data to csv file.
       - |
         psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
