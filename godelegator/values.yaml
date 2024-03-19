@@ -43,13 +43,13 @@ godelegator:
     automountServiceAccountToken: true
   podSecurityContext: {}
   containerSecurityContext: {}
-resources:
-  limits:
-    cpu: 500m
-    memory: 1Gi
-  requests:
-    cpu: 500m
-    memory: 1Gi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
