@@ -27,18 +27,28 @@ jobs:
         chmod -R 777 /data/csv
 
         echo "Step 2: Export old data to csv files"
-        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} psql $DATABASE_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
+        psql $ORAKL_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
+        | xargs -I {} psql $ORAKL_DB_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
+        psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
+        | xargs -I {} psql $DELEGATOR_DB_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
 
         echo "Step 3: Upload all csv files to GCS bucket."
         gcloud storage cp /data/csv/*.csv gs://orakl-db-backup-cypress
 
         echo "Step 4: Delete old data tables"
-        psql $DATABASE_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} psql $DATABASE_URL -c "DROP TABLE {};"
+        psql $ORAKL_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
+        | xargs -I {} psql $ORAKL_DB_URL -c "DROP TABLE {};"
+        psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
+        | xargs -I {} psql $DELEGATOR_DB_URL -c "DROP TABLE {};"
+
     env:
-      - name: DATABASE_URL
+      - name: ORAKL_DB_URL
         valueFrom:
           secretKeyRef:
             name: api-secrets
+            key: DATABASE_URL 
+      - name: DELEGATOR_DB_URL
+        valueFrom:
+          secretKeyRef:
+            name: delegator-secrets 
             key: DATABASE_URL
