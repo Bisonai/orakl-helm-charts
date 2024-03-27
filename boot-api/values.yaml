@@ -1,0 +1,56 @@
+## Klaytn Orakl Go Delegator Configuration
+## created by Bisonai
+
+global:
+  name: boot-api
+  namespace: orakl
+  image:
+    repository: public.ecr.aws/bisonai/orakl-boot-api #repository url
+    pullPolicy: IfNotPresent
+    tag: ""
+    imagePullPolicy: IfNotPresent
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+    imagePullSecrets: []
+  secretManager:
+    enabled: true
+    secretId:
+    versionId:
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+  podAnnotations:
+  livenessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+bootApi:
+  enabled: true
+  replicas: 1
+  podSecurityContext: {}
+  containerSecurityContext: {}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-boot-api
+  replicas: 1
