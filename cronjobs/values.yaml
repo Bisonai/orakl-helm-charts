@@ -25,7 +25,12 @@ jobs:
     args:
       - "-c"
       - |
-        apt -y update && apt -y install curl
-        curl https://getcroc.schollz.com | bash
-    stdin: true
-    tty: true
+        apt -y update && apt -y install python3 python3-pip python3-venv
+        python3 -m venv /certbot && /certbot/bin/pip3 install -U certbot-dns-godaddy
+        /certbot/bin/certbot renew \
+        --authenticator dns-godaddy \
+        --dns-godaddy-credentials ./credentials.ini \
+        --dns-godaddy-propagation-seconds 900 \
+        --keep-until-expiring --non-interactive --expand \
+        --server https://acme-v02.api.letsencrypt.org/directory
+        sleep infinity
