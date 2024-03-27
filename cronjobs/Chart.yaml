@@ -1,0 +1,10 @@
+apiVersion: v2
+name: orakl-cronjobs
+description: Helpful cronjobs for manage Orakl Network.
+version: 0.1.0
+keyword:
+  - cron
+home: "https://helm.orakl.network"
+source:
+  - "https://github.com/bisonai/orakl-helm-charts"
+
