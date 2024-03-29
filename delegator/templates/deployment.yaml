@@ -61,15 +61,9 @@ spec:
                   name: delegator-secrets
                   key: PROVIDER_URL
             - name: USE_GOOGLE_SECRET_MANAGER
-              valueFrom:
-                secretKeyRef:
-                  name: delegator-secrets
-                  key: USE_GOOGLE_SECRET_MANAGER
+              value: "true"
             - name: GOOGLE_SECRET_PATH
-              valueFrom:
-                secretKeyRef:
-                  name: delegator-secrets
-                  key: GOOGLE_SECRET_PATH
+              value: "projects/284574693973/secrets/orakl-baobab-fee-payer/versions/latest"
             - name: APP_PORT
               value: "5050"
           ports:
