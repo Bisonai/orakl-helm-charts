@@ -8,6 +8,5 @@ spec:
       targetPort: http
       protocol: TCP
   type: LoadBalancer
-  loadBalancerIP: 34.87.152.175 #TODO: Change this value
   selector:
     app: {{ .Values.deployment.name }}
