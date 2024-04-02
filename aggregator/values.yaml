@@ -120,11 +120,11 @@ reporter:
 
   resources:
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 1Gi
     requests:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 5555500m
+      memory: 1Gi
 
 nodeSelector: {}
 tolerations: []
