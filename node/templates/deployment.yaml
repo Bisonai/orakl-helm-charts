@@ -67,7 +67,7 @@ spec:
             - name: SUBMISSION_PROXY_CONTRACT
               value: "0x47ff979f01FC2a6748560ef973d3AA2f8EeAe77c"
             - name: DELEGATOR_URL
-              value: "http://orakl-delegator.orakl.svc.cluster.local:3030"
+              value: "http://orakl-delegator.orakl.svc.cluster.local:5050"
             - name: CHAIN
               value: "test"
             - name: KLAYTN_REPORTER_PK
