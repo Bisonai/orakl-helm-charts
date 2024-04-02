@@ -59,7 +59,7 @@ spec:
             - name: REDIS_HOST
               value: "redis-data-feed-master.redis.svc.cluster.local"
             - name: REDIS_PORT
-              value: 6379
+              value: "6379"
             - name: LISTEN_PORT
               value: "10010"
             - name: KLAYTN_PROVIDER_URL
