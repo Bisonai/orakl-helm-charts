@@ -69,7 +69,7 @@ spec:
             - name: DELEGATOR_URL
               value: "http://orakl-delegator.orakl.svc.cluster.local:3030"
             - name: CHAIN
-              value: "baobab"
+              value: "test"
             - name: KLAYTN_REPORTER_PK
               valueFrom:
                 secretKeyRef:
