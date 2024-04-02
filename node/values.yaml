@@ -1,0 +1,51 @@
+## Klaytn Orakl Api Configuration
+## created by Bisonai
+global:
+  name: node
+  namespace: orakl
+  image:
+    repository: public.ecr.aws/bisonai/orakl-node
+    pullPolicy: IfNotPresent
+    tag: "v0.0.1.20240402.0346.2e409db"
+    imagePullPolicy: IfNotPresent
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+    imagePullSecrets: []
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+  podAnnotations: {}
+  livenessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+node:
+  enabled: true
+  replicas: 1
+  podSecurityContext: {}
+  containerSecurityContext: {}
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+    requests:
+      cpu: 2000m
+      memory: 4Gi
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-node
+  replicas: 1
