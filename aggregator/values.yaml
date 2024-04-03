@@ -14,19 +14,16 @@ global:
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-
+    tag: v0.5.1.20240403.0423.f813b61
   secretManager:
     enabled: false
     secretId:
     versionId:
-
   affinity:
     enabled: false
     key: kubernetes.io/hostname
     value:
-
   podAnnotations: {}
-
   livenessProbe:
     enabled: true
     path: /
@@ -35,7 +32,6 @@ global:
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
-
   readinessProbe:
     enabled: true
     path: /
@@ -44,7 +40,6 @@ global:
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
-
 listener:
   enabled: true
   replicas: 1
@@ -57,13 +52,9 @@ listener:
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
-
   APP_PORT: 4000
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
-
   resources:
     limits:
       cpu: 1000m
@@ -71,7 +62,6 @@ listener:
     requests:
       cpu: 1000m
       memory: 2Gi
-
 worker:
   enabled: true
   replicas: 1
@@ -84,13 +74,9 @@ worker:
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
-
   APP_PORT: 5000
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
-
   resources:
     limits:
       cpu: 1000m
@@ -98,7 +84,6 @@ worker:
     requests:
       cpu: 1000m
       memory: 2Gi
-
 reporter:
   enabled: true
   replicas: 1
@@ -111,13 +96,9 @@ reporter:
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
-
   APP_PORT: 6000
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
-
   resources:
     limits:
       cpu: 500m
@@ -125,7 +106,6 @@ reporter:
     requests:
       cpu: 500m
       memory: 1Gi
-
 nodeSelector: {}
 tolerations: []
 dotenv: {}
