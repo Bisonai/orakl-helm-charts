@@ -60,7 +60,7 @@ spec:
                 secretKeyRef:
                   name: delegator-secrets
                   key: PROVIDER_URL
-            {{- toYaml .Values.googleSecretManager.env | nindent 12 }}
+            {{- toYaml .Values.global.googleSecretManager.env | nindent 12 }}
             - name: APP_PORT
               value: "{{ .Values.service.port }}"
           ports:
