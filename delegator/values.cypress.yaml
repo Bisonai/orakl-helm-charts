@@ -16,7 +16,12 @@ global:
     secretId:
     versionId:
   googleSecretManager:
-    enabled: false
+    enabled: true
+    env:
+      - name: USE_GOOGLE_SECRET_MANAGER
+        value: "true"
+      - name: GOOGLE_SECRET_PATH
+        value: "projects/1003113141257/secrets/orakl-cypress-fee-payer/versions/latest"
   affinity:
     enabled: false
     key: kubernetes.io/hostname

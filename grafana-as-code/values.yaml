@@ -18,3 +18,4 @@ image:
 deployment:
   name: orakl-grafana-as-code
   replicas: 1
+  env:

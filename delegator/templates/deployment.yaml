@@ -60,16 +60,7 @@ spec:
                 secretKeyRef:
                   name: delegator-secrets
                   key: PROVIDER_URL
-            - name: USE_GOOGLE_SECRET_MANAGER
-              value: "true"
-            - name: GOOGLE_SECRET_PATH
-              value: "projects/284574693973/secrets/orakl-baobab-fee-payer/versions/latest"
-            - name: APP_PORT
-              value: "5050"
-            - name: USE_GOOGLE_SECRET_MANAGER
-              value: "true"
-            - name: GOOGLE_SECRET_PATH
-              value: "projects/1003113141257/secrets/orakl-cypress-fee-payer/versions/latest"
+            {{- toYaml .Values.googleSecretManager.env | nindent 12 }}
             - name: APP_PORT
               value: "{{ .Values.service.port }}"
           ports:

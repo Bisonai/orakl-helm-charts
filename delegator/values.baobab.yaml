@@ -16,7 +16,12 @@ global:
     secretId:
     versionId:
   googleSecretManager:
-    enabled: false
+    enabled: true
+    env:
+      - name: USE_GOOGLE_SECRET_MANAGER
+        value: "true"
+      - name: GOOGLE_SECRET_PATH
+        value: "projects/284574693973/secrets/orakl-baobab-fee-payer/versions/latest"
   affinity:
     enabled: false
     key: kubernetes.io/hostname

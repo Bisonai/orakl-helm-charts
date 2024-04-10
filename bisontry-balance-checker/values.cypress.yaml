@@ -1,0 +1,12 @@
+global:
+  name: bisontry-balance-checker
+  namespace: orakl
+
+image:
+  repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-balance-checker
+  tag: v0.1.0.20231228.2125.41dd762
+
+deployment:
+  name: bisontry-balance-checker
+  replicas: 1
+  resources:

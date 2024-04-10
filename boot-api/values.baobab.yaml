@@ -2,21 +2,19 @@
 ## created by Bisonai
 
 global:
-  name: delegator
+  name: boot-api
   namespace: orakl
   image:
-    repository: public.ecr.aws/bisonai/orakl-delegator #repository url
+    repository: public.ecr.aws/bisonai/orakl-boot-api #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240326.0927.a8a6135"
+    tag: "v0.0.1.20240401.0751.79abdf4"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
   secretManager:
-    enabled: false
+    enabled: true
     secretId:
     versionId:
-  googleSecretManager:
-    enabled: false
   affinity:
     enabled: false
     key: kubernetes.io/hostname
@@ -38,14 +36,9 @@ global:
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
-delegator:
+bootApi:
   enabled: true
   replicas: 1
-  serviceAccount:
-    create: true
-    name: sa
-    annotations: {}
-    automountServiceAccountToken: true
   podSecurityContext: {}
   containerSecurityContext: {}
   resources:
@@ -59,9 +52,5 @@ nodeSelector: {}
 tolerations: []
 dotenv: {}
 deployment:
-  name: orakl-delegator
+  name: orakl-boot-api
   replicas: 1
-service:
-  port: 5050
-  # Optional: For fix external IP address
-  loadBalancerIP:

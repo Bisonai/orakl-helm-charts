@@ -1,27 +1,20 @@
-## Klaytn Orakl Go Delegator Configuration
+## Klaytn Orakl Api Configuration
 ## created by Bisonai
-
 global:
-  name: delegator
+  name: api
   namespace: orakl
   image:
-    repository: public.ecr.aws/bisonai/orakl-delegator #repository url
+    repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240326.0927.a8a6135"
+    tag: "v0.0.1.20240315.0618.c907cbb"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
-  secretManager:
-    enabled: false
-    secretId:
-    versionId:
-  googleSecretManager:
-    enabled: false
   affinity:
     enabled: false
     key: kubernetes.io/hostname
     value:
-  podAnnotations:
+  podAnnotations: {}
   livenessProbe:
     enabled: true
     path: /api/v1/
@@ -35,33 +28,24 @@ global:
     path: /api/v1/
     initialDelaySeconds: 10
     periodSeconds: 5
-    timeoutSeconds: 1
+    timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
-delegator:
+api:
   enabled: true
   replicas: 1
-  serviceAccount:
-    create: true
-    name: sa
-    annotations: {}
-    automountServiceAccountToken: true
   podSecurityContext: {}
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 2000m
+      memory: 4Gi
     requests:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 2000m
+      memory: 4Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
 deployment:
-  name: orakl-delegator
+  name: orakl-api
   replicas: 1
-service:
-  port: 5050
-  # Optional: For fix external IP address
-  loadBalancerIP:

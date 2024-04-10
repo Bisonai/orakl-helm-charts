@@ -1,13 +1,13 @@
-## Klaytn Orakl Go Delegator Configuration
+## Klaytn Orakl Listener Configuration
 ## created by Bisonai
 
 global:
-  name: delegator
+  name: fetcher
   namespace: orakl
   image:
-    repository: public.ecr.aws/bisonai/orakl-delegator #repository url
+    repository: public.ecr.aws/u6t6w0e4/orakl-fetcher #repository url
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240326.0927.a8a6135"
+    tag: "v0.0.1.20240314.0433.ce446c4"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -15,16 +15,16 @@ global:
     enabled: false
     secretId:
     versionId:
-  googleSecretManager:
-    enabled: false
   affinity:
     enabled: false
     key: kubernetes.io/hostname
     value:
-  podAnnotations:
+  externalIp:
+    enabled: false
+  podAnnotations: {}
   livenessProbe:
     enabled: true
-    path: /api/v1/
+    path: /api/v1
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 5
@@ -32,36 +32,33 @@ global:
     failureThreshold: 5
   readinessProbe:
     enabled: true
-    path: /api/v1/
+    path: /api/v1
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
-delegator:
+fetcher:
   enabled: true
   replicas: 1
   serviceAccount:
+    # -- Create a service account for the application controller
     create: true
-    name: sa
+    # -- Service account name
+    name: orakl-fetcher
+    # -- Annotations applied to created service account
     annotations: {}
+    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
   podSecurityContext: {}
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 1000m
+      memory: 2Gi
     requests:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 1000m
+      memory: 2Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
-deployment:
-  name: orakl-delegator
-  replicas: 1
-service:
-  port: 5050
-  # Optional: For fix external IP address
-  loadBalancerIP:
