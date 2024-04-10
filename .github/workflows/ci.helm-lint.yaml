@@ -28,9 +28,11 @@ jobs:
             for file in $(git diff --name-only HEAD~1..HEAD); do
               dir=$(dirname $file)
               if [ -f "$dir/Chart.yaml" ]; then
-                if ! helm lint $dir; then
-                  failed_services+="'$(basename $dir)', "
-                fi
+                for values_file in $(ls $dir/values*.yaml 2>/dev/null); do
+                  if ! helm_lint $dir -f "$values_file"; then
+                    failed_services+="'$(basename $dir)', "
+                  fi
+                done
               fi
             done
 
