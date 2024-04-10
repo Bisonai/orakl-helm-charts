@@ -104,7 +104,7 @@ spec:
             - name: HEALTH_CHECK_PORT
               value: "8080"
             - name: LOG_LEVEL
-              value: "info"
+              value: {{ .Values.global.env.LOG_LEVEL }}
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:

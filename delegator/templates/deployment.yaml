@@ -66,15 +66,21 @@ spec:
               value: "projects/284574693973/secrets/orakl-baobab-fee-payer/versions/latest"
             - name: APP_PORT
               value: "5050"
+            - name: USE_GOOGLE_SECRET_MANAGER
+              value: "true"
+            - name: GOOGLE_SECRET_PATH
+              value: "projects/1003113141257/secrets/orakl-cypress-fee-payer/versions/latest"
+            - name: APP_PORT
+              value: "{{ .Values.service.port }}"
           ports:
           - name: http
-            containerPort: 5050
+            containerPort: {{ .Values.service.port }}
             protocol: TCP
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.global.livenessProbe.path }}
-              port: 5050
+              port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
@@ -85,7 +91,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.global.readinessProbe.path }}
-              port: 5050
+              port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}

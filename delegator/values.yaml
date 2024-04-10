@@ -59,3 +59,7 @@ dotenv: {}
 deployment:
   name: orakl-delegator
   replicas: 1
+service:
+  port: 5050
+  # Optional: For fix external IP address
+  loadBalancerIP:

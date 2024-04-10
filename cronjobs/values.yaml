@@ -1,0 +1,54 @@
+jobs:
+  ###
+  # Backup Orakl DB
+  ###
+  orakl-db-backup:
+    image:
+      repository: debian
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    schedule: "0 */6 * * *"
+    failedJobHistoryLimit: 3
+    successfulJobHistoryLimit: 10
+    concurrencyPolicy: Allow
+    restartPolicy: Never 
+    ttlSecondsAfterFinished: 30
+    serviceAccount:
+      annotations:
+        iam.gke.io/gcp-serviceaccount: "orakl-db-backup@orakl-cypress-prod.iam.gserviceaccount.com"
+    command: ["/bin/bash"]
+    args:
+      - "-c"
+      - |
+        echo "Step 1: Install dependencies"
+        apt -y update && apt -y install curl apt-transport-https ca-certificates gnupg postgresql-client
+        echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg |  gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-sdk -y
+        mkdir -p /data/csv
+        chmod -R 777 /data/csv
+
+        echo "Step 2: Export old data to csv files"
+        psql $ORAKL_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
+        | xargs -I {} psql $ORAKL_DB_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
+        psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
+        | xargs -I {} psql $DELEGATOR_DB_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
+
+        echo "Step 3: Upload all csv files to GCS bucket."
+        gcloud storage cp /data/csv/*.csv gs://orakl-db-backup-cypress
+
+        echo "Step 4: Delete old data tables"
+        psql $ORAKL_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
+        | xargs -I {} psql $ORAKL_DB_URL -c "DROP TABLE {};"
+        psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
+        | xargs -I {} psql $DELEGATOR_DB_URL -c "DROP TABLE {};"
+
+    env:
+      - name: ORAKL_DB_URL
+        valueFrom:
+          secretKeyRef:
+            name: api-secrets
+            key: DATABASE_URL 
+      - name: DELEGATOR_DB_URL
+        valueFrom:
+          secretKeyRef:
+            name: delegator-secrets 
+            key: DATABASE_URL

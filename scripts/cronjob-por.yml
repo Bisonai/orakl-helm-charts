@@ -76,6 +76,7 @@ spec:
                       key: PROVIDER_URL
                 - name: POR_AGGREGATOR_HASH
                   value: "0x952f883b8d2fd47a790307cb569118a215ea45eb861cefd4ed3b83ae7550f8e8"
+                  value: "0xa979b36407ec5f47087a0b0f172ebd35790eb3b7d81d06f2dc8238bd32ec7d87"
                 - name: SLACK_WEBHOOK_URL
                   valueFrom:
                     secretKeyRef:

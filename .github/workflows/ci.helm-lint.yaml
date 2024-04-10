@@ -6,7 +6,8 @@ on:
     types:
       - opened
     branches:
-      - gcp-baobab-prod
+      - main
+      - feat/unifying-branches
 
 jobs:
   lint:

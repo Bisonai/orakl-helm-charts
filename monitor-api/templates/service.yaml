@@ -4,7 +4,7 @@ metadata:
   name: orakl-monitor-api
 spec:
   type: LoadBalancer
-  loadBalancerIP: 35.240.192.58
+  loadBalancerIP: 34.142.143.138
   ports:
     - port: 8888
       targetPort: http
