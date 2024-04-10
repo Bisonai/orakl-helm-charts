@@ -30,6 +30,8 @@ Required
 helm package ${service name} --destination ./charts
 # Example: Generate VRF package
 helm package vrf --destination ./charts
+# Example: Generate all packages
+find * -name 'Chart.yaml' -exec dirname {} \; | xargs helm package --destination ./charts
 ```
 4. Use the following command to automatically update to the helm charts index file.
 ```bash
