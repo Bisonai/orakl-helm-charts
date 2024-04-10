@@ -14,9 +14,28 @@ Optional
 
 Required
 > 1) [Redis](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/redis)
-> 2) [Storage](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/storage) (Volum Storage)
-> 3) [Cli](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/cli) (Initial configuration)
-> 4) [VRF](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/vrf) (Required)
-> 5) [Request-Response](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/request-response) (Required)
+> 2) [Cli](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/cli) (Initial configuration)
+> 3) [VRF](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/vrf) (Required)
+> 4) [Request-Response](https://github.com/Bisonai-CIC/orakl-helm-charts/tree/main/request-response) (Required)
 
 *Required applications need to be installed by sequence*
+
+## How to release new version charts
+1. (If exist updated tag image) copy the tag, and paste to `values.yaml` of updated service.
+2. Increase version value in the `Chart.yaml`. and edit `appVersion` in the same file.
+   1. If you tag image is `v0.3.1.20230712.0827.c373159`
+   app version is `0.3.1`
+3. Generate package file by using following command in the root directory.
+```bash
+helm package ${service name} --destination ./charts
+# Example: Generate VRF package
+helm package vrf --destination ./charts
+```
+4. Use the following command to automatically update to the helm charts index file.
+```bash
+helm repo index .
+```
+5. Update helm repository by using following command.
+```bash
+helm repo up
+```
