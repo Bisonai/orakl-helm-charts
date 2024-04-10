@@ -28,23 +28,6 @@ global:
     key: kubernetes.io/hostname
     value:
 
-  hostPath:
-    enable: false
-    volumes:
-      - name: orakl-log-storage
-        hostPath:
-          path: /log/
-          type: DirectoryOrCreate
-
-  volumes:
-    - name: orakl-log-storage
-      persistentVolumeClaim:
-        claimName: orakl-log
-
-  volumeMounts:
-    - name: orakl-log-storage
-      mountPath: /app/log
-
   podAnnotations: {}
 
   livenessProbe:
