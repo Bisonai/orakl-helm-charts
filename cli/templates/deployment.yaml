@@ -131,6 +131,16 @@ spec:
                 secretKeyRef:
                   name: cli-secrets
                   key: REPORTER_SERVICE_PORT
+            - name: FETCHER_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: FETCHER_HOST
+            - name: FETCHER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: FETCHER_PORT
           {{ end }}
 
           command: ["/bin/sh"]
