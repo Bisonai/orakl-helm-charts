@@ -67,7 +67,7 @@ spec:
             - name: KLAYTN_PROVIDER_URL
               value: "https://public-en.klaytnfinder.io/v1/baobab"
             - name: SUBMISSION_PROXY_CONTRACT
-              value: "0x464B6b70511B509307C54276efF175805f4A932e"
+              value: "0xF354E330Dd677E45FB8328E50f07fdcc77d75465"
             - name: DELEGATOR_URL
               value: "http://orakl-delegator.orakl.svc.cluster.local:5050"
             - name: CHAIN
