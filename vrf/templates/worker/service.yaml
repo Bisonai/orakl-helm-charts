@@ -8,12 +8,11 @@ spec:
   type: ClusterIP
   ports:
   - name: watchman
-    port: {{ .Values.listener.APP_PORT | default 5000 | int  }}
-    targetPort: {{ .Values.listener.APP_PORT | default 5000 | int  }}
+    port: 5000
+    targetPort: 5000
     protocol: TCP
-
   - name: healthcheck
-    port: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }} 
-    targetPort: {{ .Values.global.config.HEALTH_CHECK_PORT | default 8080 | int }}
+    port: 8080
+    targetPort: 8080
   selector:
     {{- include "orakl-vrf.selectorLabels.worker" . | nindent 6 }}

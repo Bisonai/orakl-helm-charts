@@ -1,0 +1,11 @@
+global:
+  name: bisontry-health-checker
+  namespace: orakl
+image:
+  repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-health-checker
+  tag: v0.1.0.20240329.0545.c229284
+
+deployment:
+  name: bisontry-health-checker
+  replicas: 1
+  resources:

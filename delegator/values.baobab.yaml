@@ -1,0 +1,72 @@
+## Klaytn Orakl Go Delegator Configuration
+## created by Bisonai
+
+global:
+  name: delegator
+  namespace: orakl
+  image:
+    repository: public.ecr.aws/bisonai/orakl-delegator #repository url
+    pullPolicy: IfNotPresent
+    tag: "v0.0.1.20240326.0927.a8a6135"
+    imagePullPolicy: IfNotPresent
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+    imagePullSecrets: []
+  secretManager:
+    enabled: false
+    secretId:
+    versionId:
+  googleSecretManager:
+    enabled: true
+    env:
+      - name: USE_GOOGLE_SECRET_MANAGER
+        value: "true"
+      - name: GOOGLE_SECRET_PATH
+        value: "projects/284574693973/secrets/orakl-baobab-fee-payer/versions/latest"
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+  podAnnotations:
+  livenessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+delegator:
+  enabled: true
+  replicas: 1
+  serviceAccount:
+    create: true
+    name: sa
+    annotations: {}
+    automountServiceAccountToken: true
+  podSecurityContext: {}
+  containerSecurityContext: {}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-delegator
+  replicas: 1
+service:
+  port: 5050
+  # Optional: For fix external IP address
+  loadBalancerIP:

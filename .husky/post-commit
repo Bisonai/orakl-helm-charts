@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# List directories include Chart.yaml file
+target_dirs=$(find . -name Chart.yaml -exec dirname {} \; | grep -v -E "redis|cron")
+
+# Get the most recent values from values.baobabyaml and values.cypress.yaml
+for dirs in $target_dirs; do
+	(
+		cd $dirs || exit
+		IFS=$'\n' tag=($(cat values.baobab.yaml values.cypress.yaml 2>/dev/null | grep -E "tag: [^\s]+|listenerTag: [^\s]+|reporterTag: [^\s]+|workerTag: [^\s]+" | awk '{print $2}'))
+
+		# Get the most recent values
+		latest_tag=$(echo $tag | sort -Vr | head -n 1)
+
+		current_appVersion=$(cat Chart.yaml 2>/dev/null | grep "appVersion" | awk '{ print $2 }')
+
+		# If appVersion is not latest, replace it with the latest tag
+		if [ "$current_appVersion" != "$latest_tag" ]; then
+			sed -i "" "s/^appVersion:.*/appVersion: $latest_tag/" Chart.yaml
+			git add Chart.yaml
+			git commit -m "Update appVersion to $latest_tag"
+		fi
+	)
+done

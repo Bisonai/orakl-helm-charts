@@ -1,0 +1,5 @@
+apiVersion: v2
+name: bisontry-event-checker
+description: Bisontry Event Checker service.
+version: 0.1.0
+appVersion: v0.0.1.20240229.0628.c5f12c9

@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.deployment.name }}
+    app.kubernetes.io/name: {{ .Values.deployment.name }}
+    app.kubernetes.io/instance: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.node.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+      app.kubernetes.io/name: {{ .Values.deployment.name }}
+      app.kubernetes.io/instance: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      {{- with .Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ .Values.deployment.name }}
+        app.kubernetes.io/name: {{ .Values.deployment.name }}
+        app.kubernetes.io/instance: {{ .Values.deployment.name }}
+    spec:
+      {{- with .Values.global.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.node.podSecurityContext | nindent 8 }}
+      {{- if .Values.global.affinity.enabled }}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: {{ .Values.global.affinity.key }}
+                operator: In
+                values:
+                - {{ .Values.global.affinity.value }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.node.containerSecurityContext | nindent 12 }}
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          env:
+            - name: LOG_LEVEL
+              value: "debug"
+            - name: APP_PORT
+              value: "3030"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: node-secrets
+                  key: DATABASE_URL
+            - name: REDIS_HOST
+              value: "redis-data-feed-master.redis.svc.cluster.local"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: LISTEN_PORT
+              value: "10010"
+            - name: KLAYTN_PROVIDER_URL
+              value: "https://public-en.klaytnfinder.io/v1/baobab"
+            - name: SUBMISSION_PROXY_CONTRACT
+              value: "0x464B6b70511B509307C54276efF175805f4A932e"
+            - name: DELEGATOR_URL
+              value: "http://orakl-delegator.orakl.svc.cluster.local:5050"
+            - name: CHAIN
+              value: "test"
+            - name: KLAYTN_REPORTER_PK
+              valueFrom:
+                secretKeyRef:
+                  name: node-secrets
+                  key: KLAYTN_REPORTER_PK
+            - name: PRIVATE_NETWORK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: node-secrets
+                  key: PRIVATE_NETWORK_SECRET
+            - name: BOOT_API_URL
+              value: "http://orakl-boot-api.orakl.svc.cluster.local:5050"
+          ports:
+          - name: http
+            containerPort: 3030
+          {{- if .Values.global.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.global.livenessProbe.path }}
+              port: 3030
+            initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.global.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.global.readinessProbe.path }}
+              port: 3030
+            initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.node.resources | nindent 12 }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

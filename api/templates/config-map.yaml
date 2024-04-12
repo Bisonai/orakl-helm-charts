@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: orakl-api-configmap
-data:
-  DATABASE_URL: "{{ .Values.global.config.DATABASE_URL }}"
-  APP_PORT: "{{ .Values.global.config.APP_PORT }}"
-  ENCRYPT_PASSWORD: "{{ .Values.global.config.ENCRYPT_PASSWORD }}"

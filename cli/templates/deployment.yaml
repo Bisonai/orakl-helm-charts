@@ -25,12 +25,6 @@ spec:
       serviceAccountName: {{ .Values.cli.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.cli.podSecurityContext | nindent 8 }}
-      volumes:
-      {{ if .Values.global.hostPath.enable }}
-        # {{- toYaml .Values.global.hostPath.volumes | default "" | nindent 8 }}
-      {{ else }}
-        {{- toYaml .Values.global.volumes | default "" | nindent 8 }}
-      {{ end }}        
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -39,22 +33,22 @@ spec:
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           {{- if .Values.global.secretManager.enabled }}
           env:
-            - name: ORAKL_NETWORK_API_URL          
+            - name: ORAKL_NETWORK_API_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-cli-secrets
                   key: ORAKL_NETWORK_API_URL
-            - name: ORAKL_NETWORK_FETCHER_URL          
+            - name: ORAKL_NETWORK_FETCHER_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-cli-secrets
                   key: ORAKL_NETWORK_FETCHER_URL
-            - name: ORAKL_NETWORK_DELEGATOR_URL          
+            - name: ORAKL_NETWORK_DELEGATOR_URL
               valueFrom:
                 secretKeyRef:
                   name: orakl-cli-secrets
                   key: ORAKL_NETWORK_DELEGATOR_URL
-            - name: LISTENER_SERVICE_HOST          
+            - name: LISTENER_SERVICE_HOST
               valueFrom:
                 secretKeyRef:
                   name: orakl-cli-secrets
@@ -84,18 +78,81 @@ spec:
                 secretKeyRef:
                   name: orakl-cli-secrets
                   key: REPORTER_SERVICE_PORT
+            - name: FETCHER_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: FETCHER_HOST
+            - name: FETCHER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-cli-secrets
+                  key: FETCHER_PORT
           {{ else }}
-          envFrom:
-            - configMapRef:
-                name: orakl-cli-configmap
+          env:
+            - name: ORAKL_NETWORK_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: ORAKL_NETWORK_API_URL
+            - name: ORAKL_NETWORK_FETCHER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: ORAKL_NETWORK_FETCHER_URL
+            - name: ORAKL_NETWORK_DELEGATOR_URL
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: ORAKL_NETWORK_DELEGATOR_URL
+            - name: LISTENER_SERVICE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: LISTENER_SERVICE_HOST
+            - name: LISTENER_SERVICE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: LISTENER_SERVICE_PORT
+            - name: WORKER_SERVICE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: WORKER_SERVICE_HOST
+            - name: WORKER_SERVICE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: WORKER_SERVICE_PORT
+            - name: REPORTER_SERVICE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: REPORTER_SERVICE_HOST
+            - name: REPORTER_SERVICE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: REPORTER_SERVICE_PORT
+            - name: FETCHER_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: FETCHER_HOST
+            - name: FETCHER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: cli-secrets
+                  key: FETCHER_PORT
           {{ end }}
 
           command: ["/bin/sh"]
-          args: ["-c", "touch /tmp/healthy; tail -f /dev/null"]          
+          args: ["-c", "touch /tmp/healthy; tail -f /dev/null"]
           volumeMounts:
-            # {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}          
+            # {{- toYaml .Values.global.volumeMounts | default "" | nindent 12 }}
           {{- if .Values.global.livenessProbe.enabled }}
-          livenessProbe: 
+          livenessProbe:
             exec:
               command:
               - ls
@@ -106,7 +163,7 @@ spec:
             failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
           {{- end }}
           {{- if .Values.global.readinessProbe.enabled }}
-          readinessProbe: 
+          readinessProbe:
             exec:
               command:
               - ls
@@ -114,8 +171,8 @@ spec:
             periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
-            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}              
-          {{- end }}          
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.cli.resources | nindent 12 }}
 

@@ -1,12 +1,7 @@
-{{- if .Values.delegator.serviceAccount.create -}}
+{{- if .Values.global.secretManager -}}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .Values.delegator.serviceAccount.name }}
-  labels:
-    {{- include "orakl-delegator.labels.delegator" . | nindent 4 }}
-  {{- with .Values.delegator.serviceAccount.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+  name: {{ .Values.deployment.name }}-{{ .Values.delegator.serviceAccount.name }}
+  labels: {{ .Values.deployment.name }}
 {{- end }}

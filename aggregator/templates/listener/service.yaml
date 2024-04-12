@@ -7,8 +7,13 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.listener.APP_PORT | default 4000 | int  }}
-    targetPort: {{ .Values.listener.APP_PORT | default 4000 | int  }}
+  - name: watchman
+    port: 4000
+    targetPort: 4000
+    protocol: TCP
+  - name: healthcheck
+    port: 8080 
+    targetPort: 8080
     protocol: TCP
   selector:
     {{- include "orakl-aggregator.selectorLabels.listener" . | nindent 6 }}

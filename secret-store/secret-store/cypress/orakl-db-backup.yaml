@@ -1,0 +1,50 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: orakl-db-backup-secrets
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-backend
+    kind: SecretStore
+  data:
+    - secretKey: TARGET_TABLE
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: TARGET_TABLE
+    - secretKey: GCP_PROJECT
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: GCP_PROJECT
+    - secretKey: GCP_BUCKET
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: GCP_BUCKET
+    - secretKey: GCP_KEYFILE
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: GCP_KEYFILE
+    - secretKey: CRON_PERIOD
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: CRON_PERIOD
+    - secretKey: ORAKL_DATABASE_USER
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: ORAKL_DATABASE_USER
+    - secretKey: ORAKL_DATABASE_DATABASE
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: ORAKL_DATABASE_DATABASE
+    - secretKey: ORAKL_DATABASE_HOST
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: ORAKL_DATABASE_HOST
+    - secretKey: ORAKL_DATABASE_PASSWORD
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: ORAKL_DATABASE_PASSWORD
+    - secretKey: ORAKL_DATABASE_PORT
+      remoteRef:
+        key: cypress/orakl-db-backup
+        property: ORAKL_DATABASE_PORT
