@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/Bisonai/orakl-helm-charts.git
-      revision: feat/unifying-branches
+      revision: main
       files:
       - path: "**/values.baobab.yaml"
   template:
@@ -20,7 +20,7 @@ spec:
       project: default 
       source:
         repoURL: https://github.com/Bisonai/orakl-helm-charts.git
-        targetRevision: feat/unifying-branches 
+        targetRevision: main 
         path: "{{global.name}}"
       destination:
         namespace: "{{global.namespace}}"
