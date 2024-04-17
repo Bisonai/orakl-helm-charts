@@ -5,7 +5,7 @@ kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   {{- if and (hasKey $job "clusterRole") (hasKey $job "clusterRole.name") }}
-  name: {{ $job.clusterRole.name }}
+  name: {{ default (print $.Release.Name "-" $jobname) $job.clusterRole.name }}
   {{- end }}
   namespace: {{ default $.Release.Namespace $job.namespace }}
   labels:
@@ -26,7 +26,7 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   {{- if and (hasKey $job "clusterRole") (hasKey $job "clusterRole.name") }}
-  name: {{ $job.clusterRole.name }}
+  name: {{ default (print $.Release.Name "-" $jobname "-binding") $job.clusterRole.name }}
   {{- else }}
   name: {{ $.Release.Name }}-{{ $jobname }}
   {{- end }}
@@ -41,7 +41,7 @@ subjects:
 roleRef:
   kind: ClusterRole
   {{- if and (hasKey $job "clusterRole") (hasKey $job "clusterRole.name") }}
-  name: {{ $job.clusterRole.name }}
+  name: {{ default (print $.Release.Name "-" $jobname) $job.clusterRole.name }}
   {{- else }}
   name: {{ $.Release.Name }}-{{ $jobname }}
   {{- end }}
