@@ -21,7 +21,8 @@ metadata:
   {{- end }}
   {{- with $job.clusterRole.rules }}
   rules:
-    {{- toYaml . | nindent 2}}
+    - |-
+      {{- toYaml . | nindent 6 }}
   {{- end }}
 
 ---
