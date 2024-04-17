@@ -2,6 +2,9 @@
 ## created by Bisonai
 
 global:
+  name: request-response
+  namespace: orakl
+
   appName: orakl-request-response
   image:
     repository: public.ecr.aws/bisonai/orakl-core #repository url
@@ -26,23 +29,6 @@ global:
     enabled: false
     key: kubernetes.io/hostname
     value: ip-10-0-90-13.ap-southeast-1.compute.internal
-
-  hostPath:
-    enable: false
-    volumes:
-      - name: orakl-log-storage
-        hostPath:
-          path: /log/
-          type: DirectoryOrCreate
-
-  volumes:
-    - name: orakl-log-storage
-      persistentVolumeClaim:
-        claimName: orakl-log
-
-  volumeMounts:
-    - name: orakl-log-storage
-      mountPath: /app/log
 
   podAnnotations: {}
 

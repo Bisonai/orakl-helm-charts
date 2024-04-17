@@ -8,10 +8,9 @@ spec:
   type: ClusterIP
   ports:
   - name: watchman
-    port: {{ .Values.listener.APP_PORT | default 5000 | int  }}
-    targetPort: {{ .Values.listener.APP_PORT | default 5000 | int  }}
+    port: 5000
+    targetPort: 5000
     protocol: TCP
-
   - name: healthcheck
     port: 8080 
     targetPort: 8080

@@ -1,0 +1,12 @@
+global:
+  name: bisontry-daily-report
+  namespace: orakl
+
+image:
+  repository: asia-southeast1-docker.pkg.dev/bisontry/bisontry/bisontry-daily-report
+  tag: v0.1.0.20231219.0733.2bb7b86
+
+deployment:
+  name: bisontry-daily-report
+  replicas: 1
+  resources:
