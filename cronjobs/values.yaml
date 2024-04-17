@@ -115,4 +115,6 @@ jobs:
         --key=/etc/letsencrypt/live/orakl.network/privkey.pem \
         --dry-run=client -o yaml | kubectl apply -n orakl -f -
 
-        sleep infinity
+        echo "Step 4: Restart orakl-backend-fe"
+        kubectl scale --replicas=0 deployment orakl-backend-fe -n orakl
+        kubectl scale --replicas=1 deployment orakl-backend-fe -n orakl
