@@ -82,7 +82,7 @@ jobs:
           resources: ["deployments"]
           verbs: ["get", "list"]
         - apiGroups: [""]
-          resources: ["pods"]
+          resources: ["pods", "secrets"]
           verbs: ["get", "list", "exec"]
         - apiGroups: [""]
           resources: ["pods/exec"]
@@ -107,7 +107,7 @@ jobs:
         --server https://acme-v02.api.letsencrypt.org/directory
         
         echo "Step 3: Export to Kubernetes secret"
-        kubectl create secret tls orakl-network-tls \
+        kubectl create secret tls orakl-backend-fe-tls \
         --cert=/etc/letsencrypt/live/orakl.network/cert.pem \
         --key=/etc/letsencrypt/live/orakl.network/privkey.pem \
         --dry-run=client -o yaml | kubectl apply -f -
