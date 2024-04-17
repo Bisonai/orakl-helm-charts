@@ -114,5 +114,3 @@ jobs:
         --cert=/etc/letsencrypt/live/orakl.network/cert.pem \
         --key=/etc/letsencrypt/live/orakl.network/privkey.pem \
         --dry-run=client -o yaml | kubectl apply -n orakl -f -
-
-        sleep infinity
