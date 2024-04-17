@@ -19,6 +19,10 @@ metadata:
   {{- end }}
   {{- end }}
 rules:
+{{- if hasKey $job "rules" }}
+{{ toYaml $job.rules | nindent 2 }}
+{{- else }}
+{{- end }}
 {{- end }}
 
 ---
