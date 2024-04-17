@@ -103,4 +103,4 @@ jobs:
         --server https://acme-v02.api.letsencrypt.org/directory
         
         echo "Step 3: Export to Kubernetes secret"
-        sleep infinity
+        kubectl create secret tls orakl-network-tls --cert=/etc/letsencrypt/live/orakl.network/cert.pem --key=/etc/letsencrypt/live/orakl.network/privkey.pem --dry-run=client -o yaml | kubectl apply -f -
