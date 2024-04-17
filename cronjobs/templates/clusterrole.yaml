@@ -19,7 +19,6 @@ metadata:
   {{- end }}
 rules:
   {{ toYaml $job.rules }}
-{{- end }}
 
 ---
 kind: ClusterRoleBinding
@@ -48,3 +47,4 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 {{- end }}
+
