@@ -7,6 +7,7 @@ metadata:
   {{- if and (hasKey $job "clusterRole") (hasKey $job "clusterRole.name") }}
   name: {{ $job.clusterRole.name }}
   {{- end }}
+  namespace: {{ default $.Release.Namespace $job.namespace }}
   labels:
     {{- include "cronjobs.labels" $ | nindent 4 }}
     cron: {{ $jobname }}
