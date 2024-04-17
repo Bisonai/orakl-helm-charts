@@ -1,5 +1,5 @@
 {{- range $jobname, $job := .Values.jobs }}
-{{- if and (hasKey $job "clusterRole") (hasKey $job "clusterRole.name") }}
+{{- if hasKey $job "clusterRole" }}
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
