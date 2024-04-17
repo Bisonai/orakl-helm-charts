@@ -18,11 +18,8 @@ metadata:
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-rules:
-  {{- toYaml $job.clusterRole.rules | nindent 2 }}
   {{- end }}
-  rules: |
-    {{ $job.clusterRole.rules }}
+rules: {{ toYaml $job.clusterRole.rules | nindent 2 }}
 
 ---
 kind: ClusterRoleBinding
