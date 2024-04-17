@@ -38,7 +38,7 @@ subjects:
   {{- else }}
   name: {{ $.Release.Name}}-{{ $jobname }}
   {{- end }}
-  namespace: {{ $job.namespace }}
+  namespace: {{ default $.Release.Namespace $job.namespace }}
 roleRef:
   kind: ClusterRole
   {{- if and (hasKey $job "clusterRole") (hasKey $job "clusterRole.name") }}
