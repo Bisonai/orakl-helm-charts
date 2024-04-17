@@ -19,7 +19,7 @@ metadata:
   {{- end }}
   {{- end }}
 rules:
-  {{ toYaml $job.rules | nindent 2 }}
+  {{ toYaml $job.rules }}
 {{- end }}
 
 ---
