@@ -74,6 +74,7 @@ jobs:
     volumeMounts:
       - name: orakl-tls-renew-volume
         mountPath: /etc/letsencrypt
+    namespace: orakl
     clusterRole:
       name: orakl-tls-renew-permission
       rules:
@@ -103,4 +104,9 @@ jobs:
         --server https://acme-v02.api.letsencrypt.org/directory
         
         echo "Step 3: Export to Kubernetes secret"
-        kubectl create secret tls orakl-network-tls --cert=/etc/letsencrypt/live/orakl.network/cert.pem --key=/etc/letsencrypt/live/orakl.network/privkey.pem --dry-run=client -o yaml | kubectl apply -f -
+        kubectl create secret tls orakl-network-tls \
+        --cert=/etc/letsencrypt/live/orakl.network/cert.pem \
+        --key=/etc/letsencrypt/live/orakl.network/privkey.pem \
+        --dry-run=client -o yaml | kubectl apply -f -
+
+        sleep infinity
