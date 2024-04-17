@@ -3,9 +3,6 @@ jobs:
   # Backup Orakl DB
   ###
   orakl-db-backup:
-  # Renew TLS certificate for `*.orakl.network` domain
-  ###
-  orakl-tls-renew:
     image:
       repository: debian
       tag: latest
@@ -14,25 +11,11 @@ jobs:
     failedJobHistoryLimit: 3
     successfulJobHistoryLimit: 10
     concurrencyPolicy: Allow
-    restartPolicy: Never 
+    restartPolicy: Never
     ttlSecondsAfterFinished: 30
     serviceAccount:
       annotations:
         iam.gke.io/gcp-serviceaccount: "orakl-db-backup@orakl-cypress-prod.iam.gserviceaccount.com"
-    schedule: "0 0 1 */2 *"
-    failedJobHistoryLimit: 3
-    successfulJobHistoryLimit: 10
-    concurrencyPolicy: Forbid
-    restartPolicy: Never
-    ttlSecondsAfterFinished: 30
-    volumes:
-      - name: orakl-tls-renew-volume
-        gcePersistentDisk:
-          pdName: orakl-tls-renew-disk
-          fsType: ext4
-    volumeMounts:
-      - name: orakl-tls-renew-volume
-        mountPath: /etc/letsencrypt
     command: ["/bin/bash"]
     args:
       - "-c"
@@ -57,7 +40,6 @@ jobs:
         | xargs -I {} psql $ORAKL_DB_URL -c "DROP TABLE {};"
         psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
         | xargs -I {} psql $DELEGATOR_DB_URL -c "DROP TABLE {};"
-
     env:
       - name: ORAKL_DB_URL
         valueFrom:
@@ -69,6 +51,33 @@ jobs:
           secretKeyRef:
             name: delegator-secrets 
             key: DATABASE_URL
+
+  ###
+  # Renew TLS certificate for `*.orakl.network` domain
+  ###
+  orakl-tls-renew:
+    image:
+      repository: debian
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    schedule: "0 0 1 */2 *"
+    failedJobHistoryLimit: 3
+    successfulJobHistoryLimit: 10
+    concurrencyPolicy: Forbid 
+    restartPolicy: Never 
+    ttlSecondsAfterFinished: 30
+    volumes:
+      - name: orakl-tls-renew-volume
+        gcePersistentDisk:
+          pdName: orakl-tls-renew-disk
+          fsType: ext4
+    volumeMounts:
+      - name: orakl-tls-renew-volume
+        mountPath: /etc/letsencrypt
+    command: ["/bin/bash"]
+    args:
+      - -c
+      - |
         apt -y update && apt -y install python3 python3-pip python3-venv
         python3 -m venv /certbot && /certbot/bin/pip3 install -U certbot-dns-godaddy
         /certbot/bin/certbot renew \
