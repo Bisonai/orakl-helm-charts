@@ -76,14 +76,17 @@ jobs:
         mountPath: /etc/letsencrypt
     namespace: orakl
     clusterRole:
-      name: orakl-tls-renew-permission
+      name: orakl-tls-renew
       rules:
         - apiGroups: ["apps"]
           resources: ["deployments"]
           verbs: ["get", "list"]
         - apiGroups: [""]
-          resources: ["pods", "secrets"]
+          resources: ["pods"]
           verbs: ["get", "list", "exec"]
+        - apiGroups: [""]
+          resources: ["secrets"]
+          verbs: ["get", "list", "patch"]
         - apiGroups: [""]
           resources: ["pods/exec"]
           verbs: ["create"]
@@ -110,6 +113,6 @@ jobs:
         kubectl create secret tls orakl-backend-fe-tls \
         --cert=/etc/letsencrypt/live/orakl.network/cert.pem \
         --key=/etc/letsencrypt/live/orakl.network/privkey.pem \
-        --dry-run=client -o yaml | kubectl apply -f -
+        --dry-run=client -o yaml | kubectl apply -n orakl -f -
 
         sleep infinity
