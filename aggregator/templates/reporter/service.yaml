@@ -7,8 +7,13 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 6000
+  - name: watchman
+    port: 6000
     targetPort: 6000
+    protocol: TCP
+  - name: healthcheck
+    port: 8080 
+    targetPort: 8080
     protocol: TCP
   selector:
     {{- include "orakl-aggregator.selectorLabels.reporter" . | nindent 6 }}

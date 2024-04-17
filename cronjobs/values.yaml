@@ -11,7 +11,7 @@ jobs:
     failedJobHistoryLimit: 3
     successfulJobHistoryLimit: 10
     concurrencyPolicy: Allow
-    restartPolicy: Never 
+    restartPolicy: Never
     ttlSecondsAfterFinished: 30
     serviceAccount:
       annotations:
@@ -40,7 +40,6 @@ jobs:
         | xargs -I {} psql $ORAKL_DB_URL -c "DROP TABLE {};"
         psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
         | xargs -I {} psql $DELEGATOR_DB_URL -c "DROP TABLE {};"
-
     env:
       - name: ORAKL_DB_URL
         valueFrom:
@@ -52,3 +51,68 @@ jobs:
           secretKeyRef:
             name: delegator-secrets 
             key: DATABASE_URL
+
+  ###
+  # Renew TLS certificate for `*.orakl.network` domain
+  ###
+  orakl-tls-renew:
+    image:
+      repository: debian
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    schedule: "0 0 1 */2 *"
+    failedJobHistoryLimit: 3
+    successfulJobHistoryLimit: 10
+    concurrencyPolicy: Forbid 
+    restartPolicy: Never 
+    ttlSecondsAfterFinished: 30
+    volumes:
+      - name: orakl-tls-renew-volume
+        gcePersistentDisk:
+          pdName: orakl-tls-renew-disk
+          fsType: ext4
+    volumeMounts:
+      - name: orakl-tls-renew-volume
+        mountPath: /etc/letsencrypt
+    namespace: orakl
+    clusterRole:
+      name: orakl-tls-renew
+      rules:
+        - apiGroups: ["apps"]
+          resources: ["deployments"]
+          verbs: ["get", "list"]
+        - apiGroups: [""]
+          resources: ["pods"]
+          verbs: ["get", "list", "exec"]
+        - apiGroups: [""]
+          resources: ["secrets"]
+          verbs: ["get", "list", "patch"]
+        - apiGroups: [""]
+          resources: ["pods/exec"]
+          verbs: ["create"]
+    command: ["/bin/bash"]
+    args:
+      - -c
+      - |
+        echo "Step 1: Install dependencies"
+        apt -y update && apt -y install python3 python3-pip python3-venv
+        python3 -m venv /certbot && /certbot/bin/pip3 install -U certbot-dns-godaddy
+        apt-get install -y curl
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+        echo "Step 2: Renew TLS certificate"
+        /certbot/bin/certbot renew \
+        --authenticator dns-godaddy \
+        --dns-godaddy-credentials ./credentials.ini \
+        --dns-godaddy-propagation-seconds 900 \
+        --keep-until-expiring --non-interactive --expand \
+        --server https://acme-v02.api.letsencrypt.org/directory
+        
+        echo "Step 3: Export to Kubernetes secret"
+        kubectl create secret tls orakl-backend-fe-tls \
+        --cert=/etc/letsencrypt/live/orakl.network/cert.pem \
+        --key=/etc/letsencrypt/live/orakl.network/privkey.pem \
+        --dry-run=client -o yaml | kubectl apply -n orakl -f -
+
+        sleep infinity

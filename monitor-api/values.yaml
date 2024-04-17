@@ -1,6 +1,9 @@
 ## Klaytn Orakl Listener Configuration
 ## created by Bisonai
 global:
+  name: monitor-api
+  namespace: orakl
+
   image:
     repository: public.ecr.aws/bisonai/orakl-general #repository url
     pullPolicy: IfNotPresent
