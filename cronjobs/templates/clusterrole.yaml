@@ -10,7 +10,7 @@ metadata:
   name: {{ $.Release.Name }}-{{ $jobname }}
   {{- end }}
   labels:
-    {{- include "cronjobs.labels" $ | nident 4 }}
+    {{- include "cronjobs.labels" $ | nindent 4 }}
     cron: {{ $jobname }}
   {{- if and (hasKey $job "clusterRole") (hasKey $job "clusterRole.annotations") }}
   {{- with $job.clusterRole.annotations }}
