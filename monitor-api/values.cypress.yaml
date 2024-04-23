@@ -1,7 +1,7 @@
 ## Klaytn Orakl Listener Configuration
 ## created by Bisonai
 global:
-  name: monitor-api
+  name: orakl-monitor-api
   namespace: orakl
 
   image:
