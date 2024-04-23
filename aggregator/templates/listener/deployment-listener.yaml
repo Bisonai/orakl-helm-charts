@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aggregator-listener
+  name: {{ .Values.global.name }}-listener
   labels:
     {{- include "orakl-aggregator.labels.listener" . | nindent 4 }}
 spec:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: request-response-worker
+  name: {{ .Values.global.name }}-worker
   labels:
     {{- include "orakl-request-response.labels.worker" . | nindent 4 }}
 spec:

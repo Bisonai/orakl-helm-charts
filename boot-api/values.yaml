@@ -2,7 +2,7 @@
 ## created by Bisonai
 
 global:
-  name: boot-api
+  name: orakl-boot-api
   namespace: orakl
   image:
     repository: public.ecr.aws/bisonai/orakl-boot-api #repository url

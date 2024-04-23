@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vrf-worker
+  name: {{ .Values.global.name }}-worker
   labels:
     {{- include "orakl-vrf.labels.worker" . | nindent 4 }}
 spec:

@@ -2,7 +2,7 @@
 ## created by Bisonai
 
 global:
-  name: vrf
+  name: orakl-vrf
   namespace: orakl
 
   appName: orakl-vrf

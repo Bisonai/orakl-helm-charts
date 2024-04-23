@@ -1,5 +1,5 @@
 global:
-  name: grafana-as-code
+  name: orakl-grafana-as-code
   namespace: orakl
 
 image:
