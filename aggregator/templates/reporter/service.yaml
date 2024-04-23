@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.name }}-reporter
+  name: {{ .Values.global.name }}-reporter
   labels: 
     {{- include "orakl-aggregator.labels.reporter" . | nindent 4 }}  
 spec:

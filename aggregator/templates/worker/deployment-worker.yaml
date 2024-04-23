@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-worker
+  name: {{ .Values.global.name }}-worker
   labels:
     {{- include "orakl-aggregator.labels.worker" . | nindent 4 }}
 spec:
