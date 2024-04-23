@@ -2,7 +2,7 @@
 ## created by Bisonai
 
 global:
-  name: delegator
+  name: orakl-delegator
   namespace: orakl
   image:
     repository: public.ecr.aws/bisonai/orakl-delegator #repository url
