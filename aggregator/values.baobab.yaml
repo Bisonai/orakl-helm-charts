@@ -2,7 +2,7 @@
 ## created by Bisonai
 
 global:
-  name: aggregator
+  name: orakl-aggregator
   namespace: orakl
   appName: orakl-aggregator
   image:
