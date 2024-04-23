@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: vrf-listener
+  name: {{ .Values.global.name }}-listener
   labels: 
     {{- include "orakl-vrf.labels.listener" . | nindent 4 }}  
 spec:
