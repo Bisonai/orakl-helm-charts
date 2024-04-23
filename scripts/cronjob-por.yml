@@ -27,7 +27,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: proof-of-reserve
-              image: public.ecr.aws/u6t6w0e4/orakl-core:v0.5.1.20240122.0240.1672788
+              image: public.ecr.aws/u6t6w0e4/orakl-core:v0.5.1.20240403.0423.f813b61
               imagePullPolicy: IfNotPresent
               command: ["yarn"]
               args: [start:por]
