@@ -2,7 +2,7 @@
 ## created by Bisonai
 
 global:
-  name: request-response
+  name: orakl-request-response
   namespace: orakl
 
   appName: orakl-request-response
