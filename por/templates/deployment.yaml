@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.deployment.name }}
+    app.kubernetes.io/name: {{ .Values.deployment.name }}
+    app.kubernetes.io/instance: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.por.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+      app.kubernetes.io/name: {{ .Values.deployment.name }}
+      app.kubernetes.io/instance: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      {{- with .Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ .Values.deployment.name }}
+        app.kubernetes.io/name: {{ .Values.deployment.name }}
+        app.kubernetes.io/instance: {{ .Values.deployment.name }}
+    spec:
+      {{- with .Values.global.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      securityContext:
+        {{- toYaml .Values.por.podSecurityContext | nindent 8 }}
+      {{- if .Values.global.affinity.enabled }}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: {{ .Values.global.affinity.key }}
+                operator: In
+                values:
+                - {{ .Values.global.affinity.value }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.por.containerSecurityContext | nindent 12 }}
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          env:
+            - name: POR_REPORTER_PK
+              valueFrom:
+                secretKeyRef:
+                  name: por-secrets
+                  key: POR_REPORTER_PK
+            - name: POR_PROVIDER_URL
+              value: "http://10.148.4.194:8551"
+            - name: POR_PORT
+              value: "3000"
+            - name: POR_CHAIN
+              value: "cypress"
+          ports:
+          - name: http
+            containerPort: 3000
+            protocol: TCP
+          {{- if .Values.global.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.global.livenessProbe.path }}
+              port: 3000
+            initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.global.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.global.readinessProbe.path }}
+              port: 3000
+            initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.por.resources | nindent 12 }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
