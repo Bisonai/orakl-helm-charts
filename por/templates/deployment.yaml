@@ -55,6 +55,11 @@ spec:
                 secretKeyRef:
                   name: por-secrets
                   key: POR_REPORTER_PK
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: por-secrets
+                  key: DATABASE_URL
             - name: POR_PROVIDER_URL
               value: "https://public-en-baobab.klaytn.net"
             - name: POR_PORT
