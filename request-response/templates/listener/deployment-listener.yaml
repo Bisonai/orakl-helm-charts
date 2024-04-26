@@ -83,6 +83,12 @@ spec:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: LISTENER_PORT
+          {{ else if .Values.global.vault.enabled }}
+          env:
+            - name: VAULT_ADDR
+              value: http://vault:8200
+            - name: JWT_PATH
+              value: /var/run/secrets/kubernetes.io/serviceaccount/token
           {{ else }}
           env:
             - name: NODE_ENV

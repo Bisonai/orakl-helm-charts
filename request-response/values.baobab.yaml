@@ -25,6 +25,9 @@ global:
     secretId:
     versionId:
 
+  vault:
+    enabled: true
+
   gcpAutopilot:
     enabled: false
 
@@ -81,7 +84,7 @@ listener:
       memory: 2Gi
 
 worker:
-  enabled: true
+  enabled: false
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
@@ -108,7 +111,7 @@ worker:
       memory: 2Gi
 
 reporter:
-  enabled: true
+  enabled: false
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
