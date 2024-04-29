@@ -84,6 +84,13 @@ spec:
                   key: PRIVATE_NETWORK_SECRET
             - name: BOOT_API_URL
               value: "http://orakl-boot-api.orakl.svc.cluster.local:5050"
+            - name: ENCRYPT_PASSWORD
+              value: "anything"
+            - name: SIGNER_PK
+              valueFrom:
+                secretKeyRef:
+                  name: node-secrets
+                  key: KLAYTN_REPORTER_PK
           ports:
           - name: http
             containerPort: 3030
