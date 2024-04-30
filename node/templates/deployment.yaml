@@ -50,7 +50,7 @@ spec:
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           env:
             - name: LOG_LEVEL
-              value: "debug"
+              value: "error"
             - name: APP_PORT
               value: "3030"
             - name: DATABASE_URL
@@ -65,7 +65,7 @@ spec:
             - name: LISTEN_PORT
               value: "10010"
             - name: KLAYTN_PROVIDER_URL
-              value: "https://public-en.klaytnfinder.io/v1/baobab"
+              value: "https://klaytn-baobab-rpc.allthatnode.com:8551"
             - name: SUBMISSION_PROXY_CONTRACT
               value: "0x15e66314bDb4CEEA7130C3B47df4DcB440c9874C"
             - name: DELEGATOR_URL
