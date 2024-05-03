@@ -91,60 +91,27 @@ spec:
           {{ else }}
           env:
             - name: ORAKL_NETWORK_API_URL
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: ORAKL_NETWORK_API_URL
+              vaule: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
             - name: ORAKL_NETWORK_FETCHER_URL
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: ORAKL_NETWORK_FETCHER_URL
+              vaule: http://orakl-fetcher.orakl.svc.cluster.local:4040/api/v1
             - name: ORAKL_NETWORK_DELEGATOR_URL
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: ORAKL_NETWORK_DELEGATOR_URL
+              vaule: http://orakl-delegator.orakl.svc.cluster.local:5050/api/v1
             - name: LISTENER_SERVICE_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: LISTENER_SERVICE_HOST
+              value: http://orakl-aggregator-listener.orakl.svc.cluster.local
             - name: LISTENER_SERVICE_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: LISTENER_SERVICE_PORT
+              value: "4000"
             - name: WORKER_SERVICE_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: WORKER_SERVICE_HOST
+              value: "http://orakl-aggregator-worker.orakl.svc.cluster.local"
             - name: WORKER_SERVICE_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: WORKER_SERVICE_PORT
+              value: "5000"
             - name: REPORTER_SERVICE_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: REPORTER_SERVICE_HOST
+              value: http://orakl-aggregator-reporter.orakl.svc.cluster.local
             - name: REPORTER_SERVICE_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: REPORTER_SERVICE_PORT
+              value: "6000"
             - name: FETCHER_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: FETCHER_HOST
+              value: http://orakl-fetcher.orakl.svc.cluster.local
             - name: FETCHER_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: cli-secrets
-                  key: FETCHER_PORT
+              value: "4040"
           {{ end }}
 
           command: ["/bin/sh"]
