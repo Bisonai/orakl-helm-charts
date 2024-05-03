@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: monitor-api
+  name: {{ .Values.global.name }} 
   labels:
     {{- include "orakl-monitor-api.labels.monitor-api" . | nindent 4 }}
 spec:

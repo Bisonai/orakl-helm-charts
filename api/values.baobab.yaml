@@ -1,7 +1,7 @@
 ## Klaytn Orakl Api Configuration
 ## created by Bisonai
 global:
-  name: api
+  name: orakl-api
   namespace: orakl
   image:
     repository: public.ecr.aws/bisonai/orakl-api
