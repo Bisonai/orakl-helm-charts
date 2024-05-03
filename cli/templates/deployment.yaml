@@ -101,7 +101,7 @@ spec:
             - name: LISTENER_SERVICE_PORT
               value: "4000"
             - name: WORKER_SERVICE_HOST
-              value: "http://orakl-aggregator-worker.orakl.svc.cluster.local"
+              value: http://orakl-aggregator-worker.orakl.svc.cluster.local
             - name: WORKER_SERVICE_PORT
               value: "5000"
             - name: REPORTER_SERVICE_HOST
