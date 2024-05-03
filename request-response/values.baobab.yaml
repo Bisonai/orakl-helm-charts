@@ -121,7 +121,7 @@ worker:
       memory: 2Gi
 
 reporter:
-  enabled: false
+  enabled: true
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
