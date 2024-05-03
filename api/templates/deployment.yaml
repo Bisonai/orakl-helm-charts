@@ -15,7 +15,7 @@ spec:
       app.kubernetes.io/instance: {{ .Values.deployment.name }}
   template:
     metadata:
-      {{- with .Values.global.podAnnotations }}
+      {{- with .Values.api.annotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -48,29 +48,10 @@ spec:
             {{- toYaml .Values.api.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          command: ["/bin/sh","-c"]
+          args: [". /vault/secrets/config && ./start-go.sh apibin"]
           env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: api-secrets
-                  key: DATABASE_URL
-            - name: ENCRYPT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: api-secrets
-                  key: ENCRYPT_PASSWORD
-            - name: APP_PORT
-              value: "3030"
-            - name: REDIS_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: api-secrets
-                  key: REDIS_HOST
-            - name: REDIS_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: api-secrets
-                  key: REDIS_PORT
+            {{- toYaml .Values.api.env | nindent 12 }}
           ports:
           - name: http
             containerPort: 3030

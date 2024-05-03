@@ -88,45 +88,14 @@ spec:
                 secretKeyRef:
                   name: orakl-request-response-secrets
                   key: REPORTER_PORT
-          {{ else }}
+          {{ else }}          
           env:
-            - name: NODE_ENV
-              valueFrom:
-                secretKeyRef:
-                  name: request-response-secrets
-                  key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL
-              valueFrom:
-                secretKeyRef:
-                  name: request-response-secrets
-                  key: ORAKL_NETWORK_API_URL
-            - name: CHAIN
-              valueFrom:
-                secretKeyRef:
-                  name: request-response-secrets
-                  key: CHAIN
-            - name: HEALTH_CHECK_PORT
-              value: "8080"
-            - name: LOG_LEVEL
-              value: {{ .Values.global.env.LOG_LEVEL }}
-            - name: REDIS_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: request-response-secrets
-                  key: REDIS_HOST
-            - name: REDIS_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: request-response-secrets
-                  key: REDIS_PORT
-            - name: PROVIDER_URL
-              valueFrom:
-                secretKeyRef:
-                  name: request-response-secrets
-                  key: PROVIDER_URL
-            - name: REPORTER_PORT
-              value: "6000"
+            {{- toYaml .Values.global.env | nindent 12 }}
           {{ end }}
+            - name: REPORTER_PORT
+              value: "6000"    
+            - name: HEALTH_CHECK_PORT
+              value: "8080"              
           command: ["yarn"]
           args: [start:reporter:request_response]
           ports:
