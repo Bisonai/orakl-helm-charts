@@ -79,11 +79,11 @@ spec:
           {{ else }}          
           env:
             {{- toYaml .Values.global.env | nindent 12 }}
-          {{ end }}
             - name: LISTENER_PORT
               value: "4000"      
             - name: HEALTH_CHECK_PORT
-              value: "8080"    
+              value: "8080"                
+          {{ end }}
           command: ["yarn"]
           args: [start:listener:request_response]
           ports:
