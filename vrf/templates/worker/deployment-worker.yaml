@@ -97,7 +97,7 @@ spec:
                   name: orakl-vrf-secrets
                   key: WORKER_PORT
           {{ else }}
-           env:
+          env:
             {{- toYaml .Values.global.env | nindent 12 }}
             - name: LISTENER_PORT
               value: "5000"      

@@ -17,14 +17,14 @@ global:
     imagePullSecrets: []
 
   env:
+    - name: LOG_LEVEL
+      value: debug  
     - name: NODE_ENV
       value: production
     - name: ORAKL_NETWORK_API_URL
       value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
     - name: CHAIN
       value: baobab
-    - name: LOG_LEVEL
-      value: debug
     - name: REDIS_HOST
       value: redis-vrf-master.redis.svc.cluster.local
     - name: REDIS_PORT
@@ -120,7 +120,7 @@ worker:
       memory: 2Gi
 
 reporter:
-  enabled: false
+  enabled: true
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller

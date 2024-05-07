@@ -18,7 +18,7 @@ global:
     imagePullSecrets: []
 
   env:
-    LOG_LEVEL: info
+    - LOG_LEVEL: info
 
   secretManager:
     enabled: false
