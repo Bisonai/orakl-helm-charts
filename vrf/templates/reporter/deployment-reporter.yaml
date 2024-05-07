@@ -99,7 +99,7 @@ spec:
           {{ else }}      
           env:
             {{- toYaml .Values.global.env | nindent 12 }}
-            - name: LISTENER_PORT
+            - name: REPORTER_PORT
               value: "6000"      
             - name: HEALTH_CHECK_PORT
               value: "8080"     
