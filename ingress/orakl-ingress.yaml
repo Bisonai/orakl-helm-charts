@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: orakl-ingress
+  namespace: orakl
+  labels:
+    app: orakl-ingress
+spec:
+  ingressClassName: contour
+  rules:
+  - host: baobab.delegator.orakl.network
+    http:
+      paths:
+      - backend:
+          service:
+            name: orakl-delegator
+            port:
+              number: 80
+        pathType: Prefix
+        path: /
+        
+        
