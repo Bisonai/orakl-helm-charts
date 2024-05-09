@@ -74,11 +74,11 @@ listener:
 
   resources:
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 800mi
     requests:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 800mi
 
 worker:
   enabled: true
@@ -101,11 +101,11 @@ worker:
 
   resources:
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 800mi
     requests:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 800mi
 
 reporter:
   enabled: true
@@ -129,10 +129,10 @@ reporter:
   resources:
     limits:
       cpu: 500m
-      memory: 1Gi
+      memory: 800mi
     requests:
       cpu: 500m
-      memory: 1Gi
+      memory: 800mi
 
 nodeSelector: {}
 tolerations: []
