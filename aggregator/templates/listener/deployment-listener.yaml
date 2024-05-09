@@ -1,3 +1,4 @@
+{{- if .Values.listener.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -85,49 +86,13 @@ spec:
                   key: PROVIDER_URL
             - name: LISTENER_PORT
               value: {{ .Values.listener.APP_PORT | default 4000 | int  }}
-          {{ else }}
+          {{ else }} 
           env:
-            - name: NODE_ENV
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: NODE_ENV
-            - name: ORAKL_NETWORK_API_URL
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: ORAKL_NETWORK_API_URL
-            - name: ORAKL_NETWORK_DELEGATOR_URL
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: ORAKL_NETWORK_DELEGATOR_URL
-            - name: CHAIN
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: CHAIN
-            - name: LOG_LEVEL
-              value: "info"
-            - name: REDIS_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: REDIS_HOST
-            - name: REDIS_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: REDIS_PORT
-            - name: PROVIDER_URL
-              valueFrom:
-                secretKeyRef:
-                  name: aggregator-secrets
-                  key: PROVIDER_URL
+            {{- toYaml .Values.global.env | nindent 12 }}
             - name: LISTENER_PORT
-              value: "4000"
+              value: "4000"      
             - name: HEALTH_CHECK_PORT
-              value: "8080"
+              value: "8080"                  
           {{ end }}
 
           command: ["yarn"]
@@ -168,3 +133,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}
