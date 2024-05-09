@@ -87,10 +87,10 @@ listener:
   resources:
     limits:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
     requests:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
 
 worker:
   enabled: true
@@ -114,10 +114,10 @@ worker:
   resources:
     limits:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
     requests:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
 
 reporter:
   enabled: true
