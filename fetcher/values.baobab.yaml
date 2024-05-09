@@ -39,19 +39,23 @@ global:
     successThreshold: 1
     failureThreshold: 5
 fetcher:
-  enabled: true
   replicas: 1
   serviceAccount:
-    # -- Create a service account for the application controller
     create: true
-    # -- Service account name
     name: orakl-fetcher
-    # -- Annotations applied to created service account
     annotations: {}
-    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
   podSecurityContext: {}
   containerSecurityContext: {}
+  env:
+    - name: CHAIN
+      value: baobab
+    - name: ORAKL_NETWORK_API_URL
+      value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
+    - name: REDIS_HOST
+      value: redis-fetcher-master.redis.svc.cluster.local
+    - name: REDIS_PORT
+      value: "6379"
   resources:
     limits:
       cpu: 1000m

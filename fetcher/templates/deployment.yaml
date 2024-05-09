@@ -74,26 +74,7 @@ spec:
               value: "20"
           {{ else }}
           env:
-            - name: CHAIN
-              valueFrom:
-                secretKeyRef:
-                  name: fetcher-secrets
-                  key: CHAIN
-            - name: ORAKL_NETWORK_API_URL
-              valueFrom:
-                secretKeyRef:
-                  name: fetcher-secrets
-                  key: ORAKL_NETWORK_API_URL
-            - name: REDIS_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: fetcher-secrets
-                  key: REDIS_HOST
-            - name: REDIS_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: fetcher-secrets
-                  key: REDIS_PORT
+          {{- toYaml .Values.fetcher.env | nindent 12 }}
             - name: APP_PORT
               value: "4040"
             - name: CONCURRENCY

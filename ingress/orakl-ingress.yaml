@@ -18,5 +18,14 @@ spec:
               number: 80
         pathType: Prefix
         path: /
-        
-        
+  
+  - host: baobab.delegator.orakl.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: orakl-delegator
+            port:
+              number: 80
+        pathType: Prefix
+        path: /
