@@ -66,7 +66,7 @@ global:
     failureThreshold: 5
 
 listener:
-  enabled: false
+  enabled: true
   replicas: 1
   serviceAccount:
     create: true
@@ -87,7 +87,7 @@ listener:
       memory: 2Gi
 
 worker:
-  enabled: false
+  enabled: true
   replicas: 1
   serviceAccount:
     create: true
