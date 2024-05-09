@@ -9,6 +9,10 @@ spec:
       app: {{ .Values.deployment.name }}
   template:
     metadata:
+      {{- with .Values.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}    
       labels:
         app: {{ .Values.deployment.name }}
     spec:
@@ -20,6 +24,8 @@ spec:
         - name: {{ .Values.deployment.name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
+          command: ["/bin/sh","-c"]
+          args: [". /vault/secrets/config && /usr/local/bin/orakl-grafana-entrypoint.sh"]          
           ports:
           - name: grafana
             containerPort: 3000
@@ -27,3 +33,5 @@ spec:
             {{- toYaml .Values.deployment.env | nindent 12 }}
             - name: GF_AUTH_ANONYMOUS_ENABLED
               value: "true"
+          resources:
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
