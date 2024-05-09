@@ -29,7 +29,7 @@ global:
     - name: ORAKL_NETWORK_API_URL
       value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
     - name: ORAKL_NETWORK_DELEGATOR_URL
-      value: http://orakl-delegator.orakl.svc.cluster.local:5050/api/v1
+      value: http://orakl-delegator.orakl.svc.cluster.local/api/v1
     - name: REDIS_HOST
       value: redis-data-feed-master.redis.svc.cluster.local
     - name: REDIS_PORT
