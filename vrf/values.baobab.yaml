@@ -51,7 +51,7 @@ global:
     enabled: true
     path: /
     initialDelaySeconds: 20
-    periodSeconds: 5
+    periodSeconds: 15
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
@@ -60,7 +60,7 @@ global:
     enabled: true
     path: /
     initialDelaySeconds: 20
-    periodSeconds: 5
+    periodSeconds: 15
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
