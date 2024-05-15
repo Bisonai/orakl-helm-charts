@@ -2,7 +2,7 @@
 ## created by Bisonai
 global:
   name: orakl-monitor-api
-  namespace: monitor
+  namespace: orakl-baobab
 
   image:
     repository: public.ecr.aws/bisonai/orakl-general #repository url

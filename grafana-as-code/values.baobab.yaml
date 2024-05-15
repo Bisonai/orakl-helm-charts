@@ -1,6 +1,6 @@
 global:
   name: orakl-grafana-as-code
-  namespace: orakl
+  namespace: orakl-baobab
 
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
