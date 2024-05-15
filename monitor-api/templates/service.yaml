@@ -3,10 +3,7 @@ kind: Service
 metadata:
   name: {{ .Values.global.name }} 
 spec:
-  type: LoadBalancer
-  {{- with .Values.service }}
-  loadBalancerIP: {{ .loadBalancerIP | quote }}
-  {{- end }}
+  type: ClusterIP
   ports:
     - port: 8888
       targetPort: http
