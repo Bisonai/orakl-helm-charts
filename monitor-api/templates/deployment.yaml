@@ -22,7 +22,6 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.monitorApi.serviceAccount.name }}
       securityContext:
         {{- toYaml .Values.monitorApi.podSecurityContext | nindent 8 }}
       {{- if .Values.global.affinity.enabled }}
