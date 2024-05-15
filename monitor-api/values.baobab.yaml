@@ -69,7 +69,7 @@ monitorApi:
       {{- end }}    
   serviceAccount:
     # -- Create a service account for the application controller
-    create: true
+    create: false
     # -- Service account name
     name: monitor
     # -- Annotations applied to created service account
