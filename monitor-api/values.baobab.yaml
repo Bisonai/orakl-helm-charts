@@ -67,15 +67,6 @@ monitorApi:
         export ORAKL_POSTGRES_PORT="{{ .Data.data.ORAKL_POSTGRES_PORT }}"
         export ORAKL_POSTGRES_USER="{{ .Data.data.ORAKL_POSTGRES_USER }}"
       {{- end }}    
-  serviceAccount:
-    # -- Create a service account for the application controller
-    create: false
-    # -- Service account name
-    name: monitor
-    # -- Annotations applied to created service account
-    annotations: {}
-    # -- Automount API credentials for the Service Account
-    automountServiceAccountToken: true
 
   podSecurityContext: {}
 
@@ -109,10 +100,10 @@ monitorApi:
   resources:
     limits:
       cpu: 2000m
-      memory: 6Gi
+      memory: 4Gi
     requests:
       cpu: 2000m
-      memory: 6Gi
+      memory: 4Gi
 
 nodeSelector: {}
 tolerations: []
