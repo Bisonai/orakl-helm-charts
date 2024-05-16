@@ -38,6 +38,7 @@ roleRef:
 kind: CronJob
 apiVersion: batch/v1
 metadata:
+  namespace: orakl
   name: aggregator-restart-cronjob
 spec:
   schedule: "30 */2 * * *"  # every run at even hours 30 mins(14:30, 16:30, 18:30, ...)
@@ -56,9 +57,9 @@ spec:
             - /bin/sh
             - -c
             - |
-              kubectl scale deployment aggregator-reporter -n orakl --replicas=0
-              kubectl scale deployment aggregator-listener -n orakl --replicas=0
-              kubectl scale deployment aggregator-worker -n orakl --replicas=0
+              kubectl scale deployment orakl-aggregator-reporter -n orakl --replicas=0
+              kubectl scale deployment orakl-aggregator-listener -n orakl --replicas=0
+              kubectl scale deployment orakl-aggregator-worker -n orakl --replicas=0
           - name: redis-flushall
             image: bitnami/kubectl:latest
             command: 
@@ -72,7 +73,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              kubectl scale deployment aggregator-reporter -n orakl --replicas=1
-              kubectl scale deployment aggregator-listener -n orakl --replicas=1
-              kubectl scale deployment aggregator-worker -n orakl --replicas=1
+              kubectl scale deployment orakl-aggregator-reporter -n orakl --replicas=1
+              kubectl scale deployment orakl-aggregator-listener -n orakl --replicas=1
+              kubectl scale deployment orakl-aggregator-worker -n orakl --replicas=1
             

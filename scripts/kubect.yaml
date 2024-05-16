@@ -1,0 +1,47 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: orakl-kubectl-test
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list"]
+  - apiGroups: ["apps"]
+    resources: ["deployments/scale"]
+    verbs: ["patch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "exec"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: test-kubectl
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: orakl
+roleRef:
+  kind: ClusterRole
+  name: orakl-kubectl-test
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubectl
+  namespace: orakl
+spec:
+  #serviceAccountName: myuser1
+  containers:
+  - name: kubectl
+    image: bitnami/kubectl:1.24.6
+    command: ['sleep']
+    args: ['infinity'] 
