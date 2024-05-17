@@ -10,6 +10,10 @@ spec:
       app: {{ .Values.deployment.name }}
   template:
     metadata:
+      {{- with .Values.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}    
       labels:
         app: {{ .Values.deployment.name }}
     spec:
@@ -21,3 +25,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3001
+          command: ["/bin/sh","-c"]
+          args: [". /vault/secrets/config && node ./dist/main"]            
+          env:
+            - name: VAULT_ADDR
+              value: http://vault.vault.svc.cluster.local:8200/
+            - name: JWT_PATH
+              value: /var/run/secrets/kubernetes.io/serviceaccount/token
+            - name: VAULT_ROLE

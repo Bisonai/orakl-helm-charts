@@ -7,15 +7,15 @@ deployment:
   replicas: 1
   resources:
 
-  annotations: 
-    vault.hashicorp.com/agent-inject: 'true'
-    vault.hashicorp.com/role: 'orakl'
-    vault.hashicorp.com/agent-inject-template-config: |
-      {{ with secret "cypress/data/fe-api" -}}
-        #!/bin/bash
-          export SERVICE_POSTGRES_USER="{{ .Data.data.SERVICE_POSTGRES_USER }}"
-          export SERVICE_POSTGRES_HOST="{{ .Data.data.SERVICE_POSTGRES_HOST }}"
-          export SERVICE_POSTGRES_DATABASE="{{ .Data.data.SERVICE_POSTGRES_DATABASE }}"
-          export SERVICE_POSTGRES_PASSWORD="{{ .Data.data.SERVICE_POSTGRES_PASSWORD }}"
-          export SERVICE_POSTGRES_PORT="{{ .Data.data.SERVICE_POSTGRES_PORT }}"
-      {{- end }}  
+annotations: 
+  vault.hashicorp.com/agent-inject: 'true'
+  vault.hashicorp.com/role: 'orakl'
+  vault.hashicorp.com/agent-inject-template-config: |
+    {{ with secret "cypress/data/fe-api" -}}
+      #!/bin/bash
+        export SERVICE_POSTGRES_USER="{{ .Data.data.SERVICE_POSTGRES_USER }}"
+        export SERVICE_POSTGRES_HOST="{{ .Data.data.SERVICE_POSTGRES_HOST }}"
+        export SERVICE_POSTGRES_DATABASE="{{ .Data.data.SERVICE_POSTGRES_DATABASE }}"
+        export SERVICE_POSTGRES_PASSWORD="{{ .Data.data.SERVICE_POSTGRES_PASSWORD }}"
+        export SERVICE_POSTGRES_PORT="{{ .Data.data.SERVICE_POSTGRES_PORT }}"
+    {{- end }}  
