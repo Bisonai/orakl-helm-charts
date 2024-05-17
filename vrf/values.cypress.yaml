@@ -66,7 +66,7 @@ global:
     failureThreshold: 5
 
 listener:
-  enabled: true
+  enabled: false
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
