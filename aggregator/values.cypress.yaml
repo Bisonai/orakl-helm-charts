@@ -9,16 +9,33 @@ global:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
     listenerTag: "v0.5.1.20240223.0352.eec1c2d"
-    reporterTag: "v0.5.1.20240202.0856.9696813"
-    workerTag: "v0.5.1.20240122.0240.1672788"
+    reporterTag: "v0.5.1.20240223.0352.eec1c2d"
+    workerTag: "v0.5.1.20240223.0352.eec1c2d"
     imagePullPolicy: IfNotPresent
-    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
 
   secretManager:
     enabled: false
     secretId:
     versionId:
+
+  env:
+    - name: CHAIN
+      value: cypress
+    - name: LOG_LEVEL
+      value: debug  
+    - name: NODE_ENV
+      value: production
+    - name: ORAKL_NETWORK_API_URL
+      value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
+    - name: ORAKL_NETWORK_DELEGATOR_URL
+      value: http://orakl-delegator.orakl.svc.cluster.local/api/v1
+    - name: REDIS_HOST
+      value: redis-data-feed-master.redis.svc.cluster.local
+    - name: REDIS_PORT
+      value: "6379"
+    - name: PROVIDER_URL
+      value: http://172.0.100.230:8551
 
   gcpAutopilot:
     enabled: false
@@ -52,19 +69,13 @@ listener:
   enabled: true
   replicas: 1
   serviceAccount:
-    # -- Create a service account for the application controller
     create: true
-    # -- Service account name
     name: orakl-aggregator-listener
-    # -- Annotations applied to created service account
     annotations: {}
-    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
   APP_PORT: 4000
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
 
   resources:
@@ -73,60 +84,48 @@ listener:
       memory: 2Gi
     requests:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
 
 worker:
   enabled: true
   replicas: 1
   serviceAccount:
-    # -- Create a service account for the application controller
     create: true
-    # -- Service account name
     name: orakl-aggregator-worker
-    # -- Annotations applied to created service account
     annotations: {}
-    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
   APP_PORT: 5000
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
 
   resources:
     limits:
-      cpu: 1000m
+      cpu: 2000m
       memory: 2Gi
     requests:
-      cpu: 1000m
+      cpu: 2000m
       memory: 2Gi
 
 reporter:
   enabled: true
   replicas: 1
   serviceAccount:
-    # -- Create a service account for the application controller
     create: true
-    # -- Service account name
     name: orakl-aggregator-reporter
-    # -- Annotations applied to created service account
     annotations: {}
-    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
   APP_PORT: 6000
-
   podSecurityContext: {}
-
   containerSecurityContext: {}
 
   resources:
     limits:
-      cpu: 500m
+      cpu: 1000m
       memory: 1Gi
     requests:
-      cpu: 500m
+      cpu: 1000m
       memory: 1Gi
 
 nodeSelector: {}

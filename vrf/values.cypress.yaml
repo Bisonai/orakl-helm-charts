@@ -7,7 +7,7 @@ global:
 
   appName: orakl-vrf
   image:
-    repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
+    repository: public.ecr.aws/bisonai/orakl-core 
     pullPolicy: IfNotPresent
     listenerTag: "v0.5.1.20240223.0352.eec1c2d"
     reporterTag: "v0.5.1.20240223.0352.eec1c2d"
@@ -17,7 +17,20 @@ global:
     imagePullSecrets: []
 
   env:
-    LOG_LEVEL: info
+    - name: LOG_LEVEL
+      value: debug  
+    - name: NODE_ENV
+      value: production
+    - name: ORAKL_NETWORK_API_URL
+      value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
+    - name: CHAIN
+      value: cypress
+    - name: REDIS_HOST
+      value: redis-vrf-master.redis.svc.cluster.local
+    - name: REDIS_PORT
+      value: "6379"
+    - name: PROVIDER_URL
+      value: http://172.0.100.230:8551
 
   secretManager:
     enabled: false
@@ -38,7 +51,7 @@ global:
     enabled: true
     path: /
     initialDelaySeconds: 20
-    periodSeconds: 5
+    periodSeconds: 15
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
@@ -47,7 +60,7 @@ global:
     enabled: true
     path: /
     initialDelaySeconds: 20
-    periodSeconds: 5
+    periodSeconds: 15
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
@@ -74,10 +87,10 @@ listener:
   resources:
     limits:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
     requests:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
 
 worker:
   enabled: true
@@ -101,10 +114,10 @@ worker:
   resources:
     limits:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
     requests:
       cpu: 1000m
-      memory: 2Gi
+      memory: 1Gi
 
 reporter:
   enabled: true
