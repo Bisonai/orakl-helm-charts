@@ -21,17 +21,3 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3001
-          envFrom:
-            - secretRef:
-                name: {{ .Values.deployment.name }}-secrets
-          env:
-            - name: TLS_KEY_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.tlsSecretName }}
-                  key: tls.key
-            - name: TLS_CERT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.tlsSecretName }}
-                  key: tls.crt
