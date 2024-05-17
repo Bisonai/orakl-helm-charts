@@ -66,10 +66,10 @@ api:
   resources:
     limits:
       cpu: 3000m
-      memory: 5Gi
+      memory: 6Gi
     requests:
       cpu: 3000m
-      memory: 5Gi
+      memory: 6Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
