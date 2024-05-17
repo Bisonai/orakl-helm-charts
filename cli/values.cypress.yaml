@@ -22,14 +22,14 @@ global:
   podAnnotations: {}
   livenessProbe:
     enabled: true
-    initialDelaySeconds: 20
+    initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 5
     successThreshold: 1
     failureThreshold: 5
   readinessProbe:
     enabled: true
-    initialDelaySeconds: 20
+    initialDelaySeconds: 19
     periodSeconds: 5
     timeoutSeconds: 1
     successThreshold: 1
@@ -50,10 +50,10 @@ cli:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 400m
+      cpu: 500m
       memory: 1Gi
     requests:
-      cpu: 400m
+      cpu: 500m
       memory: 1Gi
 nodeSelector: {}
 tolerations: []
