@@ -1,0 +1,66 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: redis-data-feed
+  namespace: redis
+spec:
+  virtualhost:
+    fqdn: cypress.redis.data-feed.orakl.local
+    tls:
+      passthrough: true
+  tcpproxy:
+    services:
+    - name: redis-data-feed-master
+      port: 6379
+
+---
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: redis-vrf
+  namespace: redis
+spec:
+  virtualhost:
+    fqdn: cypress.redis.vrf.orakl.local
+    tls:
+      passthrough: true
+  tcpproxy:
+    services:
+    - name: redis-vrf-master
+      port: 6379
+
+
+---
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: redis-request-response
+  namespace: redis
+spec:
+  virtualhost:
+    fqdn: cypress.redis.request-response.orakl.local
+    tls:
+      passthrough: true
+  tcpproxy:
+    services:
+    - name: redis-request-response-master
+      port: 6379
+
+---
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: redis-fetcher
+  namespace: redis
+spec:
+  virtualhost:
+    fqdn: cypress.redis.fetcher.orakl.local
+    tls:
+      passthrough: true
+  tcpproxy:
+    services:
+    - name: redis-fetcher-master
+      port: 6379
