@@ -48,7 +48,7 @@ global:
   podAnnotations: {}
 
   livenessProbe:
-    enabled: true
+    enabled: false
     path: /
     initialDelaySeconds: 20
     periodSeconds: 15
