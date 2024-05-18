@@ -43,18 +43,18 @@ api:
   podSecurityContext: {}
   containerSecurityContext: {}
   env:
-    # - name: VAULT_ADDR
-    #   value: http://vault.vault.svc.cluster.local:8200/
-    # - name: JWT_PATH
-    #   value: /var/run/secrets/kubernetes.io/serviceaccount/token
-    # - name: VAULT_ROLE
-    #   value: orakl
-    # - name: VAULT_SECRET_PATH
-    #   value: baobab
+    - name: VAULT_ADDR
+      value: 
+    - name: JWT_PATH
+      value: 
+    - name: VAULT_ROLE
+      value: 
+    - name: VAULT_SECRET_PATH
+      value: 
     - name: VAULT_KEY_NAME
-      value: api
+      value: 
     - name: DATABASE_URL
-      value: le
+      value: 
     - name: ENCRYPT_PASSWORD
       value: 
     - name: APP_PORT
