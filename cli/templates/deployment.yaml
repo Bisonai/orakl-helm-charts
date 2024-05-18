@@ -95,7 +95,7 @@ spec:
             - name: ORAKL_NETWORK_FETCHER_URL
               value: http://orakl-fetcher.orakl.svc.cluster.local:4040/api/v1
             - name: ORAKL_NETWORK_DELEGATOR_URL
-              value: http://orakl-delegator.orakl.svc.cluster.local:5050/api/v1
+              value: http://orakl-delegator.orakl.svc.cluster.local:80/api/v1
             - name: LISTENER_SERVICE_HOST
               value: http://orakl-aggregator-listener.orakl.svc.cluster.local
             - name: LISTENER_SERVICE_PORT
