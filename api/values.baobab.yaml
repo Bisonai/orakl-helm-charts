@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240502.0445.de5dadf"
+    tag: "v0.0.1.20240518.1205.0ce7ace"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -33,26 +33,26 @@ global:
 api:
   replicas: 1
   annotations: 
-    # vault.hashicorp.com/agent-inject: 'false'
-    # vault.hashicorp.com/role: 'orakl'
-    # vault.hashicorp.com/agent-inject-template-config: |
-    #   {{ with secret "baobab/data/api" -}}
-    #     #!/bin/bash
-    #     export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
-    #   {{- end }}  
+    vault.hashicorp.com/agent-inject: 'false'
+    vault.hashicorp.com/role: 'baobab'
+    vault.hashicorp.com/agent-inject-template-config: |
+      {{ with secret "baobab/data/api" -}}
+        #!/bin/bash
+        export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
+      {{- end }}  
   podSecurityContext: {}
   containerSecurityContext: {}
   env:
     - name: VAULT_ADDR
-      value: 
+      value: http://100.0.100.164:8200/
     - name: JWT_PATH
-      value: 
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
-      value: 
+      value: baobab
     - name: VAULT_SECRET_PATH
-      value: 
+      value: baobab
     - name: VAULT_KEY_NAME
-      value: 
+      value: api
     - name: DATABASE_URL
       value: 
     - name: ENCRYPT_PASSWORD
