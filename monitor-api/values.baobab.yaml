@@ -73,12 +73,6 @@ monitorApi:
   containerSecurityContext: {}
 
   env:
-    - name: VAULT_ADDR
-      value: http://vault.vault.svc.cluster.local:8200/
-    - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token
-    - name: VAULT_ROLE
-      value: monitor
     - name: AGGREGATOR_REDIS_HOST
       value: baobab.redis.data-feed.orakl.local
     - name: AGGREGATOR_REDIS_PORT
