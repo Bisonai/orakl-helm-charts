@@ -28,10 +28,7 @@ deployment:
   env:
     - name: NETWORK
       value: "cypress"
-    - name: VAULT_ADDR
-      value: http://100.0.100.164:8200/
-    - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token
+
   resources:
     limits:
       cpu: 2000m
