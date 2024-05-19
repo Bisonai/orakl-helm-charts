@@ -33,9 +33,8 @@ global:
 api:
   replicas: 1
   annotations: 
-    vault.hashicorp.com/auth-path: "auth/orakl-baobab"
     vault.hashicorp.com/agent-inject: 'true'
-    vault.hashicorp.com/role: 'orakl-baobab'
+    vault.hashicorp.com/role: 'orakl'
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "baobab/data/api" -}}
         #!/bin/bash
@@ -45,13 +44,11 @@ api:
   containerSecurityContext: {}
   env:
     - name: VAULT_ADDR
-      value: http://100.0.100.164:8200/
-    - name: VAULT_AUTH_PATH
-      value: auth/orakl-baobab
+      value: http://172.0.100.165:8200/
     - name: JWT_PATH
       value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
-      value: orakl-baobab
+      value: orakl
     - name: VAULT_SECRET_PATH
       value: baobab
     - name: VAULT_KEY_NAME
