@@ -8,10 +8,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: 172.0.100.130
   share: /mnt/k8s
-  pure_export_rules: "*(rw,no_root_squash)"
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
-  - tcp
-allowVolumeExpansion: true
