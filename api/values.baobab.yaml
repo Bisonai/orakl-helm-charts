@@ -34,7 +34,7 @@ api:
   replicas: 1
   annotations: 
     vault.hashicorp.com/agent-inject: 'true'
-    vault.hashicorp.com/role: 'baobab'
+    vault.hashicorp.com/role: 'orakl-baobab'
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "baobab/data/api" -}}
         #!/bin/bash
