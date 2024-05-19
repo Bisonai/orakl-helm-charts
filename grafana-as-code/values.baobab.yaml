@@ -28,10 +28,6 @@ deployment:
   env:
     - name: NETWORK
       value: "baobab"
-    - name: VAULT_ADDR
-      value: http://vault.vault.svc.cluster.local:8200/
-    - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token
   resources:
     limits:
       cpu: 2000m
