@@ -48,7 +48,7 @@ api:
     - name: JWT_PATH
       value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
-      value: baobab
+      value: orakl-baobab
     - name: VAULT_SECRET_PATH
       value: baobab
     - name: VAULT_KEY_NAME
