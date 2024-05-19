@@ -46,6 +46,8 @@ api:
   env:
     - name: VAULT_ADDR
       value: http://100.0.100.164:8200/
+    - name: VAULT_AUTH_PATH
+      value: auth/orakl-baobab
     - name: JWT_PATH
       value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
