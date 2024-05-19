@@ -73,12 +73,6 @@ monitorApi:
   containerSecurityContext: {}
 
   env:
-    - name: VAULT_ADDR
-      value: http://100.0.100.164:8200/
-    - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token
-    - name: VAULT_ROLE
-      value: monitor
     - name: AGGREGATOR_REDIS_HOST
       value: cypress.redis.data-feed.orakl.local
     - name: AGGREGATOR_REDIS_PORT
