@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: {{ .Values.deployment.name }}
 spec:
-  clusterIP: None
   ports:
     - port: 3030
       name: http

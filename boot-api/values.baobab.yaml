@@ -47,24 +47,15 @@ bootApi:
       {{ with secret "baobab/data/boot-api" -}}
         #!/bin/bash
         export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
+        export PRIVATE_NETWORK_SECRET="{{ .Data.data.PRIVATE_NETWORK_SECRET }}"
       {{- end }}    
   env:
-    - name: USE_VAULT
-      value: "true"
-    - name: VAULT_ADDR
-      value: http://172.0.100.165:8200/
-    - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token
-    - name: VAULT_ROLE
-      value: orakl
-    - name: VAULT_SECRET_PATH
-      value: baobab
-    - name: VAULT_KEY_NAME
-      value: boot-api
     - name: BOOT_API_PORT
       value: "5050"      
     - name: DATABASE_URL
-      value:
+      value: 
+    - name: PRIVATE_NETWORK_SECRET
+      value: 
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
