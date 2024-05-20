@@ -7,6 +7,6 @@ spec:
   ports:
     - port: 3030
       targetPort: http
-      protocol: TCP
+      protocol: HTTP
   selector:
     app: {{ .Values.deployment.name }}
