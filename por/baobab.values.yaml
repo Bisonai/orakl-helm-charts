@@ -61,7 +61,10 @@ por:
       value: /var/run/secrets/kubernetes.io/serviceaccount/token              
     - name: VAULT_ROLE
       value: orakl    
-    - name: 
+    - name: VAULT_SECRET_PATH
+      value: baobab
+    - name: VAULT_KEY_NAME
+      value: por
 nodeSelector: {}
 tolerations: []
 dotenv: {}

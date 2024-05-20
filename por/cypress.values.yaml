@@ -61,6 +61,10 @@ por:
       value: /var/run/secrets/kubernetes.io/serviceaccount/token              
     - name: VAULT_ROLE
       value: orakl    
+    - name: VAULT_SECRET_PATH
+      value: cypress
+    - name: VAULT_KEY_NAME
+      value: por
 nodeSelector: {}
 tolerations: []
 dotenv: {}
