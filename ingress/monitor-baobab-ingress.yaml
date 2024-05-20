@@ -2,30 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: monitor-ingress
-  namespace: monitor
+  namespace: orakl-baobab
   labels:
     app: monitor-ingress
 spec:
-  ingressClassName: contour
-  rules:
-  - host: baobab.api.monitor.orakl.local
-    http:
-      paths:
-      - backend:
-          service:
-            name: orakl-monitor-api
-            port:
-              number: 8080
-        pathType: Prefix
-        path: /
-  
-  - host: baobab.monitor.orakl.local
-    http:
-      paths:
-      - backend:
-          service:
-            name: orakl-grafana-as-code
-            port:
-              number: 80
-        pathType: Prefix
-        path: /
+  ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: orakl-grafana-as-code
+      port:
+        number: 80
