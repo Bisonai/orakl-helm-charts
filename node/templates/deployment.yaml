@@ -55,6 +55,8 @@ spec:
           ports:
           - name: http
             containerPort: 3030
+          - name: tcp
+            containerPort: 10010
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
