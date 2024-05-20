@@ -13,6 +13,10 @@ global:
     enabled: false
     key: kubernetes.io/hostname
     value:
+<<<<<<< Updated upstream
+=======
+  podAnnotations: {}
+>>>>>>> Stashed changes
   livenessProbe:
     enabled: true
     path: /api/v1/
