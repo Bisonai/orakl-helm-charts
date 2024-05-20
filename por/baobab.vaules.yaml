@@ -10,7 +10,7 @@ global:
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   secretManager:
-    enabled: true
+    enabled: false
     secretId:
     versionId:
   affinity:
@@ -46,6 +46,22 @@ por:
     requests:
       cpu: 500m
       memory: 1Gi
+  env:
+    - name: LOG_LEVEL
+      value: "error"
+    - name: POR_PROVIDER_URL
+      value: "http://172.0.100.240:8551"
+    - name: POR_PORT
+      value: "3000"
+    - name: POR_CHAIN
+      value: "baobab"
+    - name: VAULT_ADDR
+      value: http://172.0.100.165:8200/
+    - name: JWT_PATH
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token              
+    - name: VAULT_ROLE
+      value: orakl    
+    - name: 
 nodeSelector: {}
 tolerations: []
 dotenv: {}
