@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-node
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240520.1128.8c30c2f"
+    tag: "v0.0.1.20240520.1256.852dc86"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -66,6 +66,8 @@ node:
       value: "10010"
     - name: KLAYTN_PROVIDER_URL
       value: "http://172.0.100.240:8551"
+    - name: ETH_PROVIDER_URL
+      value: "https://ethereum-mainnet-rpc.allthatnode.com"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xde8fb45ff8e330ccf8e5cc0913ee0143b2a0ebdb"
     - name: DELEGATOR_URL
