@@ -1,6 +1,6 @@
 ## argocd api notification set up
 
-export app=cli
+export app=boot-api
 
 kubectl patch app $app -n argocd -p '{"metadata": {"annotations": {"notifications.argoproj.io/subscribe.on-sync-succeeded.slack":"orakl-notification"}}}' --type merge
 
