@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240502.0445.de5dadf"
+    tag: "v0.0.1.20240518.1205.0ce7ace"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -44,7 +44,7 @@ api:
   containerSecurityContext: {}
   env:
     - name: VAULT_ADDR
-      value: http://vault.vault.svc.cluster.local:8200/
+      value: http://172.0.100.185:8200/
     - name: JWT_PATH
       value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE

@@ -1,6 +1,6 @@
 ## argocd api notification set up
 
-export app=redis-request-response
+export app=cli
 
 kubectl patch app $app -n argocd -p '{"metadata": {"annotations": {"notifications.argoproj.io/subscribe.on-sync-succeeded.slack":"orakl-argocd-notification"}}}' --type merge
 
@@ -23,8 +23,6 @@ message: |
   {{if eq .serviceType "slack"}}:white_check_mark:{{end}} *baobab* `{{.app.metadata.name}}` has been successfully synced at {{.app.status.operationState.finishedAt}}.
 slack:
   attachments: "[{\n  \"title\": \"{{ .app.metadata.name}}\",\n  \"title_link\":\"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}\",\n  \"color\": \"#18be52\",\n  \"fields\": [\n  {\n    \"title\": \"Sync Status\",\n    \"value\": \"{{.app.status.sync.status}}\",\n    \"short\": true\n  },\n  {\n    \"title\": \"Repository\",\n    \"value\": \"{{.app.spec.source.repoURL}}\",\n    \"short\": true\n  }\n  {{range $index, $c := .app.status.conditions}}\n  {{if not $index}},{{end}}\n  {{if $index}},{{end}}\n  {\n    \"title\": \"{{$c.type}}\",\n    \"value\": \"{{$c.message}}\",\n    \"short\": true\n  }\n  {{end}}\n  ]\n}]    "
-
-
 
 
 email:
