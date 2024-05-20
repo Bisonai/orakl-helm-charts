@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: {{ .Values.deployment.name }}
 spec:
-  type: ClusterIP
+  clusterIP: None
   ports:
     - port: 3030
-      targetPort: http
-      protocol: HTTP
+      name: http
+      protocol: TCP
+
   selector:
     app: {{ .Values.deployment.name }}
