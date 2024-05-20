@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: {{ .Values.deployment.name }}
 spec:
+  clusterIP: None
   ports:
     - port: 5050
       targetPort: http
       protocol: TCP
-  type: {{ .Values.bootApi.service.type }}
   selector:
     app: {{ .Values.deployment.name }}
