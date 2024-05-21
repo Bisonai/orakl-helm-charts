@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-por
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240520.0721.8a76ac8"
+    tag: "v0.0.1.20240520.1307.d9e79da"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   secretManager:
@@ -58,9 +58,9 @@ por:
     - name: VAULT_ADDR
       value: http://172.0.100.165:8200/
     - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token              
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
-      value: orakl    
+      value: orakl
     - name: VAULT_SECRET_PATH
       value: baobab
     - name: VAULT_KEY_NAME
