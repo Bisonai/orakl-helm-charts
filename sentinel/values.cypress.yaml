@@ -1,7 +1,7 @@
 ## created by Bisonai
 
 global:
-  name: por
+  name: sentinel
   namespace: orakl
   image:
     repository: public.ecr.aws/bisonai/orakl-sentinel
@@ -34,7 +34,7 @@ global:
     timeoutSeconds: 1
     successThreshold: 1
     failureThreshold: 5
-por:
+sentinel:
   annotations: {}
   replicas: 1
   podSecurityContext: {}
