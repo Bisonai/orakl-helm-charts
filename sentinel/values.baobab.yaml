@@ -1,0 +1,79 @@
+## created by Bisonai
+
+global:
+  name: por
+  namespace: orakl
+  image:
+    repository: public.ecr.aws/bisonai/orakl-sentinel
+    pullPolicy: IfNotPresent
+    tag: ""
+    imagePullPolicy: IfNotPresent
+    imagePullSecrets: []
+  secretManager:
+    enabled: false
+    secretId:
+    versionId:
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+  podAnnotations:
+  livenessProbe:
+    enabled: true
+    path: /api/v1
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    enabled: true
+    path: /api/v1
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+por:
+  annotations: {}
+  replicas: 1
+  podSecurityContext: {}
+  containerSecurityContext: {}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  env:
+    - name: LOG_LEVEL
+      value: "error"
+    - name: CHAIN
+      value: "baobab"
+    - name: JSON_RPC_URL
+      value: "http://172.0.100.240:8551"
+    - name: ORAKL_API_URL
+      value: ""
+    - name: ORAKL_NODE_ADMIN_URL
+      value: ""
+    - name: ORAKL_DELEGATOR_URL
+      value: ""
+    - name: POR_URL
+      value: ""
+    - name: VAULT_ADDR
+      value: http://172.0.100.165:8200/
+    - name: JWT_PATH
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
+    - name: VAULT_ROLE
+      value: orakl
+    - name: VAULT_SECRET_PATH
+      value: baobab
+    - name: VAULT_KEY_NAME
+      value: sentinel
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-sentinel
+  replicas: 1
