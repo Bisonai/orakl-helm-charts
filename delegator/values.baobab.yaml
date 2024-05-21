@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-delegator
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240516.0649.cea6666"
+    tag: "v0.0.1.20240521.0639.7c4dfd4"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   affinity:
@@ -37,17 +37,17 @@ global:
     enabled: false
     secretId:
     versionId:
-  
+
 delegator:
   replicas: 1
-  annotations: 
+  annotations:
     vault.hashicorp.com/agent-inject: 'true'
     vault.hashicorp.com/role: 'orakl'
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "baobab/data/delegator" -}}
         #!/bin/bash
         export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
-      {{- end }}  
+      {{- end }}
   podSecurityContext: {}
   containerSecurityContext: {}
   env:
@@ -66,7 +66,7 @@ delegator:
     - name: PROVIDER_URL
       value: http://172.0.100.240:8551
     - name: DATABASE_URL
-      value:       
+      value:
   resources:
     limits:
       cpu: 100m
