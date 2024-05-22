@@ -43,6 +43,7 @@ monitorApi:
   enabled: true
   replicas: 1
   annotations: 
+    vault.hashicorp.com/auth-path: "auth/monitor"  
     vault.hashicorp.com/agent-inject: 'true'
     vault.hashicorp.com/role: 'monitor'
     vault.hashicorp.com/agent-inject-template-config: |
