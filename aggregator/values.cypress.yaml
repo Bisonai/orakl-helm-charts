@@ -8,9 +8,9 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-core #repository url
     pullPolicy: IfNotPresent
-    listenerTag: "v0.5.1.20240223.0352.eec1c2d"
-    reporterTag: "v0.5.1.20240223.0352.eec1c2d"
-    workerTag: "v0.5.1.20240223.0352.eec1c2d"
+    listenerTag: "v0.5.1.20240403.0423.f813b61"
+    reporterTag: "v0.5.1.20240403.0423.f813b61"
+    workerTag: "v0.5.1.20240403.0423.f813b61"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
 
@@ -23,7 +23,7 @@ global:
     - name: CHAIN
       value: cypress
     - name: LOG_LEVEL
-      value: debug  
+      value: debug
     - name: NODE_ENV
       value: production
     - name: ORAKL_NETWORK_API_URL
