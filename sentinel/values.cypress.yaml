@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-sentinel
     pullPolicy: IfNotPresent
-    tag: ""
+    tag: "v0.0.1.20240522.0552.7b4f67b"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   secretManager:
@@ -52,15 +52,15 @@ sentinel:
     - name: CHAIN
       value: "baobab"
     - name: JSON_RPC_URL
-      value: "http://172.0.100.240:8551"
+      value: "http://172.0.100.230:8551"
     - name: ORAKL_API_URL
-      value: ""
+      value: "http://orakl-api.orakl.svc.cluster.local:3030/api/v1"
     - name: ORAKL_NODE_ADMIN_URL
-      value: ""
+      value: "http://orakl-node.orakl.svc.cluster.local:3030/api/v1"
     - name: ORAKL_DELEGATOR_URL
-      value: ""
+      value: "http://orakl-delegator.orakl.svc.cluster.local:80/api/v1"
     - name: POR_URL
-      value: ""
+      value: "http://orakl-por.orakl.svc.cluster.local:3000/api/v1"
     - name: VAULT_ADDR
       value: http://172.0.100.165:8200/
     - name: JWT_PATH
