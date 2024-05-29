@@ -8,3 +8,8 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   timeout.reconciliation: 10s
+  resource.customizations.ignoreDifferences.all: |
+    jsonPointers:
+    - /version
+    - /appVersion
+  
