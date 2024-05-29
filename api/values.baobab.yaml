@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240518.1205.0ce7ace"
+    tag: "v0.0.1.20240529.0117.29ebbe0"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -32,14 +32,14 @@ global:
     failureThreshold: 5
 api:
   replicas: 1
-  annotations: 
-    vault.hashicorp.com/agent-inject: 'true'
-    vault.hashicorp.com/role: 'orakl'
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "orakl"
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "baobab/data/api" -}}
         #!/bin/bash
         export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
-      {{- end }}  
+      {{- end }}
   podSecurityContext: {}
   containerSecurityContext: {}
   env:
@@ -54,9 +54,9 @@ api:
     - name: VAULT_KEY_NAME
       value: api
     - name: DATABASE_URL
-      value: 
+      value:
     - name: ENCRYPT_PASSWORD
-      value: 
+      value:
     - name: APP_PORT
       value: "3030"
     - name: REDIS_HOST
