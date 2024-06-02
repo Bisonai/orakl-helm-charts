@@ -1,0 +1,21 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: orakl-delegator
+  namespace: orakl 
+spec:
+  virtualhost:
+    fqdn: baobab.delegator.orakl.network
+    ipAllowPolicy:
+      - cidr: 127.0.0.1/32
+        source: Peer
+      - cidr: 34.64.182.160/32
+        source: Remote
+      - cidr: 0.0.0.0/0
+        source: Remote
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+      - name: orakl-delegator
+        port: 80

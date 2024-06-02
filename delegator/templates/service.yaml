@@ -5,7 +5,8 @@ metadata:
   labels:
     app: {{ .Values.deployment.name }}
 spec:
-  type: ClusterIP
+  type: LoadBalancer
+  loadBalancerClass: tailscale
   ports:
     - port: 80
       targetPort: http
