@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: {{ .Values.deployment.name }}
 spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
   ports:
     - port: 3030
       name: http
