@@ -7,6 +7,7 @@ spec:
     - port: 5050
       targetPort: http
       protocol: TCP
-  type: {{ .Values.bootApi.service.type }}
+  type: LoadBalancer
+  loadBalancerClass: tailscale      
   selector:
     app: {{ .Values.deployment.name }}
