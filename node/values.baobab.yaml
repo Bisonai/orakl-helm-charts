@@ -16,7 +16,7 @@ global:
     value:
   podAnnotations: {}
   livenessProbe:
-    enabled: true
+    enabled: false
     path: /api/v1/
     initialDelaySeconds: 10
     periodSeconds: 5
@@ -24,7 +24,7 @@ global:
     successThreshold: 1
     failureThreshold: 5
   readinessProbe:
-    enabled: true
+    enabled: false
     path: /api/v1/
     initialDelaySeconds: 10
     periodSeconds: 5
