@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-node
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240605.0714.dba5cc0"
+    tag: "v0.0.1.20240605.0215.bf0c55c"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -76,8 +76,7 @@ node:
       value: "baobab"
     - name: BOOT_API_URL
       value: "http://100.107.229.9:5050"   
-    - name: HOST_IP
-      value: "100.126.168.82"
+
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
