@@ -75,7 +75,7 @@ node:
     - name: CHAIN
       value: "baobab"
     - name: BOOT_API_URL
-      value: "http://10.244.1.213:5050"   
+      value: "http://orakl-boot-api.orakl.svc.cluster.local:5050"   
 
   replicas: 1
   podSecurityContext: {}
