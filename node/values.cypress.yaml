@@ -1,0 +1,95 @@
+## Klaytn Orakl Api Configuration
+## created by Bisonai
+global:
+  name: orakl-node
+  namespace: orakl
+  image:
+    repository: public.ecr.aws/bisonai/orakl-node
+    pullPolicy: IfNotPresent
+    tag: "v0.0.1.20240605.0215.bf0c55c"
+    imagePullPolicy: IfNotPresent
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+    imagePullSecrets: []
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+  podAnnotations: {}
+  livenessProbe:
+    enabled: false
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    enabled: false
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+node:
+  enabled: true
+  annotations: 
+    vault.hashicorp.com/agent-inject: 'true'
+    vault.hashicorp.com/role: 'orakl'
+    vault.hashicorp.com/agent-inject-template-config: |
+      {{ with secret "cypress/data/orakl-node" -}}
+        #!/bin/bash
+        export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
+      {{- end }}      
+  env:
+    - name: USE_VAULT
+      value: "true"
+    - name: VAULT_ADDR
+      value: http://172.0.100.185:8200/
+    - name: JWT_PATH
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
+    - name: VAULT_ROLE
+      value: orakl
+    - name: VAULT_SECRET_PATH
+      value: cypress
+    - name: VAULT_KEY_NAME
+      value: orakl-node
+    - name: LOG_LEVEL
+      value: "debug"
+    - name: APP_PORT
+      value: "3030"
+    - name: REDIS_HOST
+      value: "redis-node-master.redis.svc.cluster.local"
+    - name: REDIS_PORT
+      value: "6379"
+    - name: LISTEN_PORT
+      value: "10010"
+    - name: KLAYTN_PROVIDER_URL
+      value: "http://172.0.100.230:8551"
+    - name: ETH_PROVIDER_URL
+      value: "https://ethereum-mainnet-rpc.allthatnode.com"
+    - name: SUBMISSION_PROXY_CONTRACT
+      value: "0xbfdb0c7f84b494272278cdad77de21634c395eda"
+    - name: DELEGATOR_URL
+      value: "http://orakl-delegator.orakl.svc.cluster.local"
+    - name: CHAIN
+      value: "baobab"
+    - name: BOOT_API_URL
+      value: "http://orakl-boot-api.orakl.svc.cluster.local:5050"   
+
+  replicas: 1
+  podSecurityContext: {}
+  containerSecurityContext: {}
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+    requests:
+      cpu: 2000m
+      memory: 4Gi
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-node
+  replicas: 1
