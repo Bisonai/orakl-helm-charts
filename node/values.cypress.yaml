@@ -73,7 +73,7 @@ node:
     - name: DELEGATOR_URL
       value: "http://orakl-delegator.orakl.svc.cluster.local"
     - name: CHAIN
-      value: "baobab"
+      value: "cypress"
     - name: BOOT_API_URL
       value: "http://orakl-boot-api.orakl.svc.cluster.local:5050"   
 
