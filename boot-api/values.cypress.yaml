@@ -52,7 +52,7 @@ bootApi:
     - name: USE_VAULT
       value: "true"
     - name: VAULT_ADDR
-      value: ttp://172.0.100.185:8200/
+      value: http://172.0.100.185:8200/
     - name: JWT_PATH
       value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
