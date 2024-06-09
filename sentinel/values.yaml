@@ -1,0 +1,92 @@
+## Orakl Sentinel Helm Chart
+## created by Bisonai
+global:
+  name: orakl-sentinel
+  namespace: orakl
+
+  image:
+    repository: public.ecr.aws/bisonai/orakl-sentinel
+    pullPolicy: IfNotPresent
+    tag: "v0.0.1.20240522.0552.7b4f67b"
+    imagePullPolicy: IfNotPresent
+    imagePullSecrets: []
+
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value: "orakl-sentinel"
+
+  podAnnotations: {}
+
+  livenessProbe:
+    enabled: true
+    path: /api/v1
+    port: 3000
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+
+  readinessProbe:
+    enabled: true
+    path: /api/v1
+    port: 3000
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+
+sentinel:
+  enabled: true
+  replicas: 1
+  annotations: {}
+  serviceAccount:
+    create: false
+    name:
+    annotations: {}
+    automountServiceAccountToken: true
+
+  podSecurityContext: {}
+
+  containerSecurityContext: {}
+
+  env:
+    - name: LOG_LEVEL
+      value: error
+    - name: CHAIN
+      value: baobab
+    - name: HEALTH_CHECK_INTERVAL
+      value: "10s"
+    - name: BALANCE_CHECK_INTERVAL
+      value: "10s"
+    - name: BALANCE_ALARM_INTERVAL
+      value: "30m"
+    - name: SUBMITTER_ALARM_AMOUNT
+      value: "25"
+    - name: DELEGATOR_ALARM_AMOUNT
+      value: "10000"
+    - name: JSON_RPC_URL
+      value:
+    - name: ORAKL_API_URL
+      value:
+    - name: ORAKL_NODE_ADMIN_URL
+      value:
+    - name: ORAKL_DELEGATOR_URL
+      value:
+    - name: POR_URL
+      value:
+    - name: SLACK_WEBHOOK_URL
+      value:
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 1000m
+      memory: 2Gi
+
+nodeSelector: {}
+tolerations: []
+dotenv: {}

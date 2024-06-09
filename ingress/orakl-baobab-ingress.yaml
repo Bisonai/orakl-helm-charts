@@ -7,12 +7,22 @@ metadata:
     app: orakl-ingress
   annotations:
     projectcontour.io/ingress.class: "contour"
-    ngress.kubernetes.io/whitelist-source-range: "34.64.166.21/32" 
-    
+
 spec:
   ingressClassName: contour
   rules:
-  - host: baobab.delegator.orakl.network
+  - host: baobab.pod-api.orakl.network
+    http:
+      paths:
+      - backend:
+          service:
+            name: orakl-api
+            port:
+              number: 3030
+        pathType: Prefix
+        path: /
+  
+  - host: baobab.pod-delegator.orakl.network
     http:
       paths:
       - backend:
@@ -22,47 +32,25 @@ spec:
               number: 80
         pathType: Prefix
         path: /
-  
-  - host: baobab.boot-api.orakl.network
+
+  - host: baobab.pod-node.orakl.network
     http:
       paths:
-      - backend:
-          service:
-            name: orakl-boot-api
-            port:
-              number: 5050
-        pathType: Prefix
-        path: /
+        - backend:
+            service:
+              name: orakl-node
+              port:
+                number: 3030
+          pathType: Prefix
+          path: /
 
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: default-deny-ingress
-spec:
-  podSelector: {}
-  policyTypes:
-  - Ingress
-
---- 
-
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-klaytn-node-ip
-  namespace: orakl
-spec:
-  podSelector:
-    matchLabels:
-      app: orakl-delegator
-  policyTypes:
-  - Ingress
-  ingress:
-  - from:
-    - ipBlock:
-        cidr: 34.64.166.21/32
-    ports:
-    - protocol: TCP
-      port: 80
-    - protocol: TCP
-      port: 5050
+  - host: baobab.pod-por.orakl.network
+    http:
+      paths:
+        - backend:
+            service:
+              name: orakl-por
+              port:
+                number: 3000
+          pathType: Prefix
+          path: /

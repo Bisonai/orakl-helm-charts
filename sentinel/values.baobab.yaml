@@ -1,0 +1,102 @@
+## Orakl Sentinel Helm Chart
+## created by Bisonai
+global:
+  name: orakl-sentinel
+  namespace: orakl-baobab
+
+  image:
+    repository: public.ecr.aws/bisonai/orakl-sentinel
+    pullPolicy: IfNotPresent
+    tag: "v0.0.1.20240522.0552.7b4f67b"
+    imagePullPolicy: IfNotPresent
+    imagePullSecrets: []
+
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value: "orakl-sentinel"
+
+  podAnnotations: {}
+
+  livenessProbe:
+    enabled: true
+    path: /api/v1
+    port: 3000
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+
+  readinessProbe:
+    enabled: true
+    path: /api/v1
+    port: 3000
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+
+app:
+  enabled: true
+  replicas: 1
+  annotations:
+    vault.hashicorp.com/auth-path: "auth/monitor"
+    vault.hashicorp.com/agent-inject: 'true'
+    vault.hashicorp.com/role: 'monitor'
+    vault.hashicorp.com/agent-inject-template-config: |
+      {{ with secret "monitor/data/baobab" -}}
+        #!/bin/bash
+        export SLACK_WEBHOOK_URL="{{ .Data.data.SLACK_WEBHOOK_URL }}"
+      {{- end }}
+  serviceAccount:
+    create: false
+    name:
+    annotations: {}
+    automountServiceAccountToken: true
+
+  podSecurityContext: {}
+
+  containerSecurityContext: {}
+
+  port: "3000"
+
+  args: ["sentinelbin"]
+
+  env:
+    - name: LOG_LEVEL
+      value: error
+    - name: CHAIN
+      value: baobab
+    - name: HEALTH_CHECK_INTERVAL
+      value: "10s"
+    - name: BALANCE_CHECK_INTERVAL
+      value: "10s"
+    - name: BALANCE_ALARM_INTERVAL
+      value: "30m"
+    - name: SUBMITTER_ALARM_AMOUNT
+      value: "25"
+    - name: DELEGATOR_ALARM_AMOUNT
+      value: "10000"
+    - name: JSON_RPC_URL
+      value: http://172.0.100.240:8551
+    - name: ORAKL_API_URL
+      value: http://baobab.pod-api.orakl.network
+    - name: ORAKL_NODE_ADMIN_URL
+      value: http://baobab.pod-node.orakl.network
+    - name: ORAKL_DELEGATOR_URL
+      value: http://baobab.pod-delegator.orakl.network
+    - name: POR_URL
+      value: http://baobab.pod-por.orakl.network
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 1000m
+      memory: 2Gi
+
+nodeSelector: {}
+tolerations: []
+dotenv: {}

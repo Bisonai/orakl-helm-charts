@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: pod-api
+  namespace: orakl
+spec:
+  rules:
+  - host: baobab.pod-api.orakl.network
+    http:
+      paths:
+      - backend:
+          serviceName: orakl-api
+          servicePort: 3030
