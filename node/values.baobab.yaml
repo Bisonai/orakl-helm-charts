@@ -75,9 +75,9 @@ node:
     - name: CHAIN
       value: "baobab"
     - name: BOOT_API_URL
-      value: "http://100.107.229.9:5050"
+      value: "http://100.70.132.44:5050"
     - name: HOST_IP
-      value: "100.120.75.71"
+      value: "100.85.52.98"
 
   replicas: 1
   podSecurityContext: {}
