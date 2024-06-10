@@ -65,11 +65,11 @@ api:
       value: "6379"
   resources:
     limits:
-      cpu: 3000m
-      memory: 6Gi
+      cpu: 2000m
+      memory: 4Gi
     requests:
-      cpu: 3000m
-      memory: 6Gi
+      cpu: 2000m
+      memory: 4Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
