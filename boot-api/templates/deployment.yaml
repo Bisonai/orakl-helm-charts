@@ -85,8 +85,6 @@ spec:
           imagePullPolicy: Always
           image: "ghcr.io/tailscale/tailscale:latest"
           env:
-            - name: TS_KUBE_SECRET
-              value: "tailscale-auth"
             - name: TS_DEBUG_FIREWALL_MODE
               value: "auto"
             - name: TS_USERSPACE
