@@ -34,14 +34,39 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-              - key: {{ .Values.global.affinity.key }}
-                operator: In
-                values:
-                - {{ .Values.global.affinity.value }}
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: {{ .Values.global.affinity.key }}
+                    operator: In
+                    values:
+                      - {{ .Values.global.affinity.value }}
       {{- end }}
+      initContainers:
+        - name: ts-sidecar-init
+          imagePullPolicy: Always
+          image: "ghcr.io/tailscale/tailscale:latest"
+          env:
+            - name: TS_KUBE_SECRET
+              value: "tailscale-auth"
+            - name: TS_DEBUG_FIREWALL_MODE
+              value: "auto"
+            - name: TS_USERSPACE
+              value: "true"
+            - name: TS_EXTRA_ARGS
+              value: "--advertise-tags=tag:orakl"
+            - name: TS_AUTHKEY
+              valueFrom:
+                secretKeyRef:
+                  name: tailscale-auth
+                  key: TS_AUTHKEY
+                  optional: true
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN", "NET_RAW", "SYS_MODULE"]
+          command: ["/bin/sh", "-c"]
+          args: ["tailscale up --authkey=${TS_AUTHKEY} && while ! tailscale status; do sleep 1; done"]
+
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -53,10 +78,10 @@ spec:
           env:
             {{- toYaml .Values.node.env | nindent 12 }}
           ports:
-          - name: http
-            containerPort: 3030
-          - name: tcp
-            containerPort: 10010
+            - name: http
+              containerPort: 3030
+            - name: tcp
+              containerPort: 10010
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
@@ -81,27 +106,6 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.node.resources | nindent 12 }}
-        - name: ts-sidecar
-          imagePullPolicy: Always
-          image: "ghcr.io/tailscale/tailscale:latest"
-          env:
-            - name: TS_KUBE_SECRET
-              value: "tailscale-auth"
-            - name: TS_DEBUG_FIREWALL_MODE
-              value: "auto"
-            - name: TS_USERSPACE
-              value: "true"
-            - name: TS_EXTRA_ARGS
-              value: "--advertise-tags=tag:orakl"
-            - name: TS_AUTHKEY
-              valueFrom:
-                secretKeyRef:
-                  name: tailscale-auth
-                  key: TS_AUTHKEY
-                  optional: true
-          securityContext:
-            capabilities:
-              add: ["NET_ADMIN", "NET_RAW", "SYS_MODULE"]
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
