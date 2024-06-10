@@ -8,7 +8,6 @@ spec:
       targetPort: http
       protocol: TCP
   externalTrafficPolicy: Local      
-  type: LoadBalancer
-  loadBalancerClass: tailscale      
+  type: ClusterIP
   selector:
     app: {{ .Values.deployment.name }}
