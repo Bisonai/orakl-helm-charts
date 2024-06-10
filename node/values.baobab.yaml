@@ -73,7 +73,7 @@ node:
     - name: CHAIN
       value: "baobab"
     - name: BOOT_API_URL
-      value: "http://100.70.132.44:5050"
+      value: "http://100.65.163.2:5050"
     - name: HOST_IP
       value: "100.98.248.96"
 
