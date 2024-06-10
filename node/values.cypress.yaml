@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-node
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240607.0636.1644ed6"
+    tag: "v0.0.1.20240605.0215.bf0c55c"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -75,7 +75,9 @@ node:
     - name: CHAIN
       value: "cypress"
     - name: BOOT_API_URL
-      value: "http://orakl-boot-api.orakl.svc.cluster.local:5050"
+      value: "http://100.75.66.35:5050"
+    - name: HOST_IP
+      value: "100.80.108.6"
 
   replicas: 1
   podSecurityContext: {}
