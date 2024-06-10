@@ -71,6 +71,8 @@ app:
       value: "25"
     - name: DELEGATOR_ALARM_AMOUNT
       value: "10000"
+    - name: SUBMISSION_PROXY_CONTRACT
+      value: "0xbfdb0c7f84b494272278cdad77de21634c395eda"
     - name: JSON_RPC_URL
       value:
     - name: ORAKL_API_URL
