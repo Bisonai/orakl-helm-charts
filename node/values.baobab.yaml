@@ -62,8 +62,8 @@ node:
       value: "redis-node-master.redis.svc.cluster.local"
     - name: REDIS_PORT
       value: "6379"
-    - name: LISTEN_PORT
-      value: "10010"
+#    - name: LISTEN_PORT
+#      value: "10010"
     - name: KLAYTN_PROVIDER_URL
       value: "http://172.0.100.240:8551"
     - name: ETH_PROVIDER_URL

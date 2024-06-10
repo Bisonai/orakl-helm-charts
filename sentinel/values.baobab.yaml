@@ -47,7 +47,6 @@ app:
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "baobab/data/monitor" -}}
         #!/bin/bash
-        export SLACK_WEBHOOK_URL="{{ .Data.data.SLACK_WEBHOOK_URL }}"
         export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
       {{- end }}
   serviceAccount:

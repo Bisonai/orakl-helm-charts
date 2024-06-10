@@ -4,8 +4,7 @@ metadata:
   name: {{ .Values.deployment.name }}
 spec:
   externalTrafficPolicy: Local
-  type: LoadBalancer
-  loadBalancerClass: tailscale
+  type: ClusterIP
   ports:
     - port: 3030
       name: http
