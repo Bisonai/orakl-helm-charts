@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: {{ .Values.global.name }}
     app.kubernetes.io/instance: {{ .Values.global.name }}
 spec:
-  replicas: {{ .Values.monitorApi.replicas }}
+  replicas: {{ .Values.app.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.global.name }}
@@ -29,7 +29,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.monitorApi.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.app.podSecurityContext | nindent 8 }}
       {{- if .Values.global.affinity.enabled }}
       affinity:
         nodeAffinity:
@@ -46,11 +46,11 @@ spec:
         - name: {{ .Values.global.name }}
           securityContext:
             {{- toYaml .Values.app.containerSecurityContext | nindent 12 }}
-          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default v0.0.1.20240522.0552.7b4f67b }}"
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           command: ["/bin/sh","-c"]
-          args: {{ .Values.app.args | nindent 12 }}
-          env: {{- toYaml .Values.api.env | nindent 12 }}
+          args: [{{ .Values.app.args | nindent 12 }}]
+          env: {{- toYaml .Values.app.env | nindent 12 }}
           ports:
           - name: http
             containerPort: {{ .Values.app.port }}

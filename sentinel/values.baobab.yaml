@@ -2,7 +2,7 @@
 ## created by Bisonai
 global:
   name: orakl-sentinel
-  namespace: orakl-baobab
+  namespace: orakl
 
   image:
     repository: public.ecr.aws/bisonai/orakl-sentinel
@@ -42,13 +42,13 @@ app:
   enabled: true
   replicas: 1
   annotations:
-    vault.hashicorp.com/auth-path: "auth/monitor"
     vault.hashicorp.com/agent-inject: 'true'
-    vault.hashicorp.com/role: 'monitor'
+    vault.hashicorp.com/role: 'orakl'
     vault.hashicorp.com/agent-inject-template-config: |
-      {{ with secret "monitor/data/baobab" -}}
+      {{ with secret "baobab/data/monitor" -}}
         #!/bin/bash
         export SLACK_WEBHOOK_URL="{{ .Data.data.SLACK_WEBHOOK_URL }}"
+        export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
       {{- end }}
   serviceAccount:
     create: false
@@ -62,9 +62,19 @@ app:
 
   port: "3000"
 
-  args: ["sentinelbin"]
+  args: "sentinelbin"
 
   env:
+    - name: VAULT_ADDR
+      value: http://172.0.100.165:8200/
+    - name: JWT_PATH
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
+    - name: VAULT_ROLE
+      value: orakl
+    - name: VAULT_SECRET_PATH
+      value: baobab
+    - name: VAULT_KEY_NAME
+      value: monitor
     - name: LOG_LEVEL
       value: error
     - name: CHAIN
@@ -79,16 +89,18 @@ app:
       value: "25"
     - name: DELEGATOR_ALARM_AMOUNT
       value: "10000"
+    - name: EVENT_CHECK_INTERVAL
+      value: "60s"
     - name: JSON_RPC_URL
       value: http://172.0.100.240:8551
     - name: ORAKL_API_URL
-      value: http://baobab.pod-api.orakl.network
+      value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
     - name: ORAKL_NODE_ADMIN_URL
-      value: http://baobab.pod-node.orakl.network
+      value: http://orakl-node.orakl.svc.cluster.local:3030/api/v1
     - name: ORAKL_DELEGATOR_URL
-      value: http://baobab.pod-delegator.orakl.network
+      value: http://orakl-delegator.orakl.svc.cluster.local/api/v1
     - name: POR_URL
-      value: http://baobab.pod-por.orakl.network
+      value: http://orakl-por.orakl.svc.cluster.local:3000/api/v1
   resources:
     limits:
       cpu: 1000m

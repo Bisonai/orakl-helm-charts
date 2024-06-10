@@ -1,1 +1,1 @@
-Welcome to orakl-monitor-api
+Welcome to orakl sentinel
