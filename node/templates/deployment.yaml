@@ -82,23 +82,6 @@ spec:
           resources:
             {{- toYaml .Values.node.resources | nindent 12 }}
 
-        - name: ts-sidecar
-          imagePullPolicy: Always
-          image: "ghcr.io/tailscale/tailscale:latest"
-          env:
-            - name: TS_KUBE_SECRET
-              value: ""
-            - name: TS_DEBUG_FIREWALL_MODE
-              value: "auto"
-            - name: TS_USERSPACE
-              value: "false"
-            - name: TS_EXTRA_ARGS
-              value: "--advertise-tags=tag:orakl"
-
-          securityContext:
-            capabilities:
-              add: ["NET_ADMIN", "NET_RAW", "SYS_MODULE"]
-
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
