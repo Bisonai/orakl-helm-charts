@@ -91,7 +91,7 @@ spec:
             - name: TS_DEBUG_FIREWALL_MODE
               value: "auto"
             - name: TS_USERSPACE
-              value: "true"
+              value: "false"
             - name: TS_EXTRA_ARGS
               value: "--advertise-tags=tag:orakl"
             - name: TS_AUTHKEY
