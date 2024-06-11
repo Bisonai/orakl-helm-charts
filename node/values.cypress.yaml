@@ -55,7 +55,7 @@ node:
     - name: VAULT_KEY_NAME
       value: orakl-node
     - name: LOG_LEVEL
-      value: "error"
+      value: "info"
     - name: APP_PORT
       value: "3030"
     - name: REDIS_HOST
