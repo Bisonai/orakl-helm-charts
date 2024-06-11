@@ -55,7 +55,7 @@ node:
     - name: VAULT_KEY_NAME
       value: orakl-node
     - name: LOG_LEVEL
-      value: "debug"
+      value: "error"
     - name: APP_PORT
       value: "3030"
     - name: REDIS_HOST
@@ -75,7 +75,7 @@ node:
     - name: CHAIN
       value: "cypress"
     - name: BOOT_API_URL
-      value: "http://100.75.66.35:5050"
+      value: "http://100.72.39.118:5050"
     - name: HOST_IP
       value: "100.80.108.6"
 
