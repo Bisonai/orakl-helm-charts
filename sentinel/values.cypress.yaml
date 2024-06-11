@@ -2,12 +2,12 @@
 ## created by Bisonai
 global:
   name: orakl-sentinel
-  namespace: orakl-baobab
+  namespace: orakl
 
   image:
     repository: public.ecr.aws/bisonai/orakl-sentinel
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240522.0552.7b4f67b"
+    tag: "v0.0.1.20240610.0137.ac29ed2"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
 
@@ -41,7 +41,14 @@ global:
 app:
   enabled: true
   replicas: 1
-  annotations: {}
+  annotations:
+    vault.hashicorp.com/agent-inject: 'true'
+    vault.hashicorp.com/role: 'orakl'
+    vault.hashicorp.com/agent-inject-template-config: |
+      {{ with secret "cypress/data/monitor" -}}
+        #!/bin/bash
+        export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
+      {{- end }}
   serviceAccount:
     create: false
     name:
@@ -54,9 +61,19 @@ app:
 
   port: "3000"
 
-  args: [". /vault/secrets/config && ./start-go.sh sentinelbin"]
+  args: "sentinelbin"
 
   env:
+    - name: VAULT_ADDR
+      value: http://172.0.100.185:8200/
+    - name: JWT_PATH
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
+    - name: VAULT_ROLE
+      value: orakl
+    - name: VAULT_SECRET_PATH
+      value: cypress
+    - name: VAULT_KEY_NAME
+      value: monitor
     - name: LOG_LEVEL
       value: error
     - name: CHAIN
@@ -71,18 +88,19 @@ app:
       value: "25"
     - name: DELEGATOR_ALARM_AMOUNT
       value: "10000"
+    - name: EVENT_CHECK_INTERVAL
+      value: "60s"
     - name: JSON_RPC_URL
-      value:
+      value: http://172.0.100.230:8551
     - name: ORAKL_API_URL
-      value:
+      value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
     - name: ORAKL_NODE_ADMIN_URL
-      value:
+      value: http://orakl-node.orakl.svc.cluster.local:3030/api/v1
     - name: ORAKL_DELEGATOR_URL
-      value:
+      value: http://orakl-delegator.orakl.svc.cluster.local/api/v1
     - name: POR_URL
-      value:
-    - name: SLACK_WEBHOOK_URL
-      value:
+      value: http://orakl-por.orakl.svc.cluster.local:3000/api/v1
+    - name:
   resources:
     limits:
       cpu: 1000m
