@@ -81,7 +81,7 @@ app:
     - name: HEALTH_CHECK_INTERVAL
       value: "10s"
     - name: BALANCE_CHECK_INTERVAL
-      value: "10s"
+      value: "60s"
     - name: BALANCE_ALARM_INTERVAL
       value: "30m"
     - name: SUBMITTER_ALARM_AMOUNT
