@@ -1,4 +1,4 @@
-## Klaytn Orakl Api Configuration
+## Kaia Orakl Api Configuration
 ## created by Bisonai
 global:
   name: orakl-node
@@ -33,14 +33,14 @@ global:
     failureThreshold: 5
 node:
   enabled: true
-  annotations: 
-    vault.hashicorp.com/agent-inject: 'true'
-    vault.hashicorp.com/role: 'orakl'
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "orakl"
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "cypress/data/orakl-node" -}}
         #!/bin/bash
         export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
-      {{- end }}      
+      {{- end }}
   env:
     - name: USE_VAULT
       value: "true"
@@ -64,7 +64,7 @@ node:
       value: "6379"
     - name: LISTEN_PORT
       value: "10010"
-    - name: KLAYTN_PROVIDER_URL
+    - name: KAIA_PROVIDER_URL
       value: "http://172.0.100.230:8551"
     - name: ETH_PROVIDER_URL
       value: "34.126.104.218:4000"
