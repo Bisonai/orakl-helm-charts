@@ -67,9 +67,9 @@ node:
     - name: KLAYTN_PROVIDER_URL
       value: "http://172.0.100.230:8551"
     - name: ETH_PROVIDER_URL
-      value: "34.126.104.218:4000"
+      value: "http://34.126.104.218:4000"
     - name: FETCHER_ETHEREUM_PROVIDER_URL
-      value: "34.126.104.218:4000"
+      value: "http://34.126.104.218:4000"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xbfdb0c7f84b494272278cdad77de21634c395eda"
     - name: DELEGATOR_URL
