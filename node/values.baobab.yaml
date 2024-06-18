@@ -65,9 +65,9 @@ node:
     - name: KLAYTN_PROVIDER_URL
       value: "http://172.0.100.240:8551"
     - name: ETH_PROVIDER_URL
-      value: "https://ethereum-mainnet.g.allthatnode.com/full/evm"
+      value: "34.142.228.64:4000"
     - name: FETCHER_ETHEREUM_PROVIDER_URL
-      value: "https://ethereum-mainnet.g.allthatnode.com/full/evm"
+      value: "34.142.228.64:4000"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xde8fb45ff8e330ccf8e5cc0913ee0143b2a0ebdb"
     - name: DELEGATOR_URL
