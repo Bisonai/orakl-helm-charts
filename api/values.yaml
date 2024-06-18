@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240315.0618.c907cbb"
+    tag: "v0.0.1.20240610.0158.454500a"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -32,10 +32,22 @@ global:
     successThreshold: 1
     failureThreshold: 5
 api:
+  secreatmanager: true
   enabled: true
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
+  env: 
+    - name: DATABASE_URL
+      value:
+    - name: ENCRYPT_PASSWORD
+      value:
+    - name: APP_PORT
+      value: "3030"
+    - name: REDIS_HOST
+      value: 
+    - name: REDIS_PORT
+      value: 
   resources:
     limits:
       cpu: 2000m
