@@ -134,6 +134,35 @@ reporter:
       cpu: 500m
       memory: 1Gi
 
+core:
+  enabled: true
+  replicas: 1
+  serviceAccount:
+    # -- Create a service account for the application controller
+    create: true
+    # -- Service account name
+    name: orakl-request-response-core
+    # -- Annotations applied to created service account
+    annotations: {}
+    # -- Automount API credentials for the Service Account
+    automountServiceAccountToken: true
+
+  LISTENER_PORT: 4000
+  WORKER_PORT: 5000
+  REPORTER_PORT: 6000
+
+  podSecurityContext: {}
+
+  containerSecurityContext: {}
+
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 1000m
+      memory: 1Gi
+
 nodeSelector: {}
 tolerations: []
 dotenv: {}

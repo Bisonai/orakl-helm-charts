@@ -1,0 +1,145 @@
+{{- if .Values.core.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.global.name }}-core
+  labels:
+    {{- include "orakl-request-response.labels.core" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.core.replicas }}
+  selector:
+    matchLabels:
+      {{- include "orakl-request-response.selectorLabels.core" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "orakl-request-response.selectorLabels.core" . | nindent 8 }}
+    spec:
+      {{- with .Values.global.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.core.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.core.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.core.containerSecurityContext | nindent 12 }}
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.coreTag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          {{- if .Values.global.secretManager.enabled }}
+         env:
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: NODE_ENV
+            - name: ORAKL_NETWORK_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: ORAKL_NETWORK_API_URL
+            - name: CHAIN
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: CHAIN
+            - name: HEALTH_CHECK_PORT
+              value: "8080"
+            - name: LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: LOG_LEVEL
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: REDIS_PORT
+            - name: PROVIDER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: PROVIDER_URL
+            - name: LISTENER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: LISTENER_PORT
+            - name: WORKER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: WORKER_PORT
+            - name: REPORTER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: orakl-request-response-secrets
+                  key: REPORTER_PORT
+          {{ else }}          
+          env:
+            {{- toYaml .Values.global.env | nindent 12 }}
+            - name: LISTENER_PORT
+              value: "4000"      
+            - name: WORKER_PORT
+              value: "5000"      
+            - name: REPORTER_PORT
+              value: "6000"      
+            - name: HEALTH_CHECK_PORT
+              value: "8080"                
+          {{ end }}
+          command: ["yarn"]
+          args: [start:core:request_response]
+          ports:
+          - name: healthcheck
+            containerPort: 8080
+          - name: listener_watchman
+            containerPort: {{ .Values.core.LISTENER_PORT | default 4000 | int  }}
+          - name: worker_watchman
+            containerPort: {{ .Values.core.WORKER_PORT | default 5000 | int  }}
+          - name: reporter_watchman
+            containerPort: {{ .Values.core.REPORTER_PORT | default 6000 | int  }}
+          {{- if .Values.global.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: healthcheck
+            initialDelaySeconds: {{ .Values.global.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.global.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: healthcheck
+            initialDelaySeconds: {{ .Values.global.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.global.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.global.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.global.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.global.readinessProbe.failureThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.core.resources | nindent 12 }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
