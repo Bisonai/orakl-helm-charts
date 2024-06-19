@@ -75,7 +75,7 @@ app:
     - name: VAULT_KEY_NAME
       value: monitor
     - name: LOG_LEVEL
-      value: error
+      value: debug
     - name: CHAIN
       value: baobab
     - name: HEALTH_CHECK_INTERVAL
