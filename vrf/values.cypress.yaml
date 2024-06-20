@@ -9,9 +9,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-core
     pullPolicy: IfNotPresent
-    listenerTag: "v0.5.1.20240403.0423.f813b61"
-    reporterTag: "v0.5.1.20240403.0423.f813b61"
-    workerTag: "v0.5.1.20240403.0423.f813b61"
+    coreTag: "v0.5.1.20240403.0423.f813b61"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -92,7 +90,7 @@ core:
       memory: 1Gi
     requests:
       cpu: 1000m
-      memory: 800mi
+      memory: 800Mi
 
 nodeSelector: {}
 tolerations: []
