@@ -51,11 +51,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Common labels for listener
+Common labels for core
 */}}
-{{- define "orakl-vrf.labels.listener" -}}
+{{- define "orakl-vrf.labels.core" -}}
 helm.sh/chart: {{ include "orakl-vrf.chart" . }}
-{{ include "orakl-vrf.selectorLabels.listener" . }}
+{{ include "orakl-vrf.selectorLabels.core" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -63,49 +63,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Selector labels for listener
+Selector labels for core
 */}}
-{{- define "orakl-vrf.selectorLabels.listener" -}}
-app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-listener
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Common labels for worker
-*/}}
-{{- define "orakl-vrf.labels.worker" -}}
-helm.sh/chart: {{ include "orakl-vrf.chart" . }}
-{{ include "orakl-vrf.selectorLabels.worker" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels for worker
-*/}}
-{{- define "orakl-vrf.selectorLabels.worker" -}}
-app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-worker
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Common labels for reporter
-*/}}
-{{- define "orakl-vrf.labels.reporter" -}}
-helm.sh/chart: {{ include "orakl-vrf.chart" . }}
-{{ include "orakl-vrf.selectorLabels.reporter" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels for reporter
-*/}}
-{{- define "orakl-vrf.selectorLabels.reporter" -}}
-app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-reporter
+{{- define "orakl-vrf.selectorLabels.core" -}}
+app.kubernetes.io/name: {{ include "orakl-vrf.name" . }}-core
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

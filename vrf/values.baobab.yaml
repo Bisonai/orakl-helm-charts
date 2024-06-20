@@ -9,9 +9,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-core
     pullPolicy: IfNotPresent
-    listenerTag: "v0.5.1.20240620.0510.f370c8e"
-    reporterTag: "v0.5.1.20240620.0510.f370c8e"
-    workerTag: "v0.5.1.20240620.0510.f370c8e"
+    coreTag: "v0.5.1.20240620.0510.f370c8e"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
@@ -65,20 +63,22 @@ global:
     successThreshold: 1
     failureThreshold: 5
 
-listener:
+core:
   enabled: true
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-vrf-listener
+    name: orakl-vrf-core
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
-  APP_PORT: 4000
+  LISTENER_PORT: 4000
+  WORKER_PORT: 5000
+  REPORTER_PORT: 6000
 
   podSecurityContext: {}
 
@@ -90,61 +90,7 @@ listener:
       memory: 1Gi
     requests:
       cpu: 1000m
-      memory: 1Gi
-
-worker:
-  enabled: true
-  replicas: 1
-  serviceAccount:
-    # -- Create a service account for the application controller
-    create: true
-    # -- Service account name
-    name: orakl-vrf-worker
-    # -- Annotations applied to created service account
-    annotations: {}
-    # -- Automount API credentials for the Service Account
-    automountServiceAccountToken: true
-
-  APP_PORT: 5000
-
-  podSecurityContext: {}
-
-  containerSecurityContext: {}
-
-  resources:
-    limits:
-      cpu: 1000m
-      memory: 1Gi
-    requests:
-      cpu: 1000m
-      memory: 1Gi
-
-reporter:
-  enabled: true
-  replicas: 1
-  serviceAccount:
-    # -- Create a service account for the application controller
-    create: true
-    # -- Service account name
-    name: orakl-vrf-reporter
-    # -- Annotations applied to created service account
-    annotations: {}
-    # -- Automount API credentials for the Service Account
-    automountServiceAccountToken: true
-
-  APP_PORT: 6000
-
-  podSecurityContext: {}
-
-  containerSecurityContext: {}
-
-  resources:
-    limits:
-      cpu: 500m
-      memory: 1Gi
-    requests:
-      cpu: 500m
-      memory: 1Gi
+      memory: 800Mi
 
 nodeSelector: {}
 tolerations: []
