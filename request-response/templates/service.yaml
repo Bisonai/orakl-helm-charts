@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.global.name }}-core
+  labels: 
+    {{- include "orakl-request-response.labels.core" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: listener
+    port: 4000
+    targetPort: 4000
+    protocol: TCP
+  - name: worker
+    port: 5000
+    targetPort: 5000
+    protocol: TCP
+  - name: reporter
+    port: 6000
+    targetPort: 6000
+    protocol: TCP
+  - name: healthcheck
+    port: 8080
+    targetPort: 8080
+    protocol: TCP    
+  selector:
+  {{- include "orakl-request-response.selectorLabels.core" . | nindent 6 }}
+
+

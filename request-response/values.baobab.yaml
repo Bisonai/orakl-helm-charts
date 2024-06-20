@@ -9,9 +9,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-core #repository url
     pullPolicy: IfNotPresent
-    listenerTag: "v0.5.1.20240620.0546.0acca6f"
-    reporterTag: "v0.5.1.20240620.0546.0acca6f"
-    workerTag: "v0.5.1.20240620.0546.0acca6f"
+    coreTag: "v0.5.1.20240620.0546.0acca6f"
     tag: "v0.5.1.20240620.0546.0acca6f"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
@@ -66,20 +64,22 @@ global:
     successThreshold: 1
     failureThreshold: 5
 
-listener:
+core:
   enabled: true
   replicas: 1
   serviceAccount:
     # -- Create a service account for the application controller
     create: true
     # -- Service account name
-    name: orakl-request-response-listener
+    name: orakl-request-response-core
     # -- Annotations applied to created service account
     annotations: {}
     # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
-  APP_PORT: 4000
+  LISTENER_PORT: 4000
+  WORKER_PORT: 5000
+  REPORTER_PORT: 6000
 
   podSecurityContext: {}
 
@@ -87,65 +87,11 @@ listener:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 800Mi
+      cpu: 1000m
+      memory: 1Gi
     requests:
-      cpu: 500m
-      memory: 800Mi
-
-worker:
-  enabled: true
-  replicas: 1
-  serviceAccount:
-    # -- Create a service account for the application controller
-    create: true
-    # -- Service account name
-    name: orakl-request-response-worker
-    # -- Annotations applied to created service account
-    annotations: {}
-    # -- Automount API credentials for the Service Account
-    automountServiceAccountToken: true
-
-  APP_PORT: 5000
-
-  podSecurityContext: {}
-
-  containerSecurityContext: {}
-
-  resources:
-    limits:
-      cpu: 500m
-      memory: 800Mi
-    requests:
-      cpu: 500m
-      memory: 800Mi
-
-reporter:
-  enabled: true
-  replicas: 1
-  serviceAccount:
-    # -- Create a service account for the application controller
-    create: true
-    # -- Service account name
-    name: orakl-request-response-reporter
-    # -- Annotations applied to created service account
-    annotations: {}
-    # -- Automount API credentials for the Service Account
-    automountServiceAccountToken: true
-
-  APP_PORT: 6000
-
-  podSecurityContext: {}
-
-  containerSecurityContext: {}
-
-  resources:
-    limits:
-      cpu: 500m
-      memory: 800Mi
-    requests:
-      cpu: 500m
-      memory: 800Mi
+      cpu: 1000m
+      memory: 1Gi
 
 nodeSelector: {}
 tolerations: []
