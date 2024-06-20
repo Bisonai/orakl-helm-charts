@@ -5,15 +5,15 @@ global:
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
   pullPolicy: IfNotPresent
-  tag: "monitor.v1.0.0.20240619.0800.359dcd6"
+  tag: "monitor.v1.0.0.20240620.0835.bdc6461"
 
   imagePullSecrets:
     - name: gar-json-key
 
-annotations: 
+annotations:
   vault.hashicorp.com/auth-path: "auth/monitor"
-  vault.hashicorp.com/agent-inject: 'true'
-  vault.hashicorp.com/role: 'monitor'
+  vault.hashicorp.com/agent-inject: "true"
+  vault.hashicorp.com/role: "monitor"
   vault.hashicorp.com/agent-inject-template-config: |
     {{ with secret "monitor/data/grafana-baobab" -}}
       #!/bin/bash
@@ -21,7 +21,7 @@ annotations:
       export BAOBAB_GRAPHNODE_DB_PW="{{ .Data.data.BAOBAB_GRAPHNODE_DB_PW }}"
       export BAOBAB_MAIN_DB_PW="{{ .Data.data.BAOBAB_MAIN_DB_PW }}"
       export BAOBAB_MONITOR_DB_PW="{{ .Data.data.BAOBAB_MONITOR_DB_PW }}"
-    {{- end }}  
+    {{- end }}
 
 deployment:
   name: orakl-grafana-as-code
