@@ -52,11 +52,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Common labels for listener
+Common labels for core
 */}}
-{{- define "orakl-request-response.labels.listener" -}}
+{{- define "orakl-request-response.labels.core" -}}
 helm.sh/chart: {{ include "orakl-request-response.chart" . }}
-{{ include "orakl-request-response.selectorLabels.listener" . }}
+{{ include "orakl-request-response.selectorLabels.core" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -64,49 +64,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Selector labels for listener
+Selector labels for core
 */}}
-{{- define "orakl-request-response.selectorLabels.listener" -}}
-app.kubernetes.io/name: {{ include "orakl-request-response.name" . }}-listener
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Common labels for worker
-*/}}
-{{- define "orakl-request-response.labels.worker" -}}
-helm.sh/chart: {{ include "orakl-request-response.chart" . }}
-{{ include "orakl-request-response.selectorLabels.worker" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels for worker
-*/}}
-{{- define "orakl-request-response.selectorLabels.worker" -}}
-app.kubernetes.io/name: {{ include "orakl-request-response.name" . }}-worker
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Common labels for reporter
-*/}}
-{{- define "orakl-request-response.labels.reporter" -}}
-helm.sh/chart: {{ include "orakl-request-response.chart" . }}
-{{ include "orakl-request-response.selectorLabels.reporter" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels for reporter
-*/}}
-{{- define "orakl-request-response.selectorLabels.reporter" -}}
-app.kubernetes.io/name: {{ include "orakl-request-response.name" . }}-reporter
+{{- define "orakl-request-response.selectorLabels.core" -}}
+app.kubernetes.io/name: {{ include "orakl-request-response.name" . }}-core
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

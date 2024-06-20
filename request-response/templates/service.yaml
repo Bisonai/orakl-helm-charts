@@ -7,15 +7,15 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - name: listener_watchman
+  - name: listener
     port: 4000
     targetPort: 4000
     protocol: TCP
-  - name: worker_watchman
+  - name: worker
     port: 5000
     targetPort: 5000
     protocol: TCP
-  - name: reporter_watchman
+  - name: reporter
     port: 6000
     targetPort: 6000
     protocol: TCP

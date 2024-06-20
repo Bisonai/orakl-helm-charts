@@ -103,11 +103,11 @@ spec:
           ports:
           - name: healthcheck
             containerPort: 8080
-          - name: listener_watchman
+          - name: listener
             containerPort: {{ .Values.core.LISTENER_PORT | default 4000 | int  }}
-          - name: worker_watchman
+          - name: worker
             containerPort: {{ .Values.core.WORKER_PORT | default 5000 | int  }}
-          - name: reporter_watchman
+          - name: reporter
             containerPort: {{ .Values.core.REPORTER_PORT | default 6000 | int  }}
           {{- if .Values.global.livenessProbe.enabled }}
           livenessProbe:
