@@ -7,7 +7,7 @@ global:
   image:
     repository: public.ecr.aws/u6t6w0e4/orakl-cli
     pullPolicy: IfNotPresent
-    tag: "v0.6.2.20240621.0457.6c6912c"
+    tag: "v0.6.2.20240621.0504.9b9ba56"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
