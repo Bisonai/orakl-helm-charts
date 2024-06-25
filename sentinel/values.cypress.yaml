@@ -102,6 +102,8 @@ app:
       value: http://orakl-por.orakl.svc.cluster.local:3000/api/v1
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xbfdb0c7f84b494272278cdad77de21634c395eda"
+    - name: SIGNER
+      value: "0xAF885887B3B8ce9e7ABb4F3CfC2Ed72deB8E8ca9"
   resources:
     limits:
       cpu: 1000m
