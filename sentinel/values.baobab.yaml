@@ -104,11 +104,11 @@ app:
       value: "0xde8fb45ff8e330ccf8e5cc0913ee0143b2a0ebdb"
   resources:
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 100m
+      memory: 0.5Gi
     requests:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 100m
+      memory: 0.5Gi
 
 nodeSelector: {}
 tolerations: []

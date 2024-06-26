@@ -70,11 +70,11 @@ bootApi:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 50m
+      memory: 0.5Gi
     requests:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 50m
+      memory: 0.5Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
