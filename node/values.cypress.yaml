@@ -71,7 +71,7 @@ node:
     - name: ETH_WEBSOCKET_URL
       value: "wss://ethereum-rpc.publicnode.com"
     - name: KAIA_WEBSOCKET_URL
-      value: "wss://public-en-cypress.klaytn.net/ws"
+      value: "http://172.0.100.240:8551"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xbfdb0c7f84b494272278cdad77de21634c395eda"
     - name: DELEGATOR_URL
