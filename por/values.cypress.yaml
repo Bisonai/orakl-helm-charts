@@ -42,10 +42,10 @@ por:
   resources:
     limits:
       cpu: 500m
-      memory: 1Gi
+      memory: 500Mi
     requests:
       cpu: 500m
-      memory: 1Gi
+      memory: 500Mi
   env:
     - name: LOG_LEVEL
       value: "error"
@@ -58,9 +58,9 @@ por:
     - name: VAULT_ADDR
       value: http://172.0.100.185:8200/
     - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token              
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
-      value: orakl    
+      value: orakl
     - name: VAULT_SECRET_PATH
       value: cypress
     - name: VAULT_KEY_NAME
