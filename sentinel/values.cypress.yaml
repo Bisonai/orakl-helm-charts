@@ -42,8 +42,8 @@ app:
   enabled: true
   replicas: 1
   annotations:
-    vault.hashicorp.com/agent-inject: 'true'
-    vault.hashicorp.com/role: 'orakl'
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "orakl"
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "cypress/data/monitor" -}}
         #!/bin/bash
@@ -106,11 +106,11 @@ app:
       value: "0xAF885887B3B8ce9e7ABb4F3CfC2Ed72deB8E8ca9"
   resources:
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 500Mi
     requests:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 500Mi
 
 nodeSelector: {}
 tolerations: []
