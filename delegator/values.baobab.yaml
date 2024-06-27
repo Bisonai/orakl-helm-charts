@@ -66,11 +66,11 @@ delegator:
       value:
   resources:
     limits:
-      cpu: 100m
-      memory: 2Gi
+      cpu: 50m
+      memory: 0.5Gi
     requests:
-      cpu: 100m
-      memory: 2Gi
+      cpu: 50m
+      memory: 0.5Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
