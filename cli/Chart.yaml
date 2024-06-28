@@ -3,4 +3,4 @@ name: orakl-cli
 description: A Helm chart for Kubernetes
 type: application
 version: 0.1.2
-appVersion: v.20240621.0620.8da2428
+appVersion: v0.6.2.20240628.0216.0cec242
