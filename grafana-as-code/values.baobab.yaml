@@ -5,7 +5,7 @@ global:
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
   pullPolicy: IfNotPresent
-  tag: "monitor.v1.0.0.20240625.0920.b1858b7"
+  tag: "monitor.v1.0.0.20240708.0709.d97b2cf"
 
   imagePullSecrets:
     - name: gar-json-key
