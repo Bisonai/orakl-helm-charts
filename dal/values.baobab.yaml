@@ -63,12 +63,16 @@ dal:
       value: dal
     - name: DAL_API_PORT
       value: "8090"
+    - name: KAIA_PROVIDER_URL
+      value: "http://172.0.100.240:8551"
     - name: KAIA_WEBSOCKET_URL
       value: "ws://172.0.100.240:8552"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xde8fb45ff8e330ccf8e5cc0913ee0143b2a0ebdb"
-    - name: DATABASE_URL
-      value:
+    - name: REDIS_HOST
+      value: "redis-node-master.redis.svc.cluster.local"
+    - name: REDIS_PORT
+      value: "6379"
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
