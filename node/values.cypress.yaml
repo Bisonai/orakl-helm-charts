@@ -89,10 +89,10 @@ node:
   resources:
     limits:
       cpu: 3000m
-      memory: 4Gi
+      memory: 2Gi
     requests:
       cpu: 3000m
-      memory: 4Gi
+      memory: 2Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
