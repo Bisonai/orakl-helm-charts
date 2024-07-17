@@ -86,11 +86,11 @@ core:
 
   resources:
     limits:
-      cpu: 1000m
-      memory: 1Gi
+      cpu: 500m
+      memory: 500Mi
     requests:
-      cpu: 1000m
-      memory: 800Mi
+      cpu: 500m
+      memory: 500Mi
 
 nodeSelector: {}
 tolerations: []
