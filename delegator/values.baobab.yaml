@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-delegator
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240610.0158.454500a"
+    tag: "v0.0.1.20240724.0615.951a25d"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   affinity:
