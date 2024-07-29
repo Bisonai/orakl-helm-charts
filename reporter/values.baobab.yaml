@@ -1,0 +1,69 @@
+## created by Bisonai
+
+global:
+  name: orakl-reporter
+  namespace: orakl
+  image:
+    repository: public.ecr.aws/bisonai/orakl-reporter
+    pullPolicy: IfNotPresent
+    tag: ""
+    imagePullPolicy: IfNotPresent
+    imagePullSecrets: []
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+  podAnnotations: {}
+  livenessProbe:
+    enabled: true
+    path: /api/v1
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    enabled: true
+    path: /api/v1
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+reporter:
+  annotations: {}
+  replicas: 1
+  podSecurityContext: {}
+  containerSecurityContext: {}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  env:
+    - name: DAL_WS_URL
+      value: "ws://dal.baobab.orakl.network/ws"
+    - name: REPORTER_PORT
+      value: "3000"
+    - name: LOG_LEVEL
+      value: "error"
+    - name: CHAIN
+      value: "baobab"
+    - name: SUBMISSION_PROXY_CONTRACT
+      value: "0x3f4acd79aa15b439495d4d3c25bfba1d86b98d46"
+    - name: VAULT_ADDR
+      value: http://172.0.100.165:8200/
+    - name: VAULT_ROLE
+      value: orakl
+    - name: VAULT_SECRET_PATH
+      value: baobab
+    - name: VAULT_KEY_NAME
+      value: reporter
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-reporter
+  replicas: 1

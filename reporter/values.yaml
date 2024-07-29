@@ -1,0 +1,55 @@
+## created by Bisonai
+
+global:
+  name: orakl-reporter
+  namespace: orakl
+  image:
+    repository: public.ecr.aws/bisonai/orakl-reporter
+    pullPolicy: IfNotPresent
+    tag: ""
+    imagePullPolicy: IfNotPresent
+    imagePullSecrets: []
+  affinity:
+    enabled: false
+    key: kubernetes.io/hostname
+    value:
+  podAnnotations: {}
+  livenessProbe:
+    enabled: true
+    path: /api/v1
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    enabled: true
+    path: /api/v1
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+reporter:
+  enabled: true
+  replicas: 1
+  podSecurityContext: {}
+  containerSecurityContext: {}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  env:
+    - name: DAL_WS_URL
+      value: "ws://dal.baobab.orakl.network/ws"
+    - name: REPORTER_PORT
+      value: "3000"
+nodeSelector: {}
+tolerations: []
+dotenv: {}
+deployment:
+  name: orakl-reporter
+  replicas: 1
