@@ -63,6 +63,10 @@ reporter:
       value: "baobab"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x3f4acd79aa15b439495d4d3c25bfba1d86b98d46"
+    - name: KAIA_PROVIDER_URL
+      value: http://172.0.100.240:8551
+    - name: KAIA_WEBSOCKET_URL
+      value: ws://172.0.100.230:8552
 nodeSelector: {}
 tolerations: []
 dotenv: {}

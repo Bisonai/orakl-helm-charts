@@ -63,6 +63,10 @@ reporter:
       value: "cypress"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x07ec1e04353d0368ab9c6165dac2a0be51cfb1fe"
+    - name: KAIA_PROVIDER_URL
+      value: http://172.0.100.230:8551
+    - name: KAIA_WEBSOCKET_URL
+      value: ws://172.0.100.230:8552
 nodeSelector: {}
 tolerations: []
 dotenv: {}
