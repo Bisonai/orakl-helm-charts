@@ -42,11 +42,6 @@ reporter:
     requests:
       cpu: 500m
       memory: 1Gi
-  env:
-    - name: DAL_WS_URL
-      value: "ws://dal.baobab.orakl.network/ws"
-    - name: REPORTER_PORT
-      value: "3000"
 nodeSelector: {}
 tolerations: []
 dotenv: {}
