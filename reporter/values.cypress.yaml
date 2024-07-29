@@ -58,7 +58,7 @@ reporter:
     - name: DAL_WS_URL
       value: "ws://dal.baobab.orakl.network/ws"
     - name: LOG_LEVEL
-      value: "error"
+      value: "info"
     - name: CHAIN
       value: "cypress"
     - name: SUBMISSION_PROXY_CONTRACT
