@@ -7,7 +7,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-sentinel
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240729.0734.8a64d46"
+    tag: "v0.0.1.20240729.0744.b3448bb"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
 
