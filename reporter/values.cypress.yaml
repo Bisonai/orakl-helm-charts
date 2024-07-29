@@ -43,6 +43,18 @@ reporter:
       cpu: 500m
       memory: 1Gi
   env:
+    - name: USE_VAULT
+      value: "true"
+    - name: VAULT_ADDR
+      value: http://172.0.100.185:8200/
+    - name: JWT_PATH
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
+    - name: VAULT_ROLE
+      value: orakl
+    - name: VAULT_SECRET_PATH
+      value: cypress
+    - name: VAULT_KEY_NAME
+      value: reporter
     - name: DAL_WS_URL
       value: "ws://dal.baobab.orakl.network/ws"
     - name: LOG_LEVEL
@@ -51,14 +63,6 @@ reporter:
       value: "cypress"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x07ec1e04353d0368ab9c6165dac2a0be51cfb1fe"
-    - name: VAULT_ADDR
-      value: http://172.0.100.165:8200/
-    - name: VAULT_ROLE
-      value: orakl
-    - name: VAULT_SECRET_PATH
-      value: baobab
-    - name: VAULT_KEY_NAME
-      value: reporter
 nodeSelector: {}
 tolerations: []
 dotenv: {}
