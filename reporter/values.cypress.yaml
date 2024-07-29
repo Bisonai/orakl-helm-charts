@@ -67,6 +67,8 @@ reporter:
       value: http://172.0.100.230:8551
     - name: KAIA_WEBSOCKET_URL
       value: ws://172.0.100.230:8552
+    - name: DELEGATOR_URL
+      value: "http://orakl-delegator.orakl.svc.cluster.local"
 nodeSelector: {}
 tolerations: []
 dotenv: {}
