@@ -80,10 +80,10 @@ dal:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 500m
+      cpu: 2000m
       memory: 500Mi
     requests:
-      cpu: 500m
+      cpu: 2000m
       memory: 500Mi
 nodeSelector: {}
 tolerations: []
