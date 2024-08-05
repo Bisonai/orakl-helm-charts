@@ -52,7 +52,7 @@ logscribe:
     - name: VAULT_SECRET_PATH
       value: baobab
     - name: VAULT_KEY_NAME
-      value: logscribe
+      value: orakl-logscribe
     - name: LOG_LEVEL
       value: "info"
     - name: CHAIN
