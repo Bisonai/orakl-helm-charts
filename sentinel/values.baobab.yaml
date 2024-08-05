@@ -101,7 +101,7 @@ app:
     - name: POR_URL
       value: http://orakl-por.orakl.svc.cluster.local:3000/api/v1
     - name: SUBMISSION_PROXY_CONTRACT
-      value: "0x3f4acd79aa15b439495d4d3c25bfba1d86b98d46"
+      value: "0x6646dd4d529fa1625f279951b9af74b77392f75d"
   resources:
     limits:
       cpu: 500m
