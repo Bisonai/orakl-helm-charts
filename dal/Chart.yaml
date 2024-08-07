@@ -3,4 +3,4 @@ name: orakl-dal
 description: A Helm chart for Kubernetes
 type: application
 version: 0.1.0
-appVersion: v0.0.1.20240805.1011.e61e2a9
+appVersion: v0.0.1.20240807.0602.570af13
