@@ -56,6 +56,8 @@ node:
       value: orakl-node
     - name: LOG_LEVEL
       value: "info"
+    - name: LOGSCRIBE_LOG_LEVEL
+      value: "error"
     - name: APP_PORT
       value: "3030"
     - name: REDIS_HOST
