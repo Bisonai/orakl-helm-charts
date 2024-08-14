@@ -38,10 +38,10 @@ reporter:
   resources:
     limits:
       cpu: 500m
-      memory: 1Gi
+      memory: 500Mi
     requests:
       cpu: 500m
-      memory: 1Gi
+      memory: 500Mi
   env:
     - name: USE_VAULT
       value: "true"
