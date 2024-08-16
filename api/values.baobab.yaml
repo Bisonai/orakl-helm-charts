@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-api
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240809.0752.7dc3d11"
+    tag: "v0.0.1.20240816.0524.ed93e4c"
     imagePullPolicy: IfNotPresent
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
     imagePullSecrets: []
