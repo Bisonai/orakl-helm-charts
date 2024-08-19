@@ -160,7 +160,6 @@ master:
   ## ref: https://redis.io/topics/config
   ##
   configuration: |
-    tcp-nodelay yes
     hz 50
     client-output-buffer-limit pubsub 256mb 64mb 60
     io-threads 4
@@ -559,7 +558,6 @@ replica:
   ## ref: https://redis.io/topics/config
   ##
   configuration: |
-    tcp-nodelay yes
     hz 50
     client-output-buffer-limit pubsub 256mb 64mb 60
     io-threads 4
