@@ -23,7 +23,7 @@ global:
     - name: CHAIN
       value: baobab
     - name: LOG_LEVEL
-      value: debug
+      value: info
     - name: REDIS_HOST
       value: redis-request-response-master.redis.svc.cluster.local
     - name: REDIS_PORT
