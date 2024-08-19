@@ -102,6 +102,14 @@ app:
       value: http://orakl-por.orakl.svc.cluster.local:3000/api/v1
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x3a251c738e19806a546815eb6065e139a8d65b4b"
+    - name: KAIA_PROVIDER_URL
+      value: "http://172.0.100.230:8551"
+    - name: ACC_ID
+      value: "14"
+    - name: VRF_KEYHASH
+      value: "0x6cff5233743b3c0321a19ae11ab38ae0ddc7ddfe1e91b162fa8bb657488fb157"
+    - name: INSPECT_CONSUMER_ADDRESS
+      value: "0xb76a7B28dEDcF082859026FB7493b8A51535B544"
   resources:
     limits:
       cpu: 500m
