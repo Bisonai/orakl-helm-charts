@@ -64,11 +64,11 @@ logscribe:
   resources:
     limits:
       cpu: 500m
-      memory: 1Gi
+      memory: 500Mi
     requests:
       cpu: 500m
-      memory: 1Gi
-  
+      memory: 500Mi
+
 nodeSelector: {}
 tolerations: []
 dotenv: {}
