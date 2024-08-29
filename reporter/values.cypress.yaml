@@ -64,7 +64,7 @@ reporter:
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x3a251c738e19806a546815eb6065e139a8d65b4b"
     - name: KAIA_PROVIDER_URL
-      value: https://public-en.klaytnfinder.io/v1/cypress
+      value: http://172.0.100.230:8551
     - name: KAIA_WEBSOCKET_URL
       value: ws://172.0.100.230:8552
     - name: DELEGATOR_URL
