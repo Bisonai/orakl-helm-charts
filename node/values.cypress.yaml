@@ -67,7 +67,7 @@ node:
     - name: LISTEN_PORT
       value: "10010"
     - name: KAIA_PROVIDER_URL
-      value: "http://172.0.100.230:8551"
+      value: "https://public-en.klaytnfinder.io/v1/cypress"
     - name: ETH_PROVIDER_URL
       value: "http://34.126.104.218:4000"
     - name: ETH_WEBSOCKET_URL
