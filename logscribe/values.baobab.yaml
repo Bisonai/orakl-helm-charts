@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-logscribe
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240827.0757.3486519"
+    tag: "v0.0.1.20240830.0536.d7fcdf0"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   affinity:
