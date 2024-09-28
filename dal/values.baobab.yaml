@@ -77,6 +77,8 @@ dal:
       value: "6379"
     - name: ORAKL_NODE_ADMIN_URL
       value: http://orakl-node.orakl.svc.cluster.local:3030/api/v1
+    - name: CHAIN
+      value: "baobab"
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
