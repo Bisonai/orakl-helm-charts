@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-reporter
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20240829.0827.b5eff49"
+    tag: "v0.0.1.20241003.0448.13cc9ed"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   affinity:
