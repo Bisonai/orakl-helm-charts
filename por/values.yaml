@@ -50,7 +50,7 @@ por:
     - name: LOG_LEVEL
       value: "error"
     - name: POR_PROVIDER_URL
-      value: "http://172.0.100.240:8551"
+      value: "http://210.109.55.179:8551"
     - name: POR_PORT
       value: "3000"
     - name: POR_CHAIN
@@ -58,9 +58,9 @@ por:
     - name: VAULT_ADDR
       value: http://172.0.100.165:8200/
     - name: JWT_PATH
-      value: /var/run/secrets/kubernetes.io/serviceaccount/token              
+      value: /var/run/secrets/kubernetes.io/serviceaccount/token
     - name: VAULT_ROLE
-      value: orakl    
+      value: orakl
     - name: VAULT_SECRET_PATH
       value: baobab
     - name: VAULT_KEY_NAME
