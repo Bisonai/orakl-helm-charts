@@ -65,7 +65,7 @@ node:
     - name: REDIS_PORT
       value: "6379"
     - name: KAIA_PROVIDER_URL
-      value: "http://172.0.100.240:8551"
+      value: "http://210.109.55.179:8551"
     - name: ETH_PROVIDER_URL
       value: "http://34.142.228.64:4000"
     - name: ETH_WEBSOCKET_URL
