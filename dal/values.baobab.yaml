@@ -66,9 +66,9 @@ dal:
     - name: DAL_API_PORT
       value: "8090"
     - name: KAIA_PROVIDER_URL
-      value: "http://172.0.100.240:8551"
+      value: "http://210.109.55.179:8551"
     - name: KAIA_WEBSOCKET_URL
-      value: "ws://172.0.100.240:8552"
+      value: "ws://210.109.55.179:8552"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x6646dd4d529fa1625f279951b9af74b77392f75d"
     - name: REDIS_HOST
