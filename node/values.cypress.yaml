@@ -84,6 +84,8 @@ node:
       value: "http://100.72.39.118:5050"
     - name: HOST_IP
       value: "100.65.92.37"
+    - name: WS_PROXY
+      value: "ws://34.64.214.115:4000"
 
   replicas: 1
   podSecurityContext: {}
