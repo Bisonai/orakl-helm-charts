@@ -62,7 +62,7 @@ reporter:
     - name: CHAIN
       value: "baobab"
     - name: SUBMISSION_PROXY_CONTRACT
-      value: "0x6646dd4d529fa1625f279951b9af74b77392f75d"
+      value: "0x05ce978f1200bc7243ae4a5968de8c3f8bd082f7"
     - name: KAIA_PROVIDER_URL
       value: http://210.109.55.179:8551
     - name: KAIA_WEBSOCKET_URL
