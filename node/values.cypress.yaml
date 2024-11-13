@@ -75,7 +75,7 @@ node:
     - name: KAIA_WEBSOCKET_URL
       value: "ws://172.0.100.230:8552"
     - name: SUBMISSION_PROXY_CONTRACT
-      value: "0x3a251c738e19806a546815eb6065e139a8d65b4b"
+      value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: DELEGATOR_URL
       value: "http://orakl-delegator.orakl.svc.cluster.local"
     - name: CHAIN
