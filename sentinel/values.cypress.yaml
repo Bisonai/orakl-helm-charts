@@ -101,7 +101,7 @@ app:
     - name: POR_URL
       value: http://orakl-por.orakl.svc.cluster.local:3000/api/v1
     - name: SUBMISSION_PROXY_CONTRACT
-      value: "0x3a251c738e19806a546815eb6065e139a8d65b4b"
+      value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: KAIA_PROVIDER_URL
       value: "http://172.0.100.230:8551"
     - name: ACC_ID
