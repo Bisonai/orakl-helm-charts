@@ -58,7 +58,7 @@ reporter:
     - name: DAL_WS_URL
       value: "ws://orakl-dal.orakl.svc.cluster.local/ws"
     - name: LOG_LEVEL
-      value: "info"
+      value: "debug"
     - name: CHAIN
       value: "cypress"
     - name: SUBMISSION_PROXY_CONTRACT
