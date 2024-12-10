@@ -51,6 +51,8 @@ dal:
         export DATABASE_URL="{{ .Data.data.DATABASE_URL }}"
       {{- end }}
   env:
+    - name: LOG_LEVEL
+      value: "debug"
     - name: USE_VAULT
       value: "true"
     - name: VAULT_ADDR
