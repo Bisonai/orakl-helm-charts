@@ -41,10 +41,10 @@ por:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 500m
+      cpu: 100m
       memory: 500Mi
     requests:
-      cpu: 500m
+      cpu: 100m
       memory: 500Mi
   env:
     - name: LOG_LEVEL
