@@ -71,7 +71,7 @@ node:
     - name: ETH_PROVIDER_URL
       value: "http://34.126.104.218:4000"
     - name: ETH_WEBSOCKET_URL
-      value: "wss://ethereum-rpc.publicnode.com"
+      value: "https://eth.llamarpc.com"
     - name: KAIA_WEBSOCKET_URL
       value: "ws://172.0.100.230:8552"
     - name: SUBMISSION_PROXY_CONTRACT
