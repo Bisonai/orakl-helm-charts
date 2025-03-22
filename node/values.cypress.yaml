@@ -67,13 +67,13 @@ node:
     - name: LISTEN_PORT
       value: "10010"
     - name: KAIA_PROVIDER_URL
-      value: "http://172.0.100.230:8551"
+      value: "https://freely-inspired-ram.n0des.xyz"
     - name: ETH_PROVIDER_URL
       value: "http://34.126.104.218:4000"
     - name: ETH_WEBSOCKET_URL
       value: "https://eth.llamarpc.com"
     - name: KAIA_WEBSOCKET_URL
-      value: "ws://172.0.100.230:8552"
+      value: "wss://public-en.node.kaia.io/ws"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: DELEGATOR_URL
