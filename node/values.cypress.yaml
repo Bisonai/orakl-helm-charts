@@ -73,7 +73,7 @@ node:
     - name: ETH_WEBSOCKET_URL
       value: "https://eth.llamarpc.com"
     - name: KAIA_WEBSOCKET_URL
-      value: "wss://alpha-hardworking-orb.kaia-mainnet.quiknode.pro"
+      value: "ws://34.47.90.152:8552"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: DELEGATOR_URL
