@@ -66,7 +66,7 @@ dal:
     - name: DAL_API_PORT
       value: "8090"
     - name: KAIA_PROVIDER_URL
-      value: "http://172.0.100.230:8551"
+      value: "https://freely-inspired-ram.n0des.xyz"
     - name: KAIA_WEBSOCKET_URL
       value: "ws://172.0.100.230:8552"
     - name: SUBMISSION_PROXY_CONTRACT
