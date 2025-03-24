@@ -56,7 +56,9 @@ reporter:
     - name: VAULT_KEY_NAME
       value: reporter
     - name: DAL_WS_URL
-      value: "ws://orakl-dal.orakl.svc.cluster.local/ws"
+      value: "ws://dal.cypress.orakl.network/ws"
+    - name: DAL_REST_URL
+      value: "https://dal.cypress.orakl.network"
     - name: LOG_LEVEL
       value: "debug"
     - name: CHAIN
