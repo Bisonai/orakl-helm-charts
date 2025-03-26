@@ -70,8 +70,6 @@ node:
       value: "http://34.142.228.64:4000"
     - name: ETH_WEBSOCKET_URL
       value: "wss://ethereum-rpc.publicnode.com"
-    - name: KAIA_WEBSOCKET_URL
-      value: "ws://172.0.100.230:8552"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x05ce978f1200bc7243ae4a5968de8c3f8bd082f7"
     - name: DELEGATOR_URL
