@@ -66,7 +66,7 @@ reporter:
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x05ce978f1200bc7243ae4a5968de8c3f8bd082f7"
     - name: KAIA_PROVIDER_URL
-      value: http://210.109.55.179:8551
+      value: http://172.0.100.240:8551
     - name: KAIA_WEBSOCKET_URL
       value: ws://172.0.100.230:8552
     - name: DELEGATOR_URL
