@@ -69,7 +69,7 @@ node:
     - name: ETH_PROVIDER_URL
       value: "http://34.126.104.218:4000"
     - name: ETH_WEBSOCKET_URL
-      value: "https://eth.llamarpc.com"
+      value: "wss://ethereum-rpc.publicnode.com"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: DELEGATOR_URL
