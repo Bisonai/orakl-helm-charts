@@ -93,7 +93,7 @@ spec:
             - name: TS_USERSPACE
               value: "false"
             - name: TS_EXTRA_ARGS
-              value: "--advertise-tags=tag:orakl --mtu=1280"
+              value: "--advertise-tags=tag:orakl"
             - name: TS_AUTHKEY
               valueFrom:
                 secretKeyRef:
