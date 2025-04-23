@@ -79,7 +79,7 @@ node:
     - name: BOOT_API_URL
       value: "http://100.72.39.118:5050"
     - name: HOST_IP
-      value: "100.65.92.37"
+      value: "100.97.79.113"
     - name: WS_PROXY
       value: "ws://34.64.214.115:4000"
 
