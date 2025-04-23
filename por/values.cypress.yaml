@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-por
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20250404.0425.ad6e1c2"
+    tag: "v0.0.1.20240906.0210.44681b4"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   secretManager:
@@ -21,7 +21,6 @@ global:
   livenessProbe:
     enabled: true
     path: /api/v1
-    host: 127.0.0.1
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 5
@@ -30,7 +29,6 @@ global:
   readinessProbe:
     enabled: true
     path: /api/v1
-    host: 127.0.0.1
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 1
@@ -52,7 +50,7 @@ por:
     - name: LOG_LEVEL
       value: "error"
     - name: POR_PROVIDER_URL
-      value: "http://172.0.100.230:8551"
+      value: "https://freely-inspired-ram.n0des.xyz"
     - name: POR_PORT
       value: "3000"
     - name: POR_CHAIN
