@@ -21,6 +21,7 @@ global:
   livenessProbe:
     enabled: true
     path: /api/v1
+    host: 127.0.0.1
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 5
@@ -29,6 +30,7 @@ global:
   readinessProbe:
     enabled: true
     path: /api/v1
+    host: 127.0.0.1
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 1
