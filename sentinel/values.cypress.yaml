@@ -91,7 +91,7 @@ app:
     - name: EVENT_CHECK_INTERVAL
       value: "60s"
     - name: JSON_RPC_URL
-      value: "http://172.0.100.230:8551"
+      value: "http://34.47.90.152:8551"
     - name: ORAKL_API_URL
       value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
     - name: ORAKL_NODE_ADMIN_URL
