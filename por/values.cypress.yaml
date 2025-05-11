@@ -48,7 +48,7 @@ por:
       memory: 500Mi
   env:
     - name: LOG_LEVEL
-      value: "error"
+      value: "info"
     - name: POR_PROVIDER_URL
       value: "http://34.47.90.152:8551"
     - name: POR_PORT
