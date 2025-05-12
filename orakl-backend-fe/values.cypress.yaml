@@ -1,6 +1,6 @@
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-backend-fe
-  tag: v.20240614.0112.a46d8aa
+  tag: "v0.0.1.20250404.0429.5013bf3"
 
 deployment:
   name: orakl-backend-fe
