@@ -88,10 +88,10 @@ node:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 6000m
+      cpu: 8000m
       memory: 2Gi
     requests:
-      cpu: 6000m
+      cpu: 8000m
       memory: 2Gi
 nodeSelector: {}
 tolerations: []
