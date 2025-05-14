@@ -55,7 +55,7 @@ node:
     - name: VAULT_KEY_NAME
       value: orakl-node
     - name: LOG_LEVEL
-      value: "info"
+      value: "error"
     - name: LOGSCRIBE_LOG_LEVEL
       value: "error"
     - name: APP_PORT
