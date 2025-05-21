@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redis-request-response
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-health-degraded: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-sync-failed: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-sync-running.slack: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: orakl-argocd-notification
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Bisonai/orakl-helm-charts.git
+    targetRevision: idc-fly
+    path: redis-request-response
+    helm:
+      valueFiles:
+      - values.baobab.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: redis
+  syncPolicy:
+    automated: {}

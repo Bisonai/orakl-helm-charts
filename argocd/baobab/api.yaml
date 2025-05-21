@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-deployed.undefined: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-health-degraded: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-health-degraded.undefined: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-sync-failed: orakl-notification
+    notifications.argoproj.io/subscribe.on-sync-failed.undefined: orakl-notification
+    notifications.argoproj.io/subscribe.on-sync-running: orakl-notification
+    notifications.argoproj.io/subscribe.on-sync-running.slack: orakl-argocd-notification
+    notifications.argoproj.io/subscribe.on-sync-running.undefined: orakl-notification
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: orakl-notification
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: orakl-notification
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Bisonai/orakl-helm-charts.git
+    targetRevision: idc-fly
+    path: api
+    helm:
+      valueFiles:
+      - values.baobab.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: orakl
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
