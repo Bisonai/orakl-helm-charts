@@ -103,7 +103,7 @@ app:
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: KAIA_PROVIDER_URL
-      value: "http://172.0.100.230:8551"
+      value: "http://34.47.90.152:8551"
     - name: ACC_ID
       value: "14"
     - name: VRF_KEYHASH
