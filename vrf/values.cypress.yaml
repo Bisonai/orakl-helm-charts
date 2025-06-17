@@ -50,7 +50,7 @@ global:
     path: /
     initialDelaySeconds: 20
     periodSeconds: 15
-    timeoutSeconds: 5
+    timeoutSeconds: 6
     successThreshold: 1
     failureThreshold: 5
 
@@ -59,7 +59,7 @@ global:
     path: /
     initialDelaySeconds: 20
     periodSeconds: 15
-    timeoutSeconds: 1
+    timeoutSeconds: 2
     successThreshold: 1
     failureThreshold: 5
 

@@ -18,16 +18,16 @@ global:
     enabled: true
     path: /api/v1/
     initialDelaySeconds: 10
-    periodSeconds: 5
-    timeoutSeconds: 5
+    periodSeconds: 6
+    timeoutSeconds: 6
     successThreshold: 1
     failureThreshold: 5
   readinessProbe:
     enabled: true
     path: /api/v1/
     initialDelaySeconds: 10
-    periodSeconds: 5
-    timeoutSeconds: 5
+    periodSeconds: 6
+    timeoutSeconds: 6
     successThreshold: 1
     failureThreshold: 5
 api:
