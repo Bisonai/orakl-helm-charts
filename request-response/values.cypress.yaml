@@ -28,7 +28,7 @@ global:
     - name: REDIS_PORT
       value: "6379"
     - name: PROVIDER_URL
-      value: "http://34.47.90.152:8551"
+      value: "http://172.0.100.230:8551"
 
   secretManager:
     enabled: false
