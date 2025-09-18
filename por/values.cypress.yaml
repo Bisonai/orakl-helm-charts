@@ -48,7 +48,7 @@ por:
       memory: 500Mi
   env:
     - name: LOG_LEVEL
-      value: "info"
+      value: "debug"
     - name: POR_PROVIDER_URL
       value: "http://172.0.100.230:8551"
     - name: POR_PORT
