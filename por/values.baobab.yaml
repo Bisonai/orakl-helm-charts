@@ -65,6 +65,8 @@ por:
       value: baobab
     - name: VAULT_KEY_NAME
       value: por
+    - name: DELEGATOR_URL
+      value: "http://orakl-delegator.orakl.svc.cluster.local"
 nodeSelector: {}
 tolerations: []
 dotenv: {}
