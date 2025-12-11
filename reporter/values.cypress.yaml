@@ -35,13 +35,6 @@ reporter:
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
-  resources:
-    limits:
-      cpu: 500m
-      memory: 500Mi
-    requests:
-      cpu: 500m
-      memory: 500Mi
   env:
     - name: USE_VAULT
       value: "true"
@@ -71,6 +64,15 @@ reporter:
       value: "wss://172.0.100.230:8552"
     - name: DELEGATOR_URL
       value: "http://orakl-delegator.orakl.svc.cluster.local"
+    - name: GOMAXPROCS
+      value: "1"
+  resources:
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 300m
+      memory: 100Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
