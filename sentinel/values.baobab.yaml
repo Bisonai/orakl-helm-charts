@@ -114,13 +114,15 @@ app:
       value: "0xd9af33106d664a53cb9946df5cd81a30695f5b72224ee64e798b278af812779c"
     - name: INSPECT_CONSUMER_ADDRESS
       value: "0x99Cf4bd9d0B3cb905d015480A4AF7113F4E64C58"
+    - name: GOMAXPROCS
+      value: "1"
   resources:
     limits:
-      cpu: 500m
+      cpu: 600m
       memory: 500Mi
     requests:
-      cpu: 500m
-      memory: 500Mi
+      cpu: 300m
+      memory: 100Mi
 
 nodeSelector: {}
 tolerations: []
