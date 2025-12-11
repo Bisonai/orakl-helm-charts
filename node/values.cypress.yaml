@@ -86,6 +86,8 @@ node:
       value: "100.97.79.113"
     - name: WS_PROXY
       value: "ws://34.64.214.115:4000"
+    - name: GOMAXPROCS
+      value: "15"
 
   replicas: 1
   podSecurityContext: {}
@@ -95,8 +97,8 @@ node:
       cpu: 15000m
       memory: 4Gi
     requests:
-      cpu: 8000m
-      memory: 2Gi
+      cpu: 6000m
+      memory: 1Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
