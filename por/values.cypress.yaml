@@ -39,13 +39,6 @@ por:
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
-  resources:
-    limits:
-      cpu: 100m
-      memory: 500Mi
-    requests:
-      cpu: 100m
-      memory: 500Mi
   env:
     - name: LOG_LEVEL
       value: "debug"
@@ -67,6 +60,15 @@ por:
       value: por
     - name: DELEGATOR_URL
       value: "http://orakl-delegator.orakl.svc.cluster.local"
+    - name: GOMAXPROCS
+      value: "1"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
