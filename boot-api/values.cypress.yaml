@@ -69,16 +69,18 @@ bootApi:
       value: "5050"
     - name: DATABASE_URL
       value:
+    - name: GOMAXPROCS
+      value: "1"
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 100m
+      cpu: 300m
       memory: 500Mi
     requests:
       cpu: 100m
-      memory: 500Mi
+      memory: 100Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
