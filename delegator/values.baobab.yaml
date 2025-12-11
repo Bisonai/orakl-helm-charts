@@ -68,13 +68,15 @@ delegator:
       value: http://172.0.100.240:8551
     - name: DATABASE_URL
       value:
+    - name: GOMAXPROCS
+      value: "1"
   resources:
     limits:
-      cpu: 100m
+      cpu: 300m
       memory: 500Mi
     requests:
       cpu: 100m
-      memory: 500Mi
+      memory: 100Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
