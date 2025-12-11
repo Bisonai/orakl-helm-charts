@@ -87,6 +87,8 @@ dal:
       value: http://orakl-node.orakl.svc.cluster.local:3030/api/v1
     - name: CHAIN
       value: "cypress"
+    - name: GOMAXPROCS
+      value: "2"
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
@@ -96,7 +98,7 @@ dal:
       memory: 500Mi
     requests:
       cpu: 2000m
-      memory: 500Mi
+      memory: 00Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}

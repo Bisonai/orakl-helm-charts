@@ -85,6 +85,8 @@ dal:
       value: http://orakl-node.orakl.svc.cluster.local:3030/api/v1
     - name: CHAIN
       value: "baobab"
+    - name: GOMAXPROCS
+      value: "1"
   replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
@@ -93,8 +95,8 @@ dal:
       cpu: 1000m
       memory: 500Mi
     requests:
-      cpu: 1000m
-      memory: 500Mi
+      cpu: 800m
+      memory: 100Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
