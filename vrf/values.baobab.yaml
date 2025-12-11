@@ -89,8 +89,8 @@ core:
       cpu: 500m
       memory: 500Mi
     requests:
-      cpu: 500m
-      memory: 500Mi
+      cpu: 300m
+      memory: 300Mi
 
 nodeSelector: {}
 tolerations: []
