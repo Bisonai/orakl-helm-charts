@@ -53,8 +53,8 @@ cli:
       cpu: 400m
       memory: 1Gi
     requests:
-      cpu: 400m
-      memory: 1Gi
+      cpu: 100m
+      memory: 500Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}

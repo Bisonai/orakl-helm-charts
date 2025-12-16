@@ -40,6 +40,10 @@ delegator:
   annotations:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/role: "orakl"
+    vault.hashicorp.com/agent-requests-cpu: "50m"
+    vault.hashicorp.com/agent-limits-cpu: "150m"
+    vault.hashicorp.com/agent-requests-mem: "32Mi"
+    vault.hashicorp.com/agent-limits-mem: "64Mi"
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "baobab/data/delegator" -}}
         #!/bin/bash
@@ -64,13 +68,15 @@ delegator:
       value: http://172.0.100.240:8551
     - name: DATABASE_URL
       value:
+    - name: GOMAXPROCS
+      value: "1"
   resources:
     limits:
-      cpu: 100m
+      cpu: 300m
       memory: 500Mi
     requests:
       cpu: 100m
-      memory: 500Mi
+      memory: 100Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}

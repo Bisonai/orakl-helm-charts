@@ -36,6 +36,10 @@ node:
   annotations:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/role: "orakl"
+    vault.hashicorp.com/agent-requests-cpu: "50m"
+    vault.hashicorp.com/agent-limits-cpu: "150m"
+    vault.hashicorp.com/agent-requests-mem: "32Mi"
+    vault.hashicorp.com/agent-limits-mem: "64Mi"
     vault.hashicorp.com/agent-inject-template-config: |
       {{ with secret "baobab/data/orakl-node" -}}
         #!/bin/bash
@@ -82,6 +86,8 @@ node:
       value: "100.65.163.2"
     - name: WS_PROXY
       value: "ws://34.22.71.175:4000"
+    - name: GOMAXPROCS
+      value: "6"
 
   replicas: 1
   podSecurityContext: {}
@@ -91,8 +97,8 @@ node:
       cpu: 6000m
       memory: 2Gi
     requests:
-      cpu: 6000m
-      memory: 2Gi
+      cpu: 4000m
+      memory: 1Gi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
