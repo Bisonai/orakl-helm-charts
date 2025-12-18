@@ -50,7 +50,6 @@ cli:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 400m
       memory: 1Gi
     requests:
       cpu: 400m
