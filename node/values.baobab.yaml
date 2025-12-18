@@ -93,7 +93,6 @@ node:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 6000m
       memory: 2Gi
     requests:
       cpu: 4000m
