@@ -86,7 +86,6 @@ core:
 
   resources:
     limits:
-      cpu: 500m
       memory: 500Mi
     requests:
       cpu: 400m
