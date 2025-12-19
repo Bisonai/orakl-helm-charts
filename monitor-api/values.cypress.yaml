@@ -98,7 +98,6 @@ monitorApi:
       value: http://172.0.100.230:8551
   resources:
     limits:
-      cpu: 2000m
       memory: 4Gi
     requests:
       cpu: 2000m
