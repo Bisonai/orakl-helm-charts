@@ -94,11 +94,10 @@ dal:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 2000m
       memory: 500Mi
     requests:
       cpu: 2000m
-      memory: 00Mi
+      memory: 500Mi
 nodeSelector: {}
 tolerations: []
 dotenv: {}
