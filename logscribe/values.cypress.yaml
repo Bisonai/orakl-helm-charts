@@ -67,7 +67,6 @@ logscribe:
   containerSecurityContext: {}
   resources:
     limits:
-      cpu: 100m
       memory: 500Mi
     requests:
       cpu: 100m
