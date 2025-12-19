@@ -124,7 +124,6 @@ app:
       value: "1"
   resources:
     limits:
-      cpu: 700m
       memory: 500Mi
     requests:
       cpu: 500m
