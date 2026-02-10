@@ -22,7 +22,6 @@ annotations:
     {{ with secret "monitor/data/grafana-cypress" -}}
       #!/bin/bash
       export CYPRESS_DELEGATOR_DB_PW="{{ .Data.data.CYPRESS_DELEGATOR_DB_PW }}"
-      export CYPRESS_GRAPHNODE_DB_PW="{{ .Data.data.CYPRESS_GRAPHNODE_DB_PW }}"
       export CYPRESS_MAIN_DB_PW="{{ .Data.data.CYPRESS_MAIN_DB_PW }}"
       export CYPRESS_MONITOR_DB_PW="{{ .Data.data.CYPRESS_MONITOR_DB_PW }}"
     {{- end }}

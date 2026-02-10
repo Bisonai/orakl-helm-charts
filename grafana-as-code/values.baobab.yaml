@@ -5,7 +5,7 @@ global:
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
   pullPolicy: IfNotPresent
-  tag: "monitor.v1.0.0.20260203.0201.12aec48"
+  tag: "monitor.v1.0.0.20260210.0117.98f40ac"
 
   imagePullSecrets:
     - name: gar-json-key
@@ -22,7 +22,6 @@ annotations:
     {{ with secret "monitor/data/grafana-baobab" -}}
       #!/bin/bash
       export BAOBAB_DELEGATOR_DB_PW="{{ .Data.data.BAOBAB_DELEGATOR_DB_PW }}"
-      export BAOBAB_GRAPHNODE_DB_PW="{{ .Data.data.BAOBAB_GRAPHNODE_DB_PW }}"
       export BAOBAB_MAIN_DB_PW="{{ .Data.data.BAOBAB_MAIN_DB_PW }}"
       export BAOBAB_MONITOR_DB_PW="{{ .Data.data.BAOBAB_MONITOR_DB_PW }}"
     {{- end }}
