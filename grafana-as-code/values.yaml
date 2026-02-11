@@ -3,19 +3,20 @@ global:
   namespace: orakl
 
 image:
-  repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
+  repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana
   pullPolicy: IfNotPresent
-  tag: "monitor.v1.0.0.20240229.0613.748eb76"
-image:
-  repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana #repository url
-  pullPolicy: IfNotPresent
-  tag: "monitor.v1.0.0.20240308.0151.22ae7e7"
-  imagePullPolicy: IfNotPresent
-  # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+  tag: "latest"
   imagePullSecrets:
     - name: gar-json-key
 
-deployment:
+job:
   name: orakl-grafana-as-code
-  replicas: 1
-  env:
+  backoffLimit: 3
+  ttlSecondsAfterFinished: 300
+  env: []
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
