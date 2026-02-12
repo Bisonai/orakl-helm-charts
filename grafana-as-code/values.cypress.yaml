@@ -24,6 +24,7 @@ annotations:
       export CYPRESS_MAIN_DB_PW="{{ .Data.data.CYPRESS_MAIN_DB_PW }}"
       export CYPRESS_MONITOR_DB_PW="{{ .Data.data.CYPRESS_MONITOR_DB_PW }}"
       export GRAFANA_PASSWORD="{{ .Data.data.GRAFANA_PASSWORD }}"
+      export KF_CYPRESS_NODE_DB_PW="{{ .Data.data.KF_CYPRESS_NODE_DB_PW }}"
     {{- end }}
 
 job:
