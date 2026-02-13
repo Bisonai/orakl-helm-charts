@@ -1,0 +1,15 @@
+grafana:
+  plugins:
+    - yesoreyeram-infinity-datasource
+  sidecar:
+    dashboards:
+      annotations:
+        grafana_folder: "🖥️ orakl-k8s-monitor"
+      folderAnnotation: grafana_folder
+      provider:
+        folder: "🖥️ orakl-k8s-monitor"
+        folderUid: orakl-k8s-monitor
+        foldersFromFilesStructure: true
+kube-state-metrics:
+  metricLabelsAllowlist:
+    - pods=[app.kubernetes.io/name,app,app.kubernetes.io/instance]
