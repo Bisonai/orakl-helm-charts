@@ -1,0 +1,13 @@
+global:
+  namespace: monitoring
+
+dashboard:
+  targetNamespace: "orakl"
+  datasource:
+    type: prometheus
+    uid: prometheus
+
+datasources:
+  loki:
+    enabled: true
+    url: http://loki-gateway.monitoring.svc:80

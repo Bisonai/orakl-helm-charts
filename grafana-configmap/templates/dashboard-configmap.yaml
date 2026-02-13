@@ -1,0 +1,603 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-orakl-services
+  namespace: {{ .Values.global.namespace }}
+  annotations:
+    grafana_folder: ""
+  labels:
+    grafana_dashboard: "1"
+data:
+  orakl-services.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": { "type": "grafana", "uid": "-- Grafana --" },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 1,
+      "links": [],
+      "panels": [
+        {
+          "collapsed": false,
+          "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+          "id": 100,
+          "title": "Overview",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "{{ .Values.dashboard.datasource.type }}",
+            "uid": "{{ .Values.dashboard.datasource.uid }}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": { "mode": "thresholds" },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": { "h": 4, "w": 8, "x": 0, "y": 1 },
+          "id": 101,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": ["lastNotNull"],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "title": "Total CPU",
+          "type": "stat",
+          "targets": [
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"$namespace\", container!=\"\"}[5m]))",
+              "legendFormat": "CPU Cores",
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "{{ .Values.dashboard.datasource.type }}",
+            "uid": "{{ .Values.dashboard.datasource.uid }}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": { "mode": "thresholds" },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": { "h": 4, "w": 8, "x": 8, "y": 1 },
+          "id": 102,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": ["lastNotNull"],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "title": "Total Memory",
+          "type": "stat",
+          "targets": [
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum(container_memory_working_set_bytes{namespace=\"$namespace\", container!=\"\"})",
+              "legendFormat": "Memory",
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "{{ .Values.dashboard.datasource.type }}",
+            "uid": "{{ .Values.dashboard.datasource.uid }}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": { "mode": "thresholds" },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": { "h": 4, "w": 8, "x": 16, "y": 1 },
+          "id": 103,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": ["lastNotNull"],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "title": "Running Pods",
+          "type": "stat",
+          "targets": [
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "count(kube_pod_status_phase{namespace=\"$namespace\", phase=\"Running\"} == 1)",
+              "legendFormat": "Pods",
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "collapsed": false,
+          "gridPos": { "h": 1, "w": 24, "x": 0, "y": 5 },
+          "id": 200,
+          "repeat": "service",
+          "repeatDirection": "h",
+          "title": "$service",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "{{ .Values.dashboard.datasource.type }}",
+            "uid": "{{ .Values.dashboard.datasource.uid }}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": { "mode": "palette-classic" },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": { "type": "linear" },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": { "group": "A", "mode": "none" },
+                "thresholdsStyle": { "mode": "off" }
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": { "id": "byName", "options": "Request" },
+                "properties": [
+                  { "id": "color", "value": { "fixedColor": "yellow", "mode": "fixed" } },
+                  { "id": "custom.lineStyle", "value": { "dash": [10, 10], "fill": "dash" } },
+                  { "id": "custom.fillOpacity", "value": 0 }
+                ]
+              },
+              {
+                "matcher": { "id": "byName", "options": "Limit" },
+                "properties": [
+                  { "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } },
+                  { "id": "custom.lineStyle", "value": { "dash": [10, 10], "fill": "dash" } },
+                  { "id": "custom.fillOpacity", "value": 0 }
+                ]
+              }
+            ]
+          },
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 6 },
+          "id": 201,
+          "options": {
+            "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true },
+            "tooltip": { "mode": "single", "sort": "none" }
+          },
+          "title": "$service - CPU",
+          "type": "timeseries",
+          "targets": [
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum by (pod)(rate(container_cpu_usage_seconds_total{namespace=\"$namespace\", container=\"$service\"}[5m]))",
+              "legendFormat": "{{ "{{" }}pod{{ "}}" }}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum(kube_pod_container_resource_requests{namespace=\"$namespace\", container=\"$service\", resource=\"cpu\"})",
+              "legendFormat": "Request",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum(kube_pod_container_resource_limits{namespace=\"$namespace\", container=\"$service\", resource=\"cpu\"})",
+              "legendFormat": "Limit",
+              "refId": "C"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "{{ .Values.dashboard.datasource.type }}",
+            "uid": "{{ .Values.dashboard.datasource.uid }}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": { "mode": "palette-classic" },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": { "type": "linear" },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": { "group": "A", "mode": "none" },
+                "thresholdsStyle": { "mode": "off" }
+              },
+              "unit": "decbytes"
+            },
+            "overrides": [
+              {
+                "matcher": { "id": "byName", "options": "Request" },
+                "properties": [
+                  { "id": "color", "value": { "fixedColor": "yellow", "mode": "fixed" } },
+                  { "id": "custom.lineStyle", "value": { "dash": [10, 10], "fill": "dash" } },
+                  { "id": "custom.fillOpacity", "value": 0 }
+                ]
+              },
+              {
+                "matcher": { "id": "byName", "options": "Limit" },
+                "properties": [
+                  { "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } },
+                  { "id": "custom.lineStyle", "value": { "dash": [10, 10], "fill": "dash" } },
+                  { "id": "custom.fillOpacity", "value": 0 }
+                ]
+              }
+            ]
+          },
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 6 },
+          "id": 202,
+          "options": {
+            "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true },
+            "tooltip": { "mode": "single", "sort": "none" }
+          },
+          "title": "$service - Memory",
+          "type": "timeseries",
+          "targets": [
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum by (pod)(container_memory_working_set_bytes{namespace=\"$namespace\", container=\"$service\"})",
+              "legendFormat": "{{ "{{" }}pod{{ "}}" }}",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum(kube_pod_container_resource_requests{namespace=\"$namespace\", container=\"$service\", resource=\"memory\"})",
+              "legendFormat": "Request",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum(kube_pod_container_resource_limits{namespace=\"$namespace\", container=\"$service\", resource=\"memory\"})",
+              "legendFormat": "Limit",
+              "refId": "C"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "{{ .Values.dashboard.datasource.type }}",
+            "uid": "{{ .Values.dashboard.datasource.uid }}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": { "mode": "palette-classic" },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": { "type": "linear" },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": { "group": "A", "mode": "none" },
+                "thresholdsStyle": { "mode": "off" }
+              },
+              "unit": "Bps"
+            },
+            "overrides": [
+              {
+                "matcher": { "id": "byName", "options": "Receive" },
+                "properties": [
+                  { "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } }
+                ]
+              },
+              {
+                "matcher": { "id": "byName", "options": "Transmit" },
+                "properties": [
+                  { "id": "color", "value": { "fixedColor": "blue", "mode": "fixed" } }
+                ]
+              }
+            ]
+          },
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 14 },
+          "id": 203,
+          "options": {
+            "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true },
+            "tooltip": { "mode": "single", "sort": "none" }
+          },
+          "title": "$service - Network",
+          "type": "timeseries",
+          "targets": [
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum by (pod)(rate(container_network_receive_bytes_total{namespace=\"$namespace\", pod=~\"$service.*\"}[5m]))",
+              "legendFormat": "{{ "{{" }}pod{{ "}}" }} - Receive",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum by (pod)(rate(container_network_transmit_bytes_total{namespace=\"$namespace\", pod=~\"$service.*\"}[5m]))",
+              "legendFormat": "{{ "{{" }}pod{{ "}}" }} - Transmit",
+              "refId": "B"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "{{ .Values.dashboard.datasource.type }}",
+            "uid": "{{ .Values.dashboard.datasource.uid }}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": { "mode": "thresholds" },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "yellow", "value": 1 },
+                  { "color": "red", "value": 5 }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": { "id": "byName", "options": "Running Pods" },
+                "properties": [
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        { "color": "red", "value": null },
+                        { "color": "green", "value": 1 }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": { "id": "byName", "options": "Deployed" },
+                "properties": [
+                  { "id": "unit", "value": "dateTimeFromNow" },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        { "color": "blue", "value": null }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 14 },
+          "id": 204,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": ["lastNotNull"],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "title": "$service - Pod Info",
+          "type": "stat",
+          "targets": [
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "sum(kube_pod_container_status_restarts_total{namespace=\"$namespace\", container=\"$service\"})",
+              "legendFormat": "Restarts",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "count(kube_pod_status_phase{namespace=\"$namespace\", pod=~\"$service.*\", phase=\"Running\"} == 1)",
+              "legendFormat": "Running Pods",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "{{ .Values.dashboard.datasource.type }}",
+                "uid": "{{ .Values.dashboard.datasource.uid }}"
+              },
+              "expr": "max(kube_pod_start_time{namespace=\"$namespace\", pod=~\"$service.*\"}) * 1000",
+              "legendFormat": "Deployed",
+              "refId": "C"
+            }
+          ]
+        }
+      ],
+      "schemaVersion": 39,
+      "tags": ["orakl", "kubernetes"],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": false,
+              "text": "{{ .Values.dashboard.targetNamespace }}",
+              "value": "{{ .Values.dashboard.targetNamespace }}"
+            },
+            "datasource": {
+              "type": "{{ .Values.dashboard.datasource.type }}",
+              "uid": "{{ .Values.dashboard.datasource.uid }}"
+            },
+            "definition": "label_values(kube_pod_info, namespace)",
+            "hide": 0,
+            "includeAll": false,
+            "label": "Namespace",
+            "multi": false,
+            "name": "namespace",
+            "options": [],
+            "query": {
+              "qryType": 1,
+              "query": "label_values(kube_pod_info, namespace)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 2,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 1,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": ["All"],
+              "value": ["$__all"]
+            },
+            "datasource": {
+              "type": "{{ .Values.dashboard.datasource.type }}",
+              "uid": "{{ .Values.dashboard.datasource.uid }}"
+            },
+            "definition": "label_values(kube_pod_container_info{namespace=\"$namespace\", container!=\"\"}, container)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "Service",
+            "multi": true,
+            "name": "service",
+            "options": [],
+            "query": {
+              "qryType": 1,
+              "query": "label_values(kube_pod_container_info{namespace=\"$namespace\", container!=\"\"}, container)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 2,
+            "regex": "/^orakl-.*/",
+            "skipUrlSync": false,
+            "sort": 1,
+            "type": "query"
+          }
+        ]
+      },
+      "time": { "from": "now-36h", "to": "now" },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Orakl Services Resource Usage Overview",
+      "uid": "orakl-services-overview",
+      "version": 1,
+      "weekStart": ""
+    }
