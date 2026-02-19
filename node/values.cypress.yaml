@@ -98,6 +98,8 @@ node:
     requests:
       cpu: 6000m
       memory: 1Gi
+tailscale:
+  enabled: true
 nodeSelector: {}
 tolerations: []
 dotenv: {}

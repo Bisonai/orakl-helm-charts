@@ -82,6 +82,7 @@ spec:
           resources:
             {{- toYaml .Values.node.resources | nindent 12 }}
 
+        {{- if .Values.tailscale.enabled }}
         - name: ts-sidecar
           imagePullPolicy: Always
           image: "ghcr.io/tailscale/tailscale:latest"
@@ -103,6 +104,7 @@ spec:
           securityContext:
             capabilities:
               add: ["NET_ADMIN", "NET_RAW", "SYS_MODULE"]
+        {{- end }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
