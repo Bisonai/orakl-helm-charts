@@ -83,7 +83,9 @@ node:
     - name: BOOT_API_URL
       value: "http://orakl-boot-api.orakl.svc.cluster.local:5050"
     - name: HOST_IP
-      value: "100.65.163.2"
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
     - name: WS_PROXY
       value: "ws://34.22.71.175:4000"
     - name: GOMAXPROCS
