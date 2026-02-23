@@ -85,7 +85,7 @@ node:
     - name: HOST_IP
       value: "100.97.79.113"
     - name: WS_PROXY
-      value: "ws://34.64.214.115:4000"
+      value: "ws://34.64.220.17:4000"
     - name: GOMAXPROCS
       value: "15"
 

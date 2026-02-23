@@ -87,7 +87,7 @@ node:
         fieldRef:
           fieldPath: status.podIP
     - name: WS_PROXY
-      value: "ws://34.22.71.175:4000"
+      value: "ws://34.50.0.159:4000"
     - name: GOMAXPROCS
       value: "6"
 
