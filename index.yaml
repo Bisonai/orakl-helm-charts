@@ -301,16 +301,6 @@ entries:
     urls:
     - charts/orakl-api-0.1.0.tgz
     version: 0.1.0
-  orakl-backend-fe:
-  - apiVersion: v2
-    appVersion: v.20240104.0704.cffc2d9
-    created: "2024-07-17T11:16:12.649445+09:00"
-    description: The backend service for Orakl frontend page.
-    digest: 6b456266ca4675b7645e6ea72293c494a239f00beb65c22be450d4d1456df28c
-    name: orakl-backend-fe
-    urls:
-    - charts/orakl-backend-fe-0.1.0.tgz
-    version: 0.1.0
   orakl-boot-api:
   - apiVersion: v2
     appVersion: v0.0.1.20240401.0751.79abdf4

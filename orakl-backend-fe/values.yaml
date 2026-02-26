@@ -1,9 +1,0 @@
-image:
-  repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-backend-fe
-  tag: "v.20251226.0437.45ebdf2"
-tlsSecretName: orakl-backend-fe-tls
-
-deployment:
-  name: orakl-backend-fe
-  replicas: 1
-  resources:
