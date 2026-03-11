@@ -49,9 +49,9 @@ reporter:
     - name: VAULT_KEY_NAME
       value: reporter
     - name: DAL_WS_URL
-      value: "ws://dal.baobab.orakl.network/ws"
+      value: "ws://orakl-dal.orakl.svc.cluster.local/ws"
     - name: DAL_REST_URL
-      value: "https://dal.baobab.orakl.network"
+      value: "http://orakl-dal.orakl.svc.cluster.local"
     - name: LOG_LEVEL
       value: "debug"
     - name: CHAIN
