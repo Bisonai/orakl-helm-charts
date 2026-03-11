@@ -2,12 +2,21 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.deployment.name }}
 spec:
-  type: LoadBalancer
+  type: {{ .Values.dal.service.type | default "LoadBalancer" }}
+  {{- if eq (default "LoadBalancer" .Values.dal.service.type) "LoadBalancer" }}
   loadBalancerClass: tailscale
+  {{- end }}
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: http
+      protocol: TCP
+    - name: metrics
+      port: 8090
+      targetPort: 8090
       protocol: TCP
   selector:
     app: {{ .Values.deployment.name }}

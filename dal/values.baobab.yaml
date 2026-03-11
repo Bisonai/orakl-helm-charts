@@ -99,6 +99,9 @@ dal:
     requests:
       cpu: 1000m
       memory: 100Mi
+serviceMonitor:
+  enabled: true
+  interval: "15s"
 nodeSelector: {}
 tolerations: []
 dotenv: {}
