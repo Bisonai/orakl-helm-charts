@@ -43,6 +43,9 @@ dal:
     type: ClusterIP
   enabled: true
   annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8090"
+    prometheus.io/path: "/metrics"
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/role: "orakl"
     vault.hashicorp.com/agent-requests-cpu: "50m"
