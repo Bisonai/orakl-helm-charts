@@ -40,7 +40,7 @@ global:
     failureThreshold: 5
 dal:
   service:
-    type: ClusterIP
+    type: LoadBalancer
   enabled: true
   annotations:
     prometheus.io/scrape: "true"
