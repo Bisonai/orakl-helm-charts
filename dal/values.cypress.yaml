@@ -72,7 +72,7 @@ dal:
     - name: KAIA_PROVIDER_URL
       value: "https://freely-inspired-ram.n0des.xyz"
     - name: KAIA_WEBSOCKET_URL
-      value: "wss://public-en.node.kaia.io/ws"
+      value: "ws://172.0.100.230:8552"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: REDIS_HOST

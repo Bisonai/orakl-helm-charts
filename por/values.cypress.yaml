@@ -43,7 +43,7 @@ por:
     - name: LOG_LEVEL
       value: "debug"
     - name: POR_PROVIDER_URL
-      value: "https://public-en.node.kaia.io"
+      value: "http://172.0.100.230:8551"
     - name: POR_PORT
       value: "3000"
     - name: POR_CHAIN
