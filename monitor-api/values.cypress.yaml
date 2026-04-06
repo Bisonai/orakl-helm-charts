@@ -95,7 +95,7 @@ monitorApi:
     - name: PASSWORD
       value: bisonaicomingsoon
     - name: PROVIDER
-      value: https://public-en.node.kaia.io
+      value: http://172.0.100.230:8551
   resources:
     limits:
       memory: 4Gi

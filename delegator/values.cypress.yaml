@@ -64,7 +64,7 @@ delegator:
     - name: VAULT_KEY_NAME
       value: delegator
     - name: PROVIDER_URL
-      value: "https://public-en.node.kaia.io"
+      value: "http://172.0.100.230:8551"
     - name: DATABASE_URL
       value:
     - name: GOMAXPROCS

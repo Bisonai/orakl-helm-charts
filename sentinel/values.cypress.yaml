@@ -94,7 +94,7 @@ app:
     - name: EVENT_CHECK_INTERVAL
       value: "60s"
     - name: JSON_RPC_URL
-      value: "https://public-en.node.kaia.io"
+      value: "http://172.0.100.230:8551"
     - name: ORAKL_API_URL
       value: http://orakl-api.orakl.svc.cluster.local:3030/api/v1
     - name: ORAKL_NODE_ADMIN_URL
@@ -106,7 +106,7 @@ app:
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: KAIA_PROVIDER_URL
-      value: "https://public-en.node.kaia.io"
+      value: "http://172.0.100.230:8551"
     - name: ACC_ID
       value: "14"
     - name: VRF_KEYHASH
