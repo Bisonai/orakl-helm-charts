@@ -70,6 +70,8 @@ node:
       value: "6379"
     - name: KAIA_PROVIDER_URL
       value: "http://172.0.100.240:8551"
+    - name: KAIA_WEBSOCKET_URL
+      value: "wss://public-en.node.kaia.io/ws"
     - name: ETH_PROVIDER_URL
       value: "http://34.142.228.64:4000"
     - name: ETH_WEBSOCKET_URL
