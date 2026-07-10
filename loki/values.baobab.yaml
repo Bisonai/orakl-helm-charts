@@ -1,0 +1,92 @@
+# Values for the upstream grafana/loki chart (v6.41.1, app 3.5.5) on baobab.
+#
+# This release is NOT managed by ArgoCD -- it is applied manually:
+#
+#   helm repo add grafana https://grafana.github.io/helm-charts
+#   helm upgrade --install loki grafana/loki --version 6.41.1 \
+#     -n monitoring -f loki/values.baobab.yaml
+#
+# The file exists because the live configmap had drifted from the values used
+# at install time: retention was patched in-cluster with `kubectl patch cm loki`
+# after the 2026-05-04 NFS incident (Loki alone had consumed 84GB of a 96.3GB
+# NFS volume). Without the `compactor` and `limits_config` blocks below, a plain
+# `helm upgrade` silently drops retention entirely and resets retention_period
+# to the chart default of 336h -- which refills the volume within days.
+#
+# Keep this file in sync with the live configmap. To verify:
+#   helm template loki grafana/loki --version 6.41.1 -n monitoring \
+#     -f loki/values.baobab.yaml | <extract ConfigMap loki config.yaml>
+#   kubectl -n monitoring get cm loki -o jsonpath='{.data.config\.yaml}'
+
+deploymentMode: SingleBinary
+
+singleBinary:
+  replicas: 1
+
+# Distributed-mode components are unused in SingleBinary mode.
+backend:
+  replicas: 0
+read:
+  replicas: 0
+write:
+  replicas: 0
+
+gateway:
+  enabled: true
+  replicas: 1
+
+chunksCache:
+  enabled: true
+  replicas: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 8Gi
+    requests:
+      cpu: 50m
+      memory: 512Mi
+
+persistence:
+  enabled: true
+  size: 50Gi
+  storageClass: ""
+
+loki:
+  auth_enabled: false
+
+  server:
+    http_listen_port: 3100
+
+  commonConfig:
+    replication_factor: 1
+
+  storage:
+    type: filesystem
+
+  schemaConfig:
+    configs:
+      - from: "2024-01-01"
+        index:
+          period: 24h
+          prefix: loki_index_
+        object_store: filesystem
+        schema: v13
+        store: tsdb
+
+  # 3-day retention. The NFS volume is shared with the redis PVCs; at the
+  # observed ~10-12GB/day ingest rate anything above ~5 days risks filling it.
+  limits_config:
+    retention_period: 72h
+    reject_old_samples_max_age: 72h
+    volume_enabled: true
+
+  # Required for retention to be enforced at all. The chart leaves
+  # `loki.compactor` empty by default, which renders no compactor block and
+  # therefore never deletes anything.
+  compactor:
+    working_directory: /var/loki/compactor
+    compaction_interval: 10m
+    retention_enabled: true
+    retention_delete_delay: 5m
+    retention_delete_worker_count: 150
+    delete_request_store: filesystem
