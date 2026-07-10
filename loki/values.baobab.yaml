@@ -54,6 +54,23 @@ persistence:
 loki:
   auth_enabled: false
 
+  # Same as the chart default, except for fsGroupChangePolicy. The chart
+  # renders this block with `toYaml`, so every key must be repeated here.
+  #
+  # Without `OnRootMismatch`, kubelet recursively chowns the whole volume on
+  # every pod start because fsGroup is set. This volume holds ~42k chunk files
+  # on NFS, so each restart stalls the pod in ContainerCreating for many
+  # minutes while `pod_workers.go` logs
+  #   "unmounted volumes=[storage] ... context deadline exceeded"
+  # even though the CSI mount already succeeded. `OnRootMismatch` skips the
+  # walk when the volume root already has the right ownership.
+  podSecurityContext:
+    fsGroup: 10001
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 10001
+    runAsNonRoot: true
+    runAsUser: 10001
+
   server:
     http_listen_port: 3100
 
