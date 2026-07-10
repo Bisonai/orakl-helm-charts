@@ -88,7 +88,7 @@ dal:
       value: "baobab"
     - name: GOMAXPROCS
       value: "1"
-  replicas: 3
+  replicas: 1
   podSecurityContext: {}
   containerSecurityContext: {}
   resources:
