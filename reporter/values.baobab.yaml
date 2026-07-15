@@ -59,9 +59,9 @@ reporter:
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0x05ce978f1200bc7243ae4a5968de8c3f8bd082f7"
     - name: KAIA_PROVIDER_URL
-      value: http://172.0.100.240:8551
+      value: https://kaia-kairos.blockpi.network/v1/rpc/3cfd82415a376065d8ce988e77d10ce1a7cf9506
     - name: KAIA_WEBSOCKET_URL
-      value: ws://172.0.100.230:8552
+      value: wss://kaia-kairos.blockpi.network/v1/ws/3cfd82415a376065d8ce988e77d10ce1a7cf9506
     - name: DELEGATOR_URL
       value: "http://orakl-delegator.orakl.svc.cluster.local"
     - name: GOMAXPROCS
