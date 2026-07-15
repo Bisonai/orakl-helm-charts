@@ -43,7 +43,7 @@ por:
     - name: LOG_LEVEL
       value: "debug"
     - name: POR_PROVIDER_URL
-      value: "http://172.0.100.230:8551"
+      value: "https://kaia.blockpi.network/v1/rpc/6162552d8a429e7bfc7aeae9420e908062adda5b"
     - name: POR_PORT
       value: "3000"
     - name: POR_CHAIN
