@@ -71,7 +71,7 @@ node:
     - name: LISTEN_PORT
       value: "10010"
     - name: ETH_PROVIDER_URL
-      value: "http://34.126.104.218:4000"
+      value: "https://ethereum-rpc.publicnode.com"
     - name: ETH_WEBSOCKET_URL
       value: "wss://ethereum-rpc.publicnode.com"
     - name: SUBMISSION_PROXY_CONTRACT
@@ -84,8 +84,6 @@ node:
       value: "http://100.72.39.118:5050"
     - name: HOST_IP
       value: "100.97.79.113"
-    - name: WS_PROXY
-      value: "ws://34.64.220.17:4000"
     - name: GOMAXPROCS
       value: "15"
 
