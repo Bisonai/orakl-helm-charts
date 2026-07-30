@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-delegator
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20260730.0146.5e0c12a.cypress"
+    tag: "v0.0.1.20260730.0224.59227df.cypress"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   affinity:
