@@ -4,7 +4,7 @@ description: Helpful cronjobs for manage Orakl Network.
 version: 0.1.0
 keyword:
   - cron
-home: "https://helm.orakl.network"
+home: "https://github.com/Bisonai/orakl-helm-charts"
 source:
   - "https://github.com/bisonai/orakl-helm-charts"
 
