@@ -6,8 +6,7 @@ on:
     types:
       - opened
     branches:
-      - main
-      - feat/unifying-branches
+      - idc-fly
 
 jobs:
   lint:
