@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/Bisonai/orakl-helm-charts.git
-      revision: main
+      revision: idc-fly
       files:
       - path: "**/values.cypress.yaml"
   template:
@@ -20,7 +20,7 @@ spec:
       project: default 
       source:
         repoURL: https://github.com/Bisonai/orakl-helm-charts.git
-        targetRevision: main 
+        targetRevision: idc-fly
         path: "{{global.name}}"
       destination:
         namespace: "{{global.namespace}}"
