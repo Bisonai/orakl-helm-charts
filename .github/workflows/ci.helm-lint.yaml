@@ -7,7 +7,6 @@ on:
       - opened
     branches:
       - idc-fly
-      - feat/unifying-branches
 
 jobs:
   lint:
