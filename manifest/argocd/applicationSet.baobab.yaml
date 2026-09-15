@@ -20,7 +20,7 @@ spec:
       project: default 
       source:
         repoURL: https://github.com/Bisonai/orakl-helm-charts.git
-        targetRevision: main 
+        targetRevision: idc-fly
         path: "{{global.name}}"
       destination:
         namespace: "{{global.namespace}}"
