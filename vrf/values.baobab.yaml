@@ -29,6 +29,8 @@ global:
       value: "6379"
     - name: PROVIDER_URL
       value: https://kaia-kairos.blockpi.network/v1/rpc/3cfd82415a376065d8ce988e77d10ce1a7cf9506
+    - name: LISTENER_DELAY
+      value: "1000"
 
   secretManager:
     enabled: false
