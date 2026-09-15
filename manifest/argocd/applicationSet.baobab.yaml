@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/Bisonai/orakl-helm-charts.git
-      revision: main
+      revision: idc-fly
       files:
       - path: "**/values.baobab.yaml"
   template:
