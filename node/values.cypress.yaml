@@ -70,10 +70,6 @@ node:
       value: "6379"
     - name: LISTEN_PORT
       value: "10010"
-    - name: ETH_PROVIDER_URL
-      value: "https://ethereum-rpc.publicnode.com"
-    - name: ETH_WEBSOCKET_URL
-      value: "wss://ethereum-rpc.publicnode.com"
     - name: SUBMISSION_PROXY_CONTRACT
       value: "0xcb56b163e545a3870ca04c6ae2401f2405fb29a9"
     - name: DELEGATOR_URL
