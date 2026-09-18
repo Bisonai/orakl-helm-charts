@@ -96,16 +96,10 @@ spec:
               value: http://orakl-fetcher.orakl.svc.cluster.local:4040/api/v1
             - name: ORAKL_NETWORK_DELEGATOR_URL
               value: http://orakl-delegator.orakl.svc.cluster.local:80/api/v1
-            - name: LISTENER_SERVICE_HOST
-              value: http://orakl-aggregator-listener.orakl.svc.cluster.local
             - name: LISTENER_SERVICE_PORT
               value: "4000"
-            - name: WORKER_SERVICE_HOST
-              value: http://orakl-aggregator-worker.orakl.svc.cluster.local
             - name: WORKER_SERVICE_PORT
               value: "5000"
-            - name: REPORTER_SERVICE_HOST
-              value: http://orakl-aggregator-reporter.orakl.svc.cluster.local
             - name: REPORTER_SERVICE_PORT
               value: "6000"
             - name: FETCHER_HOST
