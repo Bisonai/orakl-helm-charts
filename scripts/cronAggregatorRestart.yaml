@@ -60,13 +60,6 @@ spec:
               kubectl scale deployment orakl-aggregator-reporter -n orakl --replicas=0
               kubectl scale deployment orakl-aggregator-listener -n orakl --replicas=0
               kubectl scale deployment orakl-aggregator-worker -n orakl --replicas=0
-          - name: redis-flushall
-            image: bitnami/kubectl:latest
-            command: 
-            - /bin/sh
-            - -c
-            - |
-              kubectl exec redis-data-feed-master-0 -n redis -- redis-cli flushall
           - name: scale-up-restart-pods
             image: bitnami/kubectl:latest
             command: 

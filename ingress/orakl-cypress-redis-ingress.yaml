@@ -1,23 +1,6 @@
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
-  name: redis-data-feed
-  namespace: redis
-spec:
-  virtualhost:
-    fqdn: cypress.redis.data-feed.orakl.local
-    tls:
-      passthrough: true
-  tcpproxy:
-    services:
-    - name: redis-data-feed-master
-      port: 6379
-
----
-
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
-metadata:
   name: redis-vrf
   namespace: redis
 spec:
