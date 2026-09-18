@@ -18,13 +18,3 @@ spec:
               number: 80
         pathType: Prefix
         path: /
-  - host: front.api.orakl.network
-    http:
-      paths:
-      - backend:
-          service:
-            name: orakl-backend-fe
-            port:
-              number: 80
-        pathType: Prefix
-        path: /
