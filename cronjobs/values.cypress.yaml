@@ -27,8 +27,6 @@ jobs:
         chmod -R 777 /data/csv
 
         echo "Step 2: Export old data to csv files"
-        psql $ORAKL_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} psql $ORAKL_DB_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
         psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
         | xargs -I {} psql $DELEGATOR_DB_URL -c "\copy {} to '/data/csv/{}.csv' WITH DELIMITER ',' CSV HEADER;"
 
@@ -36,17 +34,10 @@ jobs:
         gcloud storage cp /data/csv/*.csv gs://orakl-db-backup-cypress
 
         echo "Step 4: Delete old data tables"
-        psql $ORAKL_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'data_%';" \
-        | xargs -I {} psql $ORAKL_DB_URL -c "DROP TABLE {};"
         psql $DELEGATOR_DB_URL -t -c "SELECT tablename FROM pg_tables WHERE tablename LIKE 'transactions_%';" \
         | xargs -I {} psql $DELEGATOR_DB_URL -c "DROP TABLE {};"
 
     env:
-      - name: ORAKL_DB_URL
-        valueFrom:
-          secretKeyRef:
-            name: api-secrets
-            key: DATABASE_URL 
       - name: DELEGATOR_DB_URL
         valueFrom:
           secretKeyRef:
