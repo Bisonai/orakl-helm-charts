@@ -23,8 +23,6 @@ jobs:
         id: lint
         with:
           exec: |
-            # nullglob: skip charts with no env-specific values (empty match)
-            shopt -s nullglob
             failed_services=""
             for file in $(git diff --name-only HEAD~1..HEAD); do
               dir=$(dirname $file)
@@ -32,6 +30,8 @@ jobs:
                 # Lint only env-specific values (values.baobab.yaml, values.cypress.yaml);
                 # the glob values.*.yaml excludes the base values.yaml on purpose.
                 for values_file in "$dir"/values.*.yaml; do
+                  # Skip when the glob matched nothing (chart has no env-specific values).
+                  [ -e "$values_file" ] || continue
                   if ! helm lint "$dir" -f "$values_file"; then
                     failed_services+="'$(basename $dir)', "
                   fi
