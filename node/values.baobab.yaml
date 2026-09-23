@@ -82,6 +82,8 @@ node:
       value: "ws://34.50.0.159:4000"
     - name: GOMAXPROCS
       value: "6"
+    - name: P2P_ENCODING
+      value: "msgpack"
 
   replicas: 1
   podSecurityContext: {}
