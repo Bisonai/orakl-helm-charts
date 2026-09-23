@@ -80,6 +80,8 @@ node:
       value: "100.97.79.113"
     - name: GOMAXPROCS
       value: "15"
+    - name: P2P_ENCODING
+      value: "json"
 
   replicas: 1
   podSecurityContext: {}
