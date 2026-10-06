@@ -73,16 +73,6 @@ spec:
                 secretKeyRef:
                   name: orakl-cli-secrets
                   key: REPORTER_SERVICE_PORT
-            - name: FETCHER_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-cli-secrets
-                  key: FETCHER_HOST
-            - name: FETCHER_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: orakl-cli-secrets
-                  key: FETCHER_PORT
           {{ else }}
           env:
             - name: ORAKL_NETWORK_API_URL
@@ -95,10 +85,6 @@ spec:
               value: "5000"
             - name: REPORTER_SERVICE_PORT
               value: "6000"
-            - name: FETCHER_HOST
-              value: http://orakl-fetcher.orakl.svc.cluster.local
-            - name: FETCHER_PORT
-              value: "4040"
           {{ end }}
 
           command: ["/bin/sh"]
