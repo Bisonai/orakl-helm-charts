@@ -31,7 +31,7 @@ job:
   name: orakl-grafana-as-code
   env:
     - name: NETWORK
-      value: "cypress"
+      value: "mainnet"
     - name: GRAFANA_URL
       value: "http://prometheus-grafana.monitoring.svc"
     - name: GRAFANA_USER
