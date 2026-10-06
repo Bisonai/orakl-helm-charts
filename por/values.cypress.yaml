@@ -6,7 +6,7 @@ global:
   image:
     repository: public.ecr.aws/bisonai/orakl-por
     pullPolicy: IfNotPresent
-    tag: "v0.0.1.20261005.0813.b5e6347.cypress"
+    tag: "v0.0.1.20261006.0541.011611e.cypress"
     imagePullPolicy: IfNotPresent
     imagePullSecrets: []
   secretManager:
