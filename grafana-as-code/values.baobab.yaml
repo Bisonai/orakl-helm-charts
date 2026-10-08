@@ -5,7 +5,7 @@ global:
 image:
   repository: asia-southeast1-docker.pkg.dev/vpc-host-orakl-prod/orakl/orakl-grafana
   pullPolicy: IfNotPresent
-  tag: "monitor.v1.0.0.20260908.0539.91b91cd"
+  tag: "monitor.v1.0.0.20261008.0519.d41ad7c"
   imagePullSecrets:
     - name: gar-json-key
 
@@ -30,7 +30,7 @@ job:
   name: orakl-grafana-as-code
   env:
     - name: NETWORK
-      value: "baobab"
+      value: "kairos"
     - name: GRAFANA_URL
       value: "http://prometheus-grafana.monitoring.svc"
     - name: GRAFANA_USER
