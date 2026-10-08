@@ -47,7 +47,7 @@ por:
     - name: POR_PORT
       value: "3000"
     - name: POR_CHAIN
-      value: "cypress"
+      value: "mainnet"
     - name: VAULT_ADDR
       value: http://172.0.100.185:8200/
     - name: JWT_PATH
