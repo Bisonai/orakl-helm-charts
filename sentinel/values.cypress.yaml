@@ -80,7 +80,11 @@ app:
     - name: LOG_LEVEL
       value: debug
     - name: CHAIN
-      value: cypress
+      value: mainnet
+    - name: DAL_CHECK_REST_URL
+      value: "https://dal.cypress.orakl.network"
+    - name: DAL_CHECK_WS_URL
+      value: "ws://dal.cypress.orakl.network/ws"
     - name: HEALTH_CHECK_INTERVAL
       value: "10s"
     - name: BALANCE_CHECK_INTERVAL
