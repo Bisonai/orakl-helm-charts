@@ -81,7 +81,7 @@ app:
     - name: LOG_LEVEL
       value: debug
     - name: CHAIN
-      value: baobab
+      value: kairos
     - name: HEALTH_CHECK_INTERVAL
       value: "10s"
     - name: BALANCE_CHECK_INTERVAL
