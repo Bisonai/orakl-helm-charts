@@ -73,7 +73,7 @@ node:
     - name: DELEGATOR_URL
       value: "http://orakl-delegator.orakl.svc.cluster.local"
     - name: CHAIN
-      value: "cypress"
+      value: "mainnet"
     - name: BOOT_API_URL
       value: "http://100.72.39.118:5050"
     - name: HOST_IP
